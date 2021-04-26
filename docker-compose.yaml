@@ -1,0 +1,15 @@
+version: "3"
+services:
+  database:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_DB=legalAliens
+      - POSTGRES_USER=legalAliens_user
+      - POSTGRES_PASSWORD=legalAliens_pass
+    ports:
+      - "5431:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
