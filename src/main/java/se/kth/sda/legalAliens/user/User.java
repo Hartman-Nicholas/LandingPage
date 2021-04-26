@@ -45,6 +45,9 @@ public class User {
     @OneToMany(mappedBy = "groupOwner")
     private List<Group> groupsCreated;
 
+    @ManyToMany(mappedBy = "members")
+    private List<Group> groupsJoined;
+
     public User() {
     }
 
@@ -113,6 +116,14 @@ public class User {
 
     public void setGroupsCreated(List<Group> groupsCreated) {
         this.groupsCreated = groupsCreated;
+    }
+
+    public List<Group> getGroupsJoined() {
+        return this.groupsJoined;
+    }
+
+    public void setGroupsJoined(List<Group> groupsJoined) {
+        this.groupsJoined = groupsJoined;
     }
 
 }

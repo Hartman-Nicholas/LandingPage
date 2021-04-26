@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 
 import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -48,6 +49,12 @@ public class Group {
     @OneToMany(mappedBy = "groupOwner")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Post> posts;
+
+    @ManyToMany
+        @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "name")
+    @JsonIdentityReference(alwaysAsId = true)
+    @JoinColumn(nullable = false)
+    private List<User> members;
 
     @PrePersist
     protected void onCreate() {
@@ -121,6 +128,14 @@ public class Group {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+    }
+
+    public List<User> getMembers() {
+        return this.members;
+    }
+
+    public void setMembers(List<User> members) {
+        this.members = members;
     }
 
 }

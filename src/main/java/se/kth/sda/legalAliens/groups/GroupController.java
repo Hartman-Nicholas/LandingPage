@@ -36,13 +36,14 @@ public class GroupController {
     }
 
     // Return a specific post based on the groupId.
-    @GetMapping("/{id}")
-    public ResponseEntity<Group> getGroup(@PathVariable Long id) {
-        Group post = groupRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+    @GetMapping("/{groupId}")
+    public ResponseEntity<Group> getGroup(@PathVariable Long groupId) {
+        Group post = groupRepository.findById(groupId).orElseThrow(ResourceNotFoundException::new);
         return ResponseEntity.ok(post);
     }
 
     // Create a new group on User given by Logged In User
+
     @PostMapping
     public ResponseEntity<Group> createGroup(@RequestBody Group group, Principal principal) {
         String userName = principal.getName();
@@ -52,4 +53,17 @@ public class GroupController {
         return ResponseEntity.status(HttpStatus.CREATED).body(group);
     }
 
+    @PostMapping("/{groupId}")
+    public ResponseEntity<Group> createMembership(@PathVariable Long groupId, Principal principal) {
+
+        Group group = groupRepository.findById(groupId).orElseThrow(ResourceNotFoundException::new);
+        String userName = principal.getName();
+        User user = userService.findUserByEmail(userName);
+
+        group.getMembers().add(user);
+        groupRepository.save(group);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(group);
+
+    }
 }
