@@ -1,10 +1,11 @@
 // NPM Packages
 import { useState } from "react";
 import { useRecoilState } from "recoil";
+import {useParams} from 'react-router-dom'
 
 // Project files
 import { postDataState } from "../../state/userDataState";
-import PostApi from "../../api/PostsApi";
+import GroupApi from "../../api/GroupApi";
 import CommentsApi from "../../api/CommentsApi";
 
 
@@ -14,14 +15,13 @@ export const CommentForm = ({postId}) => {
 		body: "",
 	});
 	const [postData, setPostData] = useRecoilState(postDataState);
-	// const [groupData, setGroupData] = useRecoilState(postDataState);
-
+	let { id } = useParams();
 	// Constants
 	async function createComment(commentData) {
 		try {
 			await CommentsApi.createComment(postId, commentData);
-			PostApi.getAllPosts()
-				.then(({ data }) => setPostData(data))
+			GroupApi.getGroupById(id)
+				.then(({ data }) => setPostData(data.posts))
 				.catch((err) => console.error(err));
 		} catch (e) {
 			console.error(e);
@@ -36,7 +36,8 @@ export const CommentForm = ({postId}) => {
 		});
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
+		setCommentForm({body: ""})
 		createComment(commentForm);
 		e.preventDefault();
 	};
