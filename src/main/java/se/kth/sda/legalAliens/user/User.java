@@ -48,6 +48,8 @@ public class User {
     @ManyToMany(mappedBy = "members")
     private List<Group> groupsJoined;
 
+    private Boolean firstLogIn = false;
+
     public User() {
     }
 
@@ -124,6 +126,18 @@ public class User {
 
     public void setGroupsJoined(List<Group> groupsJoined) {
         this.groupsJoined = groupsJoined;
+    }
+
+    public Boolean isFirstLogIn() {
+        return this.firstLogIn;
+    }
+
+    public Boolean getFirstLogIn() {
+        return this.firstLogIn;
+    }
+
+    public void setFirstLogIn(Boolean firstLogIn) {
+        this.firstLogIn = firstLogIn;
     }
 
 }
