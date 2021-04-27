@@ -32,11 +32,15 @@ export const GroupForm = () => {
 			...groupForm,
 			[name]: value,
 		});
-		console.log("groupForm", groupForm);
+
 	};
 
 	const handleSubmit = async (e) => {
 		createGroup(groupForm);
+		setGroupForm({
+			title: "",
+			description: "",
+		})
 		e.preventDefault();
 	};
 	// Components
