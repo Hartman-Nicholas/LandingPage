@@ -3,18 +3,8 @@ package se.kth.sda.legalAliens.groups;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
-import javax.persistence.ManyToOne;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -25,6 +15,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import se.kth.sda.legalAliens.posts.Post;
+import se.kth.sda.legalAliens.topics.Topic;
 import se.kth.sda.legalAliens.user.User;
 
 @Entity
@@ -34,6 +25,7 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "title", unique = true)
     private String title;
     private String description;
     private String rules;
@@ -57,6 +49,13 @@ public class Group {
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(nullable = false)
     private List<User> members;
+
+    @ManyToMany
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "topic")
+    @JsonIdentityReference(alwaysAsId = true)
+    @JoinColumn(nullable = false)
+    private List<Topic> topics;
+
 
     @PrePersist
     protected void onCreate() {
@@ -156,5 +155,13 @@ public class Group {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
     }
 }

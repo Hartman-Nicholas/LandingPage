@@ -42,18 +42,12 @@ public class UserController {
     }
 
     @PutMapping
-    public  ResponseEntity<User> updateUser (@RequestBody User updateUser, Principal principal) {
+    public  ResponseEntity<User> updateUser (@RequestBody User updateUserData, Principal principal) {
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        updateUser = user.setUpdateUser(updateUser);
-        updateUser.setId(user.getId());
-        updateUser.setComments(user.getComments());
-        updateUser.setFirstLogIn(user.getFirstLogIn());
-        updateUser.setGroupsCreated(user.getGroupsCreated());
-        updateUser.setGroupsJoined(user.getGroupsJoined());
-        updateUser.setPosts(user.getPosts());
-        userRepository.save(updateUser);
-        return ResponseEntity.ok(updateUser);
+        updateUserData = userService.updateUser(user, updateUserData);
+        userRepository.save(updateUserData);
+        return ResponseEntity.ok(updateUserData);
 
     }
 

@@ -26,7 +26,6 @@ public class PostController {
     CommentRepository commentRepository;
 
     @Autowired
-
     public PostController(PostRepository postRepository, GroupRepository groupRepository, PostService postService,
             UserService userService, CommentRepository commentRepository) {
         this.postRepository = postRepository;
