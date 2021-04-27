@@ -10,7 +10,7 @@ class PostsApi {
   }
 
   createPost(groupId, post) {
-    return Api.post("/posts/" + groupId, post);
+    return Api.post(`/posts/${groupId}`, post);
   }
 
   updatePost(postId, post) {
