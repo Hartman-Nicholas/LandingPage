@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.kth.sda.legalAliens.exception.ResourceNotFoundException;
-import se.kth.sda.legalAliens.groups.Group;
-import se.kth.sda.legalAliens.groups.GroupRepository;
+
 
 import java.util.List;
 
@@ -15,13 +13,12 @@ import java.util.List;
 public class TopicController {
 
     TopicRepository topicRepository;
-    GroupRepository groupRepository;
 
     @Autowired
-    public TopicController(TopicRepository topicRepository, GroupRepository groupRepository) {
+    public TopicController(TopicRepository topicRepository) {
         this.topicRepository = topicRepository;
-        this.groupRepository = groupRepository;
     }
+
 
     @GetMapping
     public List<Topic> getAllTopics() {
@@ -30,21 +27,13 @@ public class TopicController {
     }
 
     @PostMapping
-    public ResponseEntity<Topic> createTopic (@RequestBody Topic topic) {
-        topicRepository.save(topic);
-        return ResponseEntity.status(HttpStatus.CREATED).body(topic);
-
-    }
-
-    @PostMapping("/{topicId}/groups/{groupId}")
-    public ResponseEntity<Topic> createTopicMembership(@PathVariable Long groupId, @PathVariable Long topicId) {
-        Group group = groupRepository.findById(groupId).orElseThrow(ResourceNotFoundException::new);
-        Topic topic = topicRepository.findById(topicId).orElseThrow(ResourceNotFoundException::new);
-
-        topic.getGroupsWithTopic().add(group);
-
-        topicRepository.save(topic);
-
+    public ResponseEntity<Topic> createTopic () {
+        Topic topic = new Topic();
+			String[] topicsArray = new String[]{"Sport", "Entertainment", "Health", "Education", "Family"};
+			for (String s : topicsArray) {
+				topic = new Topic(s);
+				topicRepository.save(topic);
+			}
         return ResponseEntity.status(HttpStatus.CREATED).body(topic);
     }
 

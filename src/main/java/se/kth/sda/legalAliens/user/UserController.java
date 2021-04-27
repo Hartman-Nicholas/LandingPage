@@ -32,12 +32,13 @@ public class UserController {
         return user != null;
     }
 
-    @PostMapping("/{someValue}")
-    public ResponseEntity<User> updateLogIn(Principal principal, @PathVariable boolean someValue) {
+    @PostMapping
+    public ResponseEntity<User> updateLogIn(Principal principal) {
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        user.setFirstLogIn(someValue);
+        user.setFirstLogIn(true);
         userRepository.save(user);
+
         return ResponseEntity.ok(user);
     }
 

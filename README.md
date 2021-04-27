@@ -1,4 +1,4 @@
-# SDA starter template
+# LandingPage
 
 This web starter template is based on Spring, PostgreSQL, React, React router and Axios. Check the following links for documentation and guides:
 
@@ -43,28 +43,55 @@ Then start the frontend application by running
 npm start
 ```
 
-### Inviting collaborators
-The following should be done by one person in each group.
-
-Now that you have a repo, you can start inviting your group members as collaborators so that they can work
-with you on your repo. Go to `Settings` -> `Manage Access` and then add your group members via their usernames.
-
-### Task
-You will find your task in [`Task.md`](Task.md)
+## Backend - API
 
 These are the endpoints for the posts API that should exist:
+
+### User Routes
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/users`      | return loggedIn User. |
+| `GET`    | `/users/{userName}` | return false if userName not found, True if userName found case sensitive|
+| `POST`   | `/users`      | Sets firstLogIn to true on User profile.|
+| `PUT`    | `/users` | Update the given User, this route is used to add Avatar and Bio as well.|
+| `DELETE` | `/users/{id}` | "Not Yet implemented".|
+
+### Group Routes
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/groups`      | return all groups. |
+| `GET`    | `/groups/{groupId}` | return a group by given groupId|
+| `POST`   | `/groups`      | Create a new group.|
+| `POST`   | `/groups/{groupId}`      | Join a group.|
+| `POST`   | `/groups/{groupId}/topics/{topicId}`      | Join a topic.|
+| `PUT`    | `/groups` | -To Be implemented |
+| `DELETE` | `/groups/{id}` | -To Be implemented |
+
+### Post Routes
+
 | HTTP Method | HTTP Path | Action |
 | ------------|-----------|--------|
 | `GET`    | `/posts`      | return all posts. |
-| `GET`    | `/posts/{id}` | return a specific post based on the provided id.|
-| `POST`   | `/posts`      | create a new post.|
-| `PUT`    | `/posts/{id}` | update the given post.|
-| `DELETE` | `/posts/{id}` | delete the given post.|
+| `GET`    | `/posts/{postId}` | return a specific post based on the provided id.|
+| `POST`   | `/posts/{groupId}`      | create a new post on a given Group.|
+| `PUT`    | `/posts/{postId}` | update the given post.|
+| `DELETE` | `/posts/{postId}` | delete the given post.|
 
-These are the endpoints for the comments API that should exist:
+### Comment Routes
+
 | HTTP Method | HTTP Path | Action |
 | ------------|-----------|--------|
 | `GET`    | `/comments/{postId}`      | return all comments for a specific post. |
-| `POST`   | `/comments/{postId}`      | create a new comment.|
-| `PUT`    | `/comments/{id}` | update the given comment.|
-| `DELETE` | `/comments/{id}` | delete the given comment.|
+| `POST`   | `/comments/{postId}`      | create a new comment on the given post.|
+| `PUT`    | `/comments/{commentId}` | update the given comment.|
+| `DELETE` | `/comments/{commentId}` | delete the given comment.|
+
+### Topic Routes
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/topics/{postId}`      | return all topics. |
+| `POST`   | `/topics`      | create all generic topics.|
+
