@@ -5,9 +5,9 @@ import { useRecoilState } from "recoil";
 // Project files
 import { postDataState } from "../../state/userDataState";
 import PostApi from "../../api/PostsApi";
+import GroupApi from "../../api/GroupApi";
 
-
-export const PostForm = ({groupId}) => {
+export const PostForm = ({ groupId }) => {
 	// State
 	const [postForm, setPostForm] = useState({
 		body: "",
@@ -17,8 +17,8 @@ export const PostForm = ({groupId}) => {
 	async function createPost(postData) {
 		try {
 			await PostApi.createPost(groupId, postData);
-			PostApi.getAllPosts()
-				.then(({ data }) => setPostData(data))
+			GroupApi.getGroupById(groupId)
+				.then(({ data }) => setPostData(data.posts))
 				.catch((err) => console.error(err));
 		} catch (e) {
 			console.error(e);
@@ -33,8 +33,9 @@ export const PostForm = ({groupId}) => {
 		});
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		createPost(postForm);
+		setPostForm({ body: "" });
 		e.preventDefault();
 	};
 	// Components
@@ -48,7 +49,7 @@ export const PostForm = ({groupId}) => {
 				type="text"
 				name="body"
 				required
-        maxLength= "255"
+				maxLength="255"
 			/>
 			<button type="submit">Submit</button>
 		</form>
