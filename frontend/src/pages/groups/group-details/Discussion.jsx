@@ -18,14 +18,13 @@ export const Discussion = ({ groupData }) => {
 
 	// Components
 	useEffect(() => {
-		let mount = true;
-		if (mount) {
+		const abortFetch = new AbortController();
 			groupData.map((group) => setPostData(group.posts));
-		}
+
 		return () => {
-			mount = false;
+			abortFetch.abort()
 		};
-	}, [setPostData]);
+	}, []);
 
 	return (
 		<div>
