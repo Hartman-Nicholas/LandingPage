@@ -16,6 +16,10 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+    public User findUserByName(String name) {
+        return userRepository.findByName(name);
+    }
+
     public void register(User user) {
         String encryptedPass = passwordEncoder.encode(user.getPassword());
         user.setPassword(encryptedPass);

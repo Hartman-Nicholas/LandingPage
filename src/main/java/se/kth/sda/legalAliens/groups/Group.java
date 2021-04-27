@@ -36,6 +36,8 @@ public class Group {
 
     private String title;
     private String description;
+    private String rules;
+    private String avatar;
     private Date created;
     private Date updated;
 
@@ -69,9 +71,11 @@ public class Group {
     public Group() {
     }
 
-    public Group(String title, String description) {
+    public Group(String title, String description, String rules, String avatar) {
         this.title = title;
         this.description = description;
+        this.rules = rules;
+        this.avatar = avatar;
     }
 
     public Long getId() {
@@ -138,4 +142,19 @@ public class Group {
         this.members = members;
     }
 
+    public String getRules() {
+        return rules;
+    }
+
+    public void setRules(String rules) {
+        this.rules = rules;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 }

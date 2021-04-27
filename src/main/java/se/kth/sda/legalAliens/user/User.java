@@ -23,6 +23,9 @@ public class User {
     @Column(name = "id")
     private Long id;
 
+    private String avatar;
+    private String bio = "Sample information, a short description of where you are from, your interests, personality.";
+
     @Email(message = "Invalid email address! Please provide a valid email address")
     @NotEmpty(message = "Please provide an email address")
     @Column(name = "email", unique = true)
@@ -60,6 +63,25 @@ public class User {
         this.email = email;
         this.password = password;
         this.name = name;
+    }
+
+    public User setUpdateUser (User updateUser) {
+        if (updateUser.getAvatar() == null) {
+         updateUser.setAvatar(this.getAvatar());
+        }
+        if (updateUser.getBio() == null) {
+            updateUser.setBio(this.getBio());
+        }
+        if (updateUser.getName()== null) {
+            updateUser.setName(this.getName());
+        }
+        if (updateUser.getPassword()== null) {
+            updateUser.setPassword(this.getPassword());
+        }
+        if (updateUser.getEmail() == null) {
+            updateUser.setEmail(this.getEmail());
+        }
+        return updateUser;
     }
 
     public Long getId() {
@@ -140,4 +162,19 @@ public class User {
         this.firstLogIn = firstLogIn;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 }
