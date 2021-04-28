@@ -19,6 +19,7 @@ import { About } from "./pages/groups/group-details/About";
 import { GroupForm } from "./pages/groups/GroupForm";
 
 export default function App() {
+
 	// State
 	const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
 
@@ -48,4 +49,5 @@ export default function App() {
 			</RecoilRoot>
 		</div>
 	);
+
 }

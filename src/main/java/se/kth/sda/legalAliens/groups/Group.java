@@ -3,17 +3,8 @@ package se.kth.sda.legalAliens.groups;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -24,6 +15,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import se.kth.sda.legalAliens.posts.Post;
+import se.kth.sda.legalAliens.topics.Topic;
 import se.kth.sda.legalAliens.user.User;
 
 @Entity
@@ -33,8 +25,11 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "title", unique = true)
     private String title;
     private String description;
+    private String rules;
+    private String avatar;
     private Date created;
     private Date updated;
 
@@ -49,6 +44,19 @@ public class Group {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Post> posts;
 
+    @ManyToMany
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "name")
+    @JsonIdentityReference(alwaysAsId = true)
+    @JoinColumn(nullable = false)
+    private List<User> members;
+
+    @ManyToMany
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "topic")
+    @JsonIdentityReference(alwaysAsId = true)
+    @JoinColumn(nullable = false)
+    private List<Topic> topics;
+
+
     @PrePersist
     protected void onCreate() {
         created = new Date();
@@ -62,9 +70,11 @@ public class Group {
     public Group() {
     }
 
-    public Group(String title, String description) {
+    public Group(String title, String description, String rules, String avatar) {
         this.title = title;
         this.description = description;
+        this.rules = rules;
+        this.avatar = avatar;
     }
 
     public Long getId() {
@@ -100,7 +110,7 @@ public class Group {
     }
 
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
     public void setTitle(String title) {
@@ -123,4 +133,35 @@ public class Group {
         this.posts = posts;
     }
 
+    public List<User> getMembers() {
+        return this.members;
+    }
+
+    public void setMembers(List<User> members) {
+        this.members = members;
+    }
+
+    public String getRules() {
+        return rules;
+    }
+
+    public void setRules(String rules) {
+        this.rules = rules;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
+    }
 }
