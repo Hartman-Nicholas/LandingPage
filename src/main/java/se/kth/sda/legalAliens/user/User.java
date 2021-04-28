@@ -1,5 +1,7 @@
 package se.kth.sda.legalAliens.user;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Length;
 
 import se.kth.sda.legalAliens.comments.Comment;
@@ -17,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "account")
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,15 +43,19 @@ public class User {
     private String name;
 
     @OneToMany(mappedBy = "userCommentOwner")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Comment> comments;
 
     @OneToMany(mappedBy = "postOwner")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Post> posts;
 
     @OneToMany(mappedBy = "groupOwner")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Group> groupsCreated;
 
     @ManyToMany(mappedBy = "members")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Group> groupsJoined;
 
     private Boolean firstLogIn = true;
