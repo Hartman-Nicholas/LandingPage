@@ -1,10 +1,9 @@
 // NPM Packages
-import ReactTimeAgo from "react-time-ago";
 import { useParams,Switch,Route, BrowserRouter } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
 // Project files
-import { groupDataState, userDataState } from "../../state/userDataState";
+import { groupDataState } from "../../state/userDataState";
 import { About } from "./group-details/About";
 import { Discussion } from "./group-details/Discussion";
 import { Members } from "./group-details/Members";

@@ -15,7 +15,6 @@ import "./styles/App.css";
 import { Groups } from "./pages/groups/Groups";
 import { GroupsBar } from "./components/GroupsBar";
 import { GroupHome } from "./pages/groups/GroupHome";
-import { About } from "./pages/groups/group-details/About";
 import { GroupForm } from "./pages/groups/GroupForm";
 
 export default function App() {
