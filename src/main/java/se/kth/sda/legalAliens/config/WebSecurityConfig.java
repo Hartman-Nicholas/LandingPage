@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         // Whitelist
-        http.authorizeRequests().antMatchers("/authenticate", "/register").permitAll()
+        http.authorizeRequests().antMatchers("/authenticate", "/register", "/register/{userName}").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated();
 
         // Register filters
