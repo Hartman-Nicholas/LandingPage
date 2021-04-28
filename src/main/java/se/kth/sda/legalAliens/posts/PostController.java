@@ -26,7 +26,6 @@ public class PostController {
     CommentRepository commentRepository;
 
     @Autowired
-
     public PostController(PostRepository postRepository, GroupRepository groupRepository, PostService postService,
             UserService userService, CommentRepository commentRepository) {
         this.postRepository = postRepository;
@@ -44,9 +43,9 @@ public class PostController {
     }
 
     // Return a specific post based on the postId.
-    @GetMapping("/{id}")
-    public ResponseEntity<Post> getPost(@PathVariable Long id) {
-        Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+    @GetMapping("/{postId}")
+    public ResponseEntity<Post> getPost(@PathVariable Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
         return ResponseEntity.ok(post);
     }
 
@@ -64,17 +63,18 @@ public class PostController {
     }
 
     // Update the post based on the provided postId
-    @PutMapping("/{id}")
-    public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post updatedPost, Principal principal) {
-        Post post = postService.updatePost(id, updatedPost, principal);
+    @PutMapping("/{postId}")
+    public ResponseEntity<Post> updatePost(@PathVariable Long postId, @RequestBody Post updatedPost,
+            Principal principal) {
+        Post post = postService.updatePost(postId, updatedPost, principal);
         return ResponseEntity.ok(post);
     }
 
     // Delete the post based on the provided postId.
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{postId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePost(@PathVariable Long id, Principal principal) {
-        Post post = postService.deletePost(id, principal);
+    public void deletePost(@PathVariable Long postId, Principal principal) {
+        Post post = postService.deletePost(postId, principal);
         postRepository.delete(post);
     }
 }

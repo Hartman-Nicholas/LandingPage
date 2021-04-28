@@ -4,9 +4,7 @@ import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/users")
 @RestController
@@ -26,6 +24,32 @@ public class UserController {
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping ("/{userName}")
+    public boolean checkUserName (@PathVariable String userName) {
+        User user = userService.findUserByName(userName);
+        return user != null;
+    }
+
+    @PostMapping
+    public ResponseEntity<User> updateLogIn(Principal principal) {
+        String userName = principal.getName();
+        User user = userService.findUserByEmail(userName);
+        user.setFirstLogIn(false);
+        userRepository.save(user);
+
+        return ResponseEntity.ok(user);
+    }
+
+    @PutMapping
+    public  ResponseEntity<User> updateUser (@RequestBody User updateUserData, Principal principal) {
+        String userName = principal.getName();
+        User user = userService.findUserByEmail(userName);
+        updateUserData = userService.updateUser(user, updateUserData);
+        userRepository.save(updateUserData);
+        return ResponseEntity.ok(updateUserData);
+
     }
 
 }

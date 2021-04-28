@@ -26,6 +26,7 @@ export default function App() {
       <RecoilRoot>
         <BrowserRouter>
           <Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
+          <GroupsCard />
           <Switch>
             {!loggedIn && <AuthPage />}
             <Route path="/" exact component={Home} />
