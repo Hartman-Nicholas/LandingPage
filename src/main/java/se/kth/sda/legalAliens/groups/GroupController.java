@@ -45,6 +45,12 @@ public class GroupController {
         return ResponseEntity.ok(post);
     }
 
+    @GetMapping("/title/{groupTitle}")
+    public boolean checkGroupTitle (@PathVariable String groupTitle) {
+        Group group = groupRepository.findByTitle(groupTitle);
+        return group != null;
+    }
+
     // Create a new group on User given by Logged In User
     @PostMapping
     public ResponseEntity<Group> createGroup(@RequestBody Group group, Principal principal) {

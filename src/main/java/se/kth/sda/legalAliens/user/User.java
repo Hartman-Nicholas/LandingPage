@@ -51,7 +51,7 @@ public class User {
     @ManyToMany(mappedBy = "members")
     private List<Group> groupsJoined;
 
-    private Boolean firstLogIn = false;
+    private Boolean firstLogIn = true;
 
     public User() {
     }

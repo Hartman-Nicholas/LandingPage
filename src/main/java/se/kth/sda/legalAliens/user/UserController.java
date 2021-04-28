@@ -36,7 +36,7 @@ public class UserController {
     public ResponseEntity<User> updateLogIn(Principal principal) {
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        user.setFirstLogIn(true);
+        user.setFirstLogIn(false);
         userRepository.save(user);
 
         return ResponseEntity.ok(user);

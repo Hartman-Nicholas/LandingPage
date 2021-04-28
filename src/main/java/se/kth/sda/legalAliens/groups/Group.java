@@ -45,7 +45,7 @@ public class Group {
     private List<Post> posts;
 
     @ManyToMany
-        @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "name")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "name")
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(nullable = false)
     private List<User> members;
@@ -110,7 +110,7 @@ public class Group {
     }
 
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
     public void setTitle(String title) {
