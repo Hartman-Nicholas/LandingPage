@@ -3,6 +3,9 @@ package se.kth.sda.legalAliens.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import se.kth.sda.legalAliens.exception.ResourceNotFoundException;
+
+import java.security.Principal;
 
 @Service()
 public class UserService {
@@ -37,4 +40,5 @@ public class UserService {
         user.setPassword(encryptedPass);
         userRepository.save(user);
     }
+
 }
