@@ -26,11 +26,6 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping ("/{userName}")
-    public boolean checkUserName (@PathVariable String userName) {
-        User user = userService.findUserByName(userName);
-        return user != null;
-    }
 
     @PostMapping
     public ResponseEntity<User> updateLogIn(Principal principal) {
