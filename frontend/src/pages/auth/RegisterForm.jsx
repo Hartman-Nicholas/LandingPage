@@ -2,35 +2,34 @@ import React, { useState } from "react";
 
 import Auth from "../../services/Auth";
 import UserApi from "../../api/UserApi";
-import {InvalidCredentials} from './InvalidCredentials'
+import { InvalidCredentials, UserExists } from "./InvalidCredentials";
 
 export default function RegisterForm() {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+
+	//Registeration state:
 	const [isSuccessful, setIsSuccessful] = useState(true);
+	const [doesUsernameExist, setDoesUsernameExists] = useState(false);
 
 	async function register(registrationData) {
 		const registerSuccess = await Auth.register(registrationData);
 		if (!registerSuccess) {
-      setIsSuccessful(false)
+			setIsSuccessful(false);
 		}
 	}
-
-	// const checkUsername = async (username) => {
-	// 	UserApi.userNameExists(username)
-	// 		.then((res) => setDoesUsernameExists(res))
-	// 		.catch((err) => console.log(err));
-	// };
+	const checkUsername = async (username) => {
+		await UserApi.userNameExists(username)
+			.then((res) => setDoesUsernameExists(res.data))
+			.catch((err) => console.log(err));
+	};
 
 	const handleSubmit = (e) => {
-		// checkUsername(name);
-
-		// if (!doesUsernameExists) {
-			return register({ name, email, password });
-		// } else {
-		// 	alert("username already exists");
-		// }
+		checkUsername(name);
+		if (!doesUsernameExist) {
+			register({ name, email, password });
+		}
 	};
 
 	return (
@@ -65,12 +64,16 @@ export default function RegisterForm() {
 				</div>
 
 				<div>
-          {!isSuccessful &&
-          <InvalidCredentials/>
-          }
 					<button type="submit" onClick={handleSubmit}>
 						Create account
 					</button>
+					{doesUsernameExist ? (
+						<UserExists />
+					) : !isSuccessful ? (
+						<InvalidCredentials />
+					) : (
+						""
+					)}
 				</div>
 			</div>
 		</div>
