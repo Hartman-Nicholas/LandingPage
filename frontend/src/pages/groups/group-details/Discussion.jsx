@@ -6,9 +6,7 @@ import { useEffect } from "react";
 // Project files
 import { PostCard } from "../../../components/post/postCard";
 import { PostForm } from "../../../components/post/PostForm";
-import {
-	postDataState,
-} from "../../../state/userDataState";
+import { postDataState } from "../../../state/userDataState";
 
 export const Discussion = ({ groupData }) => {
 	// State
@@ -19,10 +17,10 @@ export const Discussion = ({ groupData }) => {
 	// Components
 	useEffect(() => {
 		const abortFetch = new AbortController();
-			groupData.map((group) => setPostData(group.posts));
+		groupData.map((group) => setPostData(group.posts));
 
 		return () => {
-			abortFetch.abort()
+			abortFetch.abort();
 		};
 	}, []);
 

@@ -13,9 +13,11 @@ import { GroupHeader } from "./group-details/GroupHeader";
 export const GroupHome = () => {
 	// State
 	const groupsData = useRecoilValue(groupDataState);
-	// Constants
+
+	// Variables
 	let { id } = useParams();
 	let group = groupsData.filter((data) => data.id == id);
+
 	// Components
 
 	return (

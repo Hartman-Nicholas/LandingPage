@@ -1,10 +1,10 @@
 // NPM Packages
 import { useRecoilValue } from "recoil";
-import ReactTimeAgo from "react-time-ago";
 // Project files
 import { groupDataState, userDataState } from "../../state/userDataState";
 import { GroupForm } from "./GroupForm";
 import { GroupCard } from "./GroupCard";
+import { OwnerGroupsBar } from "./group-details/OwnerGroupBar";
 
 export const Groups = () => {
 	// State
@@ -26,15 +26,18 @@ export const Groups = () => {
 						<GroupCard key={group.id} groupData={group} />
 				  ))}
 			<br />
-			<h1>Groups owned by you:</h1>
+
+			<OwnerGroupsBar />
+
+			{/* <h1>Groups owned by you:</h1>
 			{filteredGroup.length === 0
 				? "You have no groups"
 				: filteredGroup.map((group) => (
 						<GroupCard key={group.id} groupData={group} />
 				  ))}
-			<br />
-			<h1>Create a group:</h1>
-			<GroupForm />
+			<br /> */}
+			{/* <h1>Create a group:</h1>
+			<GroupForm /> */}
 		</div>
 	);
 };

@@ -19,7 +19,7 @@ export const UserData = () => {
 		const abortFetch = new AbortController();
 
 		setUserData(data);
-
+		console.log("fromuserData", userData)
 		return () => abortFetch.abort();
 	}, []);
 
@@ -40,6 +40,7 @@ export const GroupData = () => {
 		return () => abortFetch.abort();
 	}, []);
 
+
 	const list = groupData.map((group) => {
 		return (
 			<Link
@@ -57,6 +58,10 @@ export const GroupData = () => {
 
 	return <div>{list.length === 0 ? "Groups list is empty" : list}</div>;
 };
+
+
+
+
 // fetch types:
 // 0: groups
 // 1: user
