@@ -1,14 +1,35 @@
 import { selector } from "recoil";
-import { userDataState } from "./userDataState";
+import { userDataState, groupDataState, postDataState } from "./userDataState";
 import UserApi from "../api/UserApi";
+import GroupsApi from "../api/GroupApi";
+import PostsApi from "../api/PostsApi";
 
 export const getUserData = selector({
-  key: "data",
-  get: async ({ get }) => {
-    get(userDataState);
+	key: "data",
+	get: async ({ get }) => {
+		get(userDataState);
 
-    const userData = UserApi.getUser().then((response) => response);
+		const userData = UserApi.getUser().then((response) => response);
 
-    return userData;
-  },
+		return userData;
+	},
 });
+
+export const getGroupsList = selector({
+  key: "groupsList",
+  get: async({get}) => {
+    get(groupDataState);
+    const groupList = GroupsApi.getAllGroups().then(response => response);
+    return groupList;
+  }
+})
+
+export const getPostsList = selector({
+  key: "postsList",
+  get: async({get}) => {
+    get(postDataState);
+    const postsList = PostsApi.getAllPosts().then(response => response);
+    return postsList;
+  }
+})
+

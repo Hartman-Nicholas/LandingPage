@@ -5,20 +5,20 @@ class PostsApi {
     return Api.get("/posts");
   }
 
-  getPostById(id) {
-    return Api.get("/posts/" + id);
+  getPostById(postId) {
+    return Api.get(`/posts/${postId}`);
   }
 
-  createPost(groupId, post) {
-    return Api.post("/posts/" + groupId, post);
+  createPost(groupId, postData) {
+    return Api.post(`/posts/${groupId}`, postData);
   }
 
-  updatePost(postId, post) {
-    return Api.put("/posts/" + postId, post);
+  updatePost(postId, postData) {
+    return Api.put(`/posts/${postId}`, postData);
   }
 
-  deletePost(id) {
-    return Api.delete("/posts/" + id);
+  deletePost(postId) {
+    return Api.delete(`/posts/${postId}`);
   }
 }
 

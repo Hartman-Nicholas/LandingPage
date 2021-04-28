@@ -1,15 +1,15 @@
 import { useRecoilValue } from "recoil";
-import { getUserData } from "../../state/recoilFetch";
+import { userDataState } from "../../state/userDataState";
 
 export default function UserCard() {
-  const { data } = useRecoilValue(getUserData);
-  console.log(data);
+	//TODO Fix user data isnt fetching
+	const userData = useRecoilValue(userDataState);
 
-  return (
-    <section>
-      <div>UserCard Template</div>
-      <div>{data.name}</div>
-      <div> {data.email}</div>
-    </section>
-  );
+	return (
+		<section>
+			<div>UserCard Template</div>
+			<div>{userData.name}</div>
+			<div> {userData.email}</div>
+		</section>
+	);
 }
