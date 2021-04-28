@@ -1,0 +1,66 @@
+.authPage {
+}
+
+.authPage__form {
+  padding: 2rem;
+  text-align: center;
+}
+
+.authPage--logo {
+  width: 50px;
+  text-align: center;
+}
+
+.authPage--blueWave::before {
+  content: "";
+  position: absolute;
+  width: 2000px;
+  height: 2000px;
+  border-radius: 50%;
+  left: 60%;
+  bottom: 48%;
+  right: auto;
+  top: auto;
+  transform: translateX(-40%);
+
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    #006aa8;
+
+  z-index: -10;
+}
+
+.authPage--blueWave {
+  width: 100%;
+  overflow: hidden;
+}
+
+.authPage--yellowWave::before {
+  content: "";
+  position: absolute;
+  width: 2000px;
+  height: 2000px;
+  border-radius: 50%;
+  left: 60%;
+  bottom: 48%;
+  right: auto;
+  top: auto;
+  transform: translateX(-50%) translateY(110%);
+
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 48.96%,
+      rgba(255, 255, 255, 0.45) 100%
+    ),
+    #fecd00;
+
+  z-index: -10;
+}
+
+.authPage--yellowWave {
+  width: 100%;
+  overflow: hidden;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Form, Field, FormSpy } from "react-final-form";
 import createDecorator from "final-form-focus";
@@ -14,13 +14,20 @@ const emailCheck = (value) => {
   return validateEmails(value || "");
 };
 
-const userCheck = async (value) => {
-  console.log(value);
-  const exists = await UserApi.userNameExists(value)
+const emailExistsCheck = async (value) => {
+  const exists = await UserApi.emailExists(value)
     .then((res) => res.data)
     .catch((err) => console.log(err));
 
-  console.log(exists);
+  if (exists) {
+    return "Email already exists";
+  }
+};
+
+const userCheck = async (value) => {
+  const exists = await UserApi.userNameExists(value)
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
 
   if (exists) {
     return "User already exists";
@@ -57,23 +64,14 @@ const focusOnError = createDecorator();
 
 export default function RegisterForm() {
   //Registeration state:
-  const [isSuccessful, setIsSuccessful] = useState(true);
 
-  console.log(isSuccessful);
-
-  const onSubmit = (values) => {
-    register(values);
+  const onSubmit = async (values) => {
+    await Auth.register(values);
   };
-
-  async function register(registrationData) {
-    const registerSuccess = await Auth.register(registrationData);
-    if (!registerSuccess) {
-      setIsSuccessful(false);
-    }
-  }
 
   return (
     <Form
+      className="registerForm"
       onSubmit={onSubmit}
       decorators={[focusOnError]}
       subscription={{
@@ -81,12 +79,13 @@ export default function RegisterForm() {
       }}
     >
       {({ handleSubmit, submitting, pristine }) => (
-        <form onSubmit={handleSubmit} className="sign-up-form">
-          <h2 className="title">Sign up</h2>
+        <form className="registerForm__form" onSubmit={handleSubmit}>
+          <h2>Sign up</h2>
           <Field
+            className="input-field"
             name="name"
             placeholder={"User Name"}
-            validate={(required, userCheck)}
+            validate={composeValidators(required, userCheck)}
           >
             {({ input, meta, placeholder }) => (
               <div
@@ -96,18 +95,15 @@ export default function RegisterForm() {
               >
                 <i className="fas fa-user"></i>
                 <input {...input} placeholder={placeholder} />
-                {meta.error && meta.touched && (
-                  <span className="red-text" style={{ marginBottom: "20px" }}>
-                    {meta.error}
-                  </span>
-                )}
+                {meta.error && meta.touched && <span>{meta.error}</span>}
               </div>
             )}
           </Field>
           <Field
+            className="input-field"
             name="email"
             placeholder={"Email"}
-            validate={composeValidators(required, emailCheck)}
+            validate={composeValidators(required, emailCheck, emailExistsCheck)}
           >
             {({ input, meta, placeholder }) => (
               <div
@@ -115,17 +111,14 @@ export default function RegisterForm() {
                   meta.active ? "active input-field" : "input-field"
                 }`}
               >
-                <i class="fas fa-envelope"></i>
+                <i className="fas fa-envelope"></i>
                 <input {...input} placeholder={placeholder} />
-                {meta.error && meta.touched && (
-                  <span className="red-text" style={{ marginBottom: "20px" }}>
-                    {meta.error}
-                  </span>
-                )}
+                {meta.error && meta.touched && <span>{meta.error}</span>}
               </div>
             )}
           </Field>
           <Field
+            className="input-field"
             name="password"
             placeholder={"Password"}
             validate={composeValidators(required, passCheck)}
@@ -139,16 +132,12 @@ export default function RegisterForm() {
                 <i className="fas fa-lock"></i>
                 <input {...input} placeholder={placeholder} />
                 {meta.valid && <span>{showPassStrength(input.value)}</span>}
-                {meta.error && meta.touched && (
-                  <span className="red-text" style={{ marginBottom: "20px" }}>
-                    {meta.error}
-                  </span>
-                )}
+                {meta.error && meta.touched && <span>{meta.error}</span>}
               </div>
             )}
           </Field>
           <input
-            className="btn solid"
+            className="btn"
             value="Login"
             type="submit"
             disabled={pristine || submitting}
@@ -158,7 +147,7 @@ export default function RegisterForm() {
               if (submitSucceeded) {
                 return <Link to="/" />;
               }
-              return <div>Hi There</div>;
+              return <div></div>;
             }}
           </FormSpy>
                       

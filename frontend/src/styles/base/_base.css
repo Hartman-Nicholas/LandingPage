@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: inherit;
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--ff-primary);
 }
 
 html,
@@ -17,6 +17,7 @@ body {
 
 html {
   font-size: 62.5%;
+  background: var(--veryLight-grey);
 }
 
 @media (min-width: 34.375em) {
@@ -47,12 +48,6 @@ body {
   box-sizing: border-box;
   position: relative;
   padding: 0rem;
-}
-
-@media (min-width: 34.375em) {
-  body {
-    padding: 1rem;
-  }
 }
 
 section {
@@ -90,4 +85,10 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.beforeContainer {
+  position: relative;
+  min-height: 700px;
+  overflow: hidden;
 }

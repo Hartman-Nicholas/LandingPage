@@ -22,6 +22,7 @@ export default function LoginForm() {
 
   return (
     <Form
+      className="loginForm"
       onSubmit={onSubmit}
       decorators={[focusOnError]}
       subscription={{
@@ -29,24 +30,32 @@ export default function LoginForm() {
       }}
     >
       {({ handleSubmit, submitting, pristine }) => (
-        <form onSubmit={handleSubmit}>
-          <h2>Sign in</h2>
-          <Field name="email" placeholder={"Email"} validate={required}>
+        <form className="loginForm__form" onSubmit={handleSubmit}>
+          <h2 className="loginForm__form--title">Sign in</h2>
+          <Field
+            className="input-field"
+            name="email"
+            placeholder={"Email"}
+            validate={required}
+          >
             {({ input, meta, placeholder }) => (
               <div
                 className={`field ${
                   meta.active ? "active input-field" : "input-field"
                 }`}
               >
-                <i class="fas fa-envelope"></i>
+                <i className="fas fa-envelope"></i>
                 <input {...input} placeholder={placeholder} />
-                {meta.error && meta.touched && (
-                  <span className="red-text">{meta.error}</span>
-                )}
+                {meta.error && meta.touched && <span>{meta.error}</span>}
               </div>
             )}
           </Field>
-          <Field name="password" placeholder={"Password"} validate={required}>
+          <Field
+            className="input-field"
+            name="password"
+            placeholder={"Password"}
+            validate={required}
+          >
             {({ input, meta, placeholder }) => (
               <div
                 className={`field ${
@@ -60,6 +69,7 @@ export default function LoginForm() {
             )}
           </Field>
           <input
+            className="btn"
             value="Login"
             type="submit"
             disabled={pristine || submitting}

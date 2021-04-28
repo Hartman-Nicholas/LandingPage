@@ -18,35 +18,36 @@ import { GroupHome } from "./pages/groups/GroupHome";
 import { GroupForm } from "./pages/groups/GroupForm";
 
 export default function App() {
+  // State
+  const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
 
-	// State
-	const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
+  console.log(loggedIn);
+  // Constants
+  Auth.bindLoggedInStateSetter(setLoggedIn);
 
-	// Constants
-	Auth.bindLoggedInStateSetter(setLoggedIn);
+  // Components
 
-	// Components
+  return (
+    <div className={!loggedIn ? "beforeContainer" : ""}>
+      <div className="container">
+        <RecoilRoot>
+          <BrowserRouter>
+            <Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
 
-	return (
-		<div className="container">
-			<RecoilRoot>
-				<BrowserRouter>
-					<Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
+            {loggedIn && <GroupsBar />}
+            <Switch>
+              {!loggedIn && <AuthPage />}
+              <Route path="/" exact component={Home} />
+              <Route path="/user" exact component={User} />
+              <Route path="/groups/create" exact component={GroupForm} />
+              <Route path="/groups" exact component={Groups} />
+              <Route path="/groups/:id" exact component={GroupHome} />
+            </Switch>
 
-					{loggedIn && <GroupsBar />}
-					<Switch>
-						{!loggedIn && <AuthPage />}
-						<Route path="/" exact component={Home} />
-						<Route path="/user" exact component={User} />
-						<Route path="/groups/create" exact component={GroupForm} />
-						<Route path="/groups" exact component={Groups} />
-						<Route path="/groups/:id" exact component={GroupHome} />
-					</Switch>
-
-					<Footer />
-				</BrowserRouter>
-			</RecoilRoot>
-		</div>
-	);
-
+            <Footer />
+          </BrowserRouter>
+        </RecoilRoot>
+      </div>
+    </div>
+  );
 }
