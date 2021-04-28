@@ -6,6 +6,7 @@ import se.kth.sda.legalAliens.comments.Comment;
 import se.kth.sda.legalAliens.groups.Group;
 import se.kth.sda.legalAliens.posts.Post;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -145,6 +146,17 @@ public class User {
     public List<Group> getGroupsJoined() {
         return this.groupsJoined;
     }
+
+//    public List<Post> getNewsFeed() {
+//       List<Group> groups = getGroupsJoined();
+//       List<Post> posts = new ArrayList<>();
+//       for (Group value : groups) {
+//           if (value.getPosts().size() > 3) {
+//          for (int i=value.getPosts().size(); i> ; i--)
+//
+//
+//       }
+//    }
 
     public void setGroupsJoined(List<Group> groupsJoined) {
         this.groupsJoined = groupsJoined;
