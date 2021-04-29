@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Form, Field, FormSpy } from "react-final-form";
+import { FORM_ERROR } from "final-form";
 import createDecorator from "final-form-focus";
 
 import Auth from "../../services/Auth";
@@ -10,26 +11,17 @@ const required = (value) => (value ? undefined : "Required");
 const focusOnError = createDecorator();
 
 export default function LoginForm() {
-  const onSubmit = ({ email, password }) => {
-    login({ email, password });
+  const onSubmit = async (values) => {
+    const loggedIn = await Auth.login(values);
+
+    if (!loggedIn) {
+      return { [FORM_ERROR]: "Login Failed, Invalid Credentials" };
+    }
   };
 
-  async function login(loginData) {
-    const loginSuccess = await Auth.login(loginData);
-    if (!loginSuccess) {
-    }
-  }
-
   return (
-    <Form
-      className="loginForm"
-      onSubmit={onSubmit}
-      decorators={[focusOnError]}
-      subscription={{
-        submitting: true,
-      }}
-    >
-      {({ handleSubmit, submitting, pristine }) => (
+    <Form className="loginForm" onSubmit={onSubmit} decorators={[focusOnError]}>
+      {({ handleSubmit, submitting, pristine, submitError }) => (
         <form className="loginForm__form" onSubmit={handleSubmit}>
           <h2 className="loginForm__form--title">Sign in</h2>
           <Field
@@ -65,13 +57,14 @@ export default function LoginForm() {
                 }`}
               >
                 <i className="fas fa-lock"></i>
-                <input {...input} placeholder={placeholder} />
+                <input {...input} placeholder={placeholder} type="password" />
                 {meta.error && meta.touched && (
-                  <span className="input-field-error">{meta.error}</span>
+                  <div className="input-field-error">{meta.error}</div>
                 )}
               </div>
             )}
           </Field>
+          {submitError && <div className="submit-error">{submitError}</div>}
           <input
             className="btn  margin-top-medium"
             value="Login"

@@ -134,8 +134,12 @@ export default function RegisterForm() {
                 }`}
               >
                 <i className="fas fa-lock"></i>
-                <input {...input} placeholder={placeholder} />
-                {meta.valid && <span>{showPassStrength(input.value)}</span>}
+                <input {...input} placeholder={placeholder} type="password" />
+                {meta.valid && (
+                  <div className="input-field-correct">
+                    {showPassStrength(input.value)}
+                  </div>
+                )}
                 {meta.error && meta.touched && (
                   <div className="input-field-error">{meta.error}</div>
                 )}

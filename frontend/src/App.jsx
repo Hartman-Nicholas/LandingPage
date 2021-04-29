@@ -21,7 +21,6 @@ export default function App() {
   // State
   const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
 
-  console.log(loggedIn);
   // Constants
   Auth.bindLoggedInStateSetter(setLoggedIn);
 
