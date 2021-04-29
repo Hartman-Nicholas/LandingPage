@@ -23,6 +23,7 @@ public class GroupController {
     GroupService groupService;
     TopicRepository topicRepository;
 
+
     @Autowired
     public GroupController(GroupRepository groupRepository, UserService userService, GroupService groupService, TopicRepository topicRepository) {
         this.groupRepository = groupRepository;
@@ -86,4 +87,10 @@ public class GroupController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(group);
     }
+   @DeleteMapping("/{groupId}/topics/{topicId}")
+    public ResponseEntity<Group> deleteTopicFromGroup(@PathVariable Long groupId, @PathVariable Long topicId) {
+       return groupService.deleteTopicFromGroup(groupId,topicId);
+   }
+
+
 }
