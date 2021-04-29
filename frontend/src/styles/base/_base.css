@@ -13,6 +13,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   font-size: 62.5%;
+  color: var(--onyx);
 }
 
 html {

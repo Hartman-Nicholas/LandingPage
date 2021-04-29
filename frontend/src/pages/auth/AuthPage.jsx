@@ -4,7 +4,7 @@ import React, { useState } from "react";
 // Project files
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/logoLandingPage.png";
 
 export default function LoginPage() {
   const [signIn, setSignIn] = useState(false);

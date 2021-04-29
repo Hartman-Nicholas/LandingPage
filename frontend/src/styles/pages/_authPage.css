@@ -2,12 +2,13 @@
 }
 
 .authPage__form {
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
 }
 
 .authPage--logo {
-  width: 50px;
+  width: 120px;
+  padding: 1rem;
   text-align: center;
 }
 
@@ -21,7 +22,7 @@
   bottom: 48%;
   right: auto;
   top: auto;
-  transform: translateX(-40%);
+  transform: translateX(-32%);
 
   background: linear-gradient(
       180deg,
@@ -31,11 +32,6 @@
     #006aa8;
 
   z-index: -10;
-}
-
-.authPage--blueWave {
-  width: 100%;
-  overflow: hidden;
 }
 
 .authPage--yellowWave::before {
@@ -58,9 +54,4 @@
     #fecd00;
 
   z-index: -10;
-}
-
-.authPage--yellowWave {
-  width: 100%;
-  overflow: hidden;
 }

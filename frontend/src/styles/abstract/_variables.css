@@ -17,6 +17,10 @@
     0.125em 0.125em 0.25em rgba(0, 0, 0, 0.15);
 
   --white: #fff;
+  --red: #ff0033;
+  --onyx: #2b272b;
+
+  --veryLight-grey: rgb(245, 241, 241);
 
   --light-grey: #f0f0f0;
   --medium-grey: #acacac;
@@ -24,6 +28,8 @@
   --dark-grey: #333;
 
   --light-blue: #5995fd;
+  --medium-blue: rgba(0, 106, 168, 0.9);
+  --medium-blue-hover: rgba(18, 124, 185, 0.9);
 
   --dark-brown: #53361c;
   --dark-brown-transparent: rgba(95, 63, 16, 0.575);

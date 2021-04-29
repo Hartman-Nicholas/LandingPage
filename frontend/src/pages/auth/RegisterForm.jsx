@@ -95,7 +95,9 @@ export default function RegisterForm() {
               >
                 <i className="fas fa-user"></i>
                 <input {...input} placeholder={placeholder} />
-                {meta.error && meta.touched && <span>{meta.error}</span>}
+                {meta.error && meta.touched && (
+                  <div className="input-field-error">{meta.error}</div>
+                )}
               </div>
             )}
           </Field>
@@ -113,7 +115,9 @@ export default function RegisterForm() {
               >
                 <i className="fas fa-envelope"></i>
                 <input {...input} placeholder={placeholder} />
-                {meta.error && meta.touched && <span>{meta.error}</span>}
+                {meta.error && meta.touched && (
+                  <div className="input-field-error">{meta.error}</div>
+                )}
               </div>
             )}
           </Field>
@@ -132,7 +136,9 @@ export default function RegisterForm() {
                 <i className="fas fa-lock"></i>
                 <input {...input} placeholder={placeholder} />
                 {meta.valid && <span>{showPassStrength(input.value)}</span>}
-                {meta.error && meta.touched && <span>{meta.error}</span>}
+                {meta.error && meta.touched && (
+                  <div className="input-field-error">{meta.error}</div>
+                )}
               </div>
             )}
           </Field>

@@ -46,7 +46,9 @@ export default function LoginForm() {
               >
                 <i className="fas fa-envelope"></i>
                 <input {...input} placeholder={placeholder} />
-                {meta.error && meta.touched && <span>{meta.error}</span>}
+                {meta.error && meta.touched && (
+                  <span className="input-field-error">{meta.error}</span>
+                )}
               </div>
             )}
           </Field>
@@ -64,12 +66,14 @@ export default function LoginForm() {
               >
                 <i className="fas fa-lock"></i>
                 <input {...input} placeholder={placeholder} />
-                {meta.error && meta.touched && <span>{meta.error}</span>}
+                {meta.error && meta.touched && (
+                  <span className="input-field-error">{meta.error}</span>
+                )}
               </div>
             )}
           </Field>
           <input
-            className="btn"
+            className="btn  margin-top-medium"
             value="Login"
             type="submit"
             disabled={pristine || submitting}

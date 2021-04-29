@@ -4,7 +4,7 @@
   border: none;
   outline: none;
   border-radius: 49px;
-  background-color: var(--light-blue);
+  background-color: var(--medium-blue);
   color: var(--white);
   text-transform: uppercase;
   font-weight: 600;
@@ -20,7 +20,7 @@
 }
 
 .btn:hover {
-  background-color: #4d84e2;
+  background-color: var(--medium-blue-hover);
 }
 
 .btn.transparent {
@@ -31,4 +31,8 @@
   height: 41px;
   font-weight: 600;
   font-size: 0.8rem;
+}
+
+.btn.transparent:hover {
+  background-color: var(--medium-blue-hover);
 }
