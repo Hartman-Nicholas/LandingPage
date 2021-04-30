@@ -13,14 +13,13 @@ export const GroupForm = () => {
 		description: "",
 	});
 	const [groupData, setGroupData] = useRecoilState(groupDataState);
-
 	// Constants
-	async function createGroup(groupData) {
+	async function createGroup(requestBody) {
 		try {
-			await GroupApi.createGroup(groupData);
-			GroupApi.getAllGroups()
-				.then(({ data }) => setGroupData(data))
-				.catch((err) => console.error(err));
+			await GroupApi.createGroup(requestBody);
+			await GroupApi.getAllGroups().then(({ data }) => {
+				setGroupData(data);
+			});
 		} catch (e) {
 			console.error(e);
 		}
@@ -32,19 +31,17 @@ export const GroupForm = () => {
 			...groupForm,
 			[name]: value,
 		});
-
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
+		e.preventDefault();
 		createGroup(groupForm);
 		setGroupForm({
 			title: "",
 			description: "",
-		})
-		e.preventDefault();
+		});
 	};
 	// Components
-
 	return (
 		<form onSubmit={handleSubmit}>
 			<input
