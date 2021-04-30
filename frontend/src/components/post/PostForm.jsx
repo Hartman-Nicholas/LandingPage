@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 
 // Project files
-import { postDataState } from "../../state/userDataState";
+import { groupDataState } from "../../state/userDataState";
 import PostApi from "../../api/PostsApi";
 import GroupApi from "../../api/GroupApi";
 
@@ -12,14 +12,13 @@ export const PostForm = ({ groupId }) => {
 	const [postForm, setPostForm] = useState({
 		body: "",
 	});
-	const [postData, setPostData] = useRecoilState(postDataState);
+	const [groupData, setGroupData] = useRecoilState(groupDataState);
 	// Constants
-	async function createPost(postData) {
+	async function createPost(requestBody) {
 		try {
-			await PostApi.createPost(groupId, postData);
-			GroupApi.getGroupById(groupId)
-				.then(({ data }) => setPostData(data.posts))
-				.catch((err) => console.error(err));
+			await PostApi.createPost(groupId, requestBody);
+		  await	GroupApi.getAllGroups()
+				.then(({ data }) => setGroupData(data))
 		} catch (e) {
 			console.error(e);
 		}
@@ -34,9 +33,9 @@ export const PostForm = ({ groupId }) => {
 	};
 
 	const handleSubmit = (e) => {
+		e.preventDefault();
 		createPost(postForm);
 		setPostForm({ body: "" });
-		e.preventDefault();
 	};
 	// Components
 
