@@ -1,36 +1,30 @@
 // NPM Packages
 import { useParams } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { useEffect } from "react";
+import { useRecoilValue } from "recoil";
 
 // Project files
 import { PostCard } from "../../../components/post/postCard";
 import { PostForm } from "../../../components/post/PostForm";
-import { postDataState } from "../../../state/userDataState";
+import { groupDataState } from "../../../state/userDataState";
 
-export const Discussion = ({ groupData }) => {
+export const Discussion = () => {
 	// State
-	const [postData, setPostData] = useRecoilState(postDataState);
+	const groupsList = useRecoilValue(groupDataState);
 	let { id } = useParams();
 	// Constants
+let groupQuery = groupsList.filter(group => group.id == id);
 
 	// Components
-	useEffect(() => {
-		const abortFetch = new AbortController();
-		groupData.map((group) => setPostData(group.posts));
-
-		return () => {
-			abortFetch.abort();
-		};
-	}, []);
 
 	return (
 		<div>
 			<h1>Discussion</h1>
 			<PostForm groupId={id} />
-			{postData.map((post) => {
-				return <PostCard key={post.id} data={post} />;
-			})}
+			{groupQuery[0].posts.length === 0
+				? "No available posts yet"
+				: groupQuery[0].posts.map((post) => {
+						return <PostCard key={post.id} data={post} />;
+				  })}
 		</div>
 	);
 };
