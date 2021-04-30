@@ -19,7 +19,7 @@ useEffect(() => {
 },[])
 
 
-	return <>{data.name}</>;
+	return <></>;
 };
 
 export const GroupData = () => {
