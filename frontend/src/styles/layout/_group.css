@@ -1,0 +1,26 @@
+.group {
+  position: relative;
+}
+
+.groupHome {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.discussion {
+  overflow-y: scroll;
+  max-height: 200px;
+}
+
+.groupCard__radio {
+  display: none;
+}
+
+.groupCard__radio:checked ~ .hidden {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
