@@ -9,7 +9,7 @@ export const getUserData = selector({
 	get: async ({ get }) => {
 		get(userDataState);
 
-		const userData = UserApi.getUser().then((response) => response);
+		const userData = UserApi.getUser();
 
 		return userData;
 	},
@@ -19,7 +19,7 @@ export const getGroupsList = selector({
   key: "groupsList",
   get: async({get}) => {
     get(groupDataState);
-    const groupList = GroupsApi.getAllGroups().then(response => response);
+    const groupList = GroupsApi.getAllGroups();
     return groupList;
   }
 })
@@ -28,7 +28,7 @@ export const getPostsList = selector({
   key: "postsList",
   get: async({get}) => {
     get(postDataState);
-    const postsList = PostsApi.getAllPosts().then(response => response);
+    const postsList = PostsApi.getAllPosts();
     return postsList;
   }
 })
