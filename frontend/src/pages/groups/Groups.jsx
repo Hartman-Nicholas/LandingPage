@@ -1,9 +1,12 @@
 // NPM Packages
 import { useRecoilValue } from "recoil";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 // Project files
 import { groupDataState, userDataState } from "../../state/userDataState";
 import { GroupCard } from "./GroupCard";
 import { OwnerGroupsBar } from "./group-details/OwnerGroupBar";
+import { ErrorMessage } from "../../components/ErrorMessage";
 
 export const Groups = () => {
 	// State
@@ -14,6 +17,7 @@ export const Groups = () => {
 	const filteredGroup = groupsData.filter(
 		(group) => group.groupOwner !== userData.name
 	);
+
 	// Components
 	return (
 		<div>
@@ -25,8 +29,11 @@ export const Groups = () => {
 						<GroupCard key={group.id} groupData={group} />
 				  ))}
 			<br />
-
-			<OwnerGroupsBar />
+			<ErrorBoundary FallbackComponent={ErrorMessage}>
+				<Suspense fallback={<div>loading...</div>}>
+					<OwnerGroupsBar />
+				</Suspense>
+			</ErrorBoundary>
 		</div>
 	);
 };
