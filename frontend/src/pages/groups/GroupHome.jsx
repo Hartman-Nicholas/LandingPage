@@ -1,12 +1,9 @@
 // NPM Packages
-import { useParams,Switch,Route, BrowserRouter } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
 // Project files
 import { groupDataState } from "../../state/userDataState";
-import { About } from "./group-details/About";
-import { Discussion } from "./group-details/Discussion";
-import { Members } from "./group-details/Members";
 import { GroupHeader } from "./group-details/GroupHeader";
 
 export const GroupHome = () => {
@@ -23,14 +20,8 @@ export const GroupHome = () => {
 		<div>
 			<h1>Group Home page</h1>
 			<h1>{id}</h1>
-			<BrowserRouter>
-			<GroupHeader groupId={id} />
-			<Switch>
-				<Route path="/groups/:id/about" exact render={() => <About  groupData={group}/>} />
-				<Route path="/groups/:id/discussion" exact render={() => <Discussion  groupData={group}/>} />
-				<Route path="/groups/:id/members" exact render={() => <Members  groupData={group}/>} />
-			</Switch>
-			</BrowserRouter>
+			<GroupHeader groupId={id} group={group} />
+
 		</div>
 	);
 };
