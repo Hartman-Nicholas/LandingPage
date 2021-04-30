@@ -1,7 +1,7 @@
 // NPM Packages
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilState } from "recoil";
 
 // Project files
 import Auth from "./services/Auth";
@@ -17,8 +17,8 @@ import { GroupsBar } from "./components/GroupsBar";
 import { GroupHome } from "./pages/groups/GroupHome";
 import { GroupForm } from "./pages/groups/GroupForm";
 
-export default function App() {
 
+export default function App() {
 	// State
 	const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
 
@@ -40,7 +40,11 @@ export default function App() {
 						<Route path="/user" exact component={User} />
 						<Route path="/groups/create" exact component={GroupForm} />
 						<Route path="/groups" exact component={Groups} />
-						<Route path="/groups/:id" exact component={GroupHome} />
+						<Route
+							path="/groups/:id"
+							exact
+							render={(props) => <GroupHome key={props.match.params.id} />}
+						/>
 					</Switch>
 
 					<Footer />
@@ -48,5 +52,4 @@ export default function App() {
 			</RecoilRoot>
 		</div>
 	);
-
 }
