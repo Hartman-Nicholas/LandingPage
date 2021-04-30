@@ -1,30 +1,42 @@
 // NPM Packages
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 
 // Project files
 import { PostCard } from "../../../components/post/postCard";
 import { PostForm } from "../../../components/post/PostForm";
-import { groupDataState } from "../../../state/userDataState";
-
-export const Discussion = () => {
+import { groupDataState, userDataState } from "../../../state/userDataState";
+export const Discussion = ({ data }) => {
 	// State
-	const groupsList = useRecoilValue(groupDataState);
-	let { id } = useParams();
+	const [postData, setPostData] = useState(data.posts);
+	// const groupData = useRecoilValue(groupDataState)
+	// console.log("userData", groupData)
 	// Constants
-let groupQuery = groupsList.filter(group => group.id == id);
+	console.log("data", data);
+	const handleSubmit = (newPost) => {
+		console.log("before", newPost);
+		const list = postData.concat(newPost);
+		setPostData(list);
+	};
 
+	// let filteredList = groupData.filter(group => group.id == data.id)
+	// let group = filteredList[0].posts;
+	// console.log("goru",group)
 	// Components
+	let postsList =
+		postData.length === 0
+			? "No Available posts"
+			: postData.map((post) => <PostCard key={post.id} data={post} />);
 
 	return (
 		<div>
 			<h1>Discussion</h1>
-			<PostForm groupId={id} />
-			{groupQuery[0].posts.length === 0
-				? "No available posts yet"
-				: groupQuery[0].posts.map((post) => {
-						return <PostCard key={post.id} data={post} />;
-				  })}
+			<PostForm
+				groupId={data.id}
+				onSubmit={handleSubmit}
+
+			/>
+			{postsList}
 		</div>
 	);
 };

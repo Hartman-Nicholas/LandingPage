@@ -5,9 +5,9 @@ import { useRecoilValue } from "recoil";
 // Project files
 import { groupDataState, userDataState } from "../../../state/userDataState";
 
-export const Members = ({ groupData }) => {
+export const Members = ({ data }) => {
 	// State
-	console.log("fromMembers", groupData);
+	console.log("fromMembers", data);
 	// Constants
 
 	// Components

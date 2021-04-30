@@ -1,27 +1,22 @@
 // NPM Packages
-import { useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 
 // Project files
-import { groupDataState } from "../../state/userDataState";
 import { GroupHeader } from "./group-details/GroupHeader";
 
-export const GroupHome = () => {
+export const GroupHome = (props) => {
 	// State
-	const groupsData = useRecoilValue(groupDataState);
+
+	const { groupData } = props.location.state.fromNotifications;
 
 	// Variables
-	let { id } = useParams();
-	let group = groupsData.filter((data) => data.id == id);
 
 	// Components
 
 	return (
 		<div>
-			<h1>Group Home page</h1>
-			<h1>{id}</h1>
-			<GroupHeader groupId={id} group={group} />
-
+			<h1>{groupData.title}</h1>
+			<h1>{groupData.id}</h1>
+			<GroupHeader groupId={groupData.id} group={groupData} />
 		</div>
 	);
 };

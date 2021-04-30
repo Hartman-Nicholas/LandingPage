@@ -3,8 +3,9 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 
 // Project files
-import { groupDataState } from "../../state/userDataState";
+import { groupDataState, userDataState } from "../../state/userDataState";
 import GroupApi from "../../api/GroupApi";
+import UserApi from "../../api/UserApi";
 
 export const GroupForm = () => {
 	// State
@@ -12,14 +13,16 @@ export const GroupForm = () => {
 		title: "",
 		description: "",
 	});
+	const [userData, setUserData] = useRecoilState(userDataState);
 	const [groupData, setGroupData] = useRecoilState(groupDataState);
 	// Constants
 	async function createGroup(requestBody) {
 		try {
 			await GroupApi.createGroup(requestBody);
-			await GroupApi.getAllGroups().then(({ data }) => {
-				setGroupData(data);
-			});
+			// await GroupApi.getAllGroups().then(({ data }) => {
+			// 	setGroupData(data);
+			// });
+			await UserApi.getUser().then(({data}) => setUserData(data))
 		} catch (e) {
 			console.error(e);
 		}

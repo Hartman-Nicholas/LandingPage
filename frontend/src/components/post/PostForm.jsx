@@ -1,29 +1,30 @@
 // NPM Packages
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-
-// Project files
-import { groupDataState } from "../../state/userDataState";
-import PostApi from "../../api/PostsApi";
 import GroupApi from "../../api/GroupApi";
 
-export const PostForm = ({ groupId }) => {
+// Project files
+import PostApi from "../../api/PostsApi";
+import UserApi from "../../api/UserApi";
+import { groupDataState, userDataState } from "../../state/userDataState";
+
+export const PostForm = ({ groupId, onSubmit }) => {
 	// State
 	const [postForm, setPostForm] = useState({
 		body: "",
 	});
-	const [groupData, setGroupData] = useRecoilState(groupDataState);
+	const [resData, setResData] = useState({})
+	// const [groupData,setGroupData] = useRecoilState(groupDataState)
 	// Constants
 	async function createPost(requestBody) {
 		try {
-			await PostApi.createPost(groupId, requestBody);
-		  await	GroupApi.getAllGroups()
-				.then(({ data }) => setGroupData(data))
+			await PostApi.createPost(groupId, requestBody)
+			.then((res) => setResData(res.data) );
+			// await GroupApi.getAllGroups().then(({data})=> setGroupData(data))
 		} catch (e) {
 			console.error(e);
 		}
 	}
-
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setPostForm({
@@ -35,6 +36,7 @@ export const PostForm = ({ groupId }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		createPost(postForm);
+		onSubmit(resData);
 		setPostForm({ body: "" });
 	};
 	// Components
