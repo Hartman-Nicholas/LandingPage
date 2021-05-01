@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { PostCard } from "../../../components/post/postCard";
 import { PostForm } from "../../../components/post/PostForm";
 
-export const Discussion = ({ data }) => {
+export const Discussion = ({ data, status }) => {
 	// State
 	const [postData, setPostData] = useState(data.posts);
 
 	useEffect(() => {
 		setPostData(data.posts);
-	}, [data.posts]);
+	}, [data.posts, status]);
 
 	// Constants
 

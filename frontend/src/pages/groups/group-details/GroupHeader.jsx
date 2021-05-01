@@ -46,8 +46,8 @@ export const GroupHeader = ({ group }) => {
       <button name="members" onClick={handleSubmit}>
         Members{" "}
       </button>
-      {aboutState && <About data={group} />}
-      {discussionState && <Discussion data={group} />}
+      {aboutState && <About data={group}  />}
+      {discussionState && <Discussion data={group} status={discussionState} />}
       {MembersState && <Members data={group} />}
     </div>
   );
