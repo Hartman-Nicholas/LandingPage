@@ -20,8 +20,6 @@ export const Discussion = ({ data }) => {
     setPostData(list);
   };
 
-  console.log(data.posts);
-
   // Components
   let postsList =
     postData === null
