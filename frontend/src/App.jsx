@@ -48,6 +48,7 @@ export default function App() {
             <Route path="/user" exact component={User} />
             <Route path="/groups/create" exact component={GroupForm} />
             <Route path="/groups" exact component={Groups} />
+            <Route path="/groups/:id/home" exact component={GroupHome} />
           </Switch>
 
           <Footer />

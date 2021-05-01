@@ -5,31 +5,30 @@ import GroupsApi from "../api/GroupApi";
 import PostsApi from "../api/PostsApi";
 
 export const getUserData = selector({
-	key: "data",
-	get: async ({ get }) => {
-		get(userDataState);
+  key: "data",
+  get: async ({ get }) => {
+    get(userDataState);
 
-		const userData = UserApi.getUser();
+    const userData = UserApi.getUser();
 
-		return userData;
-	},
+    return userData;
+  },
 });
 
 export const getGroupsList = selector({
   key: "groupsList",
-  get: async({get}) => {
+  get: async ({ get }) => {
     get(groupDataState);
     const groupList = GroupsApi.getAllGroups();
     return groupList;
-  }
-})
+  },
+});
 
 export const getPostsList = selector({
   key: "postsList",
-  get: async({get}) => {
+  get: async ({ get }) => {
     get(postDataState);
     const postsList = PostsApi.getAllPosts();
     return postsList;
-  }
-})
-
+  },
+});

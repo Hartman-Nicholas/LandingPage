@@ -29,7 +29,7 @@ export const GroupsBar = () => {
   }, []);
 
   return (
-    <div className="group">
+    <div>
       <Link to="/groups/create">Create a group</Link>
       <h2>Groups joined :</h2>
       {groupsJoined}

@@ -1,5 +1,5 @@
 // NPM Packages
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Project files
 import { PostCard } from "../../../components/post/postCard";
@@ -9,6 +9,10 @@ export const Discussion = ({ data }) => {
   // State
   const [postData, setPostData] = useState(data.posts);
 
+  useEffect(() => {
+    setPostData(data.posts);
+  }, [data.posts]);
+
   // Constants
 
   const handleSubmit = (newPost) => {
@@ -16,14 +20,16 @@ export const Discussion = ({ data }) => {
     setPostData(list);
   };
 
+  console.log(data.posts);
+
   // Components
   let postsList =
-    postData.length === 0
+    postData === null
       ? "No Available posts"
-      : postData.map((post) => <PostCard key={post.id} data={post} />);
+      : postData?.map((post) => <PostCard key={post.id} data={post} />);
 
   return (
-    <div className="discussion">
+    <div>
       <h1>Discussion</h1>
       <PostForm groupId={data.id} onSubmit={handleSubmit} />
       {postsList}

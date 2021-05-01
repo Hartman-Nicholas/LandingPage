@@ -1,9 +1,23 @@
 // NPM Packages
 
 // Project files
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import { GroupHeader } from "./group-details/GroupHeader";
+import GroupApi from "../../api/GroupApi";
 
-export const GroupHome = ({ groupData }) => {
+export const GroupHome = () => {
+  const { id } = useParams();
+  const [groupData, setGroupData] = useState([]);
+
+  useEffect(() => {
+    const groupData = async () => {
+      await GroupApi.getGroupById(id).then(({ data }) => setGroupData(data));
+    };
+    groupData();
+    return () => setGroupData([]);
+  }, [id]);
+
   // State
 
   // Variables
@@ -11,7 +25,7 @@ export const GroupHome = ({ groupData }) => {
   // Components
 
   return (
-    <div className="groupHome">
+    <div>
       <h1>{groupData.title}</h1>
       <h1>{groupData.id}</h1>
       <GroupHeader group={groupData} />
