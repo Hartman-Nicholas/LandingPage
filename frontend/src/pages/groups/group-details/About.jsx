@@ -1,9 +1,7 @@
 // NPM Packages
-import { useParams} from "react-router-dom";
-import { useRecoilValue } from "recoil";
+
 
 // Project files
-import { groupDataState, userDataState } from "../../../state/userDataState";
 
 export const About = ({data}) => {
 	// State
@@ -14,7 +12,6 @@ export const About = ({data}) => {
 	return (
 		<div>
 			<h1>about:</h1>
-
 		</div>
 	);
 };
