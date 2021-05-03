@@ -24,18 +24,36 @@ export const GroupsBar = () => {
     return <GroupCard key={group.id} groupData={group} />;
   });
 
+  const groupCreatedTitles = groupCreated.map((item)=> {
+    return (
+      <GroupCard key={item.id} title ={item.title}/>
+    )
+  }
+  )
+
   useEffect(() => {
     setUserData(data);
   }, []);
 
   return (
-    <div>
-      <Link to="/groups/create">Create a group</Link>
-      <h2>Groups joined :</h2>
-      {groupsJoined}
-      <h2>Groups Created: </h2>
-      {groupCreated}
-      <Link to="/groups">Join a new group</Link>
-    </div>
+    <section id="groupSideBar">
+      <div className="sidebarWrapper">
+        <button className="sidebarButtonTop">
+          <Link to="/groups/create">+ Create a group</Link>
+        </button>
+        {/* <h2 className="sidebarTitle">Your Group</h2> */}
+        <ul className="sidebarList">
+          <li className="sidebarListItem">
+            <span>{groupCreated}</span>
+            {/* <span className="sidebarListItemText"> {groupCreated}</span> */}
+          </li>
+        </ul>
+        {/* <h2>Groups joined :</h2>
+        {groupsJoined} */}
+        <button className="sidebarButtonBottom">
+          <Link to="/groups">Join a new group +</Link>
+        </button>
+      </div>
+    </section>
   );
 };
