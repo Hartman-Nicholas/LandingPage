@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { PostCard } from "../../../components/post/postCard";
 import { PostForm } from "../../../components/post/PostForm";
 
-export const Discussion = ({ data, status }) => {
+export const Discussion = ({ data }) => {
 	// State
 	const [postData, setPostData] = useState(data.posts);
 
 	useEffect(() => {
 		setPostData(data.posts);
-	}, [data.posts, status]);
+	}, [data.posts]);
 
 	// Constants
 
@@ -22,7 +22,7 @@ export const Discussion = ({ data, status }) => {
 
 	// Components
 	let postsList =
-		(postData === undefined || postData.length === 0)
+		(postData === undefined || postData.length) === 0
 			? "No Available posts"
 			: postData?.map((post) => <PostCard key={post.id} data={post} />);
 
