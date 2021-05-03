@@ -21,6 +21,7 @@ import { GroupHome } from "./pages/groups/GroupHome";
 import { GroupForm } from "./pages/groups/GroupForm";
 
 export default function App() {
+
 	// State
 	const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
 

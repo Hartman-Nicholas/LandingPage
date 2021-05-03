@@ -9,7 +9,6 @@ export const userDataState = atom({
   // effects_UNSTABLE: [persistAtom],
 });
 
-
 export const groupDataState = atom({
   key: "groupData",
   default: [],

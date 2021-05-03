@@ -4,12 +4,16 @@
   "private": true,
   "dependencies": {
     "axios": "^0.21.1",
+    "final-form": "^4.20.2",
+    "final-form-focus": "^1.1.2",
     "react": "^17.0.2",
     "react-dom": "^16.11.0",
     "react-error-boundary": "^3.1.1",
+    "react-final-form": "^6.5.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "react-time-ago": "^6.2.2",
+    "react-transition-group": "^4.4.1",
     "recoil": "^0.2.0",
     "recoil-persist": "^2.5.0"
   },

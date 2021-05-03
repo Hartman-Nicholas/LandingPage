@@ -5,10 +5,12 @@ import { useState } from "react";
 import PostApi from "../../api/PostsApi";
 
 export const PostForm = ({ groupId, onSubmit }) => {
+
   // State
   const [postForm, setPostForm] = useState({
     body: "",
   });
+
 
   // Constants
   async function createPost(requestBody) {
@@ -20,6 +22,7 @@ export const PostForm = ({ groupId, onSubmit }) => {
       console.error(e);
     }
   }
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPostForm({
@@ -33,6 +36,7 @@ export const PostForm = ({ groupId, onSubmit }) => {
     createPost(postForm);
     setPostForm({ body: "" });
   };
+
 
   // Components
 
