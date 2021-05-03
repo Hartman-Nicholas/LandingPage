@@ -9,6 +9,9 @@ import se.kth.sda.legalAliens.topics.Topic;
 import se.kth.sda.legalAliens.topics.TopicRepository;
 import se.kth.sda.legalAliens.user.UserService;
 
+import java.security.Principal;
+import java.util.List;
+
 @Service
 public class GroupService {
     GroupRepository groupRepository;
@@ -30,5 +33,11 @@ public class GroupService {
         groupRepository.save(group);
         topicRepository.save(topic);
         return ResponseEntity.ok(group);
+    }
+
+    public List<Group> filterGroupList(Principal principal) {
+
+
+
     }
 }

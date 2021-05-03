@@ -34,7 +34,7 @@ public class GroupController {
 
     // Return all Groups.
     @GetMapping
-    public List<Group> listAllGroups() {
+    public List<Group> listAllGroups(Principal principal) {
         List<Group> groups = groupRepository.findAll();
         return groups;
     }
