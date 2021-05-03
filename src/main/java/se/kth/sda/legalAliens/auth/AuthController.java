@@ -43,4 +43,11 @@ public class AuthController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
+
+    @GetMapping ("/register/{userName}")
+    public boolean checkUserName (@PathVariable String userName) {
+        User user = userService.findUserByName(userName);
+        return user != null;
+    }
+
 }

@@ -23,6 +23,7 @@ public class GroupController {
     GroupService groupService;
     TopicRepository topicRepository;
 
+
     @Autowired
     public GroupController(GroupRepository groupRepository, UserService userService, GroupService groupService, TopicRepository topicRepository) {
         this.groupRepository = groupRepository;
@@ -85,6 +86,7 @@ public class GroupController {
         return ResponseEntity.status(HttpStatus.CREATED).body(group);
     }
 
+
     //Update group tile, group description, group rules or group avatar only
     @PutMapping("/{groupId}")
     public ResponseEntity<Group> updateGroup(@PathVariable Long groupId, @RequestBody Group updatedGroup, Principal principal){
@@ -97,4 +99,12 @@ public class GroupController {
     public void deleteGroup(@PathVariable Long groupId, Principal principal) {
         groupService.deleteGroup(groupId, principal);
     }
+
+   @DeleteMapping("/{groupId}/topics/{topicId}")
+    public ResponseEntity<Group> deleteTopicFromGroup(@PathVariable Long groupId, @PathVariable Long topicId) {
+       return groupService.deleteTopicFromGroup(groupId,topicId);
+   }
+
+
+
 }

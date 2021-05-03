@@ -3,8 +3,10 @@ package se.kth.sda.legalAliens.user;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.kth.sda.legalAliens.posts.Post;
 
 @RequestMapping("/users")
 @RestController
@@ -26,11 +28,6 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping ("/{userName}")
-    public boolean checkUserName (@PathVariable String userName) {
-        User user = userService.findUserByName(userName);
-        return user != null;
-    }
 
     @PostMapping
     public ResponseEntity<User> updateLogIn(Principal principal) {
@@ -50,5 +47,6 @@ public class UserController {
         userRepository.save(updateUserData);
         return ResponseEntity.ok(updateUserData);
     }
+
 
 }
