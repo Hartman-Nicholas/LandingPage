@@ -1,39 +1,37 @@
 // NPM Packages
 import { useRecoilValue } from "recoil";
-import { Suspense } from "react";
-import { ErrorBoundary } from "react-error-boundary";
+
 // Project files
-import { groupDataState, userDataState } from "../../state/userDataState";
 import { GroupCard } from "./GroupCard";
 import { OwnerGroupsBar } from "./group-details/OwnerGroupBar";
-import { ErrorMessage } from "../../components/ErrorMessage";
+import { useEffect, useState } from "react";
+import GroupsApi from "../../api/GroupApi"
 
 export const Groups = () => {
 	// State
-	const groupsData = useRecoilValue(groupDataState);
-	const userData = useRecoilValue(userDataState);
+	const [groupsList, setGroupsList] = useState([])
 
 	// Constants
-	const filteredGroup = groupsData.filter(
-		(group) => group.groupOwner !== userData.name
-	);
 
+useEffect(()=>{
+	const groupList = async()=> {
+		await GroupsApi.getAllGroups().then(({data})=> setGroupsList(data))
+	}
+	groupList()
+},[])
 	// Components
+
 	return (
 		<div>
 			<h1>All Groups</h1>
-			<br />
-			{filteredGroup.length === 0
+
+			{groupsList.length === 0
 				? "No groups available"
-				: filteredGroup.map((group) => (
+				: groupsList.map((group) => (
 						<GroupCard key={group.id} groupData={group} />
 				  ))}
-			<br />
-			<ErrorBoundary FallbackComponent={ErrorMessage}>
-				<Suspense fallback={<div>loading...</div>}>
-					<OwnerGroupsBar />
-				</Suspense>
-			</ErrorBoundary>
+
+			<OwnerGroupsBar />
 		</div>
 	);
 };
