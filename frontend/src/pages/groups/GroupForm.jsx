@@ -6,25 +6,21 @@ import { useRecoilState } from "recoil";
 import { userDataState } from "../../state/userDataState";
 import GroupApi from "../../api/GroupApi";
 import UserApi from "../../api/UserApi";
+import {ImageUploader} from "../../components/ImageUploader"
 
 export const GroupForm = () => {
 	// State
 	const [groupForm, setGroupForm] = useState({
 		title: "",
 		description: "",
-		avatar:
-			"https://res.cloudinary.com/dlvwrtpzq/image/upload/v1619987659/profilePhotos/placeholder_eo6jkp.png",
+		avatar:"https://res.cloudinary.com/dlvwrtpzq/image/upload/v1619987659/profilePhotos/placeholder_eo6jkp.png",
 	});
 	const [userData, setUserData] = useRecoilState(userDataState);
 
 	// Constants
 	async function createGroup(requestBody) {
 		try {
-
 			await GroupApi.createGroup(requestBody);
-			// await GroupApi.getAllGroups().then(({ data }) => {
-			// 	setGroupData(data);
-			// });
 			await UserApi.getUser().then(({ data }) => setUserData(data));
 		} catch (e) {
 			console.error(e);
@@ -45,11 +41,13 @@ export const GroupForm = () => {
 		setGroupForm({
 			title: "",
 			description: "",
+			avatar:"https://res.cloudinary.com/dlvwrtpzq/image/upload/v1619987659/profilePhotos/placeholder_eo6jkp.png"
 		});
 	};
 	// Components
 	return (
 		<form onSubmit={handleSubmit}>
+				<ImageUploader setImageUrl={handleChange} />
 			<input
 				value={groupForm.title}
 				onChange={handleChange}
