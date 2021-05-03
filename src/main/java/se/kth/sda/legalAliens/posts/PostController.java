@@ -78,3 +78,4 @@ public class PostController {
         postRepository.delete(post);
     }
 }
+
