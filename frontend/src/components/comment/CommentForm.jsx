@@ -1,28 +1,20 @@
 // NPM Packages
 import { useState } from "react";
-import { useRecoilState } from "recoil";
-import {useParams} from 'react-router-dom'
 
 // Project files
-import { postDataState } from "../../state/userDataState";
-import GroupApi from "../../api/GroupApi";
 import CommentsApi from "../../api/CommentsApi";
 
-
-export const CommentForm = ({postId}) => {
+export const CommentForm = ({ postId, onSubmit }) => {
 	// State
 	const [commentForm, setCommentForm] = useState({
 		body: "",
 	});
-	const [postData, setPostData] = useRecoilState(postDataState);
-	let { id } = useParams();
 	// Constants
 	async function createComment(commentData) {
 		try {
-			await CommentsApi.createComment(postId, commentData);
-			GroupApi.getGroupById(id)
-				.then(({ data }) => setPostData(data.posts))
-				.catch((err) => console.error(err));
+			await CommentsApi.createComment(postId, commentData).then(({data}) =>
+				onSubmit(data)
+			);
 		} catch (e) {
 			console.error(e);
 		}
@@ -37,9 +29,9 @@ export const CommentForm = ({postId}) => {
 	};
 
 	const handleSubmit = (e) => {
-		setCommentForm({body: ""})
-		createComment(commentForm);
 		e.preventDefault();
+		createComment(commentForm);
+		setCommentForm({ body: "" });
 	};
 	// Components
 
@@ -52,7 +44,7 @@ export const CommentForm = ({postId}) => {
 				type="text"
 				name="body"
 				required
-        maxLength= "255"
+				maxLength="255"
 			/>
 			<button type="submit">Submit</button>
 		</form>

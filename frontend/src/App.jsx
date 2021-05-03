@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 // Project files
 import Auth from "./services/Auth";
@@ -10,6 +12,7 @@ import Footer from "./components/Footer";
 import AuthPage from "./pages/auth/AuthPage";
 import Home from "./pages/home/HomePage";
 import User from "./pages/user/UserPage";
+import { ErrorMessage } from "./components/ErrorMessage";
 
 import "./styles/App.css";
 import { Groups } from "./pages/groups/Groups";
@@ -18,7 +21,6 @@ import { GroupHome } from "./pages/groups/GroupHome";
 import { GroupForm } from "./pages/groups/GroupForm";
 
 export default function App() {
-
 	// State
 	const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
 
@@ -33,14 +35,20 @@ export default function App() {
 				<BrowserRouter>
 					<Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
 
-					{loggedIn && <GroupsBar />}
+					{loggedIn && (
+						<ErrorBoundary FallbackComponent={ErrorMessage}>
+							<Suspense fallback={<div>loading...</div>}>
+								<GroupsBar />
+							</Suspense>
+						</ErrorBoundary>
+					)}
 					<Switch>
 						{!loggedIn && <AuthPage />}
 						<Route path="/" exact component={Home} />
 						<Route path="/user" exact component={User} />
 						<Route path="/groups/create" exact component={GroupForm} />
 						<Route path="/groups" exact component={Groups} />
-						<Route path="/groups/:id" exact component={GroupHome} />
+						<Route path="/groups/:id/home" exact component={GroupHome} />
 					</Switch>
 
 					<Footer />
@@ -48,5 +56,4 @@ export default function App() {
 			</RecoilRoot>
 		</div>
 	);
-
 }
