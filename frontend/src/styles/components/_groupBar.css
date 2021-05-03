@@ -1,0 +1,94 @@
+#groupSideBar {
+  flex: 3;
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
+  position: sticky;
+  top: 50px;
+  padding: 50px;
+  justify-content: space-between;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: red;
+  /* background-color: rgba(153, 153, 153, 0.1); */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: blue
+    /* background-color: rgb(179, 179, 179); */
+}
+/* .sidebarWrapper {
+  padding: 20px;
+} */
+/* .sidebarTitle{
+  position: absolute;
+  left: 70px;  
+} */
+.sidebarList {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sidebarListItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.sidebarListItemContent {
+  font-size: var(--fs-h3);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%), rgba(238, 237, 246, 0.4);
+  border-radius: 10px;
+  border: 1px solid white;
+  width: 236px;
+  height: 50px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.sidebarIcon {
+  left: 0;
+  margin-right: 15px;
+  background-color: rgba(153, 153, 153, 0.1);
+  color: tomato;
+  width: 22px;
+  height: 22px;
+  text-align: center;
+}
+.sidebarItemText {
+  margin: -20px;
+}
+.sidebarButtonTop {
+  top: 20px;
+  width: 120px;
+  border: 1px solid #006AA8;
+  color: #006AA8;
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: 500;
+  position: absolute;
+  width: 200px;
+  height: 40px;
+  left: 60px;
+  background-color: white;
+}
+
+.sidebarButtonBottom {
+  width: 120px;
+  border: 1px solid #006AA8;
+  color: white;
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: 500;
+  position: absolute;
+  width: 200px;
+  height: 40px;
+  left: 60px;
+  background-color: #006AA8;
+}
