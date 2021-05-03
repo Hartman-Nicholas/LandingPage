@@ -1,25 +1,23 @@
 // NPM Packages
 import { useState } from "react";
-import { useRecoilState } from "recoil";
 
 // Project files
-import { postDataState } from "../../state/userDataState";
 import PostApi from "../../api/PostsApi";
-import GroupApi from "../../api/GroupApi";
 
-export const PostForm = ({ groupId }) => {
+export const PostForm = ({ groupId, onSubmit }) => {
+
   // State
   const [postForm, setPostForm] = useState({
     body: "",
   });
-  const [postData, setPostData] = useRecoilState(postDataState);
+
+
   // Constants
-  async function createPost(postData) {
+  async function createPost(requestBody) {
     try {
-      await PostApi.createPost(groupId, postData);
-      GroupApi.getGroupById(groupId)
-        .then(({ data }) => setPostData(data.posts))
-        .catch((err) => console.error(err));
+      await PostApi.createPost(groupId, requestBody).then((res) =>
+        onSubmit(res.data)
+      );
     } catch (e) {
       console.error(e);
     }
@@ -38,6 +36,8 @@ export const PostForm = ({ groupId }) => {
     createPost(postForm);
     setPostForm({ body: "" });
   };
+
+
   // Components
 
   return (
