@@ -93,8 +93,8 @@ public class GroupController {
     }
 
     @DeleteMapping("/{groupId}")
-    public ResponseEntity<Group> deleteGroup(@PathVariable Long groupId, @RequestBody Principal principal) {
-        Group group = groupRepository.findById(groupId).orElseThrow(ResourceNotFoundException::new);
-        return ResponseEntity.ok(group);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteGroup(@PathVariable Long groupId, Principal principal) {
+        groupService.deleteGroup(groupId, principal);
     }
 }

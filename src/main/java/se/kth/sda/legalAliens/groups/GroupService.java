@@ -45,6 +45,16 @@ public class GroupService {
         return updatedGroup;
     }
 
+    public void deleteGroup(Long groupId, Principal principal) {
+        Group group = groupRepository.findById(groupId).orElseThrow(ResourceNotFoundException::new);
+        String userName = principal.getName();
+        if (!userName.equals(group.getGroupOwner().getEmail())) {
+            throw new ResourceNotFoundException();
+        }
+        groupRepository.delete(group);
+    }
+
+
 
 
 }
