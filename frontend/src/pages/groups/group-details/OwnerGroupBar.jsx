@@ -1,19 +1,23 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {useState, useEffect} from 'react'
 // Project files
-import UserApi from "../../../api/UserApi";
+import { useRecoilValue } from "recoil";
+import { userDataState } from "../../../state/userDataState";
 
 export const OwnerGroupsBar = () => {
 	// State
-	const [userData, setUserData] = useState([])
+	const ownerData = useRecoilValue(userDataState)
+	const [owner, setOwner] = useState({})
+	useEffect(()=> {
+		setOwner(ownerData)
+		return () => setOwner({})
+	},[])
 	// Constants
 
 	// Components
-useEffect(() => {
-	UserApi.getUser().then(({data}) => setUserData(data))
-}, [])
 
-	const list = (userData.groupsCreated) ? userData.groupsCreated.map((group) => {
+
+	const list = (owner.groupsCreated) ? owner.groupsCreated.map((group) => {
 		return (
 			<Link
 				to={{
@@ -27,7 +31,7 @@ useEffect(() => {
 				</div>
 			</Link>
 		);
-	}): "no data";
+	}): "no groups has been created yet";
 
 	return <div>your groups:{list.length === 0 ? "Groups list is empty" : list}</div>;
 };
