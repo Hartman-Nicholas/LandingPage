@@ -1,34 +1,64 @@
 // NPM Packages
-
-// Project files
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+
+// Project files
 import { GroupHeader } from "./group-details/GroupHeader";
 import GroupApi from "../../api/GroupApi";
 
 export const GroupHome = () => {
-  const { id } = useParams();
-  const [groupData, setGroupData] = useState([]);
-
-  useEffect(() => {
-    const groupData = async () => {
-      await GroupApi.getGroupById(id).then(({ data }) => setGroupData(data));
-    };
-    groupData();
-    return () => setGroupData([]);
-  }, [id]);
-
   // State
+	const { id } = useParams();
+	const [groupData, setGroupData] = useState([]);
+
+	const [aboutState, setAboutState] = useState(false);
+	const [discussionState, setDiscussionState] = useState(true);
+	const [membersState, setMembersState] = useState(false);
+
+	useEffect(() => {
+		const groupsData = async () => {
+			await GroupApi.getGroupById(id).then(({ data }) => setGroupData(data));
+		};
+		groupsData();
+	}, [id, aboutState, discussionState, membersState]);
 
   // Variables
 
   // Components
+	const handleSubmit = (e) => {
+		switch (e.target.name) {
+			case "about":
+				setAboutState(true);
+				setDiscussionState(false);
+				setMembersState(false);
+				break;
+			case "discussion":
+				setAboutState(false);
+				setDiscussionState(true);
+				setMembersState(false);
+				break;
+			case "members":
+				setAboutState(false);
+				setDiscussionState(false);
+				setMembersState(true);
+				break;
+			default:
+				break;
+		}
+	};
 
-  return (
-    <div>
-      <h1>{groupData.title}</h1>
-      <h1>{groupData.id}</h1>
-      <GroupHeader group={groupData} />
-    </div>
-  );
+
+	return (
+		<div>
+			<h1>{groupData.title}</h1>
+			<h1>{groupData.id}</h1>
+			<GroupHeader
+				group={groupData}
+				handleSubmit={handleSubmit}
+				aboutState={aboutState}
+				discussionState={discussionState}
+				membersState={membersState}
+			/>
+		</div>
+	);
 };
