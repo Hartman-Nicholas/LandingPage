@@ -1,71 +1,206 @@
 // NPM Packages
 import { useState } from "react";
 import { useRecoilState } from "recoil";
+import { Form, Field, FormSpy } from "react-final-form";
+import createDecorator from "final-form-focus";
+import { Link } from "react-router-dom";
 
 // Project files
 import { userDataState } from "../../state/userDataState";
 import GroupApi from "../../api/GroupApi";
 import UserApi from "../../api/UserApi";
-import {ImageUploader} from "../../components/ImageUploader"
+import { ImageUploader } from "../../components/ImageUploader";
+
+const composeValidators = (...validators) => (value) =>
+  validators.reduce((error, validator) => error || validator(value), undefined);
+const focusOnError = createDecorator();
 
 export const GroupForm = () => {
-	// State
-	const [groupForm, setGroupForm] = useState({
-		title: "",
-		description: "",
-		avatar:"https://res.cloudinary.com/dlvwrtpzq/image/upload/v1619987659/profilePhotos/placeholder_eo6jkp.png",
-	});
-	const [userData, setUserData] = useRecoilState(userDataState);
+  //   State
 
-	// Constants
-	async function createGroup(requestBody) {
-		try {
-			await GroupApi.createGroup(requestBody);
-			await UserApi.getUser().then(({ data }) => setUserData(data));
-		} catch (e) {
-			console.error(e);
-		}
-	}
+  const [topicArray, setTopicArray] = useState([]);
 
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setGroupForm({
-			...groupForm,
-			[name]: value,
-		});
-	};
+  const [imageUrl, setImageUrl] = useState(
+    "https://res.cloudinary.com/dlvwrtpzq/image/upload/v1619987659/profilePhotos/placeholder_eo6jkp.png"
+  );
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		createGroup(groupForm);
-		setGroupForm({
-			title: "",
-			description: "",
-			avatar:"https://res.cloudinary.com/dlvwrtpzq/image/upload/v1619987659/profilePhotos/placeholder_eo6jkp.png"
-		});
-	};
-	// Components
-	return (
-		<form onSubmit={handleSubmit}>
-				<ImageUploader setImageUrl={handleChange} />
-			<input
-				value={groupForm.title}
-				onChange={handleChange}
-				placeholder="Group name"
-				type="text"
-				name="title"
-				required
-			/>
-			<br />
-			<textarea
-				value={groupForm.description}
-				onChange={handleChange}
-				placeholder="Group description"
-				type="text"
-				name="description"
-				required
-			/>
-			<button type="submit">Submit</button>
-		</form>
-	);
+  const [, setUserData] = useRecoilState(userDataState);
+
+  const onCheck = (event) => {
+    const indexTopic = topicArray.indexOf(event.target.value);
+    const filterValue = topicArray[indexTopic];
+    console.log(indexTopic);
+    if (indexTopic >= 0) {
+      const deleteTopic = topicArray.filter((item) => !(item === filterValue));
+      setTopicArray(deleteTopic);
+    } else {
+      setTopicArray([...topicArray, event.target.value]);
+    }
+  };
+
+  console.log("topicArray", topicArray);
+
+  const onSubmit = async (values) => {
+    try {
+      values.avatar = imageUrl;
+
+      const group = await GroupApi.createGroup(values).then((res) => res.data);
+
+      topicArray.map(async (topic) => {
+        await GroupApi.joinTopic(group.id, topic);
+      });
+      await UserApi.getUser().then(({ data }) => setUserData(data));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  // Constants
+
+  const groupNameExists = async (value) => {
+    const exists = await GroupApi.checkGroupTitle(value)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+
+    if (exists) {
+      return "Group Name already exists";
+    }
+  };
+
+  const required = (value) => (value ? undefined : "Required");
+
+  // Components
+
+  return (
+    <Form
+      onSubmit={onSubmit}
+      decorators={[focusOnError]}
+      subscription={{
+        submitting: true,
+      }}
+    >
+      {({ handleSubmit, submitting, pristine }) => (
+        <form onSubmit={handleSubmit}>
+          <h2>Sign up</h2>
+          <Field
+            className="input-field"
+            name="title"
+            placeholder="Group Name"
+            validate={composeValidators(required, groupNameExists)}
+          >
+            {({ input, meta, placeholder }) => (
+              <div
+                className={`field ${
+                  meta.active ? "active input-field" : "input-field"
+                }`}
+              >
+                <i className="fas fa-user"></i>
+                <input {...input} placeholder={placeholder} />
+                {meta.error && meta.touched && (
+                  <div className="input-field-error">{meta.error}</div>
+                )}
+              </div>
+            )}
+          </Field>
+          <Field
+            className="input-field"
+            name="description"
+            placeholder="Group Description"
+            validate={composeValidators(required)}
+          >
+            {({ input, meta, placeholder }) => (
+              <div
+                className={`field ${
+                  meta.active ? "active input-field" : "input-field"
+                }`}
+              >
+                <i className="fas fa-envelope"></i>
+                <input {...input} placeholder={placeholder} />
+                {meta.error && meta.touched && (
+                  <div className="input-field-error">{meta.error}</div>
+                )}
+              </div>
+            )}
+          </Field>
+          <Field className="input-field" name="rules" placeholder="Group Rules">
+            {({ input, meta, placeholder }) => (
+              <div
+                className={`field ${
+                  meta.active ? "active input-field" : "input-field"
+                }`}
+              >
+                <i className="fas fa-lock"></i>
+                <input {...input} placeholder={placeholder} type="textarea" />
+                {meta.error && meta.touched && (
+                  <div className="input-field-error">{meta.error}</div>
+                )}
+              </div>
+            )}
+          </Field>
+          <label htmlFor="sport">Sport</label>
+          <Field
+            onClick={onCheck}
+            id="sport"
+            name="sport"
+            component="input"
+            value="1"
+            type="checkbox"
+          />
+          <label htmlFor="Entertainment">Entertainment</label>
+          <Field
+            onClick={onCheck}
+            id="Entertainment"
+            name="entertainment"
+            component="input"
+            type="checkbox"
+            value="2"
+          />
+          <label htmlFor="health">Health</label>
+          <Field
+            onClick={onCheck}
+            id="health"
+            name="health"
+            component="input"
+            value="3"
+            type="checkbox"
+          />
+          <label htmlFor="Education">Education</label>
+          <Field
+            onClick={onCheck}
+            id="Education"
+            name="education"
+            component="input"
+            value="4"
+            type="checkbox"
+          />
+          <label htmlFor="Family">Family</label>
+          <Field
+            onClick={onCheck}
+            id="Family"
+            name="family"
+            component="input"
+            value="5"
+            type="checkbox"
+          />
+          <ImageUploader setImageState={setImageUrl} />
+          <img src={imageUrl} alt="User Avatar" />
+          <input
+            className="btn"
+            value="Create"
+            type="submit"
+            disabled={pristine || submitting}
+          />
+          <FormSpy subscription={{ submitSucceeded: true, values: true }}>
+            {({ submitSucceeded }) => {
+              if (submitSucceeded) {
+                return <Link to="/" />;
+              }
+              return <div></div>;
+            }}
+          </FormSpy>
+                      
+        </form>
+      )}
+    </Form>
+  );
 };

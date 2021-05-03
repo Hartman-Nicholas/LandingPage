@@ -9,15 +9,20 @@ class GroupApi {
     return Api.get(`/groups/${id}`);
   }
 
-  createGroup(groupData){
-    return Api.post("/groups", groupData)
+  createGroup(groupData) {
+    return Api.post("/groups", groupData);
   }
-  joinGroup(groupId){
-    return Api.post(`/groups/${groupId}`)
+  joinGroup(groupId) {
+    return Api.post(`/groups/${groupId}`);
   }
-  joinTopic(groupId, topicId){
-    return Api.post(`/groups/${groupId}/topics/${topicId}`)
+  joinTopic(groupId, topicId) {
+    return Api.post(`/groups/${groupId}/topics/${topicId}`);
   }
+
+  checkGroupTitle(groupTitle) {
+    return Api.get(`/groups/title/${groupTitle}`);
+  }
+
   //To be implemented
   // updateGroup(body){
   //   return Api.put("/groups", body)
