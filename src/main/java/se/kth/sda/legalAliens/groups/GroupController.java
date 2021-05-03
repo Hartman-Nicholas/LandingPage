@@ -32,11 +32,10 @@ public class GroupController {
         this.topicRepository = topicRepository;
     }
 
-    // Return all Groups.
+    // Return all Groups not created or joined by user.
     @GetMapping
     public List<Group> listAllGroups(Principal principal) {
-        List<Group> groups = groupRepository.findAll();
-        return groups;
+        return groupService.filterGroupList(principal);
     }
 
     // Return a specific group based on the groupId.

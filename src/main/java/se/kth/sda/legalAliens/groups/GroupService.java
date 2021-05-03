@@ -3,14 +3,16 @@ package se.kth.sda.legalAliens.groups;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import se.kth.sda.legalAliens.exception.ResourceNotFoundException;
 import se.kth.sda.legalAliens.topics.Topic;
 import se.kth.sda.legalAliens.topics.TopicRepository;
+import se.kth.sda.legalAliens.user.User;
 import se.kth.sda.legalAliens.user.UserService;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GroupService {
@@ -36,8 +38,17 @@ public class GroupService {
     }
 
     public List<Group> filterGroupList(Principal principal) {
+        String userName = principal.getName();
+        User user = userService.findUserByEmail(userName);
+        List<Group> groups = groupRepository.findAll();
 
+        List<Group> filterGroups;
+        filterGroups = groups.stream()
+                .filter( group -> !(group.getGroupOwner().equals(user)))
+                .filter(group -> !(group.getMembers().contains(user)))
+                .collect(Collectors.toList());
 
+        return filterGroups;
 
     }
 }
