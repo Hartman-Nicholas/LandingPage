@@ -22,6 +22,9 @@
 @import "./layout/_authForm.css";
 @import "./layout/_Form.css";
 
+@import "./layout/_center.css";
+@import "./layout/grid.css";
+
 /* pages */
 
 @import "./pages/_authPage.css";
