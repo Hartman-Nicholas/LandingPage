@@ -49,16 +49,16 @@ export const GroupHome = () => {
 
 
 	return (
-		<div>
-			<h1>{groupData.title}</h1>
-			<h1>{groupData.id}</h1>
-			<GroupHeader
-				group={groupData}
-				handleSubmit={handleSubmit}
-				aboutState={aboutState}
-				discussionState={discussionState}
-				membersState={membersState}
-			/>
-		</div>
-	);
+      <div className="gridContainer">
+        {/* <h1>{groupData.title}</h1>
+        <h1>{groupData.id}</h1> */}
+        <GroupHeader
+          group={groupData}
+          handleSubmit={handleSubmit}
+          aboutState={aboutState}
+          discussionState={discussionState}
+          membersState={membersState}
+        />
+      </div>
+  );
 };

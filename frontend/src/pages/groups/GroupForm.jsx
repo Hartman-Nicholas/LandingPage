@@ -49,25 +49,28 @@ export const GroupForm = () => {
 	};
 	// Components
 	return (
-		<form onSubmit={handleSubmit}>
-			<input
-				value={groupForm.title}
-				onChange={handleChange}
-				placeholder="Group name"
-				type="text"
-				name="title"
-				required
-			/>
-			<br />
-			<textarea
-				value={groupForm.description}
-				onChange={handleChange}
-				placeholder="Group description"
-				type="text"
-				name="description"
-				required
-			/>
-			<button type="submit">Submit</button>
-		</form>
+		<div className="gridContainer">
+
+			<form onSubmit={handleSubmit}>
+				<input
+					value={groupForm.title}
+					onChange={handleChange}
+					placeholder="Group name"
+					type="text"
+					name="title"
+					required
+				/>
+				<br />
+				<textarea
+					value={groupForm.description}
+					onChange={handleChange}
+					placeholder="Group description"
+					type="text"
+					name="description"
+					required
+				/>
+				<button type="submit">Submit</button>
+			</form>
+		</div>
 	);
 };
