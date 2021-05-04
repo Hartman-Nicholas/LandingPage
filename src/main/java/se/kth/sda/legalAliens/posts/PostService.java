@@ -33,33 +33,14 @@ public class PostService {
             throw new ResourceNotFoundException();
         }
 
-        String body = updatedPost.getBody();
-        if (body == null) {
-            updatedPost.setBody(post.getBody());
-        }
-        if (updatedPost.getPostOwner() == null) {
-            updatedPost.setPostOwner(user);
-        }
+        post.setBody(updatedPost.getBody());
+        post.setPostOwner(post.getPostOwner());
+        post.setGroupOwner(post.getGroupOwner());
+        post.setId(id);
+        post.setComments(post.getComments());
 
-        if (updatedPost.getGroupOwner() == null) {
-            updatedPost.setGroupOwner(post.getGroupOwner());
-        }
-
-        List<Comment> commentList = updatedPost.getComments();
-        if (commentList == null) {
-            updatedPost.setComments(post.getComments());
-        }
-        if (updatedPost.getId() == null) {
-            updatedPost.setId(post.getId());
-        }
-        //updatedPost = post.setUpdatePostValues(updatedPost);
-        //setting the original id of the post
-        //updatedPost.setId(id);
-        // setting the original owner of the post. this will never change in this route.
-        //updatedPost.setPostOwner(user);
-        post = updatedPost;
         postRepository.save(post);
-        return updatedPost;
+        return post;
     }
 
     public Post deletePost(Long id, Principal principal) {
