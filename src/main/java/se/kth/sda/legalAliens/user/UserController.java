@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.kth.sda.legalAliens.comments.Comment;
+
+
 
 @RequestMapping("/users")
 @RestController
@@ -45,7 +46,6 @@ public class UserController {
         updateUserData = userService.updateUser(user, updateUserData);
         userRepository.save(updateUserData);
         return ResponseEntity.ok(updateUserData);
-
     }
 
     @DeleteMapping
@@ -55,5 +55,6 @@ public class UserController {
         User user = userService.findUserByEmail(userName);
         userRepository.delete(user);
     }
+
 
 }

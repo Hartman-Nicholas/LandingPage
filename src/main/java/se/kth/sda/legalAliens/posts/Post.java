@@ -50,7 +50,7 @@ public class Post {
     private Group groupOwner;
 
     @OneToMany(mappedBy = "commentOwner")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+
     private List<Comment> comments;
 
     @PrePersist
@@ -71,9 +71,14 @@ public class Post {
     }
 
     public Post setUpdatePostValues(Post updatedPost) {
+        // this is redundant code as the user can only update post body
         if (updatedPost.getBody() == null) {
             updatedPost.setBody(this.getBody());
         }
+        // this persists the original date created so that it is not set to null
+        updatedPost.onCreate();
+        //gets the original comments for the post.
+        updatedPost.setComments(this.getComments());
         return updatedPost;
     }
 

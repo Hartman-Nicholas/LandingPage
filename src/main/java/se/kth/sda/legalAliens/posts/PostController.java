@@ -64,17 +64,16 @@ public class PostController {
 
     // Update the post based on the provided postId
     @PutMapping("/{postId}")
-    public ResponseEntity<Post> updatePost(@PathVariable Long postId, @RequestBody Post updatedPost,
-            Principal principal) {
+    public ResponseEntity<Post> updatePost(@PathVariable Long postId, @RequestBody Post updatedPost, Principal principal) {
         Post post = postService.updatePost(postId, updatedPost, principal);
-        return ResponseEntity.ok(post);
+        return ResponseEntity.ok(updatedPost);
     }
 
     // Delete the post based on the provided postId.
     @DeleteMapping("/{postId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePost(@PathVariable Long postId, Principal principal) {
+    public ResponseEntity<Post> deletePost(@PathVariable Long postId, @RequestBody Principal principal) {
         Post post = postService.deletePost(postId, principal);
-        postRepository.delete(post);
+        return ResponseEntity.ok(post);
     }
 }
+
