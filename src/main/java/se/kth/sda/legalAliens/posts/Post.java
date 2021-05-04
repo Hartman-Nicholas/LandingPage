@@ -50,7 +50,7 @@ public class Post {
     private Group groupOwner;
 
     @OneToMany(mappedBy = "commentOwner")
-
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Comment> comments;
 
     @PrePersist

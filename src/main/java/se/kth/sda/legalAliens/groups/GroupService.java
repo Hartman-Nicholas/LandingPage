@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import se.kth.sda.legalAliens.exception.ResourceNotFoundException;
 import se.kth.sda.legalAliens.user.User;
+import se.kth.sda.legalAliens.user.UserRepository;
 import se.kth.sda.legalAliens.user.UserService;
 
 import java.security.Principal;
@@ -23,13 +24,16 @@ public class GroupService {
     GroupRepository groupRepository;
     UserService userService;
     TopicRepository topicRepository;
+    UserRepository userRepository;
 
-  @Autowired
-    public GroupService(GroupRepository groupRepository, UserService userService, TopicRepository topicRepository) {
+    @Autowired
+    public GroupService(GroupRepository groupRepository, UserService userService, TopicRepository topicRepository, UserRepository userRepository) {
         this.groupRepository = groupRepository;
         this.userService = userService;
         this.topicRepository = topicRepository;
+        this.userRepository = userRepository;
     }
+
 
     public Group updateGroup(Long id, Group updatedGroup, Principal principal) {
         Group group = groupRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
@@ -79,6 +83,16 @@ public class GroupService {
                 .collect(Collectors.toList());
 
         return filterGroups;
+
+    }
+    public void deleteGroupMembership(Long groupId, Principal principal) {
+        Group group = groupRepository.findById(groupId).orElseThrow(ResourceNotFoundException::new);
+        String userName = principal.getName();
+        User user = userService.findUserByEmail(userName);
+        group.getMembers().remove(user);
+        user.getGroupsJoined().remove(group);
+        groupRepository.save(group);
+        userRepository.save(user);
 
     }
 

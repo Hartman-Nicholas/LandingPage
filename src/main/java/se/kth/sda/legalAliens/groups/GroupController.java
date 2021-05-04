@@ -76,6 +76,7 @@ public class GroupController {
 
     }
 
+
     @PostMapping("/{groupId}/topics/{topicId}")
     public ResponseEntity<Group> createTopicMembership(@PathVariable Long groupId, @PathVariable Long topicId) {
         Group group = groupRepository.findById(groupId).orElseThrow(ResourceNotFoundException::new);
@@ -99,11 +100,15 @@ public class GroupController {
         groupService.deleteGroup(groupId, principal);
     }
 
-   @DeleteMapping("/{groupId}/topics/{topicId}")
+       @DeleteMapping("/{groupId}/topics/{topicId}")
     public ResponseEntity<Group> deleteTopicFromGroup(@PathVariable Long groupId, @PathVariable Long topicId) {
        return groupService.deleteTopicFromGroup(groupId,topicId);
    }
 
-
+    @DeleteMapping("/{groupId}/user")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteGroupMembership(@PathVariable Long groupId, Principal principal) {
+        groupService.deleteGroupMembership(groupId, principal);
+    }
 
 }
