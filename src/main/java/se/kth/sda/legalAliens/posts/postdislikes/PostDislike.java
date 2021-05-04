@@ -15,21 +15,28 @@ public class PostDislike {
     private Long id;
 
     @JoinColumn(nullable = false)
-    private String postDislikeOwner;
+    private String postDislike;
 
     @ManyToOne
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "name")
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(nullable = false)
     @NotNull
-    private Post postDislike;
+    private Post postDislikeOwner;
 
     public PostDislike() {
     }
 
-    public PostDislike(String postDislikeOwner, Post postDislike ) {
-         this.postDislikeOwner = postDislikeOwner;
-         this.postDislike = postDislike;
+    public PostDislike(String postDislike) {
+        this.postDislike = postDislike;
+    }
+
+    public String getPostDislike() {
+        return postDislike;
+    }
+
+    public void setPostDislike(String postDislike) {
+        this.postDislike = postDislike;
     }
 
     public Long getId() {
@@ -40,20 +47,12 @@ public class PostDislike {
         this.id = id;
     }
 
-    public String getPostDislikeOwner() {
+    public Post getPostDislikeOwner() {
         return postDislikeOwner;
     }
 
-    public void setPostDislikeOwner(String postDislikeOwner) {
+    public void setPostDislikeOwner(Post postDislikeOwner) {
         this.postDislikeOwner = postDislikeOwner;
-    }
-
-    public Post getPostDislike() {
-        return postDislike;
-    }
-
-    public void setPostDislike(Post postDislike) {
-        this.postDislike = postDislike;
     }
 }
 

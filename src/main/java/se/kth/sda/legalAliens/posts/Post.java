@@ -54,7 +54,7 @@ public class Post {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Comment> comments;
 
-    @OneToMany(mappedBy = "postDislike")
+    @OneToMany(mappedBy = "postDislikeOwner")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<PostDislike> postDislikes;
 

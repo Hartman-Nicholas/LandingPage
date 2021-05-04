@@ -31,11 +31,11 @@ public class PostDislikeController {
         return ResponseEntity.ok(postDislikes);
     }
 
-    // Cretae dislikes on given article
+    // Create dislikes on given article
     @PostMapping("/{postId}/dislikes")
-    public ResponseEntity<PostDislike> createLikeArticle(@PathVariable Long postId, @RequestBody PostDislike dislike) {
+    public ResponseEntity<PostDislike> createPostDislike(@PathVariable Long postId, @RequestBody PostDislike dislike) {
         Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
-        dislike.setPostDislike(post);
+        dislike.setPostDislikeOwner(post);
         postDislikeRepository.save(dislike);
         return ResponseEntity.status(HttpStatus.CREATED).body(dislike);
     }
