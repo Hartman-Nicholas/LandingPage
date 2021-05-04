@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.kth.sda.legalAliens.posts.Post;
+
+
 
 @RequestMapping("/users")
 @RestController
@@ -28,7 +29,6 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-
     @PostMapping
     public ResponseEntity<User> updateLogIn(Principal principal) {
         String userName = principal.getName();
@@ -40,12 +40,20 @@ public class UserController {
     }
 
     @PutMapping
-    public  ResponseEntity<User> updateUser (@RequestBody User updateUserData, Principal principal) {
+    public ResponseEntity<User> updateUser(@RequestBody User updateUserData, Principal principal) {
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
         updateUserData = userService.updateUser(user, updateUserData);
         userRepository.save(updateUserData);
         return ResponseEntity.ok(updateUserData);
+    }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(Principal principal) {
+        String userName = principal.getName();
+        User user = userService.findUserByEmail(userName);
+        userRepository.delete(user);
     }
 
 
