@@ -67,8 +67,9 @@ These are the endpoints for the posts API that should exist:
 | `POST`   | `/groups/{groupId}`      | Join a group.|
 | `POST`   | `/groups/{groupId}/topics/{topicId}`      | Join a topic.|
 | `PUT`    | `/groups` | Update group tile, group description, group rules or group avatar only.|
-| `DELETE` | `/groups/{id}` | -To Be implemented |
-| `DELETE` | `/groups/{groupId}/topics/{topicId}` | Leave topic. |
+| `DELETE` | `/groups/{groupId}` | Delete a Group |
+| `DELETE` | `/groups/{groupId}/topics/{topicId}` | Remove topic from group. |
+| `DELETE` | `/groups/{groupId}/user` | Leave a group |
 
 ### Post Routes
 

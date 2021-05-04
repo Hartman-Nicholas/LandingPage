@@ -1,12 +1,13 @@
 package se.kth.sda.legalAliens.user;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import se.kth.sda.legalAliens.posts.Post;
 
 
 @RequestMapping("/users")
@@ -28,6 +29,14 @@ public class UserController {
         User user = userService.findUserByEmail(userName);
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping ("/feed")
+    public ResponseEntity<List<Post>> getUserFeed (Principal principal) {
+
+        List<Post> feedPosts = userService.getUserFeed(principal);
+        return  ResponseEntity.ok(feedPosts);
+    }
+
 
     @PostMapping
     public ResponseEntity<User> updateLogIn(Principal principal) {
