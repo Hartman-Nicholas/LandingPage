@@ -7,9 +7,11 @@ import { CommentCard } from "../comment/CommentCard";
 import { CommentForm } from "../comment/CommentForm";
 import { userDataState } from "../../state/userDataState";
 import { EditPostForm } from "./EditPostForm";
+import CommentsApi from "../../api/CommentsApi";
 
 export const PostCard = ({
 	data: { id, comments, body, postOwner, created },
+	handleDelete,
 }) => {
 	// State
 	const [commentsData, setCommentsData] = useState(comments);
@@ -27,28 +29,49 @@ export const PostCard = ({
 		setCommentsData(list);
 	};
 
+	const deleteComment = async (commentId) => {
+		try {
+			await CommentsApi.deleteComment(commentId);
+		} catch (e) {
+			console.error(e);
+		}
+	};
+
 	const handleUpdate = (updatedPost) => {
 		setPostBody(updatedPost);
 		setToggler(false);
 	};
-	// Components
 
+	const handleCommentDelete = (DeletedCommentId) => {
+		deleteComment(DeletedCommentId);
+		const filteredList = commentsData.filter(
+			(comment) => comment.id !== DeletedCommentId
+		);
+		setCommentsData(filteredList);
+	};
+	// Components
 	let commentList =
 		commentsData === null || commentsData.length === 0
 			? "No Available comments"
 			: commentsData?.map((comment) => (
-					<CommentCard key={comment.id} data={comment} />
+					<CommentCard
+						key={comment.id}
+						data={comment}
+						handleDelete={handleCommentDelete}
+					/>
 			  ));
 	return (
 		<div>
-			{/* TODO update the return so it doesnt have duplicated data */}
 			{!toggler && (
 				<div>
 					<h1>{postBody}</h1>
 					<h3>{postOwner}</h3>
 					Created: <ReactTimeAgo date={new Date(created)} locale="en-US" />
 					{postOwner === userInSession && (
-						<button onClick={() => setToggler(true)}>Edit</button>
+						<>
+							<button onClick={() => setToggler(true)}>Edit</button>
+							<button onClick={() => handleDelete(id)}>Delete</button>
+						</>
 					)}
 					{commentList}
 					<CommentForm postId={id} onSubmit={handleSubmit} />
