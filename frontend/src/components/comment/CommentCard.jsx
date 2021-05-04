@@ -8,7 +8,7 @@ import { userDataState } from "../../state/userDataState";
 import { EditCommentForm } from "./EditCommentForm";
 
 export const CommentCard = ({
-	data: { id, body, userCommentOwner, created, updated },
+	data: { id, body, userCommentOwner, created, updated },handleDelete
 }) => {
 	// State
 	const [toggler, setToggler] = useState(false);
@@ -29,9 +29,12 @@ export const CommentCard = ({
 					<h3>{commentBody}</h3>
 					<h3>By: {userCommentOwner}</h3>
 					{userCommentOwner === userInSession && (
+						<>
 						<button onClick={() => setToggler(true)}>Edit</button>
+						<button onClick={() => handleDelete(id)}>Delete</button>
+						</>
 					)}
-					{created ? "Created:" : "Last updated:"}
+					{created ? "Created: " : "Last updated: "}
 					<ReactTimeAgo
 						date={new Date(created ? created : updated)}
 						locale="en-US"
