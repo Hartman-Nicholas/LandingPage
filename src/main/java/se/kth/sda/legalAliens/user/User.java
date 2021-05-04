@@ -149,13 +149,23 @@ public class User {
 
 //    public List<Post> getNewsFeed() {
 //       List<Group> groups = getGroupsJoined();
+//        System.out.println("Hows about you");
 //       List<Post> posts = new ArrayList<>();
 //       for (Group value : groups) {
+//           System.out.println(value.getPosts().size());
 //           if (value.getPosts().size() > 3) {
-//          for (int i=value.getPosts().size(); i> ; i--)
+//          for (int i=value.getPosts().size()-1; i>getPosts().size()-4 ; i--) {
+//              posts.add(value.getPosts().get(i));
+//          }
+//           } else {
+//              for (int i=0; i<getPosts().size(); i++) {
+//                  System.out.println(value.getPosts().get(i));
+//                  posts.add(value.getPosts().get(i));
+//              }
+//               }
+//           }
 //
-//
-//       }
+//        return posts;
 //    }
 
     public void setGroupsJoined(List<Group> groupsJoined) {

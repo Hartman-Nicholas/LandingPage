@@ -53,6 +53,7 @@ These are the endpoints for the posts API that should exist:
 | ------------|-----------|--------|
 | `GET`    | `/users`      | return loggedIn User. |
 | `GET`    | `/users/{userName}` | return false if userName not found, True if userName found case sensitive|
+| `GET`    | `/users/feed` | returns list of posts from groups that user has created or joined |
 | `POST`   | `/users`      | Sets firstLogIn to true on User profile.|
 | `PUT`    | `/users` | Update the given User, this route is used to add Avatar and Bio as well.|
 | `DELETE` | `/users/{id}` | "Not Yet implemented".|

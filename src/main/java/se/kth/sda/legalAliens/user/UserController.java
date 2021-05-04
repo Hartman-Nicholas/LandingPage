@@ -1,10 +1,12 @@
 package se.kth.sda.legalAliens.user;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.kth.sda.legalAliens.posts.Post;
 
 @RequestMapping("/users")
 @RestController
@@ -30,6 +32,14 @@ public class UserController {
     public boolean checkUserName (@PathVariable String userName) {
         User user = userService.findUserByName(userName);
         return user != null;
+    }
+
+    @GetMapping ("/feed")
+    public ResponseEntity<List<Post>> getUserFeed (Principal principal) {
+
+        List<Post> feedPosts = userService.getUserFeed(principal);
+        return  ResponseEntity.ok(feedPosts);
+
     }
 
     @PostMapping
