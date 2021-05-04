@@ -22,16 +22,15 @@ useEffect(()=>{
 	// Components
 
 	return (
-		<div>
-			<h1>All Groups</h1>
+    <div className="gridContainer">
+      <h1>All Groups</h1>
 
-			{groupsList.length === 0
-				? "No groups available"
-				: groupsList.map((group) => (
-						<GroupCard key={group.id} groupData={group} />
-				  ))}
-
-			<OwnerGroupsBar />
-		</div>
-	);
+      {groupsList.length === 0
+        ? "No groups available"
+        : groupsList.map((group) => (
+            <GroupCard key={group.id} groupData={group} />
+          ))}
+      <OwnerGroupsBar />
+    </div>
+  );
 };
