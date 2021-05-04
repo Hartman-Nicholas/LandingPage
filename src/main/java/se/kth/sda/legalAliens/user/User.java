@@ -15,6 +15,21 @@ import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * this class implements the model for user objects and interactions with associated classes
+ * <p>
+ *  initialises the user fields, getters and setter
+ *  designates entity relationships using hibernate annotation
+ *  dictates table constraints
+ * </p>
+ *
+ * @author Nicholas Hartman
+ * @author Sujan Varma
+ * @author Qinyu
+ * @version 1.0
+ *
+ */
+
 @Entity
 @Table(name = "account")
 public class User {
@@ -56,6 +71,14 @@ public class User {
     public User() {
     }
 
+    /**
+     *
+     * This is the constructor to initiate the User Class
+     *
+     * @param email
+     * @param password
+     * @param name
+     */
     public User(
             @Email(message = "Invalid email address! Please provide a valid email address") @NotEmpty(message = "Please provide an email address") String email,
             @Length(min = 5, max = 100, message = "Password length most be between 5-100 characters") String password,
