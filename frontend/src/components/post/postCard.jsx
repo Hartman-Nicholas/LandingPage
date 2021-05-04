@@ -13,12 +13,12 @@ export const PostCard = ({ data }) => {
 	// State
 	const [commentsData, setCommentsData] = useState(data.comments);
 	const [toggler, setToggler] = useState(false)
-	const user = useRecoilValue(userDataState);
+	const {name: userInSession} = useRecoilValue(userDataState);
 
 	useEffect(() => {
 		setCommentsData(data.comments ? data.comments : []);
 	}, [data.comments]);
-console.log(toggler)
+
 	// Constants
 	const handleSubmit = (newComment) => {
 		const list = commentsData.concat(newComment);
@@ -48,14 +48,11 @@ console.log(toggler)
 				<h1>{data.body}</h1>
 				<h3>{data.postOwner}</h3>
 				Created: <ReactTimeAgo date={new Date(data.created)} locale="en-US" />
-				{data.postOwner === user.name &&
-				<>
+				{data.postOwner === userInSession &&
 					<button onClick={()=> setToggler(true)}>Edit</button>
+				}
 					{commentList}
 					<CommentForm postId={data.id} onSubmit={handleSubmit} />
-				</>
-			}
-
 			</div>
 		}
 
