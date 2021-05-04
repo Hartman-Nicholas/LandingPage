@@ -55,19 +55,21 @@ These are the endpoints for the posts API that should exist:
 | `GET`    | `/users/{userName}` | return false if userName not found, True if userName found case sensitive|
 | `POST`   | `/users`      | Sets firstLogIn to true on User profile.|
 | `PUT`    | `/users` | Update the given User, this route is used to add Avatar and Bio as well.|
-| `DELETE` | `/users/{id}` | "Not Yet implemented".|
+| `DELETE` | `/users` | Delete logged in user.|
 
 ### Group Routes
 
 | HTTP Method | HTTP Path | Action |
 | ------------|-----------|--------|
-| `GET`    | `/groups`      | return all groups. |
+| `GET`    | `/groups`      | return all groups not created or joined by user. |
 | `GET`    | `/groups/{groupId}` | return a group by given groupId|
 | `POST`   | `/groups`      | Create a new group.|
 | `POST`   | `/groups/{groupId}`      | Join a group.|
 | `POST`   | `/groups/{groupId}/topics/{topicId}`      | Join a topic.|
-| `PUT`    | `/groups` | -To Be implemented |
-| `DELETE` | `/groups/{id}` | -To Be implemented |
+| `PUT`    | `/groups` | Update group tile, group description, group rules or group avatar only.|
+| `DELETE` | `/groups/{groupId}` | Delete a Group |
+| `DELETE` | `/groups/{groupId}/topics/{topicId}` | Remove topic from group. |
+| `DELETE` | `/groups/{groupId}/user` | Leave a group |
 
 ### Post Routes
 
