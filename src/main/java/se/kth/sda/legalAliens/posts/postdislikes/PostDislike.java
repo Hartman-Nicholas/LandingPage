@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import se.kth.sda.legalAliens.posts.Post;
+import se.kth.sda.legalAliens.user.User;
 
 @Entity
 public class PostDislike {
@@ -18,11 +19,18 @@ public class PostDislike {
     private String postDislike;
 
     @ManyToOne
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
+    @JoinColumn(nullable = false)
+    @NotNull
+    private Post dislikedPost;
+
+    @ManyToOne
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "name")
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(nullable = false)
     @NotNull
-    private Post postDislikeOwner;
+    private User postDislikeOwner;
 
     public PostDislike() {
     }
@@ -47,12 +55,20 @@ public class PostDislike {
         this.id = id;
     }
 
-    public Post getPostDislikeOwner() {
+    public User getPostDislikeOwner() {
         return postDislikeOwner;
     }
 
-    public void setPostDislikeOwner(Post postDislikeOwner) {
+    public void setPostDislikeOwner(User postDislikeOwner) {
         this.postDislikeOwner = postDislikeOwner;
+    }
+
+    public Post getDislikedPost() {
+        return dislikedPost;
+    }
+
+    public void setDislikedPost(Post dislikedPost) {
+        this.dislikedPost = dislikedPost;
     }
 }
 

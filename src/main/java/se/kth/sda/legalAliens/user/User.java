@@ -14,6 +14,7 @@ import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import se.kth.sda.legalAliens.posts.postdislikes.PostDislike;
 
 @Entity
 @Table(name = "account")
@@ -44,6 +45,9 @@ public class User {
 
     @OneToMany(mappedBy = "postOwner")
     private List<Post> posts;
+
+    @OneToMany(mappedBy = "postDislikeOwner")
+    private List<PostDislike> postDislike;
 
     @OneToMany(mappedBy = "groupOwner")
     private List<Group> groupsCreated;

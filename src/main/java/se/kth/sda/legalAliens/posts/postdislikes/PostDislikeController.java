@@ -1,5 +1,6 @@
 package se.kth.sda.legalAliens.posts.postdislikes;
 
+import java.security.Principal;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class PostDislikeController {
 
     // Create dislikes on given article
     @PostMapping("/{postId}/dislikes")
-    public ResponseEntity<PostDislike> createPostDislike(@PathVariable Long postId, @RequestBody PostDislike dislike) {
+    public ResponseEntity<PostDislike> createPostDislike(@PathVariable Long postId, @RequestBody PostDislike dislike, Principal principal) {
         Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
         dislike.setPostDislikeOwner(post);
         postDislikeRepository.save(dislike);

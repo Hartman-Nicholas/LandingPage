@@ -38,8 +38,8 @@ public class Group {
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(nullable = false)
     @NotNull
-    private User groupOwner;
-
+    private User
+    groupOwner;
     @OneToMany(mappedBy = "groupOwner")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Post> posts;
