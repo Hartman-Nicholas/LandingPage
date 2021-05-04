@@ -1,16 +1,26 @@
 // NPM Packages
-import { useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useState, useEffect } from "react";
+import { MemberCard } from "./MemberCard";
 
 // Project files
-import { groupDataState, userDataState } from "../../../state/userDataState";
 
-export const Members = ({ groupData }) => {
+export const Members = ({ data, status }) => {
 	// State
-	console.log("fromMembers", groupData);
+	const [membersList, setMembersList] = useState(data?.members);
+console.log("membersList", membersList)
+	useEffect(() => {
+		setMembersList(data.members);
+	}, [status, data.id]);
 	// Constants
+	//TODO update after BE fixes the members array data
+	let list =
+		membersList.length === 0
+			? <h3>No available members</h3>
+			: membersList?.map((member) => (
+					<MemberCard key={member.id} member={member} />
+			  ));
 
 	// Components
 
-	return <h1>Members List</h1>;
+	return <div>{list}</div>;
 };

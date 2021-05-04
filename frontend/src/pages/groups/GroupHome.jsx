@@ -1,37 +1,64 @@
 // NPM Packages
-import ReactTimeAgo from "react-time-ago";
-import { useParams,Switch,Route, BrowserRouter } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 
 // Project files
-import { groupDataState, userDataState } from "../../state/userDataState";
-import { About } from "./group-details/About";
-import { Discussion } from "./group-details/Discussion";
-import { Members } from "./group-details/Members";
 import { GroupHeader } from "./group-details/GroupHeader";
+import GroupApi from "../../api/GroupApi";
 
 export const GroupHome = () => {
-	// State
-	const groupsData = useRecoilValue(groupDataState);
+  // State
+	const { id } = useParams();
+	const [groupData, setGroupData] = useState([]);
 
-	// Variables
-	let { id } = useParams();
-	let group = groupsData.filter((data) => data.id == id);
+	const [aboutState, setAboutState] = useState(false);
+	const [discussionState, setDiscussionState] = useState(true);
+	const [membersState, setMembersState] = useState(false);
 
-	// Components
+	useEffect(() => {
+		const groupsData = async () => {
+			await GroupApi.getGroupById(id).then(({ data }) => setGroupData(data));
+		};
+		groupsData();
+	}, [id, aboutState, discussionState, membersState]);
+
+  // Variables
+
+  // Components
+	const handleSubmit = (e) => {
+		switch (e.target.name) {
+			case "about":
+				setAboutState(true);
+				setDiscussionState(false);
+				setMembersState(false);
+				break;
+			case "discussion":
+				setAboutState(false);
+				setDiscussionState(true);
+				setMembersState(false);
+				break;
+			case "members":
+				setAboutState(false);
+				setDiscussionState(false);
+				setMembersState(true);
+				break;
+			default:
+				break;
+		}
+	};
+
 
 	return (
 		<div>
-			<h1>Group Home page</h1>
-			<h1>{id}</h1>
-			<BrowserRouter>
-			<GroupHeader groupId={id} />
-			<Switch>
-				<Route path="/groups/:id/about" exact render={() => <About  groupData={group}/>} />
-				<Route path="/groups/:id/discussion" exact render={() => <Discussion  groupData={group}/>} />
-				<Route path="/groups/:id/members" exact render={() => <Members  groupData={group}/>} />
-			</Switch>
-			</BrowserRouter>
+			<h1>{groupData.title}</h1>
+			<h1>{groupData.id}</h1>
+			<GroupHeader
+				group={groupData}
+				handleSubmit={handleSubmit}
+				aboutState={aboutState}
+				discussionState={discussionState}
+				membersState={membersState}
+			/>
 		</div>
 	);
 };

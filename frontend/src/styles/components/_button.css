@@ -1,0 +1,37 @@
+.btn {
+  width: 150px;
+  height: 49px;
+  border: none;
+  outline: none;
+  border-radius: 49px;
+  background-color: var(--medium-blue);
+  color: var(--white);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  transition: 0.5s;
+  cursor: pointer;
+  transition: ease-in-out;
+  box-shadow: var(--bs);
+}
+
+.btn:active {
+  transform: translateY(5px);
+}
+
+.btn:hover {
+  background-color: var(--medium-blue-hover);
+}
+
+.btn.transparent {
+  margin: 0;
+  background: none;
+  border: 2px solid #fff;
+  width: 130px;
+  height: 41px;
+  font-weight: 600;
+}
+
+.btn.transparent:hover {
+  background-color: var(--medium-blue-hover);
+}

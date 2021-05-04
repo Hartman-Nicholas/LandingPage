@@ -2,6 +2,7 @@ import { ErrorInfo } from "../utils/ErrorInfo";
 import { Link } from "react-router-dom";
 
 export const ErrorMessage = ({ error, resetErrorBoundary }) => {
+  console.log("errrr",error)
   const { status } = error.response;
 
   console.log(error);
