@@ -39,7 +39,7 @@ export const Discussion = ({ data }) => {
 		(postData === undefined || postData.length) === 0
 			? "No Available posts"
 			: postData?.map((post) => (
-					<PostCard key={post.id} data={post} handleDelete={handleDelete} />
+					<PostCard key={post.id} data={post} handleDelete={handleDelete} groupOwner={data.groupOwner} />
 			  ));
 
 	return (
