@@ -1,5 +1,4 @@
-import React from 'react'
-
+// TODO: remove this temporary component when BE fixes feed api
 export default function Feed() {
     return (
       <div className="center">
