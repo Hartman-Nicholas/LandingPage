@@ -1,5 +1,6 @@
 // NPM Packages
 import { useEffect, useState } from "react";
+import PostsApi from "../../../api/PostsApi";
 
 // Project files
 import { PostCard } from "../../../components/post/postCard";
@@ -14,17 +15,32 @@ export const Discussion = ({ data }) => {
 	}, [data.posts]);
 
 	// Constants
+	const deletePost = async (postId) => {
+		try {
+			await PostsApi.deletePost(postId);
+		} catch (e) {
+			console.error(e);
+		}
+	};
 
 	const handleSubmit = (newPost) => {
 		const list = postData.concat(newPost);
 		setPostData(list);
 	};
 
+	const handleDelete = (id) => {
+		deletePost(id);
+		const filteredList = postData.filter((post) => post.id !== id);
+		setPostData(filteredList);
+	};
+
 	// Components
 	let postsList =
 		(postData === undefined || postData.length) === 0
 			? "No Available posts"
-			: postData?.map((post) => <PostCard key={post.id} data={post} />);
+			: postData?.map((post) => (
+					<PostCard key={post.id} data={post} handleDelete={handleDelete} />
+			  ));
 
 	return (
 		<div>
