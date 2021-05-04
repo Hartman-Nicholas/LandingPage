@@ -11,13 +11,14 @@ import CommentsApi from "../../api/CommentsApi";
 
 export const PostCard = ({
 	data: { id, comments, body, postOwner, created },
-	handleDelete,
+	handleDelete,groupOwner,
 }) => {
 	// State
 	const [commentsData, setCommentsData] = useState(comments);
 	const [postBody, setPostBody] = useState(body);
 	const [toggler, setToggler] = useState(false);
 	const { name: userInSession } = useRecoilValue(userDataState);
+	const [commentToggler, setCommentToggler] = useState(false)
 
 	useEffect(() => {
 		setCommentsData(comments ? comments : []);
@@ -58,6 +59,7 @@ export const PostCard = ({
 						key={comment.id}
 						data={comment}
 						handleDelete={handleCommentDelete}
+						groupOwner={groupOwner}
 					/>
 			  ));
 	return (
@@ -70,11 +72,19 @@ export const PostCard = ({
 					{postOwner === userInSession && (
 						<>
 							<button onClick={() => setToggler(true)}>Edit</button>
-							<button onClick={() => handleDelete(id)}>Delete</button>
 						</>
 					)}
-					{commentList}
+					{groupOwner | postOwner === userInSession &&
+						<button onClick={() => handleDelete(id)}>Delete</button>
+					}
+					<button onClick={()=> setCommentToggler(!commentToggler)}>show comments</button>
+					{
+						commentToggler &&
+						<>
+						{commentList}
 					<CommentForm postId={id} onSubmit={handleSubmit} />
+					</>
+					}
 				</div>
 			)}
 
