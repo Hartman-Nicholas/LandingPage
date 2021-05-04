@@ -4,19 +4,19 @@ import { useState } from "react";
 // Project files
 import CommentsApi from "../../api/CommentsApi";
 
-export const EditCommentForm = ({ data, onSubmit }) => {
+export const EditCommentForm = ({ data, onSubmit, commentId }) => {
 	// State
 	const [commentForm, setCommentForm] = useState({
-		body: data.body,
+		body: data,
 	});
 
 	// Constants
-	async function commentUpdate(commentId, commentData) {
+	async function commentUpdate(id, commentData) {
 		try {
-			await CommentsApi.updateComment( commentId,commentData).then(({data: {body}}) =>
-				onSubmit(body)
-
-			);
+			await CommentsApi.updateComment(
+				id,
+				commentData
+			).then(({ data: { body } }) => onSubmit(body));
 		} catch (e) {
 			console.error(e);
 		}
@@ -32,8 +32,7 @@ export const EditCommentForm = ({ data, onSubmit }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		commentUpdate(data.id, commentForm);
-		setCommentForm({ body: "" });
+		commentUpdate(commentId, commentForm);
 	};
 	// Components
 
@@ -48,7 +47,7 @@ export const EditCommentForm = ({ data, onSubmit }) => {
 				required
 				maxLength="255"
 			/>
-			<button type="submit">Submit</button>
+			<button type="submit">Save</button>
 		</form>
 	);
 };
