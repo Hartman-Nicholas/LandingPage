@@ -5,7 +5,7 @@ import { useParams } from "react-router";
 // Project files
 import { GroupHeader } from "./group-details/GroupHeader";
 import GroupApi from "../../api/GroupApi";
-
+import {About} from "./group-details/About";
 export const GroupHome = () => {
   // State
 	const { id } = useParams();
@@ -49,7 +49,8 @@ export const GroupHome = () => {
 
 
 	return (
-      <div className="gridContainer">
+    <div className="gridContainer">
+      <div className="center">
         <GroupHeader
           group={groupData}
           handleSubmit={handleSubmit}
@@ -58,5 +59,11 @@ export const GroupHome = () => {
           membersState={membersState}
         />
       </div>
+      <div className="rightBar">
+        <About />
+		{/* TODO render Member component after BE fixes */}
+		{/* <Members /> */}
+      </div>
+    </div>
   );
 };
