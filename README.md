@@ -61,7 +61,7 @@ These are the endpoints for the posts API that should exist:
 
 | HTTP Method | HTTP Path | Action |
 | ------------|-----------|--------|
-| `GET`    | `/groups`      | return all groups. |
+| `GET`    | `/groups`      | return all groups not created or joined by user. |
 | `GET`    | `/groups/{groupId}` | return a group by given groupId|
 | `POST`   | `/groups`      | Create a new group.|
 | `POST`   | `/groups/{groupId}`      | Join a group.|
