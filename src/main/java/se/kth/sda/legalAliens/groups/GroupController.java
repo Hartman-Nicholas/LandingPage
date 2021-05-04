@@ -99,7 +99,7 @@ public class GroupController {
         groupService.deleteGroup(groupId, principal);
     }
 
-   @DeleteMapping("/{groupId}/topics/{topicId}")
+       @DeleteMapping("/{groupId}/topics/{topicId}")
     public ResponseEntity<Group> deleteTopicFromGroup(@PathVariable Long groupId, @PathVariable Long topicId) {
        return groupService.deleteTopicFromGroup(groupId,topicId);
    }

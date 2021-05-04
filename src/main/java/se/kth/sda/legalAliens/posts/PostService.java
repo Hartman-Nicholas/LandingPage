@@ -44,7 +44,7 @@ public class PostService {
 
     }
 
-    public Post deletePost(Long id, Principal principal) {
+    public void deletePost(Long id, Principal principal) {
         Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         // Security measure to ensure a logged in User doesnt access the update Route
@@ -53,6 +53,6 @@ public class PostService {
             throw new ResourceNotFoundException();
         }
         postRepository.delete(post);
-        return post;
+
     }
 }
