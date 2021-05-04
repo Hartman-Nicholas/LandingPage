@@ -3,11 +3,13 @@ package se.kth.sda.legalAliens.posts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import se.kth.sda.legalAliens.comments.Comment;
 import se.kth.sda.legalAliens.exception.ResourceNotFoundException;
 import se.kth.sda.legalAliens.user.User;
 import se.kth.sda.legalAliens.user.UserService;
 
 import java.security.Principal;
+import java.util.List;
 
 @Service
 public class PostService {
@@ -29,16 +31,17 @@ public class PostService {
         // and update someone else's post.
         if (!userName.equals(post.getPostOwner().getEmail())) {
             throw new ResourceNotFoundException();
-
         }
-        // calling the method that updates the field. the method is in the Post class
-        updatedPost = post.setUpdatePostValues(updatedPost);
-        //setting the original id of the post
-        updatedPost.setId(id);
-        //setting the original owner of the post. this will never change.
-        updatedPost.setPostOwner(user);
-        postRepository.save(updatedPost);
-        return updatedPost;
+
+        post.setBody(updatedPost.getBody());
+        post.setPostOwner(post.getPostOwner());
+        post.setGroupOwner(post.getGroupOwner());
+        post.setId(id);
+        post.setComments(post.getComments());
+
+        postRepository.save(post);
+        return post;
+
     }
 
     public Post deletePost(Long id, Principal principal) {
