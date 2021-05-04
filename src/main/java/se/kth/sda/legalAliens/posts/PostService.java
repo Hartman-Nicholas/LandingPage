@@ -26,13 +26,16 @@ public class PostService {
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
         // Security measure to ensure a logged in User doesnt access the update Route
-        // and update someone elses post.
+        // and update someone else's post.
         if (!userName.equals(post.getPostOwner().getEmail())) {
             throw new ResourceNotFoundException();
 
         }
+        // calling the method that updates the field. the method is in the Post class
         updatedPost = post.setUpdatePostValues(updatedPost);
+        //setting the original id of the post
         updatedPost.setId(id);
+        //setting the original owner of the post. this will never change.
         updatedPost.setPostOwner(user);
         postRepository.save(updatedPost);
         return updatedPost;
@@ -42,10 +45,11 @@ public class PostService {
         Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         // Security measure to ensure a logged in User doesnt access the update Route
-        // and update someone elses post.
+        // and update someone else's post.
         if (!userName.equals(post.getPostOwner().getEmail())) {
             throw new ResourceNotFoundException();
         }
+        postRepository.delete(post);
         return post;
     }
 }
