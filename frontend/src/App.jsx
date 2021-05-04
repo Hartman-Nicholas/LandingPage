@@ -31,30 +31,31 @@ export default function App() {
 	// Components
 
 	return (
-		<div className="container">
-			<RecoilRoot>
-				<BrowserRouter>
-					<Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
+    <RecoilRoot>
+      <BrowserRouter>
+        <Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
+        <section id="grid">
+          <div className="groupSideBar">
+            {loggedIn && (
+              <ErrorBoundary FallbackComponent={ErrorMessage}>
+                <Suspense fallback={<div>loading...</div>}>
+                  <GroupsBar />
+                </Suspense>
+              </ErrorBoundary>
+            )}
+          </div>
+          <Switch>
+            {!loggedIn && <AuthPage />}
+            <Route path="/" exact component={Home} />
+            <Route path="/user" exact component={User} />
+            <Route path="/groups/create" exact component={GroupForm} />
+            <Route path="/groups" exact component={Groups} />
+            <Route path="/groups/:id/home" exact component={GroupHome} />
+        </Switch>
+        </section>
 
-					{loggedIn && (
-						<ErrorBoundary FallbackComponent={ErrorMessage}>
-							<Suspense fallback={<div>loading...</div>}>
-								<GroupsBar />
-							</Suspense>
-						</ErrorBoundary>
-					)}
-					<Switch>
-						{!loggedIn && <AuthPage />}
-						<Route path="/" exact component={Home} />
-						<Route path="/user" exact component={User} />
-						<Route path="/groups/create" exact component={GroupForm} />
-						<Route path="/groups" exact component={Groups} />
-						<Route path="/groups/:id/home" exact component={GroupHome} />
-					</Switch>
-
-					<Footer />
-				</BrowserRouter>
-			</RecoilRoot>
-		</div>
-	);
+        <Footer />
+      </BrowserRouter>
+    </RecoilRoot>
+  );
 }
