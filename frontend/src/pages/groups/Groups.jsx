@@ -1,24 +1,36 @@
 // NPM Packages
-import { useRecoilValue } from "recoil";
-
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 // Project files
 import { GroupCard } from "./GroupCard";
 import { OwnerGroupsBar } from "./group-details/OwnerGroupBar";
-import { useEffect, useState } from "react";
-import GroupsApi from "../../api/GroupApi"
+import { userDataState } from "../../state/userDataState";
+
+import GroupApi from "../../api/GroupApi";
 
 export const Groups = () => {
 	// State
-	const [groupsList, setGroupsList] = useState([])
-
+	const [groupsList, setGroupsList] = useState([]);
+	const [userData, setUserData] = useRecoilState(userDataState);
 	// Constants
+	const addMember = async (groupId) => {
+		await GroupApi.joinGroup(groupId).then(({ data }) => {
+			let updatedGroupsList = groupsList.filter(
+				(group) => group.id !== data.id
+			);
+			setGroupsList(updatedGroupsList);
+			let userGroups = userData.groupsJoined.concat(data);
+			setUserData({ ...userData, groupsJoined: userGroups });
+		});
+	};
 
-useEffect(()=>{
-	const groupList = async()=> {
-		await GroupsApi.getAllGroups().then(({data})=> setGroupsList(data))
-	}
-	groupList()
-},[])
+	useEffect(() => {
+		const groupList = async () => {
+			await GroupApi.getAllGroups().then(({ data }) => setGroupsList(data));
+		};
+		groupList();
+	}, [userData.groupsJoined]);
+
 	// Components
 
 	return (
@@ -28,7 +40,11 @@ useEffect(()=>{
 			{groupsList.length === 0
 				? "No groups available"
 				: groupsList.map((group) => (
-						<GroupCard key={group.id} groupData={group} />
+						<GroupCard
+							key={group.id}
+							groupData={group}
+							joinGroup={(id) => addMember(id)}
+						/>
 				  ))}
 
 			<OwnerGroupsBar />
