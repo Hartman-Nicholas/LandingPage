@@ -48,7 +48,7 @@ export const GroupCard = ({ groupData }) => {
           <div className="listItemContent">
             <div className="tag">●</div>
             <div className="sidebarItemText">
-              Group: {groupData.title}
+              <h2 className="itemTitle">Group: {groupData.title}</h2>
               <div className="non-sidebar-group-Des">
                 <img
                   src={groupData.avatar}

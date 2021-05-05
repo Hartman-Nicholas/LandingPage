@@ -10,6 +10,12 @@
 #sidebar .non-sidebar-group-Des {
   display: none;
 }
+#sidebar .itemTitle {
+  font-size: var(--fs-h3);
+  font-weight: 300;
+  align-items: center;
+  padding: 0;
+}
 .gridRight {
   display: grid;
   width: 100%;
