@@ -23,6 +23,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import se.kth.sda.legalAliens.comments.Comment;
 import se.kth.sda.legalAliens.groups.Group;
+import se.kth.sda.legalAliens.posts.postlike.PostLike;
 import se.kth.sda.legalAliens.user.User;
 
 @Entity
@@ -52,6 +53,10 @@ public class Post {
     @OneToMany(mappedBy = "commentOwner")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "likePost")
+    @OnDelete(action=OnDeleteAction.CASCADE)
+    private List<PostLike> postLikes;
 
     @PrePersist
     protected void onCreate() {
@@ -133,4 +138,12 @@ public class Post {
         this.groupOwner = groupOwner;
     }
 
+
+    public List<PostLike> getPostLikes() {
+        return postLikes;
+    }
+
+    public void setPostLikes(List<PostLike> postLikes) {
+        this.postLikes = postLikes;
+    }
 }
