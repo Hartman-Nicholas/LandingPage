@@ -7,33 +7,33 @@ export default function Feed() {
 {/* Current: a sample div with posts for showcase
 TODO: render posts taking from post component.  */}
           <div>
-            <div className="post">
-              <div className="postWrapper">
-                <div className="postTop">
-                  <div className="postTopLeft">
+            <div className="item">
+              <div className="itemWrapper">
+                <div className="itemTop">
+                  <div className="itemTopLeft">
                     <img
                       src={
                         require("../assets/CITY-STO-1.jpeg").default
                       }
                       alt=""
-                      className="postProfileImg"
+                      className="itemProfileImg"
                     />
-                    <span className="postUserName"> Anna</span>
-                    <span className="postDate">5 minutes ago</span>
+                    <span className="itemUserName"> Anna</span>
+                    <span className="itemDate">5 minutes ago</span>
                   </div>
-                  <div className="postTopRight">
+                  <div className="itemTopRight">
                   </div>
                 </div>
-                <div className="postCenter">
-                  <span className="postText">Hey! It is my first post :)</span>
+                <div className="itemCenter">
+                  <span className="itemText">Hey! It is my first post :)</span>
                   <img
-                    className="postImg"
+                    className="itemImg"
                     src={require("../assets/CITY-STO-1.jpeg").default}
                   />
                 </div>
-                <div className="postBottom">
-                  <div className="postBottomRight">
-                    <span className="postCommentText">10 comments</span>
+                <div className="itemBottom">
+                  <div className="itemBottomRight">
+                    <span className="itemCommentText">10 comments</span>
                   </div>
                 </div>
               </div>

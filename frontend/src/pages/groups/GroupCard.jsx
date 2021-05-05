@@ -9,44 +9,44 @@ import { groupDataState, userDataState } from "../../state/userDataState";
 import GroupApi from "../../api/GroupApi";
 
 export const GroupCard = ({ groupData }) => {
-	// State
-	const [userData, setUserData] = useRecoilState(userDataState);
-	const [groupsList, setGroupsList] = useRecoilState(groupDataState);
-	const [groupMembers, setGroupMembers] = useState(groupData.members);
-	const [groupsJoined, setGroupsJoined] = useState(userData.groupsJoined);
-	// Constants
+  // State
+  const [userData, setUserData] = useRecoilState(userDataState);
+  const [groupsList, setGroupsList] = useRecoilState(groupDataState);
+  const [groupMembers, setGroupMembers] = useState(groupData.members);
+  const [groupsJoined, setGroupsJoined] = useState(userData.groupsJoined);
+  // Constants
 
-	const addMember = async () => {
-		await GroupApi.joinGroup(groupData.id).then(({ data }) => {
-			let member = groupMembers.concat(userData.name);
-			let updatedGroupsList = groupsList.map((group) =>
-				group.id === data.id ? data : group
-			);
-			setGroupMembers(member);
-			setGroupsJoined([...groupsJoined, data]);
-			setUserData({ ...userData, groupsJoined });
-			setGroupsList(updatedGroupsList);
-		});
-	};
-	const handleClick = (e) => {
-		e.preventDefault();
-		addMember();
-	};
+  const addMember = async () => {
+    await GroupApi.joinGroup(groupData.id).then(({ data }) => {
+      let member = groupMembers.concat(userData.name);
+      let updatedGroupsList = groupsList.map((group) =>
+        group.id === data.id ? data : group
+      );
+      setGroupMembers(member);
+      setGroupsJoined([...groupsJoined, data]);
+      setUserData({ ...userData, groupsJoined });
+      setGroupsList(updatedGroupsList);
+    });
+  };
+  const handleClick = (e) => {
+    e.preventDefault();
+    addMember();
+  };
 
-	// Components
-	useEffect(() => {
+  // Components
+  useEffect(() => {
     setGroupsJoined(userData.groupsJoined);
     return () => setGroupsJoined([]);
   }, [userData, groupMembers]);
 
-	return (
+  return (
     <div>
       <Link to={`/groups/${groupData.id}/home`}>
         <div>
           {/* TODO Fix img only renders on the first created group */}
 
-          <div className="sidebarListItemContent">
-            <div className="sidebarIcon">●</div>
+          <div className="listItemContent">
+            <div className="tag">●</div>
             <div className="sidebarItemText">
               Group: {groupData.title}
               <div className="non-sidebar-group-Des">
@@ -57,7 +57,7 @@ export const GroupCard = ({ groupData }) => {
                     width: "100%",
                     maxHeight: "500px",
                     borderRadius: "8px",
-                    objectFit: "contain"
+                    objectFit: "contain",
                   }}
                 />
                 <p>Group Description: {groupData.description}</p>

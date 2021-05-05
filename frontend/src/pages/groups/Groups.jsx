@@ -22,19 +22,19 @@ export const Groups = () => {
   // Components
 
   return (
-    <div className="gridRight" style={{display:"flex"}}>
-        <section id="non-sidebar">
-          {groupsList.length === 0
-            ? "No groups available"
-            : groupsList.map((group) => (
-                <ul className="sidebarList">
-                  <li className="sidebarListItem">
-                    <GroupCard key={group.id} groupData={group} />
-                  </li>
-                </ul>
-              ))}
-        </section>
-        <OwnerGroupsBar />
+    <div className="gridRight" style={{ display: "flex" }}>
+      <section id="non-sidebar">
+        {groupsList.length === 0
+          ? "No groups available"
+          : groupsList.map((group) => (
+              <ul className="list">
+                <li className="listItem">
+                  <GroupCard key={group.id} groupData={group} />
+                </li>
+              </ul>
+            ))}
+      </section>
+      <OwnerGroupsBar />
     </div>
   );
 };
