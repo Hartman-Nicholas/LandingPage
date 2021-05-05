@@ -19,42 +19,43 @@ import { Groups } from "./pages/groups/Groups";
 import { GroupsBar } from "./components/GroupsBar";
 import { GroupHome } from "./pages/groups/GroupHome";
 import { GroupForm } from "./pages/groups/GroupForm";
+import { GroupEdit } from "./pages/groups/GroupEdit";
 
 export default function App() {
+  // State
+  const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
 
-	// State
-	const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
+  // Constants
+  Auth.bindLoggedInStateSetter(setLoggedIn);
 
-	// Constants
-	Auth.bindLoggedInStateSetter(setLoggedIn);
+  // Components
 
-	// Components
+  return (
+    <div className="container">
+      <RecoilRoot>
+        <BrowserRouter>
+          <Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
 
-	return (
-		<div className="container">
-			<RecoilRoot>
-				<BrowserRouter>
-					<Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
+          {loggedIn && (
+            <ErrorBoundary FallbackComponent={ErrorMessage}>
+              <Suspense fallback={<div>loading...</div>}>
+                <GroupsBar />
+              </Suspense>
+            </ErrorBoundary>
+          )}
+          <Switch>
+            {!loggedIn && <AuthPage />}
+            <Route path="/" exact component={Home} />
+            <Route path="/user" exact component={User} />
+            <Route path="/groups/create" exact component={GroupForm} />
+            <Route path="/groups" exact component={Groups} />
+            <Route path="/groups/:id/home" exact component={GroupHome} />
+            <Route path="/groups/:id/edit" exact component={GroupEdit} />
+          </Switch>
 
-					{loggedIn && (
-						<ErrorBoundary FallbackComponent={ErrorMessage}>
-							<Suspense fallback={<div>loading...</div>}>
-								<GroupsBar />
-							</Suspense>
-						</ErrorBoundary>
-					)}
-					<Switch>
-						{!loggedIn && <AuthPage />}
-						<Route path="/" exact component={Home} />
-						<Route path="/user" exact component={User} />
-						<Route path="/groups/create" exact component={GroupForm} />
-						<Route path="/groups" exact component={Groups} />
-						<Route path="/groups/:id/home" exact component={GroupHome} />
-					</Switch>
-
-					<Footer />
-				</BrowserRouter>
-			</RecoilRoot>
-		</div>
-	);
+          <Footer />
+        </BrowserRouter>
+      </RecoilRoot>
+    </div>
+  );
 }
