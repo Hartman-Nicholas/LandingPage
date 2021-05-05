@@ -16,6 +16,7 @@ import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import se.kth.sda.legalAliens.posts.postlike.PostLike;
 
 @Entity
 @Table(name = "account")
@@ -49,6 +50,9 @@ public class User {
     @OneToMany(mappedBy = "postOwner")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Post> posts;
+
+    @OneToMany(mappedBy = "postLikedOwner")
+    private List<PostLike> postLikes;
 
     @OneToMany(mappedBy = "groupOwner")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -183,5 +187,13 @@ public class User {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public List<PostLike> getPostLikes() {
+        return postLikes;
+    }
+
+    public void setPostLikes(List<PostLike> postLikes) {
+        this.postLikes = postLikes;
     }
 }
