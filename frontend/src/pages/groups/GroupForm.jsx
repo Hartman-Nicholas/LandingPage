@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { Form, Field, FormSpy } from "react-final-form";
 import createDecorator from "final-form-focus";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // Project files
 import { userDataState } from "../../state/userDataState";
@@ -24,7 +24,10 @@ export const GroupForm = () => {
     "https://res.cloudinary.com/dlvwrtpzq/image/upload/v1619987659/profilePhotos/placeholder_eo6jkp.png"
   );
 
+  const history = useHistory();
+
   const [, setUserData] = useRecoilState(userDataState);
+  const [group, setGroup] = useState({});
 
   const onCheck = (event) => {
     const indexTopic = topicArray.indexOf(event.target.value);
@@ -45,6 +48,8 @@ export const GroupForm = () => {
       values.avatar = imageUrl;
 
       const group = await GroupApi.createGroup(values).then((res) => res.data);
+
+      setGroup(group);
 
       topicArray.map(async (topic) => {
         await GroupApi.joinTopic(group.id, topic);
@@ -83,9 +88,13 @@ export const GroupForm = () => {
         <form
           onSubmit={(event) => {
             const promise = handleSubmit(event);
-            promise.then(() => {
-              form.reset();
-            });
+            if (promise === undefined) {
+            } else {
+              promise.then(() => {
+                form.reset();
+              });
+            }
+
             return promise;
           }}
         >
@@ -205,6 +214,7 @@ export const GroupForm = () => {
           <FormSpy subscription={{ submitSucceeded: true, values: true }}>
             {({ submitSucceeded }) => {
               if (submitSucceeded) {
+                history.push(`/groups/${group.id}/home`);
                 return <Link to="/" />;
               }
               return <div></div>;
