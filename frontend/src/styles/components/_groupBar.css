@@ -1,4 +1,4 @@
-#groupSideBar {
+#side-bar {
   width: 330px;
   height: calc(100vh - 50px);
   overflow-y: scroll;
@@ -22,10 +22,10 @@
 }
 .sidebarWrapper {
   padding: 20px;
-} 
-.sidebarTitle{
+}
+.sidebarTitle {
   position: absolute;
-  left: 70px;  
+  left: 70px;
 }
 .sidebarList {
   padding: 0;
@@ -42,7 +42,12 @@
 
 .sidebarListItemContent {
   font-size: var(--fs-h3);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%), rgba(238, 237, 246, 0.4);
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    rgba(238, 237, 246, 0.4);
   border-radius: 10px;
   border: 1px solid white;
   width: 236px;
@@ -66,8 +71,8 @@
 .sidebarButtonTop {
   top: 20px;
   width: 120px;
-  border: 1px solid #006AA8;
-  color: #006AA8;
+  border: 1px solid #006aa8;
+  color: #006aa8;
   padding: 10px;
   border-radius: 20px;
   font-weight: 500;
@@ -80,7 +85,7 @@
 
 .sidebarButtonBottom {
   width: 120px;
-  border: 1px solid #006AA8;
+  border: 1px solid #006aa8;
   color: white;
   padding: 10px;
   border-radius: 20px;
@@ -89,5 +94,5 @@
   width: 200px;
   height: 40px;
   left: 60px;
-  background-color: #006AA8;
+  background-color: #006aa8;
 }
