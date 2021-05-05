@@ -9,11 +9,11 @@ class GroupApi {
     return Api.get(`/groups/${id}`);
   }
 
-  createGroup(groupData){
-    return Api.post("/groups", groupData)
+  createGroup(groupData) {
+    return Api.post("/groups", groupData);
   }
-  joinGroup(groupId){
-    return Api.post(`/groups/${groupId}`)
+  joinGroup(groupId) {
+    return Api.post(`/groups/${groupId}`);
   }
   unjoinGroup(groupId){
     return Api.delete(`/groups/${groupId}/user`)
@@ -32,6 +32,7 @@ class GroupApi {
   deleteGroup(groupId){
     return Api.delete(`/groups/${groupId}`)
   }
+
 }
 
 export default new GroupApi();
