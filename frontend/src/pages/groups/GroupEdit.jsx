@@ -15,7 +15,7 @@ const composeValidators = (...validators) => (value) =>
   validators.reduce((error, validator) => error || validator(value), undefined);
 const focusOnError = createDecorator();
 
-export const GroupForm = () => {
+export const GroupEdit = (props) => {
   //   State
 
   const [topicArray, setTopicArray] = useState([]);
@@ -25,6 +25,9 @@ export const GroupForm = () => {
   );
 
   const [, setUserData] = useRecoilState(userDataState);
+  const { groupData } = props.location.state.fromNotifications;
+
+  console.log(groupData);
 
   const onCheck = (event) => {
     const indexTopic = topicArray.indexOf(event.target.value);
@@ -89,10 +92,11 @@ export const GroupForm = () => {
             return promise;
           }}
         >
-          <h2>Create Group</h2>
+          <h2>Edit Group</h2>
           <Field
             className="input-field"
             name="title"
+            defaultValue={groupData.title}
             placeholder="Group Name"
             validate={composeValidators(required, groupNameExists)}
           >
@@ -112,6 +116,7 @@ export const GroupForm = () => {
           </Field>
           <Field
             className="input-field"
+            defaultValue={groupData.description}
             name="description"
             placeholder="Group Description"
             validate={composeValidators(required)}
@@ -130,7 +135,12 @@ export const GroupForm = () => {
               </div>
             )}
           </Field>
-          <Field className="input-field" name="rules" placeholder="Group Rules">
+          <Field
+            defaultValue={groupData.rules}
+            className="input-field"
+            name="rules"
+            placeholder="Group Rules"
+          >
             {({ input, meta, placeholder }) => (
               <div
                 className={`field ${
@@ -216,3 +226,15 @@ export const GroupForm = () => {
     </Form>
   );
 };
+
+// <Link
+//   className="packageCard__link"
+//   to={{
+//     pathname: "./DetailedView",
+//     state: {
+//       fromNotifications: { data },
+//     },
+//   }}
+// ></Link>
+
+// const { data } = props.location.state.fromNotifications;
