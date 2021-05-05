@@ -22,7 +22,7 @@ export const Groups = () => {
   // Components
 
   return (
-    <div className="gridRight">
+    <div className="gridRight" style={{display:"flex"}}>
         <section id="non-sidebar">
           {groupsList.length === 0
             ? "No groups available"
