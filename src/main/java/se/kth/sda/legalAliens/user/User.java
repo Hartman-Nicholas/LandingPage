@@ -46,7 +46,7 @@ public class User {
     @OneToMany(mappedBy = "postOwner")
     private List<Post> posts;
 
-    @OneToMany(mappedBy = "postLikeOwner")
+    @OneToMany(mappedBy = "postLikedOwner")
     private List<PostLike> postLikes;
 
     @OneToMany(mappedBy = "groupOwner")
@@ -180,5 +180,13 @@ public class User {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public List<PostLike> getPostLikes() {
+        return postLikes;
+    }
+
+    public void setPostLikes(List<PostLike> postLikes) {
+        this.postLikes = postLikes;
     }
 }
