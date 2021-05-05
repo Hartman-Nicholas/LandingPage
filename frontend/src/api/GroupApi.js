@@ -33,6 +33,10 @@ class GroupApi {
     return Api.delete(`/groups/${groupId}`)
   }
 
+  checkGroupTitle(name){
+    return Api.get(`/groups/title/${name}`)
+  }
+
 }
 
 export default new GroupApi();
