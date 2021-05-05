@@ -32,30 +32,44 @@ export const GroupCard = ({ groupData }) => {
 		e.preventDefault();
 		addMember();
 	};
+
 	// Components
 	useEffect(() => {
-		setGroupsJoined(userData.groupsJoined);
-		return () => setGroupsJoined([]);
-	}, [userData, groupMembers]);
+    setGroupsJoined(userData.groupsJoined);
+    return () => setGroupsJoined([]);
+  }, [userData, groupMembers]);
 
 	return (
     <div>
       <Link to={`/groups/${groupData.id}/home`}>
         <div>
           {/* TODO Fix img only renders on the first created group */}
-          {/* <img
-						src={groupData.avatar}
-						alt="group"
-						style={{ width: "100px", height: "100px", borderRadius: "8px" }}
-					/> */}
+
           <div className="sidebarListItemContent">
             <div className="sidebarIcon">●</div>
-            <div className="sidebarItemText">Group: {groupData.title}</div>
+            <div className="sidebarItemText">
+              Group: {groupData.title}
+              <div className="non-sidebar-group-Des">
+                <img
+                  src={groupData.avatar}
+                  alt="group"
+                  style={{
+                    width: "100%",
+                    maxHeight: "500px",
+                    borderRadius: "8px",
+                    objectFit: "contain"
+                  }}
+                />
+                <p>Group Description: {groupData.description}</p>
+                <p>Admin : {groupData.groupOwner}</p>
+                Created:{" "}
+                <ReactTimeAgo
+                  date={new Date(groupData.created)}
+                  locale="en-US"
+                />
+              </div>
+            </div>
           </div>
-          {/* <h2>Group Description: {groupData.description}</h2>
-					<h3>Admin : {groupData.groupOwner}</h3>
-					Created:{" "}
-					<ReactTimeAgo date={new Date(groupData.created)} locale="en-US" /> */}
         </div>
       </Link>
       {groupData.groupOwner === userData.name ||

@@ -35,7 +35,6 @@ export default function App() {
       <BrowserRouter>
         <Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
         <section id="grid">
-          <div className="groupSideBar">
             {loggedIn && (
               <ErrorBoundary FallbackComponent={ErrorMessage}>
                 <Suspense fallback={<div>loading...</div>}>
@@ -43,7 +42,6 @@ export default function App() {
                 </Suspense>
               </ErrorBoundary>
             )}
-          </div>
           <Switch>
             {!loggedIn && <AuthPage />}
             <Route path="/" exact component={Home} />

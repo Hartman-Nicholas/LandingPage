@@ -9,7 +9,7 @@ import RightBar from "../../components/RightBar";
 export default function Home() {
   return (
     <>
-      <div className="gridContainer">
+      <div className="gridRight">
         <Feed />
         <RightBar />
       </div>
