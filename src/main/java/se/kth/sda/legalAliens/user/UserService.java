@@ -4,16 +4,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.kth.sda.legalAliens.exception.ResourceNotFoundException;
+import se.kth.sda.legalAliens.posts.Post;
+import se.kth.sda.legalAliens.posts.PostRepository;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service()
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    private PostRepository postRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, PostRepository postRepository) {
+        this.userRepository = userRepository;
+        this.postRepository = postRepository;
+    }
 
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -40,5 +50,17 @@ public class UserService {
         user.setPassword(encryptedPass);
         userRepository.save(user);
     }
+
+    public List<Post> getUserFeed (Principal principal) {
+        String userName = principal.getName();
+        User user = findUserByEmail(userName);
+        List<Post> posts = postRepository.findAll();
+        List<Post> filterPosts;
+        filterPosts = posts.stream()
+                .filter(post -> (post.getGroupOwner().getMembers().contains(user)) || post.getGroupOwner().getGroupOwner().equals(user)).collect(Collectors.toList());
+        return filterPosts;
+
+    }
+
 
 }

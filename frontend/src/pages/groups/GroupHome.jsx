@@ -1,6 +1,7 @@
 // NPM Packages
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 // Project files
 import { GroupHeader } from "./group-details/GroupHeader";
@@ -57,12 +58,23 @@ export const GroupHome = () => {
           discussionState={discussionState}
           membersState={membersState}
         />
+          <Link
+        to={{
+          pathname: "./edit",
+          state: {
+            fromNotifications: { groupData },
+          },
+        }}
+      >
+        Edit
+      </Link>
       </div>
       <div className="rightBar">
         <About />
         {/* TODO render Member component after BE fixes */}
         {/* <Members /> */}
       </div>
+
     </div>
   );
 };

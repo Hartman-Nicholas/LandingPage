@@ -164,4 +164,28 @@ public class Group {
     public void setTopics(List<Topic> topics) {
         this.topics = topics;
     }
+
+    public Group setUpdatedGroupValues(Group updatedGroup) {
+        if (updatedGroup.getTitle() == null) {
+            updatedGroup.setTitle(this.getTitle());
+        }
+        if (updatedGroup.getDescription() == null) {
+            updatedGroup.setDescription(this.getDescription());
+        }
+        if (updatedGroup.getRules() == null) {
+            updatedGroup.setRules(this.getRules());
+        }
+        if (updatedGroup.getAvatar() == null) {
+            updatedGroup.setAvatar(this.getAvatar());
+        }
+        updatedGroup.onCreate();
+        updatedGroup.setGroupOwner(this.getGroupOwner());
+        // get the list of posts
+        updatedGroup.setPosts(this.getPosts());
+        // get the list of members
+        updatedGroup.setMembers(this.getMembers());
+        //get the list of topics
+        updatedGroup.setTopics(this.getTopics());
+        return updatedGroup;
+    }
 }

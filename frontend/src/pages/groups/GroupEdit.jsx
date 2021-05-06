@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { Form, Field, FormSpy } from "react-final-form";
 import createDecorator from "final-form-focus";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Project files
 import { userDataState } from "../../state/userDataState";
@@ -15,7 +15,7 @@ const composeValidators = (...validators) => (value) =>
   validators.reduce((error, validator) => error || validator(value), undefined);
 const focusOnError = createDecorator();
 
-export const GroupForm = () => {
+export const GroupEdit = (props) => {
   //   State
 
   const [topicArray, setTopicArray] = useState([]);
@@ -24,14 +24,15 @@ export const GroupForm = () => {
     "https://res.cloudinary.com/dlvwrtpzq/image/upload/v1619987659/profilePhotos/placeholder_eo6jkp.png"
   );
 
-  const history = useHistory();
-
   const [, setUserData] = useRecoilState(userDataState);
-  const [group, setGroup] = useState({});
+  const { groupData } = props.location.state.fromNotifications;
+
+  console.log(groupData);
 
   const onCheck = (event) => {
     const indexTopic = topicArray.indexOf(event.target.value);
     const filterValue = topicArray[indexTopic];
+    console.log(indexTopic);
     if (indexTopic >= 0) {
       const deleteTopic = topicArray.filter((item) => !(item === filterValue));
       setTopicArray(deleteTopic);
@@ -40,13 +41,13 @@ export const GroupForm = () => {
     }
   };
 
+  console.log("topicArray", topicArray);
+
   const onSubmit = async (values) => {
     try {
       values.avatar = imageUrl;
 
       const group = await GroupApi.createGroup(values).then((res) => res.data);
-
-      setGroup(group);
 
       topicArray.map(async (topic) => {
         await GroupApi.joinTopic(group.id, topic);
@@ -74,8 +75,6 @@ export const GroupForm = () => {
   // Components
 
   return (
-        <div className="gridRight">
-
     <Form
       onSubmit={onSubmit}
       decorators={[focusOnError]}
@@ -87,20 +86,17 @@ export const GroupForm = () => {
         <form
           onSubmit={(event) => {
             const promise = handleSubmit(event);
-            if (promise === undefined) {
-            } else {
-              promise.then(() => {
-                form.reset();
-              });
-            }
-
+            promise.then(() => {
+              form.reset();
+            });
             return promise;
           }}
         >
-          <h2>Create Group</h2>
+          <h2>Edit Group</h2>
           <Field
             className="input-field"
             name="title"
+            defaultValue={groupData.title}
             placeholder="Group Name"
             validate={composeValidators(required, groupNameExists)}
           >
@@ -120,6 +116,7 @@ export const GroupForm = () => {
           </Field>
           <Field
             className="input-field"
+            defaultValue={groupData.description}
             name="description"
             placeholder="Group Description"
             validate={composeValidators(required)}
@@ -138,7 +135,12 @@ export const GroupForm = () => {
               </div>
             )}
           </Field>
-          <Field className="input-field" name="rules" placeholder="Group Rules">
+          <Field
+            defaultValue={groupData.rules}
+            className="input-field"
+            name="rules"
+            placeholder="Group Rules"
+          >
             {({ input, meta, placeholder }) => (
               <div
                 className={`field ${
@@ -213,7 +215,6 @@ export const GroupForm = () => {
           <FormSpy subscription={{ submitSucceeded: true, values: true }}>
             {({ submitSucceeded }) => {
               if (submitSucceeded) {
-                history.push(`/groups/${group.id}/home`);
                 return <Link to="/" />;
               }
               return <div></div>;
@@ -223,6 +224,17 @@ export const GroupForm = () => {
         </form>
       )}
     </Form>
-                </div>
   );
 };
+
+// <Link
+//   className="packageCard__link"
+//   to={{
+//     pathname: "./DetailedView",
+//     state: {
+//       fromNotifications: { data },
+//     },
+//   }}
+// ></Link>
+
+// const { data } = props.location.state.fromNotifications;

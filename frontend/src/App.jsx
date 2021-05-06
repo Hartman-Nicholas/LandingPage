@@ -19,6 +19,7 @@ import { Groups } from "./pages/groups/Groups";
 import { GroupsBar } from "./components/GroupsBar";
 import { GroupHome } from "./pages/groups/GroupHome";
 import { GroupForm } from "./pages/groups/GroupForm";
+import { GroupEdit } from "./pages/groups/GroupEdit";
 
 export default function App() {
 
@@ -49,11 +50,13 @@ export default function App() {
             <Route path="/groups/create" exact component={GroupForm} />
             <Route path="/groups" exact component={Groups} />
             <Route path="/groups/:id/home" exact component={GroupHome} />
+            <Route path="/groups/:id/edit" exact component={GroupEdit} />
         </Switch>
         </section>
 
         <Footer />
       </BrowserRouter>
     </RecoilRoot>
+
   );
 }
