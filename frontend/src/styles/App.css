@@ -13,6 +13,7 @@
 /* components */
 
 @import "./components/_button.css";
+@import "./components/_groupBar.css";
 
 /* layout */
 
@@ -20,6 +21,9 @@
 @import "./layout/_header.css";
 @import "./layout/_authForm.css";
 @import "./layout/_Form.css";
+
+@import "./layout/_center.css";
+@import "./layout/_grid.css";
 
 /* pages */
 

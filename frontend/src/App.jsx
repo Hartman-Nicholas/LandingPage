@@ -22,27 +22,27 @@ import { GroupForm } from "./pages/groups/GroupForm";
 import { GroupEdit } from "./pages/groups/GroupEdit";
 
 export default function App() {
-  // State
-  const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
 
-  // Constants
-  Auth.bindLoggedInStateSetter(setLoggedIn);
+	// State
+	const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
 
-  // Components
+	// Constants
+	Auth.bindLoggedInStateSetter(setLoggedIn);
 
-  return (
-    <div className="container">
-      <RecoilRoot>
-        <BrowserRouter>
-          <Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
+	// Components
 
-          {loggedIn && (
-            <ErrorBoundary FallbackComponent={ErrorMessage}>
-              <Suspense fallback={<div>loading...</div>}>
-                <GroupsBar />
-              </Suspense>
-            </ErrorBoundary>
-          )}
+	return (
+    <RecoilRoot>
+      <BrowserRouter>
+        <Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
+        <section id="grid">
+            {loggedIn && (
+              <ErrorBoundary FallbackComponent={ErrorMessage}>
+                <Suspense fallback={<div>loading...</div>}>
+                  <GroupsBar />
+                </Suspense>
+              </ErrorBoundary>
+            )}
           <Switch>
             {!loggedIn && <AuthPage />}
             <Route path="/" exact component={Home} />
@@ -51,11 +51,12 @@ export default function App() {
             <Route path="/groups" exact component={Groups} />
             <Route path="/groups/:id/home" exact component={GroupHome} />
             <Route path="/groups/:id/edit" exact component={GroupEdit} />
-          </Switch>
+        </Switch>
+        </section>
 
-          <Footer />
-        </BrowserRouter>
-      </RecoilRoot>
-    </div>
+        <Footer />
+      </BrowserRouter>
+    </RecoilRoot>
+
   );
 }

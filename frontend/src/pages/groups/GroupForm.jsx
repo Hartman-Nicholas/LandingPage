@@ -32,7 +32,6 @@ export const GroupForm = () => {
   const onCheck = (event) => {
     const indexTopic = topicArray.indexOf(event.target.value);
     const filterValue = topicArray[indexTopic];
-    console.log(indexTopic);
     if (indexTopic >= 0) {
       const deleteTopic = topicArray.filter((item) => !(item === filterValue));
       setTopicArray(deleteTopic);
@@ -40,8 +39,6 @@ export const GroupForm = () => {
       setTopicArray([...topicArray, event.target.value]);
     }
   };
-
-  console.log("topicArray", topicArray);
 
   const onSubmit = async (values) => {
     try {
@@ -77,6 +74,8 @@ export const GroupForm = () => {
   // Components
 
   return (
+        <div className="gridRight">
+
     <Form
       onSubmit={onSubmit}
       decorators={[focusOnError]}
@@ -224,5 +223,6 @@ export const GroupForm = () => {
         </form>
       )}
     </Form>
+                </div>
   );
 };

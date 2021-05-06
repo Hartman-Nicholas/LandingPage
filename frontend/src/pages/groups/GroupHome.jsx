@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 // Project files
 import { GroupHeader } from "./group-details/GroupHeader";
 import GroupApi from "../../api/GroupApi";
-
+import { About } from "./group-details/About";
 export const GroupHome = () => {
   // State
   const { id } = useParams();
@@ -49,10 +49,16 @@ export const GroupHome = () => {
   };
 
   return (
-    <div>
-      <h1>{groupData.title}</h1>
-      <h1>{groupData.id}</h1>
-      <Link
+    <div className="gridRight">
+      <div className="center">
+        <GroupHeader
+          group={groupData}
+          handleSubmit={handleSubmit}
+          aboutState={aboutState}
+          discussionState={discussionState}
+          membersState={membersState}
+        />
+          <Link
         to={{
           pathname: "./edit",
           state: {
@@ -62,13 +68,13 @@ export const GroupHome = () => {
       >
         Edit
       </Link>
-      <GroupHeader
-        group={groupData}
-        handleSubmit={handleSubmit}
-        aboutState={aboutState}
-        discussionState={discussionState}
-        membersState={membersState}
-      />
+      </div>
+      <div className="rightBar">
+        <About />
+        {/* TODO render Member component after BE fixes */}
+        {/* <Members /> */}
+      </div>
+
     </div>
   );
 };

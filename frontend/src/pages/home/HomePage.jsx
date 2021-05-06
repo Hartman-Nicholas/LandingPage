@@ -1,14 +1,17 @@
 // NPM Packages
 
-
 // Project files
-
+import Feed from "../../components/Feed";
+import { GroupsBar } from "../../components/GroupsBar";
+import RightBar from "../../components/RightBar";
 
 export default function Home() {
-
-	return (
-		<section>
-			<div>Home Template</div>
-		</section>
-	);
+  return (
+    <>
+      <div className="gridRight">
+        <Feed />
+        <RightBar />
+      </div>
+    </>
+  );
 }

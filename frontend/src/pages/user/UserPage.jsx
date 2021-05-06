@@ -8,13 +8,18 @@ import UserCard from "./UserCard";
 
 export default function User() {
 	return (
-		<section>
-			<div>User Template</div>
-			<ErrorBoundary FallbackComponent={ErrorMessage}>
-				<Suspense fallback={<div>loading...</div>}>
-					<UserCard />
-				</Suspense>
-			</ErrorBoundary>
-		</section>
-	);
+    <div className="gridRight">
+      <div className="center">
+        <ErrorBoundary FallbackComponent={ErrorMessage}>
+          <Suspense fallback={<div>loading...</div>}>
+            <ul className="list">
+              <li className="listItem">
+                <UserCard />
+              </li>
+            </ul>
+          </Suspense>
+        </ErrorBoundary>
+      </div>
+    </div>
+  );
 }

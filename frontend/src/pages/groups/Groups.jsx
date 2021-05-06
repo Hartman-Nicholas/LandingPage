@@ -5,7 +5,6 @@ import { useRecoilState } from "recoil";
 import { GroupCard } from "./GroupCard";
 import { OwnerGroupsBar } from "./group-details/OwnerGroupBar";
 import { userDataState } from "../../state/userDataState";
-
 import GroupApi from "../../api/GroupApi";
 
 export const Groups = () => {
@@ -80,7 +79,9 @@ export const Groups = () => {
 	// Components
 
 	return (
-		<div>
+        <div className="gridRight" style={{ display: "flex" }}>
+      <section id="non-sidebar">
+
 			<h1>All Groups</h1>
 			<input name="title" onChange={handleChange} />
 			<label htmlFor="Sport"> Sport</label>
@@ -122,21 +123,34 @@ export const Groups = () => {
 						{
 						queryList.length > 0 || flag ?
 						queryList.map((group) => (
+                        <ul className="list">
+                <li className="listItem">
+
 							<GroupCard
 								key={group.id}
 								groupData={group}
 								joinGroup={(id) => addMember(id)}
 							/>
+                                  </li>
+              </ul>
+
 						)): groupsList.map((group) => (
+                            <ul className="list">
+                <li className="listItem">
+
 								<GroupCard
 									key={group.id}
 									groupData={group}
 									joinGroup={(id) => addMember(id)}
 								/>
+                                               </li>
+              </ul>
+
 							))
 						}
 			<br />
-			<OwnerGroupsBar />
-		</div>
+      </section>
+      <OwnerGroupsBar />
+    </div>
 	);
 };
