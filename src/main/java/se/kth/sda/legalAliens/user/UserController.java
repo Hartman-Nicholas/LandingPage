@@ -47,6 +47,4 @@ public class UserController {
         userRepository.save(updateUserData);
         return ResponseEntity.ok(updateUserData);
     }
-
-
 }
