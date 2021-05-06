@@ -42,6 +42,11 @@ export const Groups = () => {
 		const { name, value } = e.target;
 
 		if (name === "title") {
+			if (value.length === 0) {
+				setFlag(false);
+			} else {
+				setFlag(true);
+			}
 			query.current = { ...query.current, [name]: value };
 		} else {
 			if (query.current.topics.includes(name)) {
@@ -76,10 +81,7 @@ export const Groups = () => {
 			}
 		});
 
-		//TODO fix bug in seach bar,  flag setting on empty input
-		queryList.length === 0 ? setFlag(true) : setFlag(false)
 		setQueryList(filteredList);
-
 	};
 
 	// Components
