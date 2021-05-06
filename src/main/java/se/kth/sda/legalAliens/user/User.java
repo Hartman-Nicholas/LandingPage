@@ -5,6 +5,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Length;
 
 import se.kth.sda.legalAliens.comments.Comment;
+import se.kth.sda.legalAliens.comments.CommentLike.CommentLike;
 import se.kth.sda.legalAliens.groups.Group;
 import se.kth.sda.legalAliens.posts.Post;
 
@@ -196,4 +197,5 @@ public class User {
     public void setPostLikes(List<PostLike> postLikes) {
         this.postLikes = postLikes;
     }
+
 }

@@ -81,6 +81,14 @@ These are the endpoints for the posts API that should exist:
 | `PUT`    | `/posts/{postId}` | update the given post.|
 | `DELETE` | `/posts/{postId}` | delete the given post.|
 
+### Post Like Routes
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/posts/{postId}/likes`      | Get all likes on a given post |
+| `POST`   | `/posts/{postId}/likes`      | Create a like on a given post |
+| `DELETE`   | `/posts/likes/{id}`      | Delete a like on a given post |
+
 ### Comment Routes
 
 | HTTP Method | HTTP Path | Action |
@@ -90,6 +98,14 @@ These are the endpoints for the posts API that should exist:
 | `PUT`    | `/comments/{commentId}` | update the given comment.|
 | `DELETE` | `/comments/{commentId}` | delete the given comment.|
 
+### Comment Like Routes
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/comments/{commentId}/likes`      | Get all likes on a given comment |
+| `POST`   | `/comments/{commentId}/likes`      | Create a like on a given comment |
+| `DELETE`   | `/comments/likes/{id}`      | Delete a like on a given comment |
+
 ### Topic Routes
 
 | HTTP Method | HTTP Path | Action |
@@ -97,10 +113,3 @@ These are the endpoints for the posts API that should exist:
 | `GET`    | `/topics/{postId}`      | return all topics. |
 | `POST`   | `/topics`      | create all generic topics.|
 
-### Post Like Routes
-
-| HTTP Method | HTTP Path | Action |
-| ------------|-----------|--------|
-| `GET`    | `/posts/{postId}/likes`      | Get all likes on a given post |
-| `POST`   | `/posts/{postId}/likes`      | Create a like on a given post |
-| `POST`   | `/posts/likes/{id}`      | Delete a like on a given post |
