@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // Project files
 import { useRecoilValue } from "recoil";
@@ -7,17 +6,13 @@ import { userDataState } from "../../../state/userDataState";
 export const OwnerGroupsBar = () => {
 	// State
 	const ownerData = useRecoilValue(userDataState)
-	const [owner, setOwner] = useState({})
-	useEffect(()=> {
-		setOwner(ownerData)
-		return () => setOwner({})
-	},[])
+
 	// Constants
 
 	// Components
 
 
-	const list = (owner.groupsCreated) ? owner.groupsCreated.map((group) => {
+	const list = (ownerData.groupsCreated) ? ownerData.groupsCreated.map((group) => {
 		return (
 			<Link
 				to={{
