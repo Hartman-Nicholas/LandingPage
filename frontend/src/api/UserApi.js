@@ -24,6 +24,10 @@ class UserApi {
   deleteUser(){
     return Api.delete(`/users`)
   }
+
+  userFeed(){
+    return Api.get("/users/feed")
+  }
 }
 
 export default new UserApi();
