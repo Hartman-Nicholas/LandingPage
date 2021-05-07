@@ -2,7 +2,6 @@
 
 // Project files
 import Feed from "../../components/Feed";
-import { GroupsBar } from "../../components/GroupsBar";
 import RightBar from "../../components/RightBar";
 
 export default function Home() {
