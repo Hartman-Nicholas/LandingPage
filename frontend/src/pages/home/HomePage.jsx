@@ -3,14 +3,14 @@
 // Project files
 import Feed from "../../components/Feed";
 import { GroupsBar } from "../../components/GroupsBar";
-import RightBar from "../../components/RightBar";
+import UserPosts from "../../components/UserPosts";
 
 export default function Home() {
   return (
     <>
       <div className="gridRight">
         <Feed />
-        <RightBar />
+        <UserPosts />
       </div>
     </>
   );
