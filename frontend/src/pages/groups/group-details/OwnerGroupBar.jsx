@@ -6,31 +6,28 @@ import { userDataState } from "../../../state/userDataState";
 
 export const OwnerGroupsBar = () => {
 	// State
-	const ownerData = useRecoilValue(userDataState)
-	const [owner, setOwner] = useState({})
-	useEffect(()=> {
-		setOwner(ownerData)
-		return () => setOwner({})
-	},[])
+	const owner = useRecoilValue(userDataState)
+
 	// Constants
 
 	// Components
-
-
 	const list = (owner.groupsCreated) ? owner.groupsCreated.map((group) => {
 		return (
-			<Link
-				to={{
-					pathname: `/groups/${group.id}`,
-				}}
-				key={group.id}
-			>
-				<div>
-					<h1>{group.title}</h1>
-					<h4>{group.description}</h4>
-				</div>
-			</Link>
-		);
+      <Link to={`/groups/${group.id}/home`}>
+        <div>
+          <ul className="list">
+            <li className="listItem">
+              <div className="listItemContent">
+                <div className="sidebarItemText">
+                  <h2>{group.title}</h2>
+                  {/* <p>{group.description}</p> */}
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </Link>
+    );
 	}): "no groups has been created yet";
 
 	return <div>your groups:{list.length === 0 ? "Groups list is empty" : list}</div>;

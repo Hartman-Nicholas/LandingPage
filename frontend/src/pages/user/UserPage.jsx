@@ -4,6 +4,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 // Project files
 import { ErrorMessage } from "../../components/ErrorMessage";
+import { OwnerGroupsBar } from "../groups/group-details/OwnerGroupBar";
 import UserCard from "./UserCard";
 
 export default function User() {
@@ -19,6 +20,9 @@ export default function User() {
             </ul>
           </Suspense>
         </ErrorBoundary>
+      </div>
+      <div className="rightBar">
+            <OwnerGroupsBar />
       </div>
     </div>
   );
