@@ -7,11 +7,7 @@ import { userDataState } from "../../../state/userDataState";
 export const OwnerGroupsBar = () => {
 	// State
 	const owner = useRecoilValue(userDataState)
-// 	const [owner, setOwner] = useState({});
-// 	useEffect(() => {
-//     setOwner(ownerData);
-//     return () => setOwner({});
-//   }, []);
+
 	// Constants
 
 	// Components
