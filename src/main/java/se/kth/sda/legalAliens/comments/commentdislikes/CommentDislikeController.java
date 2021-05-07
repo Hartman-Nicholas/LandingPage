@@ -22,7 +22,7 @@ public class CommentDislikeController {
     UserService userService;
     PostRepository postRepository;
     CommentDislikeRepository commentDislikeRepository;
-    boolean hasDisliked = false;
+
 
     @Autowired
     public CommentDislikeController(CommentRepository commentRepository, UserService userService, PostRepository postRepository, CommentDislikeRepository commentDislikeRepository) {
@@ -46,11 +46,15 @@ public class CommentDislikeController {
         Comment comment = commentRepository.findById(commentId).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        if (!hasDisliked) {
+        boolean hasDisliked =false;
+        List<CommentDislike> thisCommentDislikes = comment.getCommentDislikes();
+        for (int i=0; i < thisCommentDislikes.size(); i++) {
+           if (comment.getCommentDislikes().get(0).getCommentDislikeOwner().equals(user)) { hasDisliked = true;}
+        }
+        if(!hasDisliked){
             dislike.setCommentDislikeOwner(user);
             dislike.setDislikedComment(comment);
             commentDislikeRepository.save(dislike);
-            hasDisliked = true;
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(dislike);
     }
@@ -61,6 +65,7 @@ public class CommentDislikeController {
     public void deletePostDislike(@PathVariable Long Id) {      // Id with capital I to maintain route naming convention.
         CommentDislike commentDislike = commentDislikeRepository.findById(Id).orElseThrow(ResourceNotFoundException::new);
         commentDislikeRepository.delete(commentDislike);
+
     }
 
 }

@@ -48,12 +48,17 @@ public class PostDislikeController {
         Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        if (!hasDisliked){
+        boolean hasDisliked= false;
+        List <PostDislike> thisPostDislikes = post.getPostDislikes();
+        for (int i=0; i < thisPostDislikes.size(); i++) {
+            if (post.getPostDislikes().get(0).getPostDislikeOwner().equals(user)) { hasDisliked = true;}
+        }
+        if(!hasDisliked) {
             dislike.setPostDislikeOwner(user);
             dislike.setDislikedPost(post);
             postDislikeRepository.save(dislike);
-            hasDisliked = true;
         }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(dislike);
     }
 
