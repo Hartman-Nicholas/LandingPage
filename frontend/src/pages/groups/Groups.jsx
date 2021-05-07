@@ -152,7 +152,7 @@ export const Groups = () => {
 					  ))}
 				<br />
 			</section>
-			<OwnerGroupsBar />
+			{/* <OwnerGroupsBar /> */}
 		</div>
 	);
 };
