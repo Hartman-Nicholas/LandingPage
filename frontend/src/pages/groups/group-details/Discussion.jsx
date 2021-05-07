@@ -31,7 +31,7 @@ export const Discussion = ({ data }) => {
     setPostData(list);
     setUserData({
       ...userData,
-      posts: userData.posts.concat([newPost]),
+      posts: userData.posts.concat(newPost),
     });
   };
 
