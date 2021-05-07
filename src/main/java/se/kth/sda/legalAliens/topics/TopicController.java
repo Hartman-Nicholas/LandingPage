@@ -9,6 +9,7 @@ import se.kth.sda.legalAliens.exception.ResourceNotFoundException;
 
 import java.util.List;
 
+
 @RequestMapping("/topics")
 @RestController
 public class TopicController {
@@ -21,7 +22,10 @@ public class TopicController {
         this.topicRepository = topicRepository;
     }
 
-
+    /**
+     *
+     * @return
+     */
     @GetMapping
     public List<Topic> getAllTopics() {
        List <Topic> topics = topicRepository.findAll();

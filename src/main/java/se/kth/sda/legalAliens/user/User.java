@@ -92,7 +92,7 @@ public class User {
      *
      * This is the method to change the state of the fields for the User object
      *
-     * @param updateUser is a user object that holds the states of the fields  that will replace the old states
+     * @param updateUser is a user object that holds the states of the fields that will replace the old states
      * @return the user object with the updated states.
      */
     public User setUpdateUser (User updateUser) {
@@ -135,7 +135,10 @@ public class User {
     }
 
 
-    //
+    /**
+     *
+     * @return
+     */
     @JsonIgnore
     @JsonProperty(value = "user_password")
     public String getPassword() {
