@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { Form, Field, FormSpy } from "react-final-form";
 import createDecorator from "final-form-focus";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // Project files
 import { userDataState } from "../../state/userDataState";
@@ -16,23 +16,61 @@ const composeValidators = (...validators) => (value) =>
 const focusOnError = createDecorator();
 
 export const GroupEdit = (props) => {
+  const { groupData } = props.location.state.fromNotifications;
+
+  const history = useHistory();
+
+  const mapTopics = groupData.topics.flatMap((topic) => {
+    const topicNumber = [];
+
+    switch (topic.toLowerCase()) {
+      case "sport":
+        topicNumber.push("1");
+        break;
+      case "entertainment":
+        topicNumber.push("2");
+        break;
+      case "health":
+        topicNumber.push("3");
+        break;
+      case "education":
+        topicNumber.push("4");
+        break;
+      case "family":
+        topicNumber.push("5");
+        break;
+
+      default:
+        break;
+    }
+    return topicNumber;
+  });
+
   //   State
 
-  const [topicArray, setTopicArray] = useState([]);
+  const [topicArray, setTopicArray] = useState(mapTopics);
+  // const [sportChecked, setsportChecked] = useState(
+  //   groupData.topics.includes("Sport")
+  // );
+
+  const [checked, setChecked] = useState({
+    sport: groupData.topics.includes("Sport"),
+    entertainment: groupData.topics.includes("Entertainment"),
+    health: groupData.topics.includes("Health"),
+    education: groupData.topics.includes("Education"),
+    family: groupData.topics.includes("Family"),
+  });
 
   const [imageUrl, setImageUrl] = useState(
     "https://res.cloudinary.com/dlvwrtpzq/image/upload/v1619987659/profilePhotos/placeholder_eo6jkp.png"
   );
 
   const [, setUserData] = useRecoilState(userDataState);
-  const { groupData } = props.location.state.fromNotifications;
-
-  console.log(groupData);
 
   const onCheck = (event) => {
     const indexTopic = topicArray.indexOf(event.target.value);
     const filterValue = topicArray[indexTopic];
-    console.log(indexTopic);
+
     if (indexTopic >= 0) {
       const deleteTopic = topicArray.filter((item) => !(item === filterValue));
       setTopicArray(deleteTopic);
@@ -42,16 +80,46 @@ export const GroupEdit = (props) => {
   };
 
   console.log("topicArray", topicArray);
+  console.log("mapTopics", mapTopics);
 
   const onSubmit = async (values) => {
     try {
       values.avatar = imageUrl;
 
-      const group = await GroupApi.createGroup(values).then((res) => res.data);
+      // const unjoinTopic = async () =>
+      //   Promise.all(
+      //     mapTopics.map(async (topic) => {
+      //       console.log("topicID", topic);
+      //       await GroupApi.unjoinTopic(groupData.id, topic);
+      //     })
+      //   );
 
-      topicArray.map(async (topic) => {
-        await GroupApi.joinTopic(group.id, topic);
+      // const joinTopic = async () =>
+      //   Promise.all(
+      //     topicArray.map(async (topic) => {
+      //       console.log("joinTopicID", topic);
+      //       await GroupApi.joinTopic(groupData.id, topic);
+      //     })
+      //   );
+
+      // unjoinTopic()
+      //   .then(joinTopic())
+      //   .finally(
+      //     await GroupApi.updateGroup(groupData.id, values).then(
+      //       (res) => res.data
+      //     )
+      //   );
+
+      topicArray.forEach(async (topic) => {
+        await GroupApi.joinTopic(groupData.id, topic);
       });
+
+      // await GroupApi.joinTopic(groupData.id, 1);
+      // await GroupApi.joinTopic(groupData.id, 2);
+      await GroupApi.unjoinTopic(groupData.id, 1);
+      await GroupApi.unjoinTopic(groupData.id, 2);
+      await GroupApi.updateGroup(groupData.id, values).then((res) => res.data);
+
       await UserApi.getUser().then(({ data }) => setUserData(data));
     } catch (e) {
       console.error(e);
@@ -70,6 +138,8 @@ export const GroupEdit = (props) => {
     }
   };
 
+  console.log(checked);
+
   const required = (value) => (value ? undefined : "Required");
 
   // Components
@@ -86,9 +156,12 @@ export const GroupEdit = (props) => {
         <form
           onSubmit={(event) => {
             const promise = handleSubmit(event);
-            promise.then(() => {
-              form.reset();
-            });
+            if (promise === undefined) {
+            } else {
+              promise.then(() => {
+                form.reset();
+              });
+            }
             return promise;
           }}
         >
@@ -162,6 +235,10 @@ export const GroupEdit = (props) => {
           <label htmlFor="sport">Sport</label>
           <Field
             onClick={onCheck}
+            onChange={() => {
+              setChecked({ ...checked, sport: !checked.sport });
+            }}
+            checked={checked.sport}
             id="sport"
             name="sport"
             component="input"
@@ -170,6 +247,10 @@ export const GroupEdit = (props) => {
           />
           <label htmlFor="Entertainment">Entertainment</label>
           <Field
+            onChange={() => {
+              setChecked({ ...checked, entertainment: !checked.entertainment });
+            }}
+            checked={checked.entertainment}
             onClick={onCheck}
             id="Entertainment"
             name="entertainment"
@@ -179,6 +260,10 @@ export const GroupEdit = (props) => {
           />
           <label htmlFor="health">Health</label>
           <Field
+            onChange={() => {
+              setChecked({ ...checked, health: !checked.health });
+            }}
+            checked={checked.health}
             onClick={onCheck}
             id="health"
             name="health"
@@ -188,6 +273,10 @@ export const GroupEdit = (props) => {
           />
           <label htmlFor="Education">Education</label>
           <Field
+            onChange={() => {
+              setChecked({ ...checked, education: !checked.education });
+            }}
+            checked={checked.education}
             onClick={onCheck}
             id="Education"
             name="education"
@@ -197,6 +286,10 @@ export const GroupEdit = (props) => {
           />
           <label htmlFor="Family">Family</label>
           <Field
+            onChange={() => {
+              setChecked({ ...checked, family: !checked.family });
+            }}
+            checked={checked.family}
             onClick={onCheck}
             id="Family"
             name="family"
@@ -215,6 +308,7 @@ export const GroupEdit = (props) => {
           <FormSpy subscription={{ submitSucceeded: true, values: true }}>
             {({ submitSucceeded }) => {
               if (submitSucceeded) {
+                history.push(`/groups/${groupData.id}/home`);
                 return <Link to="/" />;
               }
               return <div></div>;

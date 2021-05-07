@@ -15,28 +15,27 @@ class GroupApi {
   joinGroup(groupId) {
     return Api.post(`/groups/${groupId}`);
   }
-  unjoinGroup(groupId){
-    return Api.delete(`/groups/${groupId}/user`)
+  unjoinGroup(groupId) {
+    return Api.delete(`/groups/${groupId}/user`);
   }
 
-  joinTopic(groupId, topicId){
-    return Api.post(`/groups/${groupId}/topics/${topicId}`)
+  joinTopic(groupId, topicId) {
+    return Api.post(`/groups/${groupId}/topics/${topicId}`);
   }
-  unjoinTopic(groupId,topicId){
-    return Api.delete(`/groups/${groupId}/topics/${topicId}`)
-  }
-
-  updateGroup(body){
-    return Api.put("/groups", body)
-  }
-  deleteGroup(groupId){
-    return Api.delete(`/groups/${groupId}`)
+  unjoinTopic(groupId, topicId) {
+    return Api.delete(`/groups/${groupId}/topics/${topicId}`);
   }
 
-  checkGroupTitle(name){
-    return Api.get(`/groups/title/${name}`)
+  updateGroup(groupId, body) {
+    return Api.put("/groups/" + groupId, body);
+  }
+  deleteGroup(groupId) {
+    return Api.delete(`/groups/${groupId}`);
   }
 
+  checkGroupTitle(name) {
+    return Api.get(`/groups/title/${name}`);
+  }
 }
 
 export default new GroupApi();
