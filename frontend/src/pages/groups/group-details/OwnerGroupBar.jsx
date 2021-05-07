@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // Project files
 import { useRecoilValue } from "recoil";
@@ -6,12 +5,16 @@ import { userDataState } from "../../../state/userDataState";
 
 export const OwnerGroupsBar = () => {
 	// State
+
 	const owner = useRecoilValue(userDataState)
+
 
 	// Constants
 
 	// Components
+
 	const list = (owner.groupsCreated) ? owner.groupsCreated.map((group) => {
+
 		return (
       <Link to={`/groups/${group.id}/home`}>
         <div>
@@ -20,7 +23,7 @@ export const OwnerGroupsBar = () => {
               <div className="listItemContent">
                 <div className="sidebarItemText">
                   <h2>{group.title}</h2>
-                  {/* <p>{group.description}</p> */}
+                 
                 </div>
               </div>
             </li>

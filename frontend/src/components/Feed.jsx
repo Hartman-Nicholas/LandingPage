@@ -1,44 +1,40 @@
-// TODO: remove this temporary component when BE fixes feed api
+//NPM packages
+import {useState, useEffect} from 'react'
+
+//Project files
+import UserApi from '../api/UserApi'
+import PostsApi from '../api/PostsApi'
+import {PostCard} from '../components/post/postCard'
+
 export default function Feed() {
+const [userFeed, setUserFeed] = useState([])
+const [flag, setFlag] = useState(false)
+
+useEffect(() => {
+  const fetchUserFeed = async()=> {
+    await UserApi.userFeed().then(({data}) => setUserFeed(data))
+  }
+  fetchUserFeed()
+}, [flag])
+
+const deletePost = async (postId) => {
+  try {
+    await PostsApi.deletePost(postId).then(()=>setFlag(true));
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+let stream =
+(userFeed === undefined || userFeed.length) === 0
+  ? "Join a new group to see some feed"
+  : userFeed?.map(feed => (
+    <PostCard key={feed.id} data={feed} handleDelete={deletePost} />
+  ))
     return (
       <div className="center">
         <div className="centerWrapper">
-          HomeFeed Page
-{/* Current: a sample div with posts for showcase
-TODO: render posts taking from post component.  */}
-          <div>
-            <div className="item">
-              <div className="itemWrapper">
-                <div className="itemTop">
-                  <div className="itemTopLeft">
-                    <img
-                      src={
-                        require("../assets/CITY-STO-1.jpeg").default
-                      }
-                      alt=""
-                      className="itemProfileImg"
-                    />
-                    <span className="itemUserName"> Anna</span>
-                    <span className="itemDate">5 minutes ago</span>
-                  </div>
-                  <div className="itemTopRight">
-                  </div>
-                </div>
-                <div className="itemCenter">
-                  <span className="itemText">Hey! It is my first post :)</span>
-                  <img
-                    className="itemImg"
-                    src={require("../assets/CITY-STO-1.jpeg").default}
-                  />
-                </div>
-                <div className="itemBottom">
-                  <div className="itemBottomRight">
-                    <span className="itemCommentText">10 comments</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      {stream}
         </div>
       </div>
     );
