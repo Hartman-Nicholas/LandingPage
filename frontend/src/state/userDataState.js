@@ -11,13 +11,13 @@ export const userDataState = atom({
 
 export const groupDataState = atom({
   key: "groupData",
-  default: {},
+  default: [],
   // effects_UNSTABLE: [persistAtom],
 });
 
 export const postDataState = atom({
   key: "postData",
-  default: {},
+  default: [],
   // effects_UNSTABLE: [persistAtom],
 });
 
