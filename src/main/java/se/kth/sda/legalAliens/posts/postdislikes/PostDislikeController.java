@@ -24,6 +24,7 @@ public class PostDislikeController {
     PostDislikeRepository postDislikeRepository;
     UserService userService;
     GroupRepository groupRepository;
+    boolean hasDisliked = false;
 
     @Autowired
     public PostDislikeController(PostRepository postRepository, PostDislikeRepository postDislikeRepository, UserService userService, GroupRepository groupRepository) {
@@ -47,9 +48,12 @@ public class PostDislikeController {
         Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        dislike.setPostDislikeOwner(user);
-        dislike.setDislikedPost(post);
-        postDislikeRepository.save(dislike);
+        if (!hasDisliked){
+            dislike.setPostDislikeOwner(user);
+            dislike.setDislikedPost(post);
+            postDislikeRepository.save(dislike);
+            hasDisliked = true;
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(dislike);
     }
 

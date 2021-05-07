@@ -22,6 +22,7 @@ public class CommentDislikeController {
     UserService userService;
     PostRepository postRepository;
     CommentDislikeRepository commentDislikeRepository;
+    boolean hasDisliked = false;
 
     @Autowired
     public CommentDislikeController(CommentRepository commentRepository, UserService userService, PostRepository postRepository, CommentDislikeRepository commentDislikeRepository) {
@@ -45,9 +46,12 @@ public class CommentDislikeController {
         Comment comment = commentRepository.findById(commentId).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        dislike.setCommentDislikeOwner(user);
-        dislike.setDislikedComment(comment);
-        commentDislikeRepository.save(dislike);
+        if (!hasDisliked) {
+            dislike.setCommentDislikeOwner(user);
+            dislike.setDislikedComment(comment);
+            commentDislikeRepository.save(dislike);
+            hasDisliked = true;
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(dislike);
     }
 
