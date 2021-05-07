@@ -5,19 +5,19 @@ import { atom } from "recoil";
 
 export const userDataState = atom({
   key: "userData",
-  default: [],
+  default: {},
   // effects_UNSTABLE: [persistAtom],
 });
 
 export const groupDataState = atom({
   key: "groupData",
-  default: [],
+  default: {},
   // effects_UNSTABLE: [persistAtom],
 });
 
 export const postDataState = atom({
   key: "postData",
-  default: [],
+  default: {},
   // effects_UNSTABLE: [persistAtom],
 });
 
