@@ -12,9 +12,15 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
 import se.kth.sda.legalAliens.comments.CommentLike.CommentLike;
 import se.kth.sda.legalAliens.posts.Post;
 import se.kth.sda.legalAliens.posts.postlike.PostLike;
+
+import se.kth.sda.legalAliens.comments.commentdislikes.CommentDislike;
+
+import se.kth.sda.legalAliens.posts.postdislikes.PostDislike;
+
 import se.kth.sda.legalAliens.user.User;
 
 @Entity
@@ -42,9 +48,15 @@ public class Comment {
     @NotNull
     private User userCommentOwner;
 
+
     @OneToMany(mappedBy = "likedComment")
     @OnDelete(action= OnDeleteAction.CASCADE)
     private List<CommentLike> commentLikes;
+
+    @OneToMany(mappedBy = "dislikedComment")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<CommentDislike> commentDislikes;
+
 
     @PrePersist
     protected void onCreate() {
@@ -111,11 +123,20 @@ public class Comment {
         this.updated = updated;
     }
 
+
     public List<CommentLike> getCommentLikes() {
         return commentLikes;
     }
 
     public void setCommentLikes(List<CommentLike> commentLikes) {
         this.commentLikes = commentLikes;
+
+    public List<CommentDislike> getCommentDislikes() {
+        return commentDislikes;
+    }
+
+    public void setCommentDislikes(List<CommentDislike> commentDislikes) {
+        this.commentDislikes = commentDislikes;
+
     }
 }

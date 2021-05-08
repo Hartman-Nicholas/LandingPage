@@ -53,9 +53,9 @@ public class PostController {
     @PostMapping("/{groupId}")
     public ResponseEntity<Post> createGroupPost(@PathVariable Long groupId, @RequestBody Post post,
             Principal principal) {
+        Group group = groupRepository.findById(groupId).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        Group group = groupRepository.findById(groupId).orElseThrow(ResourceNotFoundException::new);
         post.setPostOwner(user);
         post.setGroupOwner(group);
         postRepository.save(post);

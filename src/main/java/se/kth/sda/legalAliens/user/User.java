@@ -17,7 +17,10 @@ import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import se.kth.sda.legalAliens.posts.postdislikes.PostDislike;
 import se.kth.sda.legalAliens.posts.postlike.PostLike;
+
 
 @Entity
 @Table(name = "account")
@@ -52,8 +55,13 @@ public class User {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Post> posts;
 
+
+    @OneToMany(mappedBy = "postDislikeOwner")
+    private List<PostDislike> postDislike;
+
     @OneToMany(mappedBy = "postLikedOwner")
     private List<PostLike> postLikes;
+
 
     @OneToMany(mappedBy = "groupOwner")
     @OnDelete(action = OnDeleteAction.CASCADE)

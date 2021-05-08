@@ -57,6 +57,7 @@ public class UserController {
         return ResponseEntity.ok(updateUserData);
     }
 
+
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(Principal principal) {
@@ -64,6 +65,7 @@ public class UserController {
         User user = userService.findUserByEmail(userName);
         userRepository.delete(user);
     }
+
 
 
 }

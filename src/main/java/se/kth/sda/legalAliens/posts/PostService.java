@@ -27,13 +27,12 @@ public class PostService {
         Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        // Security measure to ensure a logged in User doesnt access the update Route
+        // Security measure to ensure a logged in User doesn't access the update Route
         // and update someone else's post.
         if (!userName.equals(post.getPostOwner().getEmail())) {
             throw new ResourceNotFoundException();
         }
-
-        post.setBody(updatedPost.getBody());
+        post.setUpdatePostValues(updatedPost);
         post.setPostOwner(post.getPostOwner());
         post.setGroupOwner(post.getGroupOwner());
         post.setId(id);
@@ -47,12 +46,15 @@ public class PostService {
     public void deletePost(Long id, Principal principal) {
         Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
-        // Security measure to ensure a logged in User doesnt access the update Route
-        // and update someone else's post.
-        if (!userName.equals(post.getPostOwner().getEmail())) {
+        // Security measure to ensure a logged in User doesn't access the delete Route
+        // and delete someone else's post.
+
+        if (userName.equals(post.getGroupOwner().getGroupOwner().getEmail())) {
+            postRepository.delete(post);
+        } else if (userName.equals(post.getPostOwner().getEmail())) {
+            postRepository.delete(post);
+        } else if (!userName.equals(post.getPostOwner().getEmail())) {
             throw new ResourceNotFoundException();
         }
-        postRepository.delete(post);
-
     }
 }
