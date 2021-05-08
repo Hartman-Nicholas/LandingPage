@@ -1,78 +1,81 @@
-package se.kth.sda.legalAliens.posts.postlike;
+package se.kth.sda.legalAliens.comments.CommentLike;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sun.istack.NotNull;
-import se.kth.sda.legalAliens.posts.Post;
+import se.kth.sda.legalAliens.comments.Comment;
 import se.kth.sda.legalAliens.user.User;
 
 import javax.persistence.*;
 
 @Entity
-public class PostLike {
-
-
+public class CommentLike {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JoinColumn(nullable = false)
-    private String postLike;
+    private String commentLike;
 
     @ManyToOne
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(nullable = false)
     @NotNull
-    private Post likedPost;
+    private Comment likedComment;
 
     @ManyToOne
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "name")
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(nullable = false)
     @NotNull
-    private User postLikedOwner;
+    private User commentLikedOwner;
 
-    public PostLike() {
+    public CommentLike() {
     }
 
-    public PostLike(String postLike) {
-        this.postLike = postLike;
-    }
-
-
-    public String getPostLike() {
-        return postLike;
-    }
-
-    public void setPostLike(String postLike) {
-        this.postLike = postLike;
-
+    public CommentLike(String commentLike) {
+        this.commentLike = commentLike;
     }
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public User getPostLikedOwner () {
-        return postLikedOwner;
+
+
+    public String getCommentLike() {
+        return commentLike; }
+
+    public void setCommentLike(String commentLike) {
+        this.commentLike = commentLike;
+
     }
 
-    public void setPostLikedOwner(User postLikedOwner) {
-        this.postLikedOwner = postLikedOwner;
+    public Comment getLikedComment() {
+
+        return likedComment;
     }
 
-    public Post getLikedPost() {
-        return likedPost;
+    public void setLikedComment(Comment likedComment) {
+
+        this.likedComment = likedComment;
     }
 
-    public void setLikedPost(Post likedPost) {
-        this.likedPost = likedPost;
+    public User getCommentLikedOwner () {
+        return commentLikedOwner;
     }
+
+    public void setCommentLikedOwner(User commentLikedOwner) {
+
+        this.commentLikedOwner = commentLikedOwner;
+    }
+
+
 
 }
