@@ -16,6 +16,7 @@ const composeValidators = (...validators) => (value) =>
 const focusOnError = createDecorator();
 
 export const GroupForm = () => {
+
   //   State
 
   const [topicArray, setTopicArray] = useState([]);
@@ -75,6 +76,7 @@ export const GroupForm = () => {
 
   return (
     <div className="gridRight" style={{ display: "flex" }}>
+
       <Form
         onSubmit={onSubmit}
         decorators={[focusOnError]}
@@ -98,11 +100,13 @@ export const GroupForm = () => {
           >
             <h2>Create Group</h2>
             <Field
+
               name="title"
               placeholder="Group Name"
               validate={composeValidators(required, groupNameExists)}
             >
               {({ input, meta, placeholder }) => (
+
                 <div>
                   <input {...input} placeholder={placeholder} />
                   {meta.error && meta.touched && (
@@ -112,11 +116,13 @@ export const GroupForm = () => {
               )}
             </Field>
             <Field
+
               name="description"
               placeholder="Group Description"
               validate={composeValidators(required)}
             >
               {({ input, meta, placeholder }) => (
+
                 <div>
                   <textarea {...input} placeholder={placeholder} />
                   {meta.error && meta.touched && (
@@ -125,9 +131,11 @@ export const GroupForm = () => {
                 </div>
               )}
             </Field>
+
             <Field name="rules" placeholder="Group Rules">
               {({ input, meta, placeholder }) => (
                 <div>
+
                   <textarea
                     {...input}
                     placeholder={placeholder}
@@ -139,6 +147,7 @@ export const GroupForm = () => {
                 </div>
               )}
             </Field>
+
             <h2>Set Topics</h2>
             <div className="topicsCheckBox">
               <div className="topicsCheckBox__wrapper">
@@ -236,8 +245,16 @@ export const GroupForm = () => {
                 className="groupForm--avatar"
                 src={imageUrl}
                 alt="User Avatar"
+style={{
+                     width: "100%",
+                     maxHeight: "500px",
+                     borderRadius: "8px",
+                     objectFit: "contain",
+                   }}
+
               />
             </div>
+
             <input
               className="btn"
               value="Create"
@@ -257,6 +274,7 @@ export const GroupForm = () => {
           </form>
         )}
       </Form>
+
     </div>
   );
 };
