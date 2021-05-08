@@ -29,7 +29,15 @@ export const PostCard = ({
     const likeStatus = async () => {
       await PostsApi.checkLikePost(id).then(({ data }) => setLikeToggler(data));
     };
+
+    const dislikeStatus = async () => {
+      await PostsApi.checkDislikePost(id).then(({ data }) =>
+        setDislikeToggler(data)
+      );
+    };
+
     likeStatus();
+    dislikeStatus();
   }, [comments, id]);
 
   console.log(likeToggler);
@@ -55,6 +63,10 @@ export const PostCard = ({
     } else {
       likePost();
       setLikeToggler(true);
+      if (dislikeToggler) {
+        deleteDislikePost();
+        setDislikeToggler(false);
+      }
     }
   };
 
@@ -69,6 +81,38 @@ export const PostCard = ({
   const deleteLikePost = async () => {
     try {
       await PostsApi.deletelikePost(likeToggler.id);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleDislike = () => {
+    if (dislikeToggler) {
+      deleteDislikePost();
+      setDislikeToggler(false);
+    } else {
+      dislikePost();
+      setDislikeToggler(true);
+      if (likeToggler) {
+        deleteLikePost();
+        setLikeToggler(false);
+      }
+    }
+  };
+
+  const dislikePost = async () => {
+    try {
+      await PostsApi.dislikePost(id).then(({ data }) =>
+        setDislikeToggler(data)
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const deleteDislikePost = async () => {
+    try {
+      await PostsApi.deleteDislikePost(dislikeToggler.id);
     } catch (e) {
       console.error(e);
     }
@@ -107,13 +151,25 @@ export const PostCard = ({
           <div>
             Created: <ReactTimeAgo date={new Date(created)} locale="en-US" />
           </div>
-          <button
-            className={likeToggler ? "postLike" : ""}
-            onClick={handleLike}
-          >
-            Like
-          </button>
-          <button>DisLike</button>
+          {likeToggler ? (
+            <div>
+              <i onClick={handleLike} className="fas fa-thumbs-up"></i>
+            </div>
+          ) : (
+            <div>
+              <i onClick={handleLike} className="far fa-thumbs-up"></i>
+            </div>
+          )}
+
+          {dislikeToggler ? (
+            <div>
+              <i onClick={handleDislike} className="fas fa-thumbs-down"></i>
+            </div>
+          ) : (
+            <div>
+              <i onClick={handleDislike} className="far fa-thumbs-down"></i>
+            </div>
+          )}
 
           {postOwner === userInSession && (
             <>
@@ -121,11 +177,19 @@ export const PostCard = ({
             </>
           )}
           {groupOwner | (postOwner === userInSession) && (
-            <button onClick={() => handleDelete(id)}>Delete</button>
+            <i
+              onClick={() => handleDelete(id)}
+              className="fas fa-trash-alt"
+            ></i>
           )}
-          <button onClick={() => setCommentToggler(!commentToggler)}>
-            show comments
-          </button>
+
+          <div>
+            <i
+              onClick={() => setCommentToggler(!commentToggler)}
+              className="fas fa-comments"
+            ></i>
+          </div>
+
           {commentToggler && (
             <>
               {commentList}

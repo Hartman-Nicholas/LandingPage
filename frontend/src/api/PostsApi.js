@@ -32,6 +32,18 @@ class PostsApi {
   deletelikePost(likeId) {
     return Api.delete(`/posts/likes/${likeId}`);
   }
+
+  checkDislikePost(postId) {
+    return Api.get(`/posts/${postId}/dislikes/check`);
+  }
+
+  dislikePost(postId) {
+    return Api.post(`/posts/${postId}/dislikes`, { postDislike: "dislike" });
+  }
+
+  deleteDislikePost(dislikeId) {
+    return Api.delete(`/posts/dislikes/${dislikeId}`);
+  }
 }
 
 export default new PostsApi();
