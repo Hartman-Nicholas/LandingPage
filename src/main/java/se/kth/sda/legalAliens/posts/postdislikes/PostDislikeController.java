@@ -46,6 +46,18 @@ public class PostDislikeController {
         return ResponseEntity.ok(postDislikes);
     }
 
+    @GetMapping("/{postId}/dislikes/check")
+    public ResponseEntity<PostDislike> checkIfDisLiked(@PathVariable Long postId, Principal principal) {
+        Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
+        String userName = principal.getName();
+        User user = userService.findUserByEmail(userName);
+        if(postDislikeServices.checkDislike(post, user) == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(postDislikeServices.checkDislike(post, user));
+        } else {
+            return ResponseEntity.ok(postDislikeServices.checkDislike(post, user));
+        }
+    }
+
     // Create dislike on a given post
     @PostMapping("/{postId}/dislikes")
     public ResponseEntity<PostDislike> createPostDislike(@PathVariable Long postId, @RequestBody PostDislike dislike, Principal principal) {
@@ -53,7 +65,7 @@ public class PostDislikeController {
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
 
-        if(!postDislikeServices.checkDislike(post, user)) {
+        if(postDislikeServices.checkDislike(post, user)==null) {
             dislike.setPostDislikeOwner(user);
             dislike.setDislikedPost(post);
             postDislikeRepository.save(dislike);
