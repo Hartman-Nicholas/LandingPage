@@ -9,7 +9,9 @@ import se.kth.sda.legalAliens.comments.Comment;
 import se.kth.sda.legalAliens.comments.CommentRepository;
 import se.kth.sda.legalAliens.exception.NoDuplicateException;
 import se.kth.sda.legalAliens.exception.ResourceNotFoundException;
+import se.kth.sda.legalAliens.posts.Post;
 import se.kth.sda.legalAliens.posts.PostRepository;
+import se.kth.sda.legalAliens.posts.postlike.PostLike;
 import se.kth.sda.legalAliens.user.User;
 import se.kth.sda.legalAliens.user.UserService;
 
@@ -36,13 +38,27 @@ public class CommentLikeController {
         this.postRepository = postRepository;
     }
 
-
     // Return likes on given comment
     @GetMapping("/{commentId}/likes")
     public ResponseEntity<List<CommentLike>> getCommentLikes(@PathVariable Long commentId) {
         Comment comment = commentRepository.findById(commentId).orElseThrow(ResourceNotFoundException::new);
         List<CommentLike> commentLikes = comment.getCommentLikes();
         return ResponseEntity.ok(commentLikes);
+    }
+
+    @GetMapping("/{commentId}/likes/check")
+    public ResponseEntity<CommentLike> checkIfLiked(@PathVariable Long commentId, Principal principal) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(ResourceNotFoundException::new);
+        String userName = principal.getName();
+        User user = userService.findUserByEmail(userName);
+
+        CommentLike likeCheck = commentLikeService.checkLike(comment, user);
+
+        if(likeCheck == null) {
+            throw new ResourceNotFoundException();
+        } else {
+            return ResponseEntity.ok(likeCheck);
+        }
     }
 
     // Create like on given comment
@@ -52,7 +68,7 @@ public class CommentLikeController {
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
 
-        if(!commentLikeService.checkLike(comment,user)) {
+        if(commentLikeService.checkLike(comment,user)==null) {
             like.setLikedComment(comment);
             like.setCommentLikedOwner(user);
             commentLikeRepository.save(like);

@@ -8,9 +8,12 @@ import se.kth.sda.legalAliens.user.User;
 @Service
 public class CommentDislikeService {
 
-    public boolean checkDislike(Comment comment, User user) {
-        return comment.getCommentDislikes().stream().anyMatch(commentDislike -> commentDislike.getCommentDislikeOwner().equals(user));
-
+    public CommentDislike checkDislike(Comment comment, User user) {
+        if (comment.getCommentDislikes().stream().anyMatch(commentDislike -> commentDislike.getCommentDislikeOwner().equals(user))) {
+            return comment.getCommentDislikes().stream().filter(commentDislike -> commentDislike.getCommentDislikeOwner().equals(user)).findFirst().get();
+        } else {
+            return null;
+        }
     }
 
 }
