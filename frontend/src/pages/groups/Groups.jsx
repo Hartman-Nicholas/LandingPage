@@ -87,72 +87,74 @@ export const Groups = () => {
 	// Components
 
 	return (
-		<div className="gridRight" style={{ display: "flex" }}>
-			<section id="non-sidebar">
-				<h1>All Groups</h1>
-				<input name="title" onChange={handleChange} />
-				<label htmlFor="Sport"> Sport</label>
-				<input
-					onChange={(event) => handleChange(event)}
-					type="checkbox"
-					id="Sport"
-					name="Sport"
-				/>
-				<label htmlFor="Health"> Health</label>
-				<input
-					onChange={handleChange}
-					type="checkbox"
-					id="Health"
-					name="Health"
-				/>
-				<label htmlFor="Entertainment"> Entertainment</label>
-				<input
-					onChange={handleChange}
-					type="checkbox"
-					id="Entertainment"
-					name="Entertainment"
-				/>
-				<label htmlFor="Education"> Education</label>
-				<input
-					onChange={handleChange}
-					type="checkbox"
-					id="Education"
-					name="Education"
-				/>
-				<label htmlFor="Family"> Family</label>
-				<input
-					onChange={handleChange}
-					type="checkbox"
-					id="Family"
-					name="Family"
-				/>
-				<br />
-				{queryList.length > 0 || flag
-					? queryList.map((group) => (
-							<ul className="list">
-								<li className="listItem">
-									<GroupCard
-										key={group.id}
-										groupData={group}
-										joinGroup={(id) => addMember(id)}
-									/>
-								</li>
-							</ul>
-					  ))
-					: groupsList.map((group) => (
-							<ul className="list">
-								<li className="listItem">
-									<GroupCard
-										key={group.id}
-										groupData={group}
-										joinGroup={(id) => addMember(id)}
-									/>
-								</li>
-							</ul>
-					  ))}
-				<br />
-			</section>
-			{/* <OwnerGroupsBar /> */}
-		</div>
-	);
+    <div className="gridRight" style={{ display: "flex" }}>
+      <section id="non-sidebar">
+        <h1>All Groups</h1>
+        <input name="title" onChange={handleChange} />
+        <label htmlFor="Sport"> Sport</label>
+        <input
+          onChange={(event) => handleChange(event)}
+          type="checkbox"
+          id="Sport"
+          name="Sport"
+        />
+        <label htmlFor="Health"> Health</label>
+        <input
+          onChange={handleChange}
+          type="checkbox"
+          id="Health"
+          name="Health"
+        />
+        <label htmlFor="Entertainment"> Entertainment</label>
+        <input
+          onChange={handleChange}
+          type="checkbox"
+          id="Entertainment"
+          name="Entertainment"
+        />
+        <label htmlFor="Education"> Education</label>
+        <input
+          onChange={handleChange}
+          type="checkbox"
+          id="Education"
+          name="Education"
+        />
+        <label htmlFor="Family"> Family</label>
+        <input
+          onChange={handleChange}
+          type="checkbox"
+          id="Family"
+          name="Family"
+        />
+        <br />
+        <div className="group-grid">
+          {queryList.length > 0 || flag
+            ? queryList.map((group) => (
+                <ul className="list">
+                  <li className="listItem">
+                    <GroupCard
+                      key={group.id}
+                      groupData={group}
+                      joinGroup={(id) => addMember(id)}
+                    />
+                  </li>
+                </ul>
+              ))
+            : groupsList.map((group) => (
+                <ul className="list">
+                  <li className="listItem">
+                    <GroupCard
+                      key={group.id}
+                      groupData={group}
+                      joinGroup={(id) => addMember(id)}
+                    />
+                  </li>
+                </ul>
+              ))}
+        </div>
+
+        <br />
+      </section>
+    </div>
+  );
 };
