@@ -22,6 +22,7 @@ export const GroupForm = () => {
 
 	const [imageUrl, setImageUrl] = useState(
 		"https://res.cloudinary.com/dlvwrtpzq/image/upload/v1619987659/profilePhotos/placeholder_eo6jkp.png"
+
 	);
 
 	const history = useHistory();
@@ -74,158 +75,165 @@ export const GroupForm = () => {
 	// Components
 
 	return (
-		<div className="gridRight">
-			<Form
-				onSubmit={onSubmit}
-				decorators={[focusOnError]}
-				subscription={{
-					submitting: true,
-				}}
-			>
-				{({ handleSubmit, form, submitting, pristine }) => (
-					<form
-						onSubmit={(event) => {
-							const promise = handleSubmit(event);
-							if (promise === undefined) {
-							} else {
-								promise.then(() => {
-									form.reset();
-								});
-							}
+    <div className="gridRight" style={{ display: "flex" }}>
+      {/* <section className="non-sidebar"> */}
+      <Form
+        onSubmit={onSubmit}
+        decorators={[focusOnError]}
+        subscription={{
+          submitting: true,
+        }}
+      >
+        {({ handleSubmit, form, submitting, pristine }) => (
+          <form
+            onSubmit={(event) => {
+              const promise = handleSubmit(event);
+              if (promise === undefined) {
+              } else {
+                promise.then(() => {
+                  form.reset();
+                });
+              }
 
-							return promise;
-						}}
-					>
-						<h2>Create Group</h2>
-						<Field
-							className="input-field"
-							name="title"
-							placeholder="Group Name"
-							validate={composeValidators(required, groupNameExists)}
-						>
-							{({ input, meta, placeholder }) => (
-								<div
-									className={`field ${
-										meta.active ? "active input-field" : "input-field"
-									}`}
-								>
-									<i className="fas fa-user"></i>
-									<input {...input} placeholder={placeholder} />
-									{meta.error && meta.touched && (
-										<div className="input-field-error">{meta.error}</div>
-									)}
-								</div>
-							)}
-						</Field>
-						<Field
-							className="input-field"
-							name="description"
-							placeholder="Group Description"
-							validate={composeValidators(required)}
-						>
-							{({ input, meta, placeholder }) => (
-								<div
-									className={`field ${
-										meta.active ? "active input-field" : "input-field"
-									}`}
-								>
-									<i className="fas fa-envelope"></i>
-									<textarea {...input} placeholder={placeholder} />
-									{meta.error && meta.touched && (
-										<div className="input-field-error">{meta.error}</div>
-									)}
-								</div>
-							)}
-						</Field>
-						<Field
-							className="input-field"
-							name="rules"
-							placeholder="Group Rules"
-						>
-							{({ input, meta, placeholder }) => (
-								<div
-									className={`field ${
-										meta.active ? "active input-field" : "input-field"
-									}`}
-								>
-									<i className="fas fa-lock"></i>
-									<textarea
-										{...input}
-										placeholder={placeholder}
-										type="textarea"
-									/>
-									{meta.error && meta.touched && (
-										<div className="input-field-error">{meta.error}</div>
-									)}
-								</div>
-							)}
-						</Field>
-						<label htmlFor="sport">Sport</label>
-						<Field
-							onClick={onCheck}
-							id="sport"
-							name="sport"
-							component="input"
-							value="1"
-							type="checkbox"
-						/>
-						<label htmlFor="Entertainment">Entertainment</label>
-						<Field
-							onClick={onCheck}
-							id="Entertainment"
-							name="entertainment"
-							component="input"
-							type="checkbox"
-							value="2"
-						/>
-						<label htmlFor="health">Health</label>
-						<Field
-							onClick={onCheck}
-							id="health"
-							name="health"
-							component="input"
-							value="3"
-							type="checkbox"
-						/>
-						<label htmlFor="Education">Education</label>
-						<Field
-							onClick={onCheck}
-							id="Education"
-							name="education"
-							component="input"
-							value="4"
-							type="checkbox"
-						/>
-						<label htmlFor="Family">Family</label>
-						<Field
-							onClick={onCheck}
-							id="Family"
-							name="family"
-							component="input"
-							value="5"
-							type="checkbox"
-						/>
-						<ImageUploader setImageState={setImageUrl} />
-						<img src={imageUrl} alt="User Avatar" />
-						<input
-							className="btn"
-							value="Create"
-							type="submit"
-							disabled={pristine || submitting}
-						/>
-						<FormSpy subscription={{ submitSucceeded: true, values: true }}>
-							{({ submitSucceeded }) => {
-								if (submitSucceeded) {
-									history.push(`/groups/${group.id}/home`);
-									return <Link to="/" />;
-								}
-								return <div></div>;
-							}}
-						</FormSpy>
-						            
-					</form>
-				)}
-			</Form>
-		</div>
-	);
+              return promise;
+            }}
+          >
+            <h2>Create Group</h2>
+            <Field
+              className="input-field"
+              name="title"
+              placeholder="Group Name"
+              validate={composeValidators(required, groupNameExists)}
+            >
+              {({ input, meta, placeholder }) => (
+                <div
+                  className={`field ${
+                    meta.active ? "active input-field" : "input-field"
+                  }`}
+                >
+                  <i className="fas fa-user"></i>
+                  <input {...input} placeholder={placeholder} />
+                  {meta.error && meta.touched && (
+                    <div className="input-field-error">{meta.error}</div>
+                  )}
+                </div>
+              )}
+            </Field>
+            <Field
+              className="input-field"
+              name="description"
+              placeholder="Group Description"
+              validate={composeValidators(required)}
+            >
+              {({ input, meta, placeholder }) => (
+                <div
+                  className={`field ${
+                    meta.active ? "active input-field" : "input-field"
+                  }`}
+                >
+                  <i className="fas fa-envelope"></i>
+                  <textarea {...input} placeholder={placeholder} />
+                  {meta.error && meta.touched && (
+                    <div className="input-field-error">{meta.error}</div>
+                  )}
+                </div>
+              )}
+            </Field>
+            <Field
+              className="input-field"
+              name="rules"
+              placeholder="Group Rules"
+            >
+              {({ input, meta, placeholder }) => (
+                <div
+                  className={`field ${
+                    meta.active ? "active input-field" : "input-field"
+                  }`}
+                >
+                  <i className="fas fa-lock"></i>
+                  <textarea
+                    {...input}
+                    placeholder={placeholder}
+                    type="textarea"
+                  />
+                  {meta.error && meta.touched && (
+                    <div className="input-field-error">{meta.error}</div>
+                  )}
+                </div>
+              )}
+            </Field>
+            <label htmlFor="sport">Sport</label>
+            <Field
+              onClick={onCheck}
+              id="sport"
+              name="sport"
+              component="input"
+              value="1"
+              type="checkbox"
+            />
+            <label htmlFor="Entertainment">Entertainment</label>
+            <Field
+              onClick={onCheck}
+              id="Entertainment"
+              name="entertainment"
+              component="input"
+              type="checkbox"
+              value="2"
+            />
+            <label htmlFor="health">Health</label>
+            <Field
+              onClick={onCheck}
+              id="health"
+              name="health"
+              component="input"
+              value="3"
+              type="checkbox"
+            />
+            <label htmlFor="Education">Education</label>
+            <Field
+              onClick={onCheck}
+              id="Education"
+              name="education"
+              component="input"
+              value="4"
+              type="checkbox"
+            />
+            <label htmlFor="Family">Family</label>
+            <Field
+              onClick={onCheck}
+              id="Family"
+              name="family"
+              component="input"
+              value="5"
+              type="checkbox"
+            />
+            <ImageUploader setImageState={setImageUrl} />
+            <img src={imageUrl} alt="User Avatar" style={{
+                     width: "100%",
+                     maxHeight: "500px",
+                     borderRadius: "8px",
+                     objectFit: "contain",
+                   }}/>
+            <input
+              className="btn"
+              value="Create"
+              type="submit"
+              disabled={pristine || submitting}
+            />
+            <FormSpy subscription={{ submitSucceeded: true, values: true }}>
+              {({ submitSucceeded }) => {
+                if (submitSucceeded) {
+                  history.push(`/groups/${group.id}/home`);
+                  return <Link to="/" />;
+                }
+                return <div></div>;
+              }}
+            </FormSpy>
+                        
+          </form>
+        )}
+      </Form>
+      {/* </section> */}
+    </div>
+  );
 };
