@@ -61,14 +61,15 @@ These are the endpoints for the posts API that should exist:
 
 | HTTP Method | HTTP Path | Action |
 | ------------|-----------|--------|
-| `GET`    | `/groups`      | return all groups. |
+| `GET`    | `/groups`      | return all groups not created or joined by user. |
 | `GET`    | `/groups/{groupId}` | return a group by given groupId|
 | `POST`   | `/groups`      | Create a new group.|
 | `POST`   | `/groups/{groupId}`      | Join a group.|
 | `POST`   | `/groups/{groupId}/topics/{topicId}`      | Join a topic.|
 | `PUT`    | `/groups` | Update group tile, group description, group rules or group avatar only.|
-| `DELETE` | `/groups/{id}` | -To Be implemented |
-| `DELETE` | `/groups/{groupId}/topics/{topicId}` | Leave topic. |
+| `DELETE` | `/groups/{groupId}` | Delete a Group |
+| `DELETE` | `/groups/{groupId}/topics/{topicId}` | Remove topic from group. |
+| `DELETE` | `/groups/{groupId}/user` | Leave a group |
 
 ### Post Routes
 
@@ -112,3 +113,10 @@ These are the endpoints for the posts API that should exist:
 | `GET`    | `/topics/{postId}`      | return all topics. |
 | `POST`   | `/topics`      | create all generic topics.|
 
+### Post Like Routes
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/posts/{postId}/likes`      | Get all likes on a given post |
+| `POST`   | `/posts/{postId}/likes`      | Create a like on a given post |
+| `POST`   | `/posts/likes/{id}`      | Delete a like on a given post |

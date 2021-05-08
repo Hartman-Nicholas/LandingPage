@@ -3,24 +3,29 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 
 // Project files
-import { groupDataState } from "../../state/userDataState";
+import { userDataState } from "../../state/userDataState";
 import GroupApi from "../../api/GroupApi";
+import UserApi from "../../api/UserApi";
 
 export const GroupForm = () => {
 	// State
 	const [groupForm, setGroupForm] = useState({
 		title: "",
 		description: "",
+		avatar:
+			"https://res.cloudinary.com/dlvwrtpzq/image/upload/v1619987659/profilePhotos/placeholder_eo6jkp.png",
 	});
-	const [groupData, setGroupData] = useRecoilState(groupDataState);
+	const [userData, setUserData] = useRecoilState(userDataState);
 
 	// Constants
-	async function createGroup(groupData) {
+	async function createGroup(requestBody) {
 		try {
-			await GroupApi.createGroup(groupData);
-			GroupApi.getAllGroups()
-				.then(({ data }) => setGroupData(data))
-				.catch((err) => console.error(err));
+
+			await GroupApi.createGroup(requestBody);
+			// await GroupApi.getAllGroups().then(({ data }) => {
+			// 	setGroupData(data);
+			// });
+			await UserApi.getUser().then(({ data }) => setUserData(data));
 		} catch (e) {
 			console.error(e);
 		}
@@ -32,19 +37,17 @@ export const GroupForm = () => {
 			...groupForm,
 			[name]: value,
 		});
-
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
+		e.preventDefault();
 		createGroup(groupForm);
 		setGroupForm({
 			title: "",
 			description: "",
-		})
-		e.preventDefault();
+		});
 	};
 	// Components
-
 	return (
 		<form onSubmit={handleSubmit}>
 			<input

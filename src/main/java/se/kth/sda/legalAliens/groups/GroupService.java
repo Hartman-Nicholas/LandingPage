@@ -3,11 +3,9 @@ package se.kth.sda.legalAliens.groups;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import se.kth.sda.legalAliens.exception.ResourceNotFoundException;
 import se.kth.sda.legalAliens.user.User;
+import se.kth.sda.legalAliens.user.UserRepository;
 import se.kth.sda.legalAliens.user.UserService;
 
 import java.security.Principal;
@@ -16,19 +14,26 @@ import se.kth.sda.legalAliens.topics.Topic;
 import se.kth.sda.legalAliens.topics.TopicRepository;
 
 
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GroupService {
     GroupRepository groupRepository;
     UserService userService;
     TopicRepository topicRepository;
+    UserRepository userRepository;
 
-  @Autowired
-    public GroupService(GroupRepository groupRepository, UserService userService, TopicRepository topicRepository) {
+    @Autowired
+    public GroupService(GroupRepository groupRepository, UserService userService, TopicRepository topicRepository, UserRepository userRepository) {
         this.groupRepository = groupRepository;
         this.userService = userService;
         this.topicRepository = topicRepository;
+        this.userRepository = userRepository;
     }
+
 
     public Group updateGroup(Long id, Group updatedGroup, Principal principal) {
         Group group = groupRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
@@ -63,6 +68,32 @@ public class GroupService {
         groupRepository.save(group);
         topicRepository.save(topic);
         return ResponseEntity.ok(group);
+    }
+
+
+    public List<Group> filterGroupList(Principal principal) {
+        String userName = principal.getName();
+        User user = userService.findUserByEmail(userName);
+        List<Group> groups = groupRepository.findAll();
+
+        List<Group> filterGroups;
+        filterGroups = groups.stream()
+                .filter( group -> !(group.getGroupOwner().equals(user)))
+                .filter(group -> !(group.getMembers().contains(user)))
+                .collect(Collectors.toList());
+
+        return filterGroups;
+
+    }
+    public void deleteGroupMembership(Long groupId, Principal principal) {
+        Group group = groupRepository.findById(groupId).orElseThrow(ResourceNotFoundException::new);
+        String userName = principal.getName();
+        User user = userService.findUserByEmail(userName);
+        group.getMembers().remove(user);
+        user.getGroupsJoined().remove(group);
+        groupRepository.save(group);
+        userRepository.save(user);
+
     }
 
 }

@@ -9,7 +9,7 @@ export const CommentCard = ({ data }) => {
 	// Constants
 
 	// Components
-	console.log("commentCard", data);
+
 	return (
 		<div>
 			<h3>{data.body}</h3>

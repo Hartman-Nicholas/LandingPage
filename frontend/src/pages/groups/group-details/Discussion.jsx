@@ -1,36 +1,36 @@
 // NPM Packages
-import { useParams } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // Project files
 import { PostCard } from "../../../components/post/postCard";
 import { PostForm } from "../../../components/post/PostForm";
-import { postDataState } from "../../../state/userDataState";
 
-export const Discussion = ({ groupData }) => {
+export const Discussion = ({ data }) => {
 	// State
-	const [postData, setPostData] = useRecoilState(postDataState);
-	let { id } = useParams();
+	const [postData, setPostData] = useState(data.posts);
+
+	useEffect(() => {
+		setPostData(data.posts);
+	}, [data.posts]);
+
 	// Constants
 
-	// Components
-	useEffect(() => {
-		const abortFetch = new AbortController();
-		groupData.map((group) => setPostData(group.posts));
+	const handleSubmit = (newPost) => {
+		const list = postData.concat(newPost);
+		setPostData(list);
+	};
 
-		return () => {
-			abortFetch.abort();
-		};
-	}, []);
+	// Components
+	let postsList =
+		(postData === undefined || postData.length) === 0
+			? "No Available posts"
+			: postData?.map((post) => <PostCard key={post.id} data={post} />);
 
 	return (
 		<div>
 			<h1>Discussion</h1>
-			<PostForm groupId={id} />
-			{postData.map((post) => {
-				return <PostCard key={post.id} data={post} />;
-			})}
+			<PostForm groupId={data.id} onSubmit={handleSubmit} />
+			{postsList}
 		</div>
 	);
 };

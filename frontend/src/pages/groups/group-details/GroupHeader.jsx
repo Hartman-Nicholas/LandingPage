@@ -1,32 +1,33 @@
 // NPM Packages
-import {Link} from 'react-router-dom'
-import { About } from './About'
-// Project files
 
-export const GroupHeader = ({groupId}) => {
+// Project files
+import { About } from "./About";
+import { Discussion } from "./Discussion";
+import { Members } from "./Members";
+
+export const GroupHeader = ({
+	group,
+	handleSubmit,
+	aboutState,
+	discussionState,
+	membersState,
+}) => {
 	// State
 
-	// Constants
-
-	// Components
-
 	return (
-		<nav>
-			<div>
-				<ul>
-					<li>
-						<Link to={`/groups/${groupId}/about`}>About</Link>
-					</li>
-
-					<li>
-						<Link to={`/groups/${groupId}/discussion`}>Discussion</Link>
-					</li>
-
-					<li>
-						<Link to={`/groups/${groupId}/members`}>Members</Link>
-					</li>
-				</ul>
-			</div>
-		</nav>
+		<div>
+			<button name="about" onClick={handleSubmit}>
+				About{" "}
+			</button>
+			<button name="discussion" onClick={handleSubmit}>
+				Discussion{" "}
+			</button>
+			<button name="members" onClick={handleSubmit}>
+				Members{" "}
+			</button>
+			{aboutState && <About data={group} />}
+			{discussionState && <Discussion data={group} />}
+			{membersState && <Members data={group} />}
+		</div>
 	);
 };
