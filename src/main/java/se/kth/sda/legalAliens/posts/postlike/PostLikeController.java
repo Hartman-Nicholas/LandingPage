@@ -42,6 +42,15 @@ public class PostLikeController {
         return ResponseEntity.ok(postLikes);
     }
 
+    @GetMapping("/{postId}/likes/check")
+    @ResponseBody
+    public boolean checkIfLiked(@PathVariable Long postId, Principal principal) {
+        Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
+        String userName = principal.getName();
+        User user = userService.findUserByEmail(userName);
+        return postLikeService.checkLike(post, user);
+    }
+
     // Create like on given post
     @PostMapping("/{postId}/likes")
     public ResponseEntity<PostLike> createPostLike(@PathVariable Long postId, @RequestBody PostLike like, Principal principal) {
