@@ -20,7 +20,9 @@
   --red: #ff0033;
   --onyx: #2b272b;
 
-  --veryLight-grey: rgb(245, 241, 241);
+  /* --veryLight-grey: rgb(245, 241, 241); */
+  --veryLight-grey: rgba(248, 249, 250, 1); 
+
 
   --light-grey: #f0f0f0;
   --medium-grey: #acacac;

@@ -43,13 +43,28 @@ public class CommentDislikeController {
         return ResponseEntity.ok(commentDislikes);
     }
 
+    @GetMapping("/{commentId}/dislikes/check")
+    public ResponseEntity<CommentDislike> checkIfLiked(@PathVariable Long commentId, Principal principal) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(ResourceNotFoundException::new);
+        String userName = principal.getName();
+        User user = userService.findUserByEmail(userName);
+
+        CommentDislike dislikeCheck = commentDislikeService.checkDislike(comment, user);
+
+        if(dislikeCheck == null) {
+            throw new ResourceNotFoundException();
+        } else {
+            return ResponseEntity.ok(dislikeCheck);
+        }
+    }
+
     // Create dislike on a given comment
     @PostMapping("/{commentId}/dislikes")
     public ResponseEntity<CommentDislike> createCommentDislike(@PathVariable Long commentId, @RequestBody CommentDislike dislike, Principal principal) {
         Comment comment = commentRepository.findById(commentId).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        if(!commentDislikeService.checkDislike(comment,user)) {
+        if(commentDislikeService.checkDislike(comment,user)==null) {
             dislike.setCommentDislikeOwner(user);
            dislike.setDislikedComment(comment);
            commentDislikeRepository.save(dislike);
