@@ -52,7 +52,7 @@ public class PostDislikeController {
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
         if(postDislikeServices.checkDislike(post, user) == null) {
-            throw new ResourceNotFoundException();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(postDislikeServices.checkDislike(post, user));
         } else {
             return ResponseEntity.ok(postDislikeServices.checkDislike(post, user));
         }

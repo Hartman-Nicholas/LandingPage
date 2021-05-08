@@ -48,7 +48,8 @@ public class PostLikeController {
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
         if(postLikeService.checkLike(post, user) == null) {
-            throw new ResourceNotFoundException();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(postLikeService.checkLike(post,user));
+
         } else {
             return ResponseEntity.ok(postLikeService.checkLike(post, user));
         }
