@@ -130,6 +130,7 @@ public class Comment {
 
     public void setCommentLikes(List<CommentLike> commentLikes) {
         this.commentLikes = commentLikes;
+    }
 
     public List<CommentDislike> getCommentDislikes() {
         return commentDislikes;

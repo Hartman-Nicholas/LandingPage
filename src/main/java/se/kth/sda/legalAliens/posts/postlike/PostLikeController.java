@@ -1,10 +1,12 @@
 package se.kth.sda.legalAliens.posts.postlike;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import se.kth.sda.legalAliens.exception.NoDuplicateException;
 import se.kth.sda.legalAliens.exception.ResourceNotFoundException;
 import se.kth.sda.legalAliens.posts.Post;
 import se.kth.sda.legalAliens.posts.PostRepository;
@@ -21,14 +23,17 @@ public class PostLikeController {
     PostRepository postRepository;
     PostLikeRepository postLikeRepository;
     UserService userService;
+    PostLikeService postLikeService;
 
-    public PostLikeController(PostRepository postRepository, PostLikeRepository postLikeRepository, UserService userService) {
+    @Autowired
+    public PostLikeController(PostRepository postRepository, PostLikeRepository postLikeRepository, UserService userService, PostLikeService postLikeService) {
         this.postRepository = postRepository;
         this.postLikeRepository = postLikeRepository;
         this.userService = userService;
+        this.postLikeService = postLikeService;
     }
 
-    // Return likes on given post
+// Return likes on given post
 
     @GetMapping("/{postId}/likes")
     public ResponseEntity<List<PostLike>> getPostLikes(@PathVariable Long postId) {
@@ -43,9 +48,14 @@ public class PostLikeController {
         Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        like.setLikedPost(post);
-        like.setPostLikedOwner(user);
-        postLikeRepository.save(like);
+        if(!postLikeService.checkLike(post, user)) {
+            like.setLikedPost(post);
+            like.setPostLikedOwner(user);
+            postLikeRepository.save(like);
+        } else {
+            throw new NoDuplicateException();
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(like);
     }
 

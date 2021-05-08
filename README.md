@@ -108,6 +108,14 @@ These are the endpoints for the posts API that should exist:
 | `PUT`    | `/comments/{commentId}` | update the given comment.|
 | `DELETE` | `/comments/{commentId}` | delete the given comment.|
 
+### Comment Like Routes
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/comments/{commentId}/likes`      | Get all likes on a given Comment |
+| `POST`   | `/comments/{commentId}/likes`      | Create a like on a given comment |
+| `DELETE`   | `/comments/likes/{id}`      | Delete a like on a given comment |
+
 
 ### Comment Dislikes Routes
 
