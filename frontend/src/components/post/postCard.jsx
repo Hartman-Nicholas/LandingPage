@@ -26,6 +26,7 @@ export const PostCard = ({
 
   useEffect(() => {
     setCommentsData(comments ? comments : []);
+
     const likeStatus = async () => {
       await PostsApi.checkLikePost(id).then(({ data }) => setLikeToggler(data));
     };
