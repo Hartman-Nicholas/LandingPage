@@ -81,6 +81,24 @@ These are the endpoints for the posts API that should exist:
 | `PUT`    | `/posts/{postId}` | update the given post.|
 | `DELETE` | `/posts/{postId}` | delete the given post.|
 
+
+### Post Like Routes
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/posts/{postId}/likes`      | Get all likes on a given post |
+| `POST`   | `/posts/{postId}/likes`      | Create a like on a given post |
+| `DELETE`   | `/posts/likes/{id}`      | Delete a like on a given post |
+
+### Post Dislikes Routes
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/posts/{postId}/dislikes` | returns all dislikes on a post.|
+| `POST`   | `/posts/{postId}/dislikes`      | create a dislike on a given post|
+| `DELETE` | `/posts/dislikes/{Id}` | delete the given dislike.|
+
+
 ### Comment Routes
 
 | HTTP Method | HTTP Path | Action |
@@ -90,10 +108,30 @@ These are the endpoints for the posts API that should exist:
 | `PUT`    | `/comments/{commentId}` | update the given comment.|
 | `DELETE` | `/comments/{commentId}` | delete the given comment.|
 
-### Topic Routes
+### Comment Like Routes
 
 | HTTP Method | HTTP Path | Action |
 | ------------|-----------|--------|
-| `GET`    | `/topics/{postId}`      | return all topics. |
-| `POST`   | `/topics`      | create all generic topics.|
+| `GET`    | `/comments/{commentId}/likes`      | Get all likes on a given Comment |
+| `POST`   | `/comments/{commentId}/likes`      | Create a like on a given comment |
+| `DELETE`   | `/comments/likes/{id}`      | Delete a like on a given comment |
+
+
+### Comment Dislikes Routes
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/comments/{commentId}/dislikes`      | return all dislikes for a specific comment. |
+| `POST`   | `/comments/{commentId}/dislikes`      | create a dislike on the given comment.|
+| `DELETE` | `/comments//dislikes/{Id}` | delete the given dislike.|
+
+### Topic Routes
+
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/comments/{commentId}/likes`      | Get all likes on a given comment |
+| `POST`   | `/comments/{commentId}/likes`      | Create a like on a given comment |
+| `DELETE`   | `/comments/likes/{id}`      | Delete a like on a given comment |
+
 
