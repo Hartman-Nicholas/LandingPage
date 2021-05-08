@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import se.kth.sda.legalAliens.comments.Comment;
-import se.kth.sda.legalAliens.posts.Post;
 import se.kth.sda.legalAliens.user.User;
 
 import javax.persistence.*;
@@ -37,7 +36,7 @@ public class CommentDislike {
     public CommentDislike () {
     }
 
-    public CommentDislike(String commentDislike_) {
+    public CommentDislike(String commentDislike) {
         this.commentDislike = commentDislike;
     }
 
@@ -72,4 +71,6 @@ public class CommentDislike {
     public void setCommentDislikeOwner(User commentDislikeOwner) {
         this.commentDislikeOwner = commentDislikeOwner;
     }
+
+
 }

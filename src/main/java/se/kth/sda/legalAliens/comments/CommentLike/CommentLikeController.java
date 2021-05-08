@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import se.kth.sda.legalAliens.comments.Comment;
 import se.kth.sda.legalAliens.comments.CommentRepository;
+import se.kth.sda.legalAliens.exception.NoDuplicateException;
 import se.kth.sda.legalAliens.exception.ResourceNotFoundException;
 import se.kth.sda.legalAliens.posts.PostRepository;
 import se.kth.sda.legalAliens.user.User;
@@ -21,20 +22,22 @@ public class CommentLikeController {
 
     CommentRepository commentRepository;
     CommentLikeRepository commentLikeRepository;
+    CommentLikeService commentLikeService;
     UserService userService;
     PostRepository postRepository;
 
-    @Autowired
-    public CommentLikeController(CommentRepository commentRepository, CommentLikeRepository commentLikeRepository, PostRepository postRepository, UserService userService) {
 
+    @Autowired
+    public CommentLikeController(CommentRepository commentRepository, CommentLikeRepository commentLikeRepository, CommentLikeService commentLikeService, UserService userService, PostRepository postRepository) {
         this.commentRepository = commentRepository;
         this.commentLikeRepository = commentLikeRepository;
+        this.commentLikeService = commentLikeService;
         this.userService = userService;
         this.postRepository = postRepository;
     }
 
-    // Return likes on given comment
 
+    // Return likes on given comment
     @GetMapping("/{commentId}/likes")
     public ResponseEntity<List<CommentLike>> getCommentLikes(@PathVariable Long commentId) {
         Comment comment = commentRepository.findById(commentId).orElseThrow(ResourceNotFoundException::new);
@@ -48,9 +51,15 @@ public class CommentLikeController {
         Comment comment = commentRepository.findById(commentId).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        like.setLikedComment(comment);
-        like.setCommentLikedOwner(user);
-        commentLikeRepository.save(like);
+
+        if(!commentLikeService.checkLike(comment,user)) {
+            like.setLikedComment(comment);
+            like.setCommentLikedOwner(user);
+            commentLikeRepository.save(like);
+        } else {
+            throw new NoDuplicateException();
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(like);
     }
 
