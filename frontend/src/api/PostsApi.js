@@ -20,6 +20,14 @@ class PostsApi {
   deletePost(postId) {
     return Api.delete(`/posts/${postId}`);
   }
+
+  likePost(postId) {
+    return Api.post(`/posts/${postId}/likes`, "like");
+  }
+
+  deletelikePost(likeId) {
+    return Api.delete(`/posts/likes/${likeId}`);
+  }
 }
 
 export default new PostsApi();
