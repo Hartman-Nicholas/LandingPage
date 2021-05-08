@@ -1,0 +1,16 @@
+.groupForm {
+  text-align: center;
+}
+
+.groupForm--img {
+}
+
+.groupForm--avatar {
+  width: 200px;
+}
+
+.groupForm--upload {
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+}

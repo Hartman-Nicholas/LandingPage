@@ -14,6 +14,7 @@
 
 @import "./components/_button.css";
 @import "./components/_groupBar.css";
+@import "./components/_checkBox.css";
 
 /* layout */
 
@@ -28,3 +29,4 @@
 /* pages */
 
 @import "./pages/_authPage.css";
+@import "./pages/_groupForm.css";
