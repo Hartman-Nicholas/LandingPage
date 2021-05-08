@@ -21,8 +21,12 @@ class PostsApi {
     return Api.delete(`/posts/${postId}`);
   }
 
+  checkLikePost(postId) {
+    return Api.get(`/posts/${postId}/likes/check`);
+  }
+
   likePost(postId) {
-    return Api.post(`/posts/${postId}/likes`, "like");
+    return Api.post(`/posts/${postId}/likes`, { postLike: "like" });
   }
 
   deletelikePost(likeId) {
