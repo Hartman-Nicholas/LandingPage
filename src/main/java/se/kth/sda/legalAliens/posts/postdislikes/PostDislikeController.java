@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import se.kth.sda.legalAliens.exception.NoDuplicateException;
 import se.kth.sda.legalAliens.exception.ResourceNotFoundException;
 import se.kth.sda.legalAliens.groups.GroupRepository;
 import se.kth.sda.legalAliens.posts.Post;
@@ -24,15 +25,18 @@ public class PostDislikeController {
     PostDislikeRepository postDislikeRepository;
     UserService userService;
     GroupRepository groupRepository;
-    boolean hasDisliked = false;
+    PostDislikeService postDislikeServices;
 
     @Autowired
-    public PostDislikeController(PostRepository postRepository, PostDislikeRepository postDislikeRepository, UserService userService, GroupRepository groupRepository) {
+    public PostDislikeController(PostRepository postRepository, PostDislikeRepository postDislikeRepository, UserService userService, GroupRepository groupRepository, PostDislikeService postDislikeServices) {
         this.postRepository = postRepository;
         this.postDislikeRepository = postDislikeRepository;
         this.userService = userService;
         this.groupRepository = groupRepository;
+        this.postDislikeServices = postDislikeServices;
     }
+
+
 
     // Return dislikes by given post
     @GetMapping("/{postId}/dislikes")
@@ -48,16 +52,15 @@ public class PostDislikeController {
         Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        boolean hasDisliked= false;
-        List <PostDislike> thisPostDislikes = post.getPostDislikes();
-        for (int i=0; i < thisPostDislikes.size(); i++) {
-            if (post.getPostDislikes().get(0).getPostDislikeOwner().equals(user)) { hasDisliked = true;}
-        }
-        if(!hasDisliked) {
+
+        if(!postDislikeServices.checkDislike(post, user)) {
             dislike.setPostDislikeOwner(user);
             dislike.setDislikedPost(post);
             postDislikeRepository.save(dislike);
+        } else {
+            throw new NoDuplicateException();
         }
+
 
         return ResponseEntity.status(HttpStatus.CREATED).body(dislike);
     }

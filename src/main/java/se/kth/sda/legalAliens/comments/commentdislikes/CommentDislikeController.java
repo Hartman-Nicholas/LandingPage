@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import se.kth.sda.legalAliens.comments.Comment;
 import se.kth.sda.legalAliens.comments.CommentRepository;
+import se.kth.sda.legalAliens.exception.NoDuplicateException;
 import se.kth.sda.legalAliens.exception.ResourceNotFoundException;
 import se.kth.sda.legalAliens.posts.PostRepository;
 import se.kth.sda.legalAliens.user.User;
@@ -22,15 +23,17 @@ public class CommentDislikeController {
     UserService userService;
     PostRepository postRepository;
     CommentDislikeRepository commentDislikeRepository;
-
+    CommentDislikeService commentDislikeService;
 
     @Autowired
-    public CommentDislikeController(CommentRepository commentRepository, UserService userService, PostRepository postRepository, CommentDislikeRepository commentDislikeRepository) {
+    public CommentDislikeController(CommentRepository commentRepository, UserService userService, PostRepository postRepository, CommentDislikeRepository commentDislikeRepository, CommentDislikeService commentDislikeService) {
         this.commentRepository = commentRepository;
         this.userService = userService;
         this.postRepository = postRepository;
         this.commentDislikeRepository = commentDislikeRepository;
+        this.commentDislikeService = commentDislikeService;
     }
+
 
     // Return dislikes by given comment
     @GetMapping("/{commentId}/dislikes")
@@ -46,16 +49,15 @@ public class CommentDislikeController {
         Comment comment = commentRepository.findById(commentId).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        boolean hasDisliked =false;
-        List<CommentDislike> thisCommentDislikes = comment.getCommentDislikes();
-        for (int i=0; i < thisCommentDislikes.size(); i++) {
-           if (comment.getCommentDislikes().get(0).getCommentDislikeOwner().equals(user)) { hasDisliked = true;}
-        }
-        if(!hasDisliked){
+        if(!commentDislikeService.checkDislike(comment,user)) {
             dislike.setCommentDislikeOwner(user);
-            dislike.setDislikedComment(comment);
-            commentDislikeRepository.save(dislike);
+           dislike.setDislikedComment(comment);
+           commentDislikeRepository.save(dislike);
+
+        } else {
+            throw new NoDuplicateException();
         }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(dislike);
     }
 
