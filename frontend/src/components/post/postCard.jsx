@@ -22,6 +22,7 @@ export const PostCard = ({
   const { name: userInSession } = useRecoilValue(userDataState);
   const [commentToggler, setCommentToggler] = useState(false);
   const [likeToggler, setLikeToggler] = useState();
+  const [likeId, setLikeId] = useState();
 
   useEffect(() => {
     setCommentsData(comments ? comments : []);
@@ -59,7 +60,7 @@ export const PostCard = ({
 
   const likePost = async () => {
     try {
-      await PostsApi.likePost(id);
+      await PostsApi.likePost(id).then(({ data }) => setLikeId(data.id));
     } catch (e) {
       console.error(e);
     }
@@ -67,7 +68,7 @@ export const PostCard = ({
 
   const deleteLikePost = async () => {
     try {
-      await PostsApi.deletelikePost(id);
+      await PostsApi.deletelikePost(likeId);
     } catch (e) {
       console.error(e);
     }
