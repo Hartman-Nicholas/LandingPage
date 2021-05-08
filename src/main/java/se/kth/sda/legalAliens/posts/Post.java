@@ -23,6 +23,10 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import se.kth.sda.legalAliens.comments.Comment;
 import se.kth.sda.legalAliens.groups.Group;
+
+import se.kth.sda.legalAliens.posts.postdislikes.PostDislike;
+import se.kth.sda.legalAliens.posts.postlike.PostLike;
+
 import se.kth.sda.legalAliens.user.User;
 
 @Entity
@@ -32,6 +36,7 @@ public class Post {
     private Long id;
 
     private String body;
+    private String photo;
     private Date created;
     private Date updated;
 
@@ -53,6 +58,16 @@ public class Post {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Comment> comments;
 
+
+    @OneToMany(mappedBy = "dislikedPost")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<PostDislike> postDislikes;
+
+    @OneToMany(mappedBy = "likedPost")
+    @OnDelete(action=OnDeleteAction.CASCADE)
+    private List<PostLike> postLikes;
+
+
     @PrePersist
     protected void onCreate() {
         created = new Date();
@@ -66,14 +81,18 @@ public class Post {
     public Post() {
     }
 
-    public Post(String body) {
+    public Post(String body, String photo) {
         this.body = body;
+        this.photo = photo;
     }
 
     public Post setUpdatePostValues(Post updatedPost) {
-        // this is redundant code as the user can only update post body
+
         if (updatedPost.getBody() == null) {
             updatedPost.setBody(this.getBody());
+        }
+        if (updatedPost.getPhoto() == null) {
+            updatedPost.setBody(this.getPhoto());
         }
         // this persists the original date created so that it is not set to null
         updatedPost.onCreate();
@@ -138,4 +157,27 @@ public class Post {
         this.groupOwner = groupOwner;
     }
 
+    public List<PostDislike> getPostDislikes() {
+        return postDislikes;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public void setPostDislikes(List<PostDislike> postDislikes) {
+        this.postDislikes = postDislikes;
+    }
+
+    public List<PostLike> getPostLikes() {
+        return postLikes;
+    }
+
+    public void setPostLikes(List<PostLike> postLikes) {
+        this.postLikes = postLikes;
+    }
 }
