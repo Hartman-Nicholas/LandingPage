@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 // Project files
-
+import GroupApi from '../api/GroupApi'
 import { getUserData } from "../state/recoilFetch";
 import { userDataState } from "../state/userDataState";
 import { GroupCard } from "../pages/groups/GroupCard";
@@ -12,12 +12,22 @@ import { GroupCard } from "../pages/groups/GroupCard";
 export const GroupsBar = () => {
   // State
   const { data } = useRecoilValue(getUserData);
-  const [, setUserData] = useRecoilState(userDataState);
+  const [userData , setUserData] = useRecoilState(userDataState);
+
   // Constants
+	const unsubscribe =async (groupId) => {
+    try{
+      await GroupApi.unjoinGroup(groupId);
+      let filteredGroup= userData.groupsJoined.filter(group => group.id !== groupId)
+      setUserData({...userData, groupsJoined: filteredGroup});
+    }catch(e){
+      console.error(e)
+    }
+	};
 
   // Components
   const groupsJoined = data.groupsJoined.map((group) => {
-    return <GroupCard key={group.id} groupData={group} />;
+    return <GroupCard key={group.id} groupData={group} leaveGroup={(id)=> unsubscribe(id)} />;
   });
 
   const groupCreated = data.groupsCreated.map((group) => {
@@ -29,13 +39,23 @@ export const GroupsBar = () => {
   }, []);
 
   return (
-    <div>
-      <Link to="/groups/create">Create a group</Link>
-      <h2>Groups joined :</h2>
-      {groupsJoined}
-      <h2>Groups Created: </h2>
-      {groupCreated}
-      <Link to="/groups">Join a new group</Link>
-    </div>
+    <section id="sidebar">
+      <div className="sidebarWrapper">
+        <button className="sidebarButtonTop">
+          <Link to="/groups">Join a new group +</Link>
+        </button>
+        <h2>joined :</h2>
+        {groupsJoined}
+        <h2>created :</h2>
+        <ul className="list">
+          <li className="listItem">
+            <span>{groupCreated}</span>
+          </li>
+        </ul>
+        <button className="sidebarButtonBottom">
+          <Link to="/groups/create">+ Create a group</Link>
+        </button>
+      </div>
+    </section>
   );
 };

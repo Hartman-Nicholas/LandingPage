@@ -19,6 +19,7 @@ import { Groups } from "./pages/groups/Groups";
 import { GroupsBar } from "./components/GroupsBar";
 import { GroupHome } from "./pages/groups/GroupHome";
 import { GroupForm } from "./pages/groups/GroupForm";
+import { GroupEdit } from "./pages/groups/GroupEdit";
 
 export default function App() {
 
@@ -31,30 +32,31 @@ export default function App() {
 	// Components
 
 	return (
-		<div className="container">
-			<RecoilRoot>
-				<BrowserRouter>
-					<Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
+    <RecoilRoot>
+      <BrowserRouter>
+        <Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
+        <section id="grid">
+            {loggedIn && (
+              <ErrorBoundary FallbackComponent={ErrorMessage}>
+                <Suspense fallback={<div>loading...</div>}>
+                  <GroupsBar />
+                </Suspense>
+              </ErrorBoundary>
+            )}
+          <Switch>
+            {!loggedIn && <AuthPage />}
+            <Route path="/" exact component={Home} />
+            <Route path="/user" exact component={User} />
+            <Route path="/groups/create" exact component={GroupForm} />
+            <Route path="/groups" exact component={Groups} />
+            <Route path="/groups/:id/home" exact component={GroupHome} />
+            <Route path="/groups/:id/edit" exact component={GroupEdit} />
+        </Switch>
+        </section>
 
-					{loggedIn && (
-						<ErrorBoundary FallbackComponent={ErrorMessage}>
-							<Suspense fallback={<div>loading...</div>}>
-								<GroupsBar />
-							</Suspense>
-						</ErrorBoundary>
-					)}
-					<Switch>
-						{!loggedIn && <AuthPage />}
-						<Route path="/" exact component={Home} />
-						<Route path="/user" exact component={User} />
-						<Route path="/groups/create" exact component={GroupForm} />
-						<Route path="/groups" exact component={Groups} />
-						<Route path="/groups/:id/home" exact component={GroupHome} />
-					</Switch>
+        <Footer />
+      </BrowserRouter>
+    </RecoilRoot>
 
-					<Footer />
-				</BrowserRouter>
-			</RecoilRoot>
-		</div>
-	);
+  );
 }
