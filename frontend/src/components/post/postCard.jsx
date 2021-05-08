@@ -22,7 +22,7 @@ export const PostCard = ({
   const { name: userInSession } = useRecoilValue(userDataState);
   const [commentToggler, setCommentToggler] = useState(false);
   const [likeToggler, setLikeToggler] = useState();
-  const [likeId, setLikeId] = useState();
+  const [dislikeToggler, setDislikeToggler] = useState();
 
   useEffect(() => {
     setCommentsData(comments ? comments : []);
@@ -60,7 +60,7 @@ export const PostCard = ({
 
   const likePost = async () => {
     try {
-      await PostsApi.likePost(id).then(({ data }) => setLikeId(data.id));
+      await PostsApi.likePost(id).then(({ data }) => setLikeToggler(data));
     } catch (e) {
       console.error(e);
     }
@@ -68,7 +68,7 @@ export const PostCard = ({
 
   const deleteLikePost = async () => {
     try {
-      await PostsApi.deletelikePost(likeId);
+      await PostsApi.deletelikePost(likeToggler.id);
     } catch (e) {
       console.error(e);
     }
@@ -107,7 +107,12 @@ export const PostCard = ({
           <div>
             Created: <ReactTimeAgo date={new Date(created)} locale="en-US" />
           </div>
-          <button onClick={handleLike}>Like</button>
+          <button
+            className={likeToggler ? "postLike" : ""}
+            onClick={handleLike}
+          >
+            Like
+          </button>
           <button>DisLike</button>
 
           {postOwner === userInSession && (
