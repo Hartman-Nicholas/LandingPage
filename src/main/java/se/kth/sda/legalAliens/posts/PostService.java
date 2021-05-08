@@ -32,8 +32,7 @@ public class PostService {
         if (!userName.equals(post.getPostOwner().getEmail())) {
             throw new ResourceNotFoundException();
         }
-
-        post.setBody(updatedPost.getBody());
+        post.setUpdatePostValues(updatedPost);
         post.setPostOwner(post.getPostOwner());
         post.setGroupOwner(post.getGroupOwner());
         post.setId(id);
