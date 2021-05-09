@@ -103,39 +103,54 @@ export const GroupForm = () => {
               validate={composeValidators(required, groupNameExists)}
             >
               {({ input, meta, placeholder }) => (
-                <div>
-                  <input {...input} placeholder={placeholder} />
+                <div className="form--input">
+                  <input required {...input} placeholder={placeholder} />
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
                   {meta.error && meta.touched && (
-                    <div className="input-field-error">{meta.error}</div>
+                    <div className="error">{meta.error}</div>
                   )}
+                  <label>Group Name</label>
                 </div>
               )}
             </Field>
             <Field
-              name="description"
               placeholder="Group Description"
+              name="description"
               validate={composeValidators(required)}
             >
               {({ input, meta, placeholder }) => (
-                <div>
-                  <textarea {...input} placeholder={placeholder} />
+                <div className="form--input">
+                  <textarea
+                    required
+                    {...input}
+                    rows="5"
+                    placeholder={placeholder}
+                  />
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
                   {meta.error && meta.touched && (
-                    <div className="input-field-error">{meta.error}</div>
+                    <div className="error">{meta.error}</div>
                   )}
+                  <label>Group Description</label>
                 </div>
               )}
             </Field>
-            <Field name="rules" placeholder="Group Rules">
+            <Field placeholder="Group Rules" name="rules">
               {({ input, meta, placeholder }) => (
-                <div>
+                <div className="form--input">
                   <textarea
                     {...input}
-                    placeholder={placeholder}
                     type="textarea"
+                    rows="5"
+                    placeholder={placeholder}
                   />
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
                   {meta.error && meta.touched && (
-                    <div className="input-field-error">{meta.error}</div>
+                    <div className="error">{meta.error}</div>
                   )}
+                  <label>Group Rules</label>
                 </div>
               )}
             </Field>

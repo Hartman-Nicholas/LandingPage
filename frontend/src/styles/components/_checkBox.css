@@ -3,14 +3,13 @@
   margin-left: auto;
   margin-right: auto;
   padding: 0 16px;
-  max-width: 550px;
   font-size: 18px;
   font-weight: 600;
   line-height: 36px;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   row-gap: 1rem;
   column-gap: 3rem;
-  max-width: 1450px;
+  max-width: 100%;
 }
 
 .topicsCheckBox__wrapper {
