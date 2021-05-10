@@ -69,7 +69,7 @@ export const PostCard = ({
 
 	const handleLike = () => {
 		if (likeToggler) {
-			setLikesCount(postLikes?.length - 1);
+			setLikesCount(likesCount === postLikes.length? likesCount: likesCount - 1 );
 			deleteLikePost();
 			setLikeToggler(false);
 		} else {
@@ -77,8 +77,8 @@ export const PostCard = ({
 			setLikesCount(postLikes?.length + 1);
 			setLikeToggler(true);
 			if (dislikeToggler) {
-				setDislikeCount(postDislikes?.length - 1);
-				setLikesCount(postLikes?.length + 1);
+				setDislikeCount(dislikeCount - 1);
+				setLikesCount(likesCount + 1);
 				deleteDislikePost();
 				setDislikeToggler(false);
 			}
@@ -103,7 +103,7 @@ export const PostCard = ({
 
 	const handleDislike = () => {
 		if (dislikeToggler) {
-			setDislikeCount(postDislikes?.length - 1);
+			setDislikeCount(dislikeCount === postDislikes?.length? dislikeCount: dislikeCount - 1);
 			deleteDislikePost();
 			setDislikeToggler(false);
 		} else {
@@ -111,8 +111,8 @@ export const PostCard = ({
 			dislikePost();
 			setDislikeToggler(true);
 			if (likeToggler) {
-				setDislikeCount(postDislikes?.length - 1);
-				setLikesCount(postLikes?.length + 1);
+				setDislikeCount(dislikeCount + 1);
+				setLikesCount(likesCount - 1);
 				deleteLikePost();
 				setLikeToggler(false);
 			}
