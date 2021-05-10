@@ -23,6 +23,7 @@ import { GroupEdit } from "./pages/groups/GroupEdit";
 
 export default function App() {
 
+
 	// State
 	const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
 
@@ -43,6 +44,7 @@ export default function App() {
                 </Suspense>
               </ErrorBoundary>
             )}
+
           <Switch>
             {!loggedIn && <AuthPage />}
             <Route path="/" exact component={Home} />
@@ -50,13 +52,15 @@ export default function App() {
             <Route path="/groups/create" exact component={GroupForm} />
             <Route path="/groups" exact component={Groups} />
             <Route path="/groups/:id/home" exact component={GroupHome} />
+
             <Route path="/groups/:id/edit" exact component={GroupEdit} />
         </Switch>
         </section>
 
-        <Footer />
+        <Footer loggedIn={loggedIn} />
       </BrowserRouter>
     </RecoilRoot>
+
 
   );
 }
