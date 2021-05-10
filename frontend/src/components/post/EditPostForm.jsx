@@ -5,19 +5,18 @@ import { useState } from "react";
 import PostApi from "../../api/PostsApi";
 import {ImageUploader} from '../ImageUploader'
 
-export const EditPostForm = ({ data, onSubmit, postId, photo }) => {
+export const EditPostForm = ({ data, onSubmit, postId }) => {
 	// State
-	const [ imageUrl,setImageUrl] = useState(photo)
+	const [ imageUrl,setImageUrl] = useState(data.photo)
 	const [postForm, setPostForm] = useState({
-		body: data
+		body: data.body,
+		photo: data.photo
 	});
-console.log("dataEdit", postForm)
 	// Constants
 	async function postUpdate(id, requestBody) {
 		try {
-			console.log("req", requestBody)
-			await PostApi.updatePost(id, requestBody).then(({ data: { body } }) =>
-				onSubmit(body)
+			await PostApi.updatePost(id, requestBody).then(({ data: { body, photo } }) =>
+				onSubmit({body, photo})
 			);
 		} catch (e) {
 			console.error(e);
@@ -34,8 +33,7 @@ console.log("dataEdit", postForm)
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// postForm.photo = imageUrl
-		console.log("postF", postForm)
+		postForm.photo = imageUrl
 		postUpdate(postId, postForm);
 	};
 
@@ -54,7 +52,6 @@ console.log("dataEdit", postForm)
 			/>
 			<img src={imageUrl} alt="post"/>
 			  <ImageUploader setImageState={setImageUrl} />
-			<input name="photo" defaultValue="hi there"/>
 			<button type="submit">Save</button>
 		</form>
 	);
