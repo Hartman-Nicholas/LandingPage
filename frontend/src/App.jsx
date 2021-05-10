@@ -21,40 +21,39 @@ import { GroupHome } from "./pages/groups/GroupHome";
 import { GroupForm } from "./pages/groups/GroupForm";
 
 export default function App() {
+  // State
+  const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
 
-	// State
-	const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
+  // Constants
+  Auth.bindLoggedInStateSetter(setLoggedIn);
 
-	// Constants
-	Auth.bindLoggedInStateSetter(setLoggedIn);
+  // Components
 
-	// Components
+  return (
+    <div className="container">
+      <RecoilRoot>
+        <BrowserRouter>
+          <Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
 
-	return (
-		<div className="container">
-			<RecoilRoot>
-				<BrowserRouter>
-					<Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
+          {loggedIn && (
+            <ErrorBoundary FallbackComponent={ErrorMessage}>
+              <Suspense fallback={<div>loading...</div>}>
+                <GroupsBar />
+              </Suspense>
+            </ErrorBoundary>
+          )}
+          <Switch>
+            {!loggedIn && <AuthPage />}
+            <Route path="/" exact component={Home} />
+            <Route path="/user" exact component={User} />
+            <Route path="/groups/create" exact component={GroupForm} />
+            <Route path="/groups" exact component={Groups} />
+            <Route path="/groups/:id/home" exact component={GroupHome} />
+          </Switch>
 
-					{loggedIn && (
-						<ErrorBoundary FallbackComponent={ErrorMessage}>
-							<Suspense fallback={<div>loading...</div>}>
-								<GroupsBar />
-							</Suspense>
-						</ErrorBoundary>
-					)}
-					<Switch>
-						{!loggedIn && <AuthPage />}
-						<Route path="/" exact component={Home} />
-						<Route path="/user" exact component={User} />
-						<Route path="/groups/create" exact component={GroupForm} />
-						<Route path="/groups" exact component={Groups} />
-						<Route path="/groups/:id/home" exact component={GroupHome} />
-					</Switch>
-
-					<Footer />
-				</BrowserRouter>
-			</RecoilRoot>
-		</div>
-	);
+          <Footer loggedIn={loggedIn} />
+        </BrowserRouter>
+      </RecoilRoot>
+    </div>
+  );
 }
