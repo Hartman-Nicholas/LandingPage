@@ -66,7 +66,7 @@ public class PostController {
     @PutMapping("/{postId}")
     public ResponseEntity<Post> updatePost(@PathVariable Long postId, @RequestBody Post updatedPost, Principal principal) {
         Post post = postService.updatePost(postId, updatedPost, principal);
-        return ResponseEntity.ok(updatedPost);
+        return ResponseEntity.ok(post);
     }
 
     // Delete the post based on the provided postId.
