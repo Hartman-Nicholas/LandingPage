@@ -12,20 +12,9 @@ export default function UserCard() {
 	return (
     <section>
       <h1>UserCard Template</h1>
-      {/* <form action="">
-        <label htmlFor="">User Name</label>
-        <input type="text" value={userData.name} />
-      </form>
-      <form action="">
-        <label htmlFor="">Email</label>
-        <input type="text" value={userData.email} />
-      </form>
-      <form action="">
-        <label htmlFor="">Biography</label>
-        <input type="text" value={userData.bio} />
-      </form> */}
-
-      <div className="listItem"><img src={userData.avatar} alt="user"/></div>
+      <div className="listItem">
+        <img src={userData.avatar} alt="avatar" />
+      </div>
       <div className="listItem">Name: {userData.name}</div>
       <div className="listItem">Email: {userData.email}</div>
       <div className="listItem">Bio: {userData.bio}</div>
@@ -47,7 +36,9 @@ export default function UserCard() {
       </div>
 
       <button onClick={() => setToggler(!toggler)}>Edit Profile</button>
-      {toggler&& <EditProfile currentUser = {userData}/>}
+      {toggler && (
+        <EditProfile currentUser={userData} />
+      )}
     </section>
   );
 }
