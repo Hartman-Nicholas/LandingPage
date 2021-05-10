@@ -20,6 +20,7 @@ export const PostCard = ({
 		postLikes,
 		postDislikes,
 		updated,
+		groupOwner: postGroup
 	},
 	handleDelete,
 	groupOwner,
@@ -169,6 +170,8 @@ export const PostCard = ({
 					<h1>{postBody}</h1>
 					<h3>{likesCount}</h3>
 					<h3>{dislikeCount}</h3>
+					<h3>{postGroup}</h3>
+
 					<div>
 						{created ? "Created: " : "Last updated: "}
 						<ReactTimeAgo
