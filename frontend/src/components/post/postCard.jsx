@@ -20,14 +20,15 @@ export const PostCard = ({
 		postLikes,
 		postDislikes,
 		updated,
-		groupOwner: postGroup
+		groupOwner: postGroup,
+		photo,
 	},
 	handleDelete,
 	groupOwner,
 }) => {
 	// State
 	const [commentsData, setCommentsData] = useState(comments);
-	const [postBody, setPostBody] = useState(body);
+	const [postBody, setPostBody] = useState({body: body, photo: photo});
 	const [toggler, setToggler] = useState(false);
 	const { name: userInSession } = useRecoilValue(userDataState);
 	const [commentToggler, setCommentToggler] = useState(false);
@@ -167,11 +168,15 @@ export const PostCard = ({
 			{!toggler && (
 				<div>
 					<h3>{postOwner}</h3>
-					<h1>{postBody}</h1>
+					<h1>{postBody.body}</h1>
 					<h3>{likesCount}</h3>
 					<h3>{dislikeCount}</h3>
 					<h3>{postGroup}</h3>
+					{
+						photo !== "" &&
+						<img src={postBody.photo} alt="post"/>
 
+					}
 					<div>
 						{created ? "Created: " : "Last updated: "}
 						<ReactTimeAgo
@@ -229,7 +234,7 @@ export const PostCard = ({
 
 			{toggler && (
 				<>
-					<EditPostForm data={postBody} onSubmit={handleUpdate} postId={id} />
+					<EditPostForm data={postBody} photo={photo} onSubmit={handleUpdate} postId={id} />
 					<button onClick={() => setToggler(false)}>Close</button>
 				</>
 			)}
