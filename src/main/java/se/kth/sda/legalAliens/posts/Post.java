@@ -36,7 +36,7 @@ public class Post {
     private Long id;
 
     private String body;
-    // private String photo;
+     private String photo;
     private Date created;
     private Date updated;
 
@@ -90,7 +90,7 @@ public class Post {
             updatedPost.setBody(this.getBody());
         }
         if (updatedPost.getPhoto() == null) {
-            updatedPost.setBody(this.getPhoto());
+            updatedPost.setPhoto(this.getPhoto());
         }
         // this persists the original date created so that it is not set to null
         updatedPost.onCreate();
@@ -159,13 +159,13 @@ public class Post {
         return postDislikes;
     }
 
-    // public String getPhoto() {
-    // return photo;
-    // }
+     public String getPhoto() {
+     return photo;
+     }
 
-    // public void setPhoto(String photo) {
-    // this.photo = photo;
-    // }
+     public void setPhoto(String photo) {
+     this.photo = photo;
+     }
 
     public void setPostDislikes(List<PostDislike> postDislikes) {
         this.postDislikes = postDislikes;
