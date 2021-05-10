@@ -36,7 +36,7 @@ public class Post {
     private Long id;
 
     private String body;
-    private String photo;
+     private String photo;
     private Date created;
     private Date updated;
 
@@ -58,15 +58,13 @@ public class Post {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Comment> comments;
 
-
     @OneToMany(mappedBy = "dislikedPost")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<PostDislike> postDislikes;
 
     @OneToMany(mappedBy = "likedPost")
-    @OnDelete(action=OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<PostLike> postLikes;
-
 
     @PrePersist
     protected void onCreate() {
@@ -92,11 +90,11 @@ public class Post {
             updatedPost.setBody(this.getBody());
         }
         if (updatedPost.getPhoto() == null) {
-            updatedPost.setBody(this.getPhoto());
+            updatedPost.setPhoto(this.getPhoto());
         }
         // this persists the original date created so that it is not set to null
         updatedPost.onCreate();
-        //gets the original comments for the post.
+        // gets the original comments for the post.
         updatedPost.setComments(this.getComments());
         return updatedPost;
     }
@@ -161,13 +159,13 @@ public class Post {
         return postDislikes;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
+     public String getPhoto() {
+     return photo;
+     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
+     public void setPhoto(String photo) {
+     this.photo = photo;
+     }
 
     public void setPostDislikes(List<PostDislike> postDislikes) {
         this.postDislikes = postDislikes;
