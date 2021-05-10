@@ -31,7 +31,7 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    private String avatar;
+    private String avatar= "https://res.cloudinary.com/dlvwrtpzq/image/upload/v1620637324/profilePhotos/unisex_enjdoe.gif";
     private String bio = "Sample information, a short description of where you are from, your interests, personality.";
 
     @Email(message = "Invalid email address! Please provide a valid email address")
