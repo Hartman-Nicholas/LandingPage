@@ -24,6 +24,8 @@ export default function UserCard() {
         <label htmlFor="">Biography</label>
         <input type="text" value={userData.bio} />
       </form> */}
+
+      <div className="listItem"><img src={userData.avatar} alt="user"/></div>
       <div className="listItem">Name: {userData.name}</div>
       <div className="listItem">Email: {userData.email}</div>
       <div className="listItem">Bio: {userData.bio}</div>
@@ -42,10 +44,6 @@ export default function UserCard() {
       <div>
         <label htmlFor="">Comments </label>
         {userData?.comments?.length} comments
-      </div>
-      <div>
-        <label htmlFor="">Likes </label>
-        {userData?.postLikes?.length} likes
       </div>
 
       <button onClick={() => setToggler(!toggler)}>Edit Profile</button>
