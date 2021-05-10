@@ -1,3 +1,93 @@
-.postLike {
-  background: blue;
+.postCard {
+  position: relative;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 6px;
+  box-shadow: var(--bs);
+}
+
+.postCard__card--imgContainer {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.postCard__card--body {
+  font-size: var(--fs-body);
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.postCard__card--img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.postCard__card--postGroup {
+  display: none;
+}
+
+.postCard__card__content {
+  position: relative;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  padding: 2rem;
+  padding-top: 3.7rem;
+}
+
+.postCard__card__details {
+}
+
+.postCard__card--like {
+  font-size: var(--fs-body);
+  cursor: pointer;
+  position: absolute;
+  bottom: -25px;
+  left: 12px;
+}
+
+.postCard__card--dislike {
+  font-size: var(--fs-body);
+  cursor: pointer;
+  position: absolute;
+  bottom: -25px;
+  left: 45px;
+}
+
+.postCard__card--created {
+  font-size: var(--fs-body-small);
+  position: absolute;
+  top: 25px;
+  left: 12px;
+}
+
+.postCard__card--owner {
+  font-size: var(--fs-body);
+  position: absolute;
+  top: 7px;
+  left: 12px;
+}
+
+.postCard__card--edit {
+  font-size: var(--fs-body);
+  cursor: pointer;
+  position: absolute;
+  top: 22px;
+  left: 148px;
+}
+
+.postCard__card--delete {
+  font-size: var(--fs-body);
+  cursor: pointer;
+  position: absolute;
+  top: 7px;
+  right: 12px;
+}
+
+.postCard__card--comments {
+  font-size: var(--fs-body);
+  cursor: pointer;
+  position: absolute;
+  bottom: 7px;
+  right: 12px;
 }
