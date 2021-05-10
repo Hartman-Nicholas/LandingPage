@@ -20,7 +20,8 @@ export const PostCard = ({
 		postLikes,
 		postDislikes,
 		updated,
-		groupOwner: postGroup
+		groupOwner: postGroup,
+		photo,
 	},
 	handleDelete,
 	groupOwner,
@@ -35,6 +36,11 @@ export const PostCard = ({
 	const [dislikeToggler, setDislikeToggler] = useState();
 	const [likesCount, setLikesCount] = useState(postLikes?.length);
 	const [dislikeCount, setDislikeCount] = useState(postDislikes?.length);
+
+
+console.log("body", body)
+console.log("photo", photo)
+
 
 	useEffect(() => {
 		setCommentsData(comments ? comments : []);
@@ -139,6 +145,7 @@ export const PostCard = ({
 	};
 
 	const handleUpdate = (updatedPost) => {
+		console.log("updated", updatedPost)
 		setPostBody(updatedPost);
 		setToggler(false);
 	};
@@ -171,7 +178,11 @@ export const PostCard = ({
 					<h3>{likesCount}</h3>
 					<h3>{dislikeCount}</h3>
 					<h3>{postGroup}</h3>
+					{
+						photo !== "" &&
+						<img src={photo} alt="post"/>
 
+					}
 					<div>
 						{created ? "Created: " : "Last updated: "}
 						<ReactTimeAgo
@@ -229,7 +240,7 @@ export const PostCard = ({
 
 			{toggler && (
 				<>
-					<EditPostForm data={postBody} onSubmit={handleUpdate} postId={id} />
+					<EditPostForm data={postBody} photo={photo} onSubmit={handleUpdate} postId={id} />
 					<button onClick={() => setToggler(false)}>Close</button>
 				</>
 			)}
