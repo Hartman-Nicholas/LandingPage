@@ -19,29 +19,32 @@ import { Groups } from "./pages/groups/Groups";
 import { GroupsBar } from "./components/GroupsBar";
 import { GroupHome } from "./pages/groups/GroupHome";
 import { GroupForm } from "./pages/groups/GroupForm";
+import { GroupEdit } from "./pages/groups/GroupEdit";
 
 export default function App() {
-  // State
-  const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
 
-  // Constants
-  Auth.bindLoggedInStateSetter(setLoggedIn);
 
-  // Components
+	// State
+	const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
 
-  return (
-    <div className="container">
-      <RecoilRoot>
-        <BrowserRouter>
-          <Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
+	// Constants
+	Auth.bindLoggedInStateSetter(setLoggedIn);
 
-          {loggedIn && (
-            <ErrorBoundary FallbackComponent={ErrorMessage}>
-              <Suspense fallback={<div>loading...</div>}>
-                <GroupsBar />
-              </Suspense>
-            </ErrorBoundary>
-          )}
+	// Components
+
+	return (
+    <RecoilRoot>
+      <BrowserRouter>
+        <Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
+        <section id="grid">
+            {loggedIn && (
+              <ErrorBoundary FallbackComponent={ErrorMessage}>
+                <Suspense fallback={<div>loading...</div>}>
+                  <GroupsBar />
+                </Suspense>
+              </ErrorBoundary>
+            )}
+
           <Switch>
             {!loggedIn && <AuthPage />}
             <Route path="/" exact component={Home} />
@@ -49,11 +52,15 @@ export default function App() {
             <Route path="/groups/create" exact component={GroupForm} />
             <Route path="/groups" exact component={Groups} />
             <Route path="/groups/:id/home" exact component={GroupHome} />
-          </Switch>
 
-          <Footer loggedIn={loggedIn} />
-        </BrowserRouter>
-      </RecoilRoot>
-    </div>
+            <Route path="/groups/:id/edit" exact component={GroupEdit} />
+        </Switch>
+        </section>
+
+        <Footer loggedIn={loggedIn} />
+      </BrowserRouter>
+    </RecoilRoot>
+
+
   );
 }

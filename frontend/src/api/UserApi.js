@@ -16,14 +16,18 @@ class UserApi {
   isFirstLogIn() {
     return Api.post("/users");
   }
+
   updateUser(body) {
     return Api.put("/users", body);
   }
 
-  //To be implemented
-  // deleteUser(userId){
-  //   return Api.delete(`/users/${userId}`)
-  // }
+  deleteUser(){
+    return Api.delete(`/users`)
+  }
+
+  userFeed(){
+    return Api.get("/users/feed")
+  }
 }
 
 export default new UserApi();

@@ -1,0 +1,20 @@
+.groupForm {
+  text-align: center;
+}
+
+.groupForm--img {
+}
+
+.groupForm--avatar {
+  width: "100%";
+  max-height: 500px;
+  border-radius: 8px;
+  object-fit: contain;
+  box-shadow: var(--bs);
+}
+
+.groupForm--upload {
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+}

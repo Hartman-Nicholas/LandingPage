@@ -20,7 +20,8 @@
   --red: #ff0033;
   --onyx: #2b272b;
 
-  --veryLight-grey: rgb(245, 241, 241);
+  /* --veryLight-grey: rgb(245, 241, 241); */
+  --veryLight-grey: rgba(248, 249, 250, 1);
 
   --light-grey: #f0f0f0;
   --medium-grey: #acacac;
@@ -30,6 +31,9 @@
   --light-blue: #5995fd;
   --medium-blue: rgba(0, 106, 168, 0.9);
   --medium-blue-hover: rgba(18, 124, 185, 0.9);
+
+  --sweden-yellow: #fecd00;
+  --sweden-blue: #006aa8;
 }
 
 /* @media (min-width: 800px) {

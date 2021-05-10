@@ -53,9 +53,9 @@ public class PostController {
     @PostMapping("/{groupId}")
     public ResponseEntity<Post> createGroupPost(@PathVariable Long groupId, @RequestBody Post post,
             Principal principal) {
+        Group group = groupRepository.findById(groupId).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        Group group = groupRepository.findById(groupId).orElseThrow(ResourceNotFoundException::new);
         post.setPostOwner(user);
         post.setGroupOwner(group);
         postRepository.save(post);
@@ -64,17 +64,17 @@ public class PostController {
 
     // Update the post based on the provided postId
     @PutMapping("/{postId}")
-    public ResponseEntity<Post> updatePost(@PathVariable Long postId, @RequestBody Post updatedPost,
-            Principal principal) {
+    public ResponseEntity<Post> updatePost(@PathVariable Long postId, @RequestBody Post updatedPost, Principal principal) {
         Post post = postService.updatePost(postId, updatedPost, principal);
-        return ResponseEntity.ok(post);
+        return ResponseEntity.ok(updatedPost);
     }
 
     // Delete the post based on the provided postId.
+
     @DeleteMapping("/{postId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePost(@PathVariable Long postId, Principal principal) {
-        Post post = postService.deletePost(postId, principal);
-        postRepository.delete(post);
+        postService.deletePost(postId, principal);
     }
 }
+

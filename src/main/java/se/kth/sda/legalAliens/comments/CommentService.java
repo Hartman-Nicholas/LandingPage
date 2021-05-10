@@ -26,8 +26,8 @@ public class CommentService {
         Comment comment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        // Security measure to ensure a logged in User doesnt access the update Route
-        // and update someone elses post.
+        // Security measure to ensure a logged in User doesn't access the update Route
+        // and update someone else's comment.
         if (!userName.equals(comment.getUserCommentOwner().getEmail())) {
             throw new ResourceNotFoundException();
 
@@ -39,15 +39,19 @@ public class CommentService {
         return updatedComment;
     }
 
-    public Comment deleteComment(Long id, Principal principal) {
+    public void deleteComment(Long id, Principal principal) {
         Comment comment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 
         String userName = principal.getName();
-        // Security measure to ensure a logged in User doesnt access the update Route
-        // and update someone elses post.
-        if (!userName.equals(comment.getUserCommentOwner().getEmail())) {
+        // Security measure to ensure a logged in User doesn't access the delete Route
+        // and delete someone else's comment.
+
+        if (userName.equals(comment.getCommentOwner().getGroupOwner().getGroupOwner().getEmail())) {
+            commentRepository.delete(comment);
+        } else if (userName.equals(comment.getUserCommentOwner().getEmail())) {
+            commentRepository.delete(comment);
+        } else if (!userName.equals(comment.getUserCommentOwner().getEmail())) {
             throw new ResourceNotFoundException();
         }
-        return comment;
     }
 }

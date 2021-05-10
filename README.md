@@ -55,19 +55,21 @@ These are the endpoints for the posts API that should exist:
 | `GET`    | `/users/{userName}` | return false if userName not found, True if userName found case sensitive|
 | `POST`   | `/users`      | Sets firstLogIn to true on User profile.|
 | `PUT`    | `/users` | Update the given User, this route is used to add Avatar and Bio as well.|
-| `DELETE` | `/users/{id}` | "Not Yet implemented".|
+| `DELETE` | `/users` | Delete logged in user.|
 
 ### Group Routes
 
 | HTTP Method | HTTP Path | Action |
 | ------------|-----------|--------|
-| `GET`    | `/groups`      | return all groups. |
+| `GET`    | `/groups`      | return all groups not created or joined by user. |
 | `GET`    | `/groups/{groupId}` | return a group by given groupId|
 | `POST`   | `/groups`      | Create a new group.|
 | `POST`   | `/groups/{groupId}`      | Join a group.|
 | `POST`   | `/groups/{groupId}/topics/{topicId}`      | Join a topic.|
-| `PUT`    | `/groups` | -To Be implemented |
-| `DELETE` | `/groups/{id}` | -To Be implemented |
+| `PUT`    | `/groups` | Update group tile, group description, group rules or group avatar only.|
+| `DELETE` | `/groups/{groupId}` | Delete a Group |
+| `DELETE` | `/groups/{groupId}/topics/{topicId}` | Remove topic from group. |
+| `DELETE` | `/groups/{groupId}/user` | Leave a group |
 
 ### Post Routes
 
@@ -79,6 +81,24 @@ These are the endpoints for the posts API that should exist:
 | `PUT`    | `/posts/{postId}` | update the given post.|
 | `DELETE` | `/posts/{postId}` | delete the given post.|
 
+
+### Post Like Routes
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/posts/{postId}/likes`      | Get all likes on a given post |
+| `POST`   | `/posts/{postId}/likes`      | Create a like on a given post |
+| `DELETE`   | `/posts/likes/{id}`      | Delete a like on a given post |
+
+### Post Dislikes Routes
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/posts/{postId}/dislikes` | returns all dislikes on a post.|
+| `POST`   | `/posts/{postId}/dislikes`      | create a dislike on a given post|
+| `DELETE` | `/posts/dislikes/{Id}` | delete the given dislike.|
+
+
 ### Comment Routes
 
 | HTTP Method | HTTP Path | Action |
@@ -88,10 +108,30 @@ These are the endpoints for the posts API that should exist:
 | `PUT`    | `/comments/{commentId}` | update the given comment.|
 | `DELETE` | `/comments/{commentId}` | delete the given comment.|
 
-### Topic Routes
+### Comment Like Routes
 
 | HTTP Method | HTTP Path | Action |
 | ------------|-----------|--------|
-| `GET`    | `/topics/{postId}`      | return all topics. |
-| `POST`   | `/topics`      | create all generic topics.|
+| `GET`    | `/comments/{commentId}/likes`      | Get all likes on a given Comment |
+| `POST`   | `/comments/{commentId}/likes`      | Create a like on a given comment |
+| `DELETE`   | `/comments/likes/{id}`      | Delete a like on a given comment |
+
+
+### Comment Dislikes Routes
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/comments/{commentId}/dislikes`      | return all dislikes for a specific comment. |
+| `POST`   | `/comments/{commentId}/dislikes`      | create a dislike on the given comment.|
+| `DELETE` | `/comments//dislikes/{Id}` | delete the given dislike.|
+
+### Topic Routes
+
+
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/comments/{commentId}/likes`      | Get all likes on a given comment |
+| `POST`   | `/comments/{commentId}/likes`      | Create a like on a given comment |
+| `DELETE`   | `/comments/likes/{id}`      | Delete a like on a given comment |
+
 
