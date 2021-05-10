@@ -22,8 +22,6 @@ import { GroupForm } from "./pages/groups/GroupForm";
 import { GroupEdit } from "./pages/groups/GroupEdit";
 
 export default function App() {
-
-
 	// State
 	const [loggedIn, setLoggedIn] = useState(Auth.isLoggedIn());
 
@@ -33,34 +31,31 @@ export default function App() {
 	// Components
 
 	return (
-    <RecoilRoot>
-      <BrowserRouter>
-        <Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
-        <section id="grid">
-            {loggedIn && (
-              <ErrorBoundary FallbackComponent={ErrorMessage}>
-                <Suspense fallback={<div>loading...</div>}>
-                  <GroupsBar />
-                </Suspense>
-              </ErrorBoundary>
-            )}
+		<RecoilRoot>
+			<BrowserRouter>
+				<Header onLogout={() => Auth.logout()} loggedIn={loggedIn} />
+				<section id="grid">
+					{loggedIn && (
+						<ErrorBoundary FallbackComponent={ErrorMessage}>
+							<Suspense fallback={<div>loading...</div>}>
+								<GroupsBar />
+							</Suspense>
+						</ErrorBoundary>
+					)}
 
-          <Switch>
-            {!loggedIn && <AuthPage />}
-            <Route path="/" exact component={Home} />
-            <Route path="/user" exact component={User} />
-            <Route path="/groups/create" exact component={GroupForm} />
-            <Route path="/groups" exact component={Groups} />
-            <Route path="/groups/:id/home" exact component={GroupHome} />
+					<Switch>
+						{!loggedIn && <AuthPage />}
+						<Route path="/" exact component={Home} />
+						<Route path="/user" exact component={User} />
+						<Route path="/groups/create" exact component={GroupForm} />
+						<Route path="/groups" exact component={Groups} />
+						<Route path="/groups/:id/home" exact component={GroupHome} />
 
-            <Route path="/groups/:id/edit" exact component={GroupEdit} />
-        </Switch>
-        </section>
-
-        <Footer loggedIn={loggedIn} />
-      </BrowserRouter>
-    </RecoilRoot>
-
-
-  );
+						<Route path="/groups/:id/edit" exact component={GroupEdit} />
+					</Switch>
+				</section>
+				{loggedIn && <Footer loggedIn={loggedIn} />}
+			</BrowserRouter>
+		</RecoilRoot>
+	);
 }
