@@ -113,7 +113,7 @@ export const CommentCard = ({
       {!toggler && (
         <>
           <h3>{commentBody}</h3>
-          <h3>By: {userCommentOwner}</h3>
+          <h3>{userCommentOwner}</h3>
           {userCommentOwner === userInSession && (
             <>
               <button onClick={() => setToggler(true)}>Edit</button>
