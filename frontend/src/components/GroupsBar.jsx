@@ -7,7 +7,7 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import GroupApi from '../api/GroupApi'
 import { getUserData } from "../state/recoilFetch";
 import { userDataState } from "../state/userDataState";
-import { GroupCard } from "../pages/groups/GroupCard";
+import { GroupCardSidebar } from "../pages/groups/GroupCardSidebar";
 
 export const GroupsBar = () => {
   // State
@@ -27,11 +27,11 @@ export const GroupsBar = () => {
 
   // Components
   const groupsJoined = data.groupsJoined.map((group) => {
-    return <GroupCard key={group.id} groupData={group} leaveGroup={(id)=> unsubscribe(id)} />;
+    return <GroupCardSidebar key={group.id} groupData={group} leaveGroup={(id)=> unsubscribe(id)} />;
   });
 
   const groupCreated = data.groupsCreated.map((group) => {
-    return <GroupCard key={group.id} groupData={group} />;
+    return <GroupCardSidebar key={group.id} groupData={group} />;
   });
 
   useEffect(() => {
