@@ -9,8 +9,18 @@ export default function EditProfile({ currentUser }) {
       Edit Profile Form
       <div>
         <form action="">
-          <label htmlFor="">Name</label>
-          <input type="text" value={currentUser.name} />
+          <div>
+            <label htmlFor="">Name</label>
+            <input type="text" value={currentUser.name} />
+          </div>
+          <div>
+            <label htmlFor="">Email</label>
+            <input type="text" value={currentUser.email} />
+          </div>
+          <div>
+            <label htmlFor="">Bio</label>
+            <input type="text" value={currentUser.bio} />
+          </div>
         </form>
       </div>
     </div>
