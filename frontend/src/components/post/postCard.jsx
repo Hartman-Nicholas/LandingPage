@@ -28,7 +28,7 @@ export const PostCard = ({
 }) => {
 	// State
 	const [commentsData, setCommentsData] = useState(comments);
-	const [postBody, setPostBody] = useState(body);
+	const [postBody, setPostBody] = useState({body: body, photo: photo});
 	const [toggler, setToggler] = useState(false);
 	const { name: userInSession } = useRecoilValue(userDataState);
 	const [commentToggler, setCommentToggler] = useState(false);
@@ -36,11 +36,6 @@ export const PostCard = ({
 	const [dislikeToggler, setDislikeToggler] = useState();
 	const [likesCount, setLikesCount] = useState(postLikes?.length);
 	const [dislikeCount, setDislikeCount] = useState(postDislikes?.length);
-
-
-console.log("body", body)
-console.log("photo", photo)
-
 
 	useEffect(() => {
 		setCommentsData(comments ? comments : []);
@@ -145,7 +140,6 @@ console.log("photo", photo)
 	};
 
 	const handleUpdate = (updatedPost) => {
-		console.log("updated", updatedPost)
 		setPostBody(updatedPost);
 		setToggler(false);
 	};
@@ -174,13 +168,13 @@ console.log("photo", photo)
 			{!toggler && (
 				<div>
 					<h3>{postOwner}</h3>
-					<h1>{postBody}</h1>
+					<h1>{postBody.body}</h1>
 					<h3>{likesCount}</h3>
 					<h3>{dislikeCount}</h3>
 					<h3>{postGroup}</h3>
 					{
 						photo !== "" &&
-						<img src={photo} alt="post"/>
+						<img src={postBody.photo} alt="post"/>
 
 					}
 					<div>
