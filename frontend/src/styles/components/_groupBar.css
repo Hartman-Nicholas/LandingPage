@@ -49,7 +49,12 @@
   margin-bottom: 20px;
   padding: 10px;
 }
-
+#sidebar .itemTitle {
+  font-size: var(--fs-h3);
+  font-weight: 300;
+  align-items: center;
+  padding: 0;
+}
 .tag {
   left: 0;
   margin-right: 15px;
