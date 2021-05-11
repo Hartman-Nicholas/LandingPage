@@ -1,7 +1,7 @@
 #grid {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(minmax(275px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
 }
 
 #sidebar {
@@ -9,12 +9,6 @@
 }
 #sidebar .non-sidebar-group-Des {
   display: none;
-}
-#sidebar .itemTitle {
-  font-size: var(--fs-h3);
-  font-weight: 300;
-  align-items: center;
-  padding: 0;
 }
 .gridRight {
   display: grid;
@@ -53,3 +47,8 @@
   grid-template-columns: repeat(3, minmax(275px, 1fr));
   grid-gap: 20px;
 }
+
+
+
+
+
