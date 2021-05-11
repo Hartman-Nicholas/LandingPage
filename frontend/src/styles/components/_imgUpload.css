@@ -1,0 +1,22 @@
+.fileContainer {
+  background: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.chooseFileButton {
+  background: var(--sweden-blue) !important;
+  box-shadow: var(--bs);
+  font-family: var(--ff-primary) !important;
+  font-weight: var(--fw-medium) !important;
+  width: 150px !important;
+  height: 49px !important;
+}
+
+.chooseFileButton:active {
+  transform: translateY(8px);
+}
+
+.chooseFileButton:hover {
+  background-color: var(--medium-blue-hover) !important;
+}

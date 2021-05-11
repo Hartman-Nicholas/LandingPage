@@ -6,76 +6,86 @@ import PostApi from "../../api/PostsApi";
 import { ImageUploader } from "../ImageUploader";
 
 export const PostForm = ({ groupId, onSubmit }) => {
-	// State
+  // State
 
-	const [photoUrl, setPhotoUrl] = useState("");
-	const [postForm, setPostForm] = useState({
-		body: "",
-		photo: "",
-	});
-	// Constants
-	async function createPost(requestBody) {
-		try {
-			await PostApi.createPost(groupId, requestBody).then((res) =>
-				onSubmit(res.data)
-			);
-		} catch (e) {
-			console.error(e);
-		}
-	}
+  const [photoUrl, setPhotoUrl] = useState("");
+  const [postForm, setPostForm] = useState({
+    body: "",
+    photo: "",
+  });
+  // Constants
+  async function createPost(requestBody) {
+    try {
+      await PostApi.createPost(groupId, requestBody).then((res) =>
+        onSubmit(res.data)
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setPostForm({
-			...postForm,
-			[name]: value,
-		});
-		console.log(postForm);
-		console.log(photoUrl);
-	};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPostForm({
+      ...postForm,
+      [name]: value,
+    });
+    console.log(postForm);
+    console.log(photoUrl);
+  };
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		createPost(postForm);
-		setPostForm({ body: "", photo: "" });
-	};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createPost(postForm);
+    setPostForm({ body: "", photo: "" });
+  };
 
-	const handleDiscard = (e) => {
-		e.preventDefault();
-		setPhotoUrl("");
-	};
+  const handleDiscard = (e) => {
+    e.preventDefault();
+    setPhotoUrl("");
+  };
 
-	useEffect(() => {
-		setPostForm({ ...postForm, photo: photoUrl });
-	}, [photoUrl]);
+  useEffect(() => {
+    setPostForm({ ...postForm, photo: photoUrl });
+  }, [photoUrl]);
 
-	// Components
+  // Components
 
-	return (
-		<form onSubmit={handleSubmit}>
-			{postForm.photo !== "" && (
-				<>
-					<img
-						className="groupForm--avatar"
-						src={postForm.photo}
-						alt="User Avatar"
-					/>
+  return (
+    <form onSubmit={handleSubmit}>
+      {postForm.photo !== "" && (
+        <div className="postForm">
+          <div className="postForm-avatarContainer">
+            <img
+              className="postForm--avatar"
+              src={postForm.photo}
+              alt="User Avatar"
+            />
+            <div className="postForm--cancelImg">
+              <i onClick={handleDiscard} className="fas fa-times"></i>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className="form--input">
+        <textarea
+          value={postForm.body}
+          onChange={handleChange}
+          placeholder="what's on your mind..."
+          type="text"
+          name="body"
+          required
+          maxLength="255"
+        />
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Your Post</label>
+      </div>
+      <ImageUploader setImageState={setPhotoUrl} />
 
-					<button onClick={handleDiscard}>discard image</button>
-				</>
-			)}
-			<textarea
-				value={postForm.body}
-				onChange={handleChange}
-				placeholder="what's on your mind..."
-				type="text"
-				name="body"
-				required
-				maxLength="255"
-			/>
-
-			<button type="submit">Submit</button>
-			<ImageUploader setImageState={setPhotoUrl} />
-		</form>
-	);
+      <button className="btn" type="submit">
+        Post
+      </button>
+    </form>
+  );
 };

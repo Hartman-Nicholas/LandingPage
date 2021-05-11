@@ -51,6 +51,16 @@ export const GroupHome = () => {
   return (
     <div className="gridRight">
       <div className="center">
+        <Link
+          to={{
+            pathname: "./edit",
+            state: {
+              fromNotifications: { groupData },
+            },
+          }}
+        >
+          Edit
+        </Link>
         <GroupHeader
           group={groupData}
           handleSubmit={handleSubmit}
@@ -58,23 +68,12 @@ export const GroupHome = () => {
           discussionState={discussionState}
           membersState={membersState}
         />
-          <Link
-        to={{
-          pathname: "./edit",
-          state: {
-            fromNotifications: { groupData },
-          },
-        }}
-      >
-        Edit
-      </Link>
       </div>
       <div className="rightBar">
         <About />
         {/* TODO render Member component after BE fixes */}
         {/* <Members /> */}
       </div>
-
     </div>
   );
 };

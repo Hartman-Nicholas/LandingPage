@@ -15,6 +15,7 @@
 @import "./components/_button.css";
 @import "./components/_groupBar.css";
 @import "./components/_checkBox.css";
+@import "./components/_imgUpload.css";
 
 /* layout */
 
@@ -25,6 +26,8 @@
 @import "./layout/_postCard.css";
 @import "./layout/_center.css";
 @import "./layout/_grid.css";
+@import "./layout/_discussions.css";
+@import "./layout/_postForm.css";
 
 /* pages */
 

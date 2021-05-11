@@ -4,15 +4,15 @@
   border: none;
   outline: none;
   border-radius: 49px;
-  background-color: var(--medium-blue);
+  background-color: var(--sweden-blue);
   color: var(--white);
   text-transform: uppercase;
   font-weight: 600;
   margin: 10px 0;
   transition: 0.5s;
   cursor: pointer;
-  transition: ease-in-out;
   box-shadow: var(--bs);
+  transition: all 0.2s ease-in;
 }
 
 .btn:active {
