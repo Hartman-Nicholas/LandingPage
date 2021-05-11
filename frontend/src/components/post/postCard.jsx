@@ -36,6 +36,7 @@ export const PostCard = ({
   const [dislikeToggler, setDislikeToggler] = useState();
   const [likesCount, setLikesCount] = useState(postLikes?.length);
   const [dislikeCount, setDislikeCount] = useState(postDislikes?.length);
+  const [imageUrl, setImageUrl] = useState(photo);
 
   useEffect(() => {
     setCommentsData(comments ? comments : []);
@@ -174,11 +175,11 @@ export const PostCard = ({
           <p className="postCard__card--owner">{postOwner}</p>
 
           <div className="postCard__card__content">
-            {photo !== "" && (
+            {imageUrl !== "" && (
               <div className="postCard__card--imgContainer">
                 <img
                   className="postCard__card--img"
-                  src={postBody.photo}
+                  src={imageUrl}
                   alt="post"
                 />
               </div>
@@ -265,8 +266,8 @@ export const PostCard = ({
       {toggler && (
         <div className="postCard__edit">
           <EditPostForm
+            setPhoto={setImageUrl}
             data={postBody}
-            photo={photo}
             onSubmit={handleUpdate}
             postId={id}
           />
