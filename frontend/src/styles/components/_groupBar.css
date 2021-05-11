@@ -1,5 +1,4 @@
 #sidebar {
-  width: 330px;
   height: calc(100vh - 50px);
   overflow-y: scroll;
   position: -webkit-sticky;
@@ -23,14 +22,10 @@
 .sidebarWrapper {
   align-items: center;
 }
-.sidebarTitle {
-  position: absolute;
-  left: 70px;
-}
+
 .list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+  display: flex;
+  justify-content: center;
 }
 
 .listItem {
@@ -54,7 +49,12 @@
   margin-bottom: 20px;
   padding: 10px;
 }
-
+#sidebar .itemTitle {
+  font-size: var(--fs-h3);
+  font-weight: 300;
+  align-items: center;
+  padding: 0;
+}
 .tag {
   left: 0;
   margin-right: 15px;
