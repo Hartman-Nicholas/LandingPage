@@ -27,8 +27,8 @@ export const CommentCard = ({
 	const [commentBody, setCommentBody] = useState(body);
 	const [likeToggler, setLikeToggler] = useState();
 	const [dislikeToggler, setDislikeToggler] = useState();
-	const [likesCount, setLikesCount] = useState(commentLikes?.length);
-	const [dislikeCount, setDislikeCount] = useState(commentDislikes?.length);
+	const [likesCount, setLikesCount] = useState(commentLikes?.length | 0);
+	const [dislikeCount, setDislikeCount] = useState(commentDislikes?.length | 0);
 
 	useEffect(() => {
 		const likeStatus = async () => {
@@ -50,12 +50,12 @@ export const CommentCard = ({
 	// Constants
 	const handleLike = () => {
 		if (likeToggler) {
-			setLikesCount(likesCount === commentLikes.length? likesCount: likesCount - 1 );
+			setLikesCount(likesCount - 1);
 			deleteLikeComment();
 			setLikeToggler(false);
 		} else {
 			likeComment();
-			setLikesCount(commentLikes?.length + 1);
+			setLikesCount(likesCount + 1);
 			setLikeToggler(true);
 			if (dislikeToggler) {
 				setDislikeCount(dislikeCount - 1);
@@ -84,13 +84,13 @@ export const CommentCard = ({
 		}
 	};
 
-  const handleDislike = () => {
+	const handleDislike = () => {
 		if (dislikeToggler) {
-			setDislikeCount(dislikeCount === commentDislikes?.length? dislikeCount: dislikeCount - 1);
+			setDislikeCount(dislikeCount - 1);
 			deleteDislikeComment();
 			setDislikeToggler(false);
 		} else {
-			setDislikeCount(commentDislikes?.length + 1);
+			setDislikeCount(dislikeCount + 1);
 			dislikeComment();
 			setDislikeToggler(true);
 			if (likeToggler) {
@@ -132,7 +132,7 @@ export const CommentCard = ({
 				<>
 					<h3>{commentBody}</h3>
 					<h3>{userCommentOwner}</h3>
-          <h3>{likesCount}</h3>
+					<h3>{likesCount}</h3>
 					<h3>{dislikeCount}</h3>
 					{userCommentOwner === userInSession && (
 						<>
