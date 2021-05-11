@@ -22,40 +22,42 @@ export const GroupCardSidebar = ({ groupData, joinGroup, leaveGroup }) => {
 	};
 
 	return (
-		<div>
-			<Link to={`/groups/${groupData.id}/home`}>
-				<div>
-					<div className="listItemContent">
-						<div className="tag">
-							<img
-								src={groupData.avatar}
-								alt="group"
-								style={{
-									width: "100%",
-									maxHeight: "500px",
-									borderRadius: "8px",
-									objectFit: "contain",
-								}}
-							/>
-						</div>
-						<div className="sidebarItemText">
-							<h2 className="itemTitle"> {groupData.title}</h2>
-						</div>
-					</div>
-				</div>
-			</Link>
-			{groupData.groupOwner !== userData.name &&
-				groupMembers.includes(userData.name) && (
-					<button name="unjoin" onClick={handleClick}>
-						Unjoin Group
-					</button>
-				)}
-			{groupData.groupOwner !== userData.name &&
-				!groupMembers.includes(userData.name) && (
-					<button name="join" onClick={() => joinGroup(groupData.id)}>
-						Join Group
-					</button>
-				)}
-		</div>
-	);
+    <div>
+      <Link to={`/groups/${groupData.id}/home`}>
+        <div>
+          <div className="listItemContent">
+            {/* <div className="tag"> */}
+            <img
+            //   className="tag"
+              src={groupData.avatar}
+              alt="group"
+              style={{
+                width: "40px",
+                height: "40px",
+                borderRadius: "8px",
+                objectFit: "contain",
+                display:"flex"
+              }}
+            />
+            {/* </div> */}
+            <div className="sidebarItemText">
+              <h2 className="itemTitle"> {groupData.title}</h2>
+            </div>
+          </div>
+        </div>
+      </Link>
+      {groupData.groupOwner !== userData.name &&
+        groupMembers.includes(userData.name) && (
+          <button name="unjoin" onClick={handleClick}>
+            Unjoin Group
+          </button>
+        )}
+      {groupData.groupOwner !== userData.name &&
+        !groupMembers.includes(userData.name) && (
+          <button name="join" onClick={() => joinGroup(groupData.id)}>
+            Join Group
+          </button>
+        )}
+    </div>
+  );
 };

@@ -34,8 +34,6 @@
 }
 
 .listItem {
-  display: flex;
-  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -52,7 +50,13 @@
   width: 236px;
   height: 50px;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 5px;
+}
+
+.itemTitle {
+  font-size: var(--fs-h3);
+  font-weight: 300;
+  align-items: center;
 }
 
 .tag {
@@ -60,8 +64,9 @@
   margin-right: 15px;
   background-color: rgba(153, 153, 153, 0.1);
   color: tomato;
-  width: 22px;
-  height: 22px;
+  width: 35px;
+  height: 35px;
+  align-items: center;
   text-align: center;
 }
 .sidebarItemText {
