@@ -55,20 +55,36 @@ export default function UserCard() {
       )}
 
       <div>
-        <label htmlFor="">Created </label>
-        {userData?.groupsCreated?.length}
+        <ul className="list">
+          <li className="listItem">
+            <label htmlFor="">Created </label>
+          </li>
+          <li className="listItem">{userData?.groupsCreated?.length}</li>
+        </ul>
       </div>
       <div>
-        <label htmlFor="">Joined </label>
-        {userData?.groupsJoined?.length}
+        <ul className="list">
+          <li className="listItem">
+            <label htmlFor="">Joined </label>
+          </li>
+          {userData?.groupsJoined?.length}
+        </ul>
       </div>
       <div>
-        <label htmlFor="">Posts </label>
-        {userData?.posts?.length}
+        <ul className="list">
+          <li className="listItem">
+            <label htmlFor="">Posts </label>
+          </li>
+          <li className="listItem">{userData?.posts?.length}</li>
+        </ul>
       </div>
       <div>
-        <label htmlFor="">Comments </label>
-        {userData?.comments?.length}
+        <ul className="list">
+          <li className="listItem">
+            <label htmlFor="">Comments </label>
+          </li>
+          <li className="listItem">{userData?.comments?.length}</li>
+        </ul>
       </div>
     </section>
   );
