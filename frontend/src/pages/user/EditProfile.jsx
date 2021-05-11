@@ -9,7 +9,7 @@ export default function EditProfile({ setToggler, onSubmit }) {
   // State
   const [userData, setUserData] = useRecoilState(userDataState);
   console.log({ userData, setUserData });
-  
+
   const [userForm, setUserForm] = useState({
     name: userData.name,
     email: userData.email,
@@ -37,15 +37,17 @@ export default function EditProfile({ setToggler, onSubmit }) {
     console.log({ userForm });
   };
 
+  //TODO: add modal confirm success
+  //TODO: name, email validation check
   const updateProfile = async () => {
     try {
       const response = await UserApi.updateUser(userForm);
-      alert("Your profile is successfully updated!");
+      // alert("Your profile is successfully updated!");
       console.log({ response });
       setUserData(response.data)
     } catch (error) {
       console.error(error);
-      alert("Failed to update!");
+      // alert("Failed to update!");
     }
   };
 
@@ -91,7 +93,14 @@ export default function EditProfile({ setToggler, onSubmit }) {
               onChange={handleChange}
             />
           </div>
-          <button type="submit" setToggler={false}>
+          <button
+            type="submit"
+            setToggler={false}
+            // onClick={() => {
+            //   if (window.confirm("Are you sure you wish to delete this item?"))
+            //     this.onCancel(onSubmit);
+            // }}
+          >
             Save{" "}
           </button>
         </form>
