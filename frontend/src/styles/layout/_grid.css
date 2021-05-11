@@ -1,15 +1,23 @@
 #grid {
   display: grid;
+  }
+.rightBar {
+    display: none;
 }
+
 @media screen and (min-width: 1025px){
   #grid {
     grid-template-columns: 30% 70%;
   }
+  .gridRight {
+    display: grid;
+    grid-template-columns: 80% 20%;
+  }
+  .rightBar {
+    display: flex;   /* To Discuss: remove 3 column layout?*/
+  }
 }
 
-/* .gridRight {
-  display: grid;
-} */
 
 /* .center {
   grid-area: 1 / 1 / span 1 / span 2;
