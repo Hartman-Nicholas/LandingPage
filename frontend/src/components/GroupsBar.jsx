@@ -45,7 +45,12 @@ export const GroupsBar = () => {
           <Link to="/groups">Join a new group +</Link>
         </button>
         <h2>joined :</h2>
-        {groupsJoined}
+        <ul className="list">
+          <li className="listItem">
+            <span>{groupsJoined}</span>
+          </li>
+        </ul>
+
         <h2>created :</h2>
         <ul className="list">
           <li className="listItem">
