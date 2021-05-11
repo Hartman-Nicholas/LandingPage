@@ -26,6 +26,7 @@ export const PostCard = ({
 	handleDelete,
 	groupOwner,
 }) => {
+
 	// State
 	const [commentsData, setCommentsData] = useState(comments);
 	const [postBody, setPostBody] = useState({ body: body, photo: photo });
@@ -36,6 +37,8 @@ export const PostCard = ({
 	const [dislikeToggler, setDislikeToggler] = useState();
 	const [likesCount, setLikesCount] = useState(postLikes?.length | 0);
 	const [dislikeCount, setDislikeCount] = useState(postDislikes?.length | 0);
+  const [imageUrl, setImageUrl] = useState(photo);
+
 
 	useEffect(() => {
 		setCommentsData(comments ? comments : []);
@@ -169,19 +172,21 @@ export const PostCard = ({
 				<div className="postCard__card">
 					<p className="postCard__card--owner">{postOwner}</p>
 
-					<div className="postCard__card__content">
-						{photo !== "" && (
-							<div className="postCard__card--imgContainer">
-								<img
-									className="postCard__card--img"
-									src={postBody.photo}
-									alt="post"
-								/>
-							</div>
-						)}
-						<p className="postCard__card--body">{postBody.body}</p>
-						<div className="postCard__card__details">
-							<p className="postCard__card--postGroup">{postGroup}</p>
+
+          <div className="postCard__card__content">
+            {imageUrl !== "" && (
+              <div className="postCard__card--imgContainer">
+                <img
+                  className="postCard__card--img"
+                  src={imageUrl}
+                  alt="post"
+                />
+              </div>
+            )}
+            <p className="postCard__card--body">{postBody.body}</p>
+            <div className="postCard__card__details">
+              <p className="postCard__card--postGroup">{postGroup}</p>
+
 
 							<div className="postCard__card--created">
 								{created ? "Created: " : "Last updated: "}
@@ -258,17 +263,19 @@ export const PostCard = ({
 				</div>
 			)}
 
-			{toggler && (
-				<div className="postCard__edit">
-					<EditPostForm
-						data={postBody}
-						photo={photo}
-						onSubmit={handleUpdate}
-						postId={id}
-					/>
-					<button onClick={() => setToggler(false)}>Close</button>
-				</div>
-			)}
-		</div>
-	);
+
+      {toggler && (
+        <div className="postCard__edit">
+          <EditPostForm
+            setPhoto={setImageUrl}
+            data={postBody}
+            onSubmit={handleUpdate}
+            postId={id}
+          />
+          <button onClick={() => setToggler(false)}>Close</button>
+        </div>
+      )}
+    </div>
+  );
+
 };
