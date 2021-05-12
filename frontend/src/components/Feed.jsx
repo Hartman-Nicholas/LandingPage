@@ -6,10 +6,13 @@ import UserApi from "../api/UserApi";
 import PostsApi from "../api/PostsApi";
 import { PostCard } from "../components/post/postCard";
 import LandingPage from "../pages/home/LandingPage";
+import { useRecoilValue } from "recoil";
+import { userDataState } from "../state/userDataState";
 
 export default function Feed() {
   const [userFeed, setUserFeed] = useState([]);
   const [flag, setFlag] = useState(false);
+  let {name: userInSession} = useRecoilValue(userDataState)
 
   useEffect(() => {
     const fetchUserFeed = async () => {
@@ -30,7 +33,7 @@ export default function Feed() {
     (userFeed === undefined || userFeed.length) === 0 ? (
       <LandingPage />
     ) : (
-      userFeed?.map((feed) => (
+      userFeed?.filter(post=> post.postOwner !== userInSession).map((feed) => (
         <PostCard key={feed.id} data={feed} handleDelete={deletePost} />
       ))
     );
