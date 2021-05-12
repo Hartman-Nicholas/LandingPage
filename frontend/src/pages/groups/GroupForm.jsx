@@ -48,9 +48,10 @@ export const GroupForm = () => {
 
       setGroup(group);
 
-      topicArray.map(async (topic) => {
+      for(const topic of topicArray){
         await GroupApi.joinTopic(group.id, topic);
-      });
+      }
+
       await UserApi.getUser().then(({ data }) => setUserData(data));
     } catch (e) {
       console.error(e);
@@ -181,7 +182,7 @@ export const GroupForm = () => {
                   id="Entertainment"
                   name="Entertainment"
                   component="input"
-                  value="1"
+                  value="2"
                   type="checkbox"
                 />
                 <label
@@ -198,7 +199,7 @@ export const GroupForm = () => {
                   id="Health"
                   name="Health"
                   component="input"
-                  value="1"
+                  value="3"
                   type="checkbox"
                 />
                 <label
@@ -215,7 +216,7 @@ export const GroupForm = () => {
                   id="Education"
                   name="Education"
                   component="input"
-                  value="1"
+                  value="4"
                   type="checkbox"
                 />
                 <label
@@ -232,7 +233,7 @@ export const GroupForm = () => {
                   id="Family"
                   name="Family"
                   component="input"
-                  value="1"
+                  value="5"
                   type="checkbox"
                 />
                 <label
