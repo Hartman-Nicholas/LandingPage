@@ -19,7 +19,7 @@
     overflow: hidden;
     object-position: center center;
     margin: 0 auto;
-    height: 100%;
+    height: 250px;
     width: 100%;
     max-height: 280px;
     opacity: 0.9;
@@ -42,9 +42,10 @@
     font-size: 15px;
     font-weight: var(--fw-reg);
     color: rgb(119, 119, 126);
-    margin: 8px 0 15px 0;
+    margin: 8px 20px 15px 20px;
     letter-spacing: .1px;
     overflow: hidden;
+    text-align: center;
 }
 
 .group-container {
@@ -83,3 +84,18 @@
     content: "Joined!  ✓";
     transition: 10s cubic-bezier(0.68, -0.55, 0.265, 1.55)
 }
+
+
+.tags-container {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    margin-left: -1px;
+    color: white;
+}
+.tags-container .tag {
+        border-radius: 5px;
+        padding: 4px 8px;
+        margin-right: 5px;
+    }
+
