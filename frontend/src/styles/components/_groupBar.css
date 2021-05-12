@@ -68,7 +68,6 @@
   margin: -20px;
 }
 .sidebarButtonTop {
-  width: 120px;
   border: 1px solid #006aa8;
   color: #006aa8;
   padding: 10px;
@@ -80,7 +79,6 @@
 }
 
 .sidebarButtonBottom {
-  width: 120px;
   border: 1px solid #006aa8;
   color: white;
   padding: 10px;

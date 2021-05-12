@@ -23,46 +23,49 @@ export const GroupCard = ({ groupData, joinGroup, leaveGroup }) => {
 	};
 
 	return (
-		<div>
-			<Link to={`/groups/${groupData.id}/home`}>
-				<div>
-					<div className="listItemContent">
-						<div className="sidebarItemText">
-							<h2 className="itemTitle">{groupData.title}</h2>
-							<div className="non-sidebar-group-Des">
-								<img
-									src={groupData.avatar}
-									alt="group"
-									style={{
-										width: "100%",
-										maxHeight: "500px",
-										borderRadius: "8px",
-										objectFit: "contain",
-									}}
-								/>
-								<p> {groupData.description}</p>
-								<ReactTimeAgo
-									date={new Date(groupData.created)}
-									locale="en-US"
-								/>
-								<div>members: {groupMembers.length}</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</Link>
-			{groupData.groupOwner !== userData.name &&
-				groupMembers.includes(userData.name) && (
-					<button name="unjoin" onClick={handleClick}>
-						Unjoin Group
-					</button>
-				)}
-			{groupData.groupOwner !== userData.name &&
-				!groupMembers.includes(userData.name) && (
-					<button name="join" onClick={() => joinGroup(groupData.id)}>
-						Join Group
-					</button>
-				)}
-		</div>
-	);
+    <>
+      <div className="group-container">
+        <div className="group-image">
+          <Link to={`/groups/${groupData.id}/home`}>
+            <img
+              src={groupData.avatar}
+              alt="group"
+              style={{
+                width: "95%",
+                maxHeight: "500px",
+                objectFit: "contain",
+              }}
+            />
+          </Link>
+        </div>
+        <p className="author-text">
+          <span>
+            <ReactTimeAgo date={new Date(groupData.created)} locale="en-US" />
+          </span>
+          <span>{groupMembers.length} members</span>
+        </p>
+        <h3 className="itemTitle">{groupData.title}</h3>
+
+        <p className="description-text"> {groupData.description}</p>
+
+        {groupData.groupOwner !== userData.name &&
+          groupMembers.includes(userData.name) && (
+            <button name="unjoin" onClick={handleClick} className="btn">
+              <span>Unjoin Group</span>
+            </button>
+          )}
+
+        {groupData.groupOwner !== userData.name &&
+          !groupMembers.includes(userData.name) && (
+            <button
+              name="join"
+              onClick={() => joinGroup(groupData.id)}
+              className="btn"
+            >
+              <span>Join Group</span>
+            </button>
+          )}
+      </div>
+    </>
+  );
 };

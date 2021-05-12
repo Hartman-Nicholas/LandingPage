@@ -1,0 +1,85 @@
+.group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    grid-column-gap: 30px;
+    grid-row-gap: 40px;
+    grid-auto-rows: 1fr;
+    padding-bottom: 50px;
+    overflow: hidden;
+}
+
+.group-grid .itemTitle {
+    font-weight: var(--fw-reg);
+    letter-spacing: 1px;
+    font-size: 22px;
+}
+
+.group-grid img {
+    position: relative;
+    overflow: hidden;
+    object-position: center center;
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+    max-height: 280px;
+    opacity: 0.9;
+}
+
+.group-grid a {
+    padding: 0 5px;
+}
+
+.author-text {
+    display: flex;
+    justify-content: space-around;
+    font-weight: var(--fw-reg);
+    color: rgb(144, 144, 146);
+    font-size: 16px;
+    letter-spacing: .7px;
+}
+
+.group-grid .description-text {
+    font-size: 15px;
+    font-weight: var(--fw-reg);
+    color: rgb(119, 119, 126);
+    margin: 8px 0 15px 0;
+    letter-spacing: .1px;
+    overflow: hidden;
+}
+
+.group-container {
+    padding: 16px 0 20px 0;
+    margin-bottom: 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.group-container button {
+    border: 1px solid #006aa8;
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    width: 150px;
+    height: 40px;
+    background-color: #006aa8;
+}
+
+.btn:hover {
+    background-color: white;
+    color: var(--sweden-blue);
+}
+
+.btn:focus span {
+    display: none;
+}
+
+.btn:focus {
+    background-color: var(--sweden-yellow);
+}
+
+.btn:focus::before {
+    content: "Joined!  ✓";
+    transition: 10s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+}
