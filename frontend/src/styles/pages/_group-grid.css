@@ -1,11 +1,10 @@
 .group-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     grid-column-gap: 30px;
     grid-row-gap: 40px;
     grid-auto-rows: 1fr;
     padding-bottom: 50px;
-    overflow: hidden;
 }
 
 .group-grid .itemTitle {
@@ -21,7 +20,6 @@
     margin: 0 auto;
     height: 250px;
     width: 100%;
-    max-height: 280px;
     opacity: 0.9;
 }
 
@@ -44,8 +42,15 @@
     color: rgb(119, 119, 126);
     margin: 8px 20px 15px 20px;
     letter-spacing: .1px;
-    overflow: hidden;
+    overflow-x: scroll;
     text-align: center;
+    white-space: nowrap;
+}
+*::-webkit-scrollbar {
+  width: 1px;
+}
+*::-webkit-scrollbar-track {
+  background-color: white;
 }
 
 .group-container {
@@ -54,6 +59,7 @@
     background-color: white;
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    align-items: center;
 }
 
 .group-container button {
@@ -65,6 +71,7 @@
     width: 150px;
     height: 40px;
     background-color: #006aa8;
+    margin: 0;
 }
 
 .btn:hover {
