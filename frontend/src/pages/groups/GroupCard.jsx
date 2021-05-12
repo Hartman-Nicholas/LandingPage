@@ -6,8 +6,12 @@ import { useState } from "react";
 
 // Project files
 import { userDataState } from "../../state/userDataState";
+import TagRow from '../../components/TagRow';
 
 export const GroupCard = ({ groupData, joinGroup, leaveGroup }) => {
+	console.log({groupData});
+
+	console.log("TOPICS", groupData?.topics)
 	// State
 	const [userData, setUserData] = useRecoilState(userDataState);
 	const [groupMembers] = useState(groupData.members);
@@ -32,7 +36,6 @@ export const GroupCard = ({ groupData, joinGroup, leaveGroup }) => {
               alt="group"
               style={{
                 width: "95%",
-                maxHeight: "500px",
                 objectFit: "contain",
               }}
             />
@@ -44,6 +47,8 @@ export const GroupCard = ({ groupData, joinGroup, leaveGroup }) => {
           </span>
           <span>{groupMembers.length} members</span>
         </p>
+        <TagRow tags={groupData.topics} />
+
         <h3 className="itemTitle">{groupData.title}</h3>
 
         <p className="description-text"> {groupData.description}</p>
