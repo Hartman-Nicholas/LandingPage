@@ -1,3 +1,7 @@
+.postForm {
+  position: relative;
+}
+
 .postForm-avatarContainer {
   width: 300px;
   position: relative;
@@ -29,4 +33,20 @@
 
 .postForm--cancelImg:hover {
   background-color: var(--medium-blue-hover);
+}
+
+.postForm__share-position {
+  position: absolute;
+  bottom: -55px;
+  right: 10px;
+}
+
+.postForm__img-position {
+  position: absolute;
+  bottom: -65px;
+  right: 65px;
+}
+
+.postForm__textArea {
+  margin-bottom: 6rem;
 }

@@ -52,9 +52,9 @@ export const PostForm = ({ groupId, onSubmit }) => {
   // Components
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="postForm">
       {postForm.photo !== "" && (
-        <div className="postForm">
+        <div>
           <div className="postForm-avatarContainer">
             <img
               className="postForm--avatar"
@@ -67,7 +67,7 @@ export const PostForm = ({ groupId, onSubmit }) => {
           </div>
         </div>
       )}
-      <div className="form--input">
+      <div className="postForm__textArea form--input">
         <textarea
           value={postForm.body}
           onChange={handleChange}
@@ -75,17 +75,21 @@ export const PostForm = ({ groupId, onSubmit }) => {
           type="text"
           name="body"
           required
-          maxLength="255"
+          maxLength="4000"
         />
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>Your Post</label>
       </div>
-      <ImageUploader setImageState={setPhotoUrl} />
+      <div className="postForm__img-position">
+        <ImageUploader setImageState={setPhotoUrl} />
+      </div>
 
-      <button className="btn" type="submit">
-        Post
-      </button>
+      <div className="postForm__share-position">
+        <div className="share" onClick={handleSubmit}>
+          <i class="fas fa-share"></i>
+        </div>
+      </div>
     </form>
   );
 };

@@ -4,6 +4,7 @@
   margin-bottom: 2rem;
   border-radius: 6px;
   box-shadow: var(--bs);
+  background: var(--white);
 }
 
 .postCard__card--imgContainer {
@@ -33,9 +34,6 @@
   margin-bottom: 5rem;
   padding: 2rem;
   padding-top: 3.7rem;
-}
-
-.postCard__card__details {
 }
 
 .postCard__card--like {
@@ -90,4 +88,5 @@
   position: absolute;
   bottom: 7px;
   right: 12px;
+  z-index: 5;
 }

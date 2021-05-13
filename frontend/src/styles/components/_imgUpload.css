@@ -1,16 +1,19 @@
 .fileContainer {
+  display: inline;
   background: none;
   box-shadow: none;
   padding: 0;
 }
 
 .chooseFileButton {
-  background: var(--sweden-blue) !important;
-  box-shadow: var(--bs);
+  position: relative;
+  background: none !important;
+  color: var(--onyx) !important;
   font-family: var(--ff-primary) !important;
   font-weight: var(--fw-medium) !important;
-  width: 150px !important;
-  height: 49px !important;
+  font-size: 25px !important;
+  width: 50px !important;
+  height: 50px !important;
 }
 
 .chooseFileButton:active {
@@ -18,5 +21,13 @@
 }
 
 .chooseFileButton:hover {
-  background-color: var(--medium-blue-hover) !important;
+  background-color: var(--sweden-yellow) !important;
+}
+
+.chooseFileButton::before {
+  position: absolute;
+  font-family: "FontAwesome";
+  top: 11px;
+  left: 12px;
+  content: "\f030";
 }
