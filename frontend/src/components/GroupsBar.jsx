@@ -49,9 +49,7 @@ export const GroupsBar = () => {
         </button>
       </div>
       <div className="sidebarWrapper">
-        {/* <h2>joined :</h2> */}
         {groupsJoined}
-        {/* <h2>created :</h2> */}
         {groupCreated}
       </div>
     </section>
