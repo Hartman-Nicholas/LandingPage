@@ -125,7 +125,10 @@ export const Groups = () => {
           id="Family"
           name="Family"
         />
-        <h2>Click to join</h2>
+        <h2 className="beginning" style={{ fontStyle: "italic" }}>
+          “Alone, we can do so little; together, we can do so much”
+          <span style={{ fontStyle:"normal", fontWeight:"100"}}> – Helen Keller</span>
+        </h2>
         <section className="group-grid container">
           {queryList.length > 0 || flag
             ? queryList.map((group) => (

@@ -7,10 +7,14 @@
     padding-bottom: 50px;
 }
 
+.beginning{
+    font-size: 20px;
+    font-weight: 300;
+}
 .group-grid .itemTitle {
     font-weight: var(--fw-reg);
     letter-spacing: 1px;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .group-grid img {
