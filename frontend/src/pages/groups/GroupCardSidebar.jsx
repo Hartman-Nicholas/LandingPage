@@ -51,10 +51,8 @@ export const GroupCardSidebar = ({ groupData, joinGroup, leaveGroup }) => {
       <div className="sidebar danger-btn">
         {groupData.groupOwner !== userData.name &&
           groupMembers.includes(userData.name) && (
-            // <button name="unjoin" onClick={handleClick}>
-            //   Unjoin Group
-            // </button>
-            <i class="fas fa-sign-out-alt" onClick={handleClick}></i>
+            <i class="fas fa-sign-out-alt" title="Leave Group" onClick={handleClick}>
+            </i>
           )}
       </div>
       <Link to={`/groups/${groupData.id}/home`}>
