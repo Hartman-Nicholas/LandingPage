@@ -1,0 +1,44 @@
+.postCard__edit {
+  padding-top: 2rem;
+  padding-bottom: 0.1rem;
+  box-shadow: var(--bs);
+  border-radius: 6px;
+  background: var(--white);
+}
+
+.postForm__edit--cancel {
+  cursor: pointer;
+  position: relative;
+  font-size: 25px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.fa-times-cancel-edits {
+  position: absolute;
+  left: 16px;
+  top: 12px;
+}
+
+.postForm__edit--cancel:hover {
+  background-color: var(--medium-blue-hover);
+}
+
+.postForm__edit--cancel-position {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+}
+
+.editPostForm__img-position {
+  position: absolute;
+  bottom: 5px;
+  right: 80px;
+}
+
+.editPostForm__share-position {
+  position: absolute;
+  bottom: 16px;
+  right: 12px;
+}

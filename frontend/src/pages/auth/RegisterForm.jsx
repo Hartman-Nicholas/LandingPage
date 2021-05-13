@@ -58,8 +58,13 @@ const showPassStrength = (value) => {
   }
 };
 
-const composeValidators = (...validators) => (value) =>
-  validators.reduce((error, validator) => error || validator(value), undefined);
+const composeValidators =
+  (...validators) =>
+  (value) =>
+    validators.reduce(
+      (error, validator) => error || validator(value),
+      undefined
+    );
 const focusOnError = createDecorator();
 
 export default function RegisterForm() {

@@ -16,6 +16,7 @@
 @import "./components/_groupBar.css";
 @import "./components/_checkBox.css";
 @import "./components/_imgUpload.css";
+@import "./components/_share.css";
 
 /* layout */
 
@@ -28,6 +29,8 @@
 @import "./layout/_grid.css";
 @import "./layout/_discussions.css";
 @import "./layout/_postForm.css";
+@import "./layout/_editPostForm.css";
+@import "./layout/_commentForm.css";
 
 /* pages */
 
