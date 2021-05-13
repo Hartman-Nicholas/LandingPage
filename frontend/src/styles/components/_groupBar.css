@@ -3,11 +3,12 @@
   overflow-y: scroll;
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
   padding: 50px;
-  justify-content: space-between;
+  margin: 0 auto;
 }
-
+#sidebar a{
+  align-items: center;
+}
 ::-webkit-scrollbar {
   width: 1px;
 }
@@ -23,50 +24,30 @@
   align-items: center;
 }
 
-.list {
-  display: flex;
-  justify-content: center;
-}
-
-.listItem {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.listItemContent {
+.sidebar-list {
   font-size: var(--fs-h3);
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.1) 0%,
       rgba(255, 255, 255, 0) 100%
     ),
-    rgba(238, 237, 246, 0.4);
+    rgba(255, 255, 255, 0.356);
   border-radius: 10px;
   border: 1px solid white;
-  width: 236px;
-  height: 50px;
   margin-bottom: 20px;
-  padding: 10px;
+  align-items: center;
+  width: 150px;
+  height: 150px;
 }
+
 #sidebar .itemTitle {
   font-size: var(--fs-h3);
   font-weight: 300;
-  align-items: center;
+  text-align: center;
   padding: 0;
 }
-.tag {
-  left: 0;
-  margin-right: 15px;
-  background-color: rgba(153, 153, 153, 0.1);
-  color: tomato;
-  width: 22px;
-  height: 22px;
-  text-align: center;
-}
-.sidebarItemText {
-  margin: -20px;
-}
+
 .sidebarButtonTop {
   border: 1px solid #006aa8;
   color: #006aa8;
@@ -77,7 +58,9 @@
   height: 40px;
   background-color: white;
 }
-
+.sidebar-image img{
+  display: none;
+}
 .sidebarButtonBottom {
   border: 1px solid #006aa8;
   color: white;
@@ -87,4 +70,11 @@
   width: 200px;
   height: 40px;
   background-color: #006aa8;
+}
+.fa-backspace{
+  font-size: 30px;
+  color: #555;
+}
+.fa-backspace:hover {
+  color: tomato;
 }
