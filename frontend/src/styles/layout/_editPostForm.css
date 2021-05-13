@@ -23,6 +23,7 @@
 
 .postForm__edit--cancel:hover {
   background-color: var(--medium-blue-hover);
+  color: var(--white);
 }
 
 .postForm__edit--cancel-position {

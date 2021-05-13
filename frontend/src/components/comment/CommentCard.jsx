@@ -187,14 +187,14 @@ export const CommentCard = ({
         </div>
       )}
       {toggler && (
-        <div className="postCard__edit">
+        <div className="commentCard__edit">
           <EditCommentForm
             data={commentBody}
             onSubmit={handleUpdate}
             commentId={id}
           />
           <div className="postForm__edit--cancel-position">
-            <div className="postForm__edit--cancel">
+            <div className="commentForm__edit--cancel">
               <i
                 onClick={() => setToggler(false)}
                 className="fas fa-times fa-times-cancel-edits"

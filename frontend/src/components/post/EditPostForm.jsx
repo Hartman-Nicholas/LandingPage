@@ -69,7 +69,7 @@ export const EditPostForm = ({ data, onSubmit, postId, setPhoto }) => {
           type="text"
           name="body"
           required
-          maxLength="255"
+          maxLength="4000"
         />
         <span class="highlight"></span>
         <span class="bar"></span>

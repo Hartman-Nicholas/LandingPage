@@ -36,9 +36,6 @@
   padding-top: 3.7rem;
 }
 
-.postCard__card__details {
-}
-
 .postCard__card--like {
   font-size: var(--fs-body);
   cursor: pointer;
