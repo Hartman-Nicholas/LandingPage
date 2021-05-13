@@ -20,6 +20,7 @@ import { GroupsBar } from "./components/GroupsBar";
 import { GroupHome } from "./pages/groups/GroupHome";
 import { GroupForm } from "./pages/groups/GroupForm";
 import { GroupEdit } from "./pages/groups/GroupEdit";
+import GuideLines from "./components/GuideLines";
 
 export default function App() {
   // State
@@ -51,6 +52,7 @@ export default function App() {
               {!loggedIn && <AuthPage />}
               <Route path="/" exact component={Home} />
               <Route path="/user" exact component={User} />
+              <Route path="/guidelines" exact component={GuideLines} />
               <Route path="/groups/create" exact component={GroupForm} />
               <Route path="/groups" exact component={Groups} />
               <Route path="/groups/:id/home" exact component={GroupHome} />
