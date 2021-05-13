@@ -6,11 +6,12 @@
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: repeat(minmax(150px, 1fr));
-  grid-column-gap: 5px ;
+  grid-column-gap: 5px;
   white-space: nowrap;
   overflow-x: scroll;
   top: 0;
 }
+
 .sidebarWrapper::-webkit-scrollbar {
   display: none;
 }
@@ -43,7 +44,7 @@
   font-weight: 500;
   text-align: center;
   padding: 0;
-  overflow-x: scroll ;
+  overflow-x: scroll;
 }
 
 .sidebarButtonTop {
@@ -52,7 +53,7 @@
   padding: 10px;
   border-radius: 20px;
   font-weight: 500;
-  width: 200px;
+  width: 150px;
   height: 40px;
   background-color: white;
 }
@@ -64,48 +65,75 @@
 .sidebar-image img {
   width: 115px;
   height: 70px;
+  object-fit: cover;
 }
-  .sidebarButtonBottom {
-    border: 1px solid #006aa8;
-    color: white;
-    padding: 10px;
-    border-radius: 20px;
-    font-weight: 500;
-    width: 200px;
-    height: 40px;
-    background-color: #006aa8;
-  }
-  .sidebar-button {
-    margin-bottom: 20px;
-      display: flex;
-      justify-content:space-between; 
 
-  }
+.sidebarButtonBottom {
+  border: 1px solid #006aa8;
+  color: white;
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: 500;
+  width: 150px;
+  height: 40px;
+  background-color: #006aa8;
+}
+
+.sidebar-button {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+
+}
 
 @media screen and (min-width: 1025px) {
+
   #sidebar {
     display: flex;
     flex-direction: column;
     height: calc(100vh - 50px);
     overflow-y: scroll;
+    margin: 0 auto;
+    overflow-x: hidden;
+    margin-bottom: 0;
     position: -webkit-sticky;
     position: sticky;
-    padding: 50px;
-    margin: 0 auto;
+    left: 0;
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+
   }
 
-  #sidebar .sidebarWrapper {
+  ::-webkit-scrollbar {
+    width: 1px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: white;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(153, 153, 153, 0.25);
+  }
+
+  .sidebarWrapper {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+    margin-top: 15px;
     display: flex;
-    grid-template-columns: none;
+    flex-direction: column;
+    object-fit: contain;
+    width: fit-content;
+    overflow-x: hidden;
   }
 
   .sidebar-group-list {
     display: grid;
     grid-template-columns: 20% 80%;
-    grid-column-gap: 3px;
     height: 55px;
-    width: 270px;
-    background-image: none;
+    width: 250px;
   }
 
   .sidebar-image img {
@@ -127,8 +155,8 @@
 
   }
 
-  .fa-user-slash:hover {
-    color: tomato;
+  .fa-sign-out-alt:hover {
+    color: #ff0033;
   }
 
   .sidebar-list {
@@ -139,26 +167,19 @@
   }
 
   .danger-btn>i {
-    /* display: inline-block;
-    text-align: center; */
     position: relative;
     top: calc(50% - 20px);
   }
 
-#sidebar .itemTitle {
-  text-align: justify;
-  overflow-x: scroll ;
-}
+  #sidebar .itemTitle {
+    text-align: justify;
+    overflow-x: scroll;
+  }
 
-#sidebar::-webkit-scrollbar {
-  width: 1px;
-}
 
-#sidebar::-webkit-scrollbar-track {
-  background-color: white;
-}
-
-#sidebar::-webkit-scrollbar-thumb {
-  background-color: rgba(153, 153, 153, 0.25);
-}
+  .sidebarButtonBottom,
+  .sidebarButtonTop {
+    width: 130px;
+    font-size: 12px;
+  }
 }
