@@ -1,12 +1,13 @@
-#grid {
+/* #grid {
   display: grid;
-}
+} */
 .rightBar {
   display: none;
 }
 
 @media screen and (min-width: 1025px) {
   #grid {
+    display: grid;
     grid-template-columns: 30% 70%;
   }
   .gridRight {
