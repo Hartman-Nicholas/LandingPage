@@ -40,12 +40,12 @@ export const ImageUploader = ({ setImageState }) => {
     <ReactImageUploadComponent
       singleImage={true}
       onChange={updateImage}
-      buttonText="Upload Image"
+      buttonText=" "
       withLabel={false}
       withIcon={false}
       buttonClassName="upload-button"
       name="avatar"
       //TODO styles can be added here
-    />
+    ></ReactImageUploadComponent>
   );
 };

@@ -1,6 +1,3 @@
-.authPage {
-}
-
 .authPage__form {
   padding-left: 4rem;
   padding-right: 4rem;
@@ -64,6 +61,8 @@
 @media (min-width: 40.625em) {
   .authPage {
     padding: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 
   .authPage--blueWave::before {
