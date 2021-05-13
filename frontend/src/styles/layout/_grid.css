@@ -1,11 +1,11 @@
 #grid {
   display: grid;
-  }
+}
 .rightBar {
-    display: none;
+  display: none;
 }
 
-@media screen and (min-width: 1025px){
+@media screen and (min-width: 1025px) {
   #grid {
     grid-template-columns: 30% 70%;
   }
@@ -14,18 +14,6 @@
     grid-template-columns: 80% 20%;
   }
   .rightBar {
-    display: flex;   /* To Discuss: remove 3 column layout?*/
+    display: flex; /* To Discuss: remove 3 column layout?*/
   }
-  .sidebar-list {
-      display: grid;
-      grid-template-columns: 30% 70%;
-      height: 55px;
-      width: 270px; 
-      background-image: none;
-  }
-  .sidebar-image img{
-  padding: 2px;
-  height: 50px;
-  width: 50px;
-}
 }
