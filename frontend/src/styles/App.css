@@ -38,4 +38,5 @@
 
 @import "./pages/_authPage.css";
 @import "./pages/_groupForm.css";
+@import './pages/_group-grid.css'
 @import "./pages/_guideLines.css";
