@@ -19,7 +19,6 @@
     object-position: center center;
     margin: 0 auto;
     height: 150px;
-    width: 100%;
     opacity: 0.9;
 }
 
@@ -47,7 +46,7 @@
     white-space: nowrap;
 }
 *::-webkit-scrollbar {
-  width: 1px;
+  display: none;
 }
 *::-webkit-scrollbar-track {
   background-color: white;
@@ -56,10 +55,9 @@
 .group-container {
     padding: 16px 0 20px 0;
     margin-bottom: 0;
-    background-color: white;
+    /* background-color: #f8f9fa; */
     border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-    align-items: center;
+box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;    align-items: center;
 }
 
 .group-container button {

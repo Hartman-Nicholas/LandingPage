@@ -36,7 +36,7 @@ export const GroupCard = ({ groupData, joinGroup, leaveGroup }) => {
               alt="group"
               style={{
                 width: "95%",
-                objectFit: "contain",
+                objectFit: "cover",
               }}
             />
           </Link>
