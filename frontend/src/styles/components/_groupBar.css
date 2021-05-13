@@ -102,6 +102,7 @@
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
+  border-right: 2px solid white;
 
   }
 
