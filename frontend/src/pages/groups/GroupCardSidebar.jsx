@@ -21,31 +21,6 @@ export const GroupCardSidebar = ({ groupData, joinGroup, leaveGroup }) => {
     setUserData({ ...userData, groupsJoined: filteredGroup });
   };
 
-  // const background_image = {
-  //   backgroundImage: `url(${groupData?.avatar})`,
-  //   backgroundPosition: "center",
-  //   backgroundSize: "cover",
-  //   backgroundRepeat: "no-repeat",
-  //   maxWidth: "100%",
-  //   maxHeight: "100%",
-  // };
-  // const [style, setStyle] = useState('');
-  // const windowWidth = window.innerWidth;
-
-  // useEffect(() => {
-  // 	windowWidth > 1025
-  //   ? { ...background_image, backgroundImage: "none !important" }
-  //   : { ...background_image };
-  // 	// return () => {
-  // 	// 	cleanup
-  // 	// }
-  // }, [style])
-
-  // const style =
-  //   windowWidth > 1025
-  //     ? { ...background_image, backgroundImage: "none !important" }
-  //     : { ...background_image };
-
   return (
     <div className="sidebar-list">
       <div className="sidebar danger-btn">
@@ -56,7 +31,6 @@ export const GroupCardSidebar = ({ groupData, joinGroup, leaveGroup }) => {
           )}
       </div>
       <Link to={`/groups/${groupData.id}/home`}>
-        {/* <div className="sidebar-group-list" style={{ ...style }}> */}
         <div className="sidebar-group-list">
           <div className="sidebar-image">
             <img
@@ -72,15 +46,6 @@ export const GroupCardSidebar = ({ groupData, joinGroup, leaveGroup }) => {
           </div>
         </div>
       </Link>
-
-      {/* <div>
-        {groupData.groupOwner !== userData.name &&
-          !groupMembers.includes(userData.name) && (
-            <button name="join" onClick={() => joinGroup(groupData.id)}>
-              Join Group
-            </button>
-          )}
-      </div> */}
     </div>
   );
 };
