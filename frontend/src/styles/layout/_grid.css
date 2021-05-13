@@ -12,9 +12,17 @@
   }
   .gridRight {
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 73% 27%;
   }
   .rightBar {
     display: flex; /* To Discuss: remove 3 column layout?*/
+  }
+  .center {
+    border-right: 2px solid white;
+  }
+  .rightBar {
+    width: fit-content;
+    object-fit: contain;
+    overflow: hidden;
   }
 }
