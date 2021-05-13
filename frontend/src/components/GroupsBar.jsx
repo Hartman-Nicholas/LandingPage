@@ -42,10 +42,10 @@ export const GroupsBar = () => {
     <section id="sidebar">
       <div className="sidebar-button">
         <button className="sidebarButtonTop">
-          <Link to="/groups">Join a new group +</Link>
+          <Link to="/groups/create">+ Create a group</Link>
         </button>
         <button className="sidebarButtonBottom">
-          <Link to="/groups/create">+ Create a group</Link>
+          <Link to="/groups">Join new group +</Link>
         </button>
       </div>
       <div className="sidebarWrapper">
