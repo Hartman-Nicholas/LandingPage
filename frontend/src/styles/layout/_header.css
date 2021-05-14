@@ -1,1 +1,34 @@
+.flexbox-container {
+  background-color: skyblue;
+}
 
+.logo {
+  position: relative;
+  left: 20px;
+}
+
+.headerBar li {
+  display: inline-block;
+  color: rgb(4, 6, 7);
+  letter-spacing: 1px;
+  font-size: var(--fs-h3);
+  margin: 0 30px;
+  font-weight: 700;
+  line-height: 1;
+  position: relative;
+  left: 500px;
+}
+
+.headerBar li a:hover {
+  text-decoration: underline;
+  font-weight: bold;
+  text-underline-position: under;
+}
+.logout {
+  background-color: #47bdef;
+  width: 50%;
+  height: 25px;
+  max-width: 100px;
+  border-radius: 55px;
+  font-size: var(--fs-h3);
+}

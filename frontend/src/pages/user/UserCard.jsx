@@ -1,16 +1,100 @@
-import { useRecoilValue } from "recoil";
+import { useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
 import { userDataState } from "../../state/userDataState";
+
+import EditProfile from "./EditProfile";
+import { ImageUploader } from "../../components/ImageUploader";
+import UserApi from "../../api/UserApi";
+
 export default function UserCard() {
-	const userData = useRecoilValue(userDataState);
+  // State
+  const [userData, setUserData] = useRecoilState(userDataState);
+  const [imageUrl, setImageUrl] = useState(userData.avatar);
+  const [toggler, setToggler] = useState(false);
 
-	console.log(userData.posts)
+  const updateProfile = async (avatar) => {
+    try {
+      console.log("updateProfile", { avatar });
+      const response = await UserApi.updateUser({ avatar });
+      console.log({ response });
+      setUserData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-	return (
+  useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
+    if (!imageUrl) {
+      return;
+    }
+    console.log("useEffect for imageUrl", { imageUrl });
+    updateProfile(imageUrl);
+    console.log({ userData });
+
+    return () => {
+      abortController.abort()
+    }
+
+  }, [imageUrl]);
+
+  // console.log({ userData });
+
+  // Constants
+
+  // Components
+  return (
     <section>
-        <div>UserCard Template</div>
-        <div>{userData.name}</div>
-        <div> {userData.email}</div>
-        <div> {userData.bio}</div>
+      <div className="custom-file-upload">
+        <img
+          className="img-wrap img-upload"
+          src={userData.avatar}
+          alt="avatar"
+        />
+      </div>
+      <ImageUploader setImageState={setImageUrl} />
+
+      <div className="listItem">Name: {userData.name}</div>
+      <div className="listItem">Email: {userData.email}</div>
+      <div className="listItem">Bio: {userData.bio}</div>
+
+      <button onClick={() => setToggler(!toggler)}>Edit Profile</button>
+      {toggler && <EditProfile setToggler={setToggler} />}
+
+      <div>
+        <ul className="list">
+          <li className="listItem">
+            <label htmlFor="">Created </label>
+          </li>
+          <li className="listItem">{userData?.groupsCreated?.length}</li>
+        </ul>
+      </div>
+      <div>
+        <ul className="list">
+          <li className="listItem">
+            <label htmlFor="">Joined </label>
+          </li>
+          {userData?.groupsJoined?.length}
+        </ul>
+      </div>
+      <div>
+        <ul className="list">
+          <li className="listItem">
+            <label htmlFor="">Posts </label>
+          </li>
+          <li className="listItem">{userData?.posts?.length}</li>
+        </ul>
+      </div>
+      <div>
+        <ul className="list">
+          <li className="listItem">
+            <label htmlFor="">Comments </label>
+          </li>
+          <li className="listItem">{userData?.comments?.length}</li>
+        </ul>
+      </div>
     </section>
   );
 }

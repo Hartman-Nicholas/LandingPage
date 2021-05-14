@@ -1,0 +1,109 @@
+.group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-column-gap: 30px;
+    grid-row-gap: 40px;
+    grid-auto-rows: 1fr;
+    padding-bottom: 50px;
+}
+
+.beginning{
+    font-size: 20px;
+    font-weight: 300;
+}
+.group-grid .itemTitle {
+    font-weight: var(--fw-reg);
+    letter-spacing: 1px;
+    font-size: 20px;
+}
+
+.group-grid img {
+    position: relative;
+    overflow: hidden;
+    object-position: center center;
+    margin: 0 auto;
+    height: 150px;
+    opacity: 0.9;
+}
+
+.group-grid a {
+    padding: 0 5px;
+}
+
+.author-text {
+    display: flex;
+    justify-content: space-around;
+    font-weight: var(--fw-reg);
+    color: rgb(144, 144, 146);
+    font-size: 13px;
+    letter-spacing: .7px;
+}
+
+.group-grid .description-text {
+    font-size: 15px;
+    font-weight: var(--fw-reg);
+    color: rgb(119, 119, 126);
+    margin: 8px 20px 15px 20px;
+    letter-spacing: .1px;
+    overflow-x: scroll;
+    text-align: center;
+    white-space: nowrap;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: white;
+}
+
+.group-container {
+    padding: 16px 0 20px 0;
+    margin-bottom: 0;
+    /* background-color: #f8f9fa; */
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    align-items: center;
+}
+
+.group-container button {
+    border: 1px solid #006aa8;
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    width: 150px;
+    height: 40px;
+    background-color: #006aa8;
+    margin: 0;
+}
+
+.btn:hover {
+    background-color: white;
+    color: var(--sweden-blue);
+}
+
+.btn:focus {
+    background-color: var(--sweden-yellow);
+}
+
+.btn:focus::before {
+    content: "✓";
+    transition: 10s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+}
+
+
+.tags-container {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    margin-left: -1px;
+    color: white;
+}
+
+.tags-container .tag {
+    border-radius: 5px;
+    padding: 4px 8px;
+    margin-right: 5px;
+}

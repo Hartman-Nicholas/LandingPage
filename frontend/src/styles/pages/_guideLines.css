@@ -1,0 +1,39 @@
+.homePage {
+  text-align: left;
+  padding: 2rem;
+}
+
+.homePage--heading {
+  text-align: center;
+}
+
+.homePage--welcome {
+  text-align: center;
+  padding-bottom: 2rem;
+  font-weight: var(--fw-reg);
+}
+
+.homePage--subHeading {
+  text-align: left;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: var(--fs-h3);
+}
+
+.homePage__list {
+  list-style: disc;
+  font-size: 1.4rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.homePage__list--item {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.homePage--links {
+  color: var(--sweden-blue);
+  font-weight: var(--fw-medium-reg);
+  text-decoration: underline;
+}

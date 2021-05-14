@@ -16,7 +16,6 @@ const composeValidators = (...validators) => (value) =>
 const focusOnError = createDecorator();
 
 export const GroupForm = () => {
-
   //   State
 
   const [topicArray, setTopicArray] = useState([]);
@@ -49,9 +48,10 @@ export const GroupForm = () => {
 
       setGroup(group);
 
-      topicArray.map(async (topic) => {
+      for(const topic of topicArray){
         await GroupApi.joinTopic(group.id, topic);
-      });
+      }
+
       await UserApi.getUser().then(({ data }) => setUserData(data));
     } catch (e) {
       console.error(e);
@@ -75,8 +75,7 @@ export const GroupForm = () => {
   // Components
 
   return (
-    <div className="gridRight" style={{ display: "flex" }}>
-
+    <div>
       <Form
         onSubmit={onSubmit}
         decorators={[focusOnError]}
@@ -100,54 +99,62 @@ export const GroupForm = () => {
           >
             <h2>Create Group</h2>
             <Field
-
               name="title"
               placeholder="Group Name"
               validate={composeValidators(required, groupNameExists)}
             >
               {({ input, meta, placeholder }) => (
-
-                <div>
-                  <input {...input} placeholder={placeholder} />
+                <div className="form--input">
+                  <input required {...input} placeholder={placeholder} />
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
                   {meta.error && meta.touched && (
-                    <div className="input-field-error">{meta.error}</div>
+                    <div className="error">{meta.error}</div>
                   )}
+                  <label>Group Name</label>
                 </div>
               )}
             </Field>
             <Field
-
-              name="description"
               placeholder="Group Description"
+              name="description"
               validate={composeValidators(required)}
             >
               {({ input, meta, placeholder }) => (
-
-                <div>
-                  <textarea {...input} placeholder={placeholder} />
+                <div className="form--input">
+                  <textarea
+                    required
+                    {...input}
+                    rows="5"
+                    placeholder={placeholder}
+                  />
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
                   {meta.error && meta.touched && (
-                    <div className="input-field-error">{meta.error}</div>
+                    <div className="error">{meta.error}</div>
                   )}
+                  <label>Group Description</label>
                 </div>
               )}
             </Field>
-
-            <Field name="rules" placeholder="Group Rules">
+            <Field placeholder="Group Rules" name="rules">
               {({ input, meta, placeholder }) => (
-                <div>
-
+                <div className="form--input">
                   <textarea
                     {...input}
-                    placeholder={placeholder}
                     type="textarea"
+                    rows="5"
+                    placeholder={placeholder}
                   />
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
                   {meta.error && meta.touched && (
-                    <div className="input-field-error">{meta.error}</div>
+                    <div className="error">{meta.error}</div>
                   )}
+                  <label>Group Rules</label>
                 </div>
               )}
             </Field>
-
             <h2>Set Topics</h2>
             <div className="topicsCheckBox">
               <div className="topicsCheckBox__wrapper">
@@ -175,7 +182,7 @@ export const GroupForm = () => {
                   id="Entertainment"
                   name="Entertainment"
                   component="input"
-                  value="1"
+                  value="2"
                   type="checkbox"
                 />
                 <label
@@ -192,7 +199,7 @@ export const GroupForm = () => {
                   id="Health"
                   name="Health"
                   component="input"
-                  value="1"
+                  value="3"
                   type="checkbox"
                 />
                 <label
@@ -209,7 +216,7 @@ export const GroupForm = () => {
                   id="Education"
                   name="Education"
                   component="input"
-                  value="1"
+                  value="4"
                   type="checkbox"
                 />
                 <label
@@ -226,7 +233,7 @@ export const GroupForm = () => {
                   id="Family"
                   name="Family"
                   component="input"
-                  value="1"
+                  value="5"
                   type="checkbox"
                 />
                 <label
@@ -245,16 +252,8 @@ export const GroupForm = () => {
                 className="groupForm--avatar"
                 src={imageUrl}
                 alt="User Avatar"
-style={{
-                     width: "100%",
-                     maxHeight: "500px",
-                     borderRadius: "8px",
-                     objectFit: "contain",
-                   }}
-
               />
             </div>
-
             <input
               className="btn"
               value="Create"
@@ -274,7 +273,6 @@ style={{
           </form>
         )}
       </Form>
-
     </div>
   );
 };

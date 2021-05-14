@@ -11,18 +11,34 @@ import CommentsApi from "../../api/CommentsApi";
 import PostsApi from "../../api/PostsApi";
 
 export const PostCard = ({
-  data: { id, comments, body, postOwner, created },
+  data: {
+    id,
+    comments,
+    body,
+    postOwner,
+    created,
+    postLikes,
+    postDislikes,
+    updated,
+    groupOwner: postGroup,
+    photo,
+  },
   handleDelete,
   groupOwner,
 }) => {
   // State
   const [commentsData, setCommentsData] = useState(comments);
-  const [postBody, setPostBody] = useState(body);
+  const [postBody, setPostBody] = useState({ body: body, photo: photo });
   const [toggler, setToggler] = useState(false);
   const { name: userInSession } = useRecoilValue(userDataState);
   const [commentToggler, setCommentToggler] = useState(false);
   const [likeToggler, setLikeToggler] = useState();
   const [dislikeToggler, setDislikeToggler] = useState();
+  const [likesCount, setLikesCount] = useState(postLikes?.length | 0);
+  const [dislikeCount, setDislikeCount] = useState(postDislikes?.length | 0);
+  const [commentsCount, setCommentsCount] = useState(comments?.length | 0);
+  const [imageUrl, setImageUrl] = useState(photo);
+
 
   useEffect(() => {
     setCommentsData(comments ? comments : []);
@@ -41,17 +57,17 @@ export const PostCard = ({
     dislikeStatus();
   }, [comments, id]);
 
-  console.log(likeToggler);
-
   // Constants
   const handleSubmit = (newComment) => {
     const list = commentsData.concat(newComment);
     setCommentsData(list);
+    setCommentsCount(commentsCount+1);
   };
 
   const deleteComment = async (commentId) => {
     try {
       await CommentsApi.deleteComment(commentId);
+      setCommentsCount(commentsCount-1)
     } catch (e) {
       console.error(e);
     }
@@ -59,12 +75,16 @@ export const PostCard = ({
 
   const handleLike = () => {
     if (likeToggler) {
+      setLikesCount(likesCount - 1);
       deleteLikePost();
       setLikeToggler(false);
     } else {
       likePost();
+      setLikesCount(likesCount + 1);
       setLikeToggler(true);
       if (dislikeToggler) {
+        setDislikeCount(dislikeCount - 1);
+        setLikesCount(likesCount + 1);
         deleteDislikePost();
         setDislikeToggler(false);
       }
@@ -89,12 +109,16 @@ export const PostCard = ({
 
   const handleDislike = () => {
     if (dislikeToggler) {
+      setDislikeCount(dislikeCount - 1);
       deleteDislikePost();
       setDislikeToggler(false);
     } else {
+      setDislikeCount(dislikeCount + 1);
       dislikePost();
       setDislikeToggler(true);
       if (likeToggler) {
+        setDislikeCount(dislikeCount + 1);
+        setLikesCount(likesCount - 1);
         deleteLikePost();
         setLikeToggler(false);
       }
@@ -144,47 +168,89 @@ export const PostCard = ({
           />
         ));
   return (
-    <div>
+    <div className="postCard">
       {!toggler && (
-        <div>
-          <h1>{postBody}</h1>
-          <h3>{postOwner}</h3>
-          <div>
-            Created: <ReactTimeAgo date={new Date(created)} locale="en-US" />
-          </div>
-          {likeToggler ? (
-            <div>
-              <i onClick={handleLike} className="fas fa-thumbs-up"></i>
-            </div>
-          ) : (
-            <div>
-              <i onClick={handleLike} className="far fa-thumbs-up"></i>
-            </div>
-          )}
+        <div className="postCard__card">
+          <p className="postCard__card--owner">{postOwner}</p>
 
-          {dislikeToggler ? (
-            <div>
-              <i onClick={handleDislike} className="fas fa-thumbs-down"></i>
+          <div className="postCard__card__content">
+            {imageUrl !== "" && (
+              <div className="postCard__card--imgContainer">
+                <img
+                  className="postCard__card--img"
+                  src={imageUrl}
+                  alt="post"
+                />
+              </div>
+            )}
+            <p className="postCard__card--body">{postBody.body}</p>
+            <div className="postCard__card__details">
+              <p className="postCard__card--postGroup">{postGroup}</p>
+
+              <div className="postCard__card--created">
+                {updated === null? "Created: " : "Last updated: "}
+                <ReactTimeAgo
+                  date={new Date(created ? created : updated)}
+                  locale="en-US"
+                />
+              </div>
+              {/* Comments counter */}
+              <div>
+                {commentsCount} comments
+              </div>
+              {likeToggler ? (
+                <div className="postCard__card--like">
+                  <i onClick={handleLike} className="fas fa-thumbs-up">
+                    <span className="postCard__card--likesCount">
+                      {likesCount}
+                    </span>
+                  </i>
+                </div>
+              ) : (
+                <div className="postCard__card--like">
+                  <i onClick={handleLike} className="far fa-thumbs-up">
+                    <span className="postCard__card--likesCount">
+                      {likesCount}
+                    </span>
+                  </i>
+                </div>
+              )}
+
+              {dislikeToggler ? (
+                <div className="postCard__card--dislike">
+                  <i onClick={handleDislike} className="fas fa-thumbs-down">
+                    <span className="postCard__card--dislikeCount">
+                      {dislikeCount}
+                    </span>
+                  </i>
+                </div>
+              ) : (
+                <div className="postCard__card--dislike">
+                  <i onClick={handleDislike} className="far fa-thumbs-down">
+                    <span className="postCard__card--dislikeCount">
+                      {dislikeCount}
+                    </span>
+                  </i>
+                </div>
+              )}
             </div>
-          ) : (
-            <div>
-              <i onClick={handleDislike} className="far fa-thumbs-down"></i>
-            </div>
-          )}
+          </div>
 
           {postOwner === userInSession && (
-            <>
-              <button onClick={() => setToggler(true)}>Edit</button>
-            </>
+            <div className="postCard__card--edit">
+              <i onClick={() => setToggler(true)} className="fas fa-edit"></i>
+            </div>
           )}
           {groupOwner | (postOwner === userInSession) && (
-            <i
-              onClick={() => handleDelete(id)}
-              className="fas fa-trash-alt"
-            ></i>
+            <div className="postCard__card--delete">
+              <i
+                onClick={() => handleDelete(id)}
+                className="fas fa-trash-alt"
+              ></i>
+            </div>
           )}
 
-          <div>
+          <div className="postCard__card--comments">
             <i
               onClick={() => setCommentToggler(!commentToggler)}
               className="fas fa-comments"
@@ -192,19 +258,31 @@ export const PostCard = ({
           </div>
 
           {commentToggler && (
-            <>
+            <div>
               {commentList}
               <CommentForm postId={id} onSubmit={handleSubmit} />
-            </>
+            </div>
           )}
         </div>
       )}
 
       {toggler && (
-        <>
-          <EditPostForm data={postBody} onSubmit={handleUpdate} postId={id} />
-          <button onClick={() => setToggler(false)}>Close</button>
-        </>
+        <div className="postCard__edit">
+          <EditPostForm
+            setPhoto={setImageUrl}
+            data={postBody}
+            onSubmit={handleUpdate}
+            postId={id}
+          />
+          <div className="postForm__edit--cancel-position">
+            <div className="postForm__edit--cancel">
+              <i
+                onClick={() => setToggler(false)}
+                className="fas fa-times fa-times-cancel-edits"
+              ></i>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

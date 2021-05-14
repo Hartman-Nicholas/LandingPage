@@ -1,17 +1,18 @@
 // NPM Packages
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Project files
 import PostApi from "../../api/PostsApi";
+import { ImageUploader } from "../ImageUploader";
 
 export const PostForm = ({ groupId, onSubmit }) => {
-
   // State
+
+  const [photoUrl, setPhotoUrl] = useState("");
   const [postForm, setPostForm] = useState({
     body: "",
+    photo: "",
   });
-
-
   // Constants
   async function createPost(requestBody) {
     try {
@@ -29,29 +30,66 @@ export const PostForm = ({ groupId, onSubmit }) => {
       ...postForm,
       [name]: value,
     });
+    console.log(postForm);
+    console.log(photoUrl);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     createPost(postForm);
-    setPostForm({ body: "" });
+    setPostForm({ body: "", photo: "" });
   };
 
+  const handleDiscard = (e) => {
+    e.preventDefault();
+    setPhotoUrl("");
+  };
+
+  useEffect(() => {
+    setPostForm({ ...postForm, photo: photoUrl });
+  }, [photoUrl]);
 
   // Components
 
   return (
-    <form onSubmit={handleSubmit}>
-      <textarea
-        value={postForm.body}
-        onChange={handleChange}
-        placeholder="what's on your mind..."
-        type="text"
-        name="body"
-        required
-        maxLength="255"
-      />
-      <button type="submit">Submit</button>
+    <form className="postForm">
+      {postForm.photo !== "" && (
+        <div>
+          <div className="postForm-avatarContainer">
+            <img
+              className="postForm--avatar"
+              src={postForm.photo}
+              alt="User Avatar"
+            />
+            <div className="postForm--cancelImg">
+              <i onClick={handleDiscard} className="fas fa-times"></i>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className="postForm__textArea form--input">
+        <textarea
+          value={postForm.body}
+          onChange={handleChange}
+          placeholder="what's on your mind..."
+          type="text"
+          name="body"
+          required
+          maxLength="4000"
+        />
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Your Post</label>
+      </div>
+      <div className="postForm__img-position">
+        <ImageUploader setImageState={setPhotoUrl} />
+      </div>
+
+      <div className="postForm__share-position">
+        <div className="share" onClick={handleSubmit}>
+          <i class="fas fa-share"></i>
+        </div>
+      </div>
     </form>
   );
 };

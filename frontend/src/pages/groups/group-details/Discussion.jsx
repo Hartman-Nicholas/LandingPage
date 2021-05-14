@@ -43,16 +43,27 @@ export const Discussion = ({ data }) => {
 
   // Components
   let postsList =
-    (postData === undefined || postData.length) === 0
-      ? "No Available posts"
-      : postData?.map((post) => (
-          <PostCard
-            key={post.id}
-            data={post}
-            handleDelete={handleDelete}
-            groupOwner={data.groupOwner}
-          />
-        ));
+    (postData === undefined || postData.length) === 0 ? (
+      <div className="discussion">
+        <h2 className="discussions--subHeading">Group has no posts.</h2>
+        <h2 className="discussions--subHeading">Why not make one?</h2>
+      </div>
+    ) : (
+      postData?.sort((currentPost,nextPost)=>{
+        if(currentPost.created > nextPost.created){
+          return -1
+        }else{
+          return 1
+        }
+      }).map((post) => (
+        <PostCard
+          key={post.id}
+          data={post}
+          handleDelete={handleDelete}
+          groupOwner={data.groupOwner}
+        />
+      ))
+    );
 
   return (
     <div>

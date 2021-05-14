@@ -1,4 +1,5 @@
 .center {
+  padding: 2rem;
   overflow-y: scroll;
 }
 ::-webkit-scrollbar {

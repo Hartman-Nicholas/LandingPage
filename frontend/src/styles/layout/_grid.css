@@ -1,55 +1,50 @@
-#grid {
+/* #grid {
   display: grid;
-  width: 100%;
-  grid-template-columns: repeat(minmax(275px, 1fr));
-}
-
-#sidebar {
-  grid-area: 1 / 1 / span 1 / span 1;
-}
-#sidebar .non-sidebar-group-Des {
-  display: none;
-}
-#sidebar .itemTitle {
-  font-size: var(--fs-h3);
-  font-weight: 300;
-  align-items: center;
-  padding: 0;
-}
-.gridRight {
-  display: grid;
-  width: 100%;
-  grid-area: 1 / 2 / span 1 / span 2;
-  grid-template-columns: repeat(3, minmax(275px, 1fr));
-}
-
-.center {
-  grid-area: 1 / 1 / span 1 / span 2;
-}
-
+} */
 .rightBar {
-  grid-area: 1 / 3 / span 1 / span 1;
-}
-
-.rightBarWrapper {
-  padding: 20px 20px 0 0;
-}
-
-#non-sidebar .non-sidebar-group-Des {
-  align-items: center;
-  padding: 20px;
-}
-#non-sidebar .tag {
   display: none;
 }
-#non-sidebar .listItemContent {
-  width: 100%;
-  height: 400px;
-  display: flex;
-}
 
-.group-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(275px, 1fr));
-  grid-gap: 20px;
+@media screen and (min-width: 1025px) {
+  #grid {
+    display: grid;
+    grid-template-columns: 25% 75%;
+  }
+
+  .gridRight {
+    display: grid;
+    grid-template-columns: 73% 27%;
+  }
+
+  .center {
+    border-right: 1px solid rgb(215, 216, 216);
+  }
+
+  .rightBar {
+    display: flex;
+    /* To Discuss: remove 3 column layout?*/
+    flex-direction: column;
+    margin: 0 auto;
+    height: fit-content;
+    object-fit: contain;
+    overflow-y: scroll;
+
+  }
+
+  .rightBar .postCard {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    align-items: center;
+    margin-left: 8px;
+    margin-right: 10px;
+
+  }
+
+  .rightBar .postCard__card {
+    width: 250px;
+  }
+  .rightBar .postCard__card--delete {
+    display: none;
+  }
 }

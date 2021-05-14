@@ -1,0 +1,52 @@
+.postForm {
+  position: relative;
+}
+
+.postForm-avatarContainer {
+  width: 300px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.postForm--avatar {
+  width: 100%;
+  height: 100%;
+}
+
+.postForm--cancelImg {
+  background: var(--sweden-blue);
+  color: var(--white);
+  border-radius: 50%;
+  position: absolute;
+  width: 24px;
+  top: 2px;
+  right: 2px;
+  box-shadow: var(--bs);
+  font-size: var(--fs-h3);
+  cursor: pointer;
+}
+
+.postForm--cancelImg:active {
+  transform: translateY(5px);
+}
+
+.postForm--cancelImg:hover {
+  background-color: var(--medium-blue-hover);
+}
+
+.postForm__share-position {
+  position: absolute;
+  bottom: -55px;
+  right: 10px;
+}
+
+.postForm__img-position {
+  position: absolute;
+  bottom: -65px;
+  right: 65px;
+}
+
+.postForm__textArea {
+  margin-bottom: 6rem;
+}

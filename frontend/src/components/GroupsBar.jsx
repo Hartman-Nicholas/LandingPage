@@ -7,7 +7,7 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import GroupApi from '../api/GroupApi'
 import { getUserData } from "../state/recoilFetch";
 import { userDataState } from "../state/userDataState";
-import { GroupCard } from "../pages/groups/GroupCard";
+import { GroupCardSidebar } from "../pages/groups/GroupCardSidebar";
 
 export const GroupsBar = () => {
   // State
@@ -27,11 +27,11 @@ export const GroupsBar = () => {
 
   // Components
   const groupsJoined = data.groupsJoined.map((group) => {
-    return <GroupCard key={group.id} groupData={group} leaveGroup={(id)=> unsubscribe(id)} />;
+    return <GroupCardSidebar key={group.id} groupData={group} leaveGroup={(id)=> unsubscribe(id)} />;
   });
 
   const groupCreated = data.groupsCreated.map((group) => {
-    return <GroupCard key={group.id} groupData={group} />;
+    return <GroupCardSidebar key={group.id} groupData={group} />;
   });
 
   useEffect(() => {
@@ -40,22 +40,25 @@ export const GroupsBar = () => {
 
   return (
     <section id="sidebar">
-      <div className="sidebarWrapper">
-        <button className="sidebarButtonTop">
-          <Link to="/groups">Join a new group +</Link>
-        </button>
-        <h2>joined :</h2>
-        {groupsJoined}
-        <h2>created :</h2>
-        <ul className="list">
-          <li className="listItem">
-            <span>{groupCreated}</span>
-          </li>
-        </ul>
-        <button className="sidebarButtonBottom">
+      <button className="sidebarButtonTop">
+        <Link to="/groups">Join new group +</Link>
+      </button>
+
+      <div className="sidebar-button">
+        <button className="sidebarButtonTopLeft">
           <Link to="/groups/create">+ Create a group</Link>
         </button>
+        <button className="sidebarButtonTopRight">
+          <Link to="/groups">Join new group +</Link>
+        </button>
       </div>
+      <div className="sidebarWrapper">
+        {groupsJoined}
+        {groupCreated}
+      </div>
+      <button className="sidebarButtonBottom">
+        <Link to="/groups/create">+ Create a group</Link>
+      </button>
     </section>
   );
 };

@@ -9,7 +9,15 @@ import { EditCommentForm } from "./EditCommentForm";
 import CommentsApi from "../../api/CommentsApi";
 
 export const CommentCard = ({
-  data: { id, body, userCommentOwner, created, updated },
+  data: {
+    id,
+    body,
+    userCommentOwner,
+    created,
+    updated,
+    commentDislikes,
+    commentLikes,
+  },
   handleDelete,
   groupOwner,
 }) => {
@@ -19,6 +27,8 @@ export const CommentCard = ({
   const [commentBody, setCommentBody] = useState(body);
   const [likeToggler, setLikeToggler] = useState();
   const [dislikeToggler, setDislikeToggler] = useState();
+  const [likesCount, setLikesCount] = useState(commentLikes?.length | 0);
+  const [dislikeCount, setDislikeCount] = useState(commentDislikes?.length | 0);
 
   useEffect(() => {
     const likeStatus = async () => {
@@ -40,12 +50,16 @@ export const CommentCard = ({
   // Constants
   const handleLike = () => {
     if (likeToggler) {
+      setLikesCount(likesCount - 1);
       deleteLikeComment();
       setLikeToggler(false);
     } else {
       likeComment();
+      setLikesCount(likesCount + 1);
       setLikeToggler(true);
       if (dislikeToggler) {
+        setDislikeCount(dislikeCount - 1);
+        setLikesCount(likesCount + 1);
         deleteDislikeComment();
         setDislikeToggler(false);
       }
@@ -72,12 +86,16 @@ export const CommentCard = ({
 
   const handleDislike = () => {
     if (dislikeToggler) {
+      setDislikeCount(dislikeCount - 1);
       deleteDislikeComment();
       setDislikeToggler(false);
     } else {
+      setDislikeCount(dislikeCount + 1);
       dislikeComment();
       setDislikeToggler(true);
       if (likeToggler) {
+        setDislikeCount(dislikeCount + 1);
+        setLikesCount(likesCount - 1);
         deleteLikeComment();
         setLikeToggler(false);
       }
@@ -111,55 +129,79 @@ export const CommentCard = ({
   return (
     <div>
       {!toggler && (
-        <>
-          <h3>{commentBody}</h3>
-          <h3>By: {userCommentOwner}</h3>
+        <div className="commentCard">
+          <p className="postCard__card--owner">{userCommentOwner}</p>
+          <div className="commentCard__card--created">
+            {created ? "Created: " : "Last updated: "}
+            <ReactTimeAgo
+              date={new Date(created ? created : updated)}
+              locale="en-US"
+            />
+          </div>
+          <p className="commentCard__card--body">{commentBody}</p>
+
           {userCommentOwner === userInSession && (
-            <>
-              <button onClick={() => setToggler(true)}>Edit</button>
-            </>
+            <div className="commentCard__card--edit">
+              <i onClick={() => setToggler(true)} className="fas fa-edit"></i>
+            </div>
           )}
           {groupOwner | (userCommentOwner === userInSession) && (
-            <i
-              onClick={() => handleDelete(id)}
-              className="fas fa-trash-alt"
-            ></i>
+            <div className="postCard__card--delete">
+              <i
+                onClick={() => handleDelete(id)}
+                className="fas fa-trash-alt"
+              ></i>
+            </div>
           )}
           {likeToggler ? (
-            <div>
-              <i onClick={handleLike} className="fas fa-thumbs-up"></i>
+            <div className="postCard__card--like">
+              <i onClick={handleLike} className="fas fa-thumbs-up">
+                <span className="postCard__card--likesCount">{likesCount}</span>
+              </i>
             </div>
           ) : (
-            <div>
-              <i onClick={handleLike} className="far fa-thumbs-up"></i>
+            <div className="postCard__card--like">
+              <i onClick={handleLike} className="far fa-thumbs-up">
+                <span className="postCard__card--likesCount">{likesCount}</span>
+              </i>
             </div>
           )}
 
           {dislikeToggler ? (
-            <div>
-              <i onClick={handleDislike} className="fas fa-thumbs-down"></i>
+            <div className="postCard__card--dislike">
+              <i onClick={handleDislike} className="fas fa-thumbs-down">
+                <span className="postCard__card--dislikeCount">
+                  {dislikeCount}
+                </span>
+              </i>
             </div>
           ) : (
-            <div>
-              <i onClick={handleDislike} className="far fa-thumbs-down"></i>
+            <div className="postCard__card--dislike">
+              <i onClick={handleDislike} className="far fa-thumbs-down">
+                <span className="postCard__card--dislikeCount">
+                  {dislikeCount}
+                </span>
+              </i>
             </div>
           )}
-          {created ? "Created: " : "Last updated: "}
-          <ReactTimeAgo
-            date={new Date(created ? created : updated)}
-            locale="en-US"
-          />
-        </>
+        </div>
       )}
       {toggler && (
-        <>
+        <div className="commentCard__edit">
           <EditCommentForm
             data={commentBody}
             onSubmit={handleUpdate}
             commentId={id}
           />
-          <button onClick={() => setToggler(false)}>Close</button>
-        </>
+          <div className="postForm__edit--cancel-position">
+            <div className="commentForm__edit--cancel">
+              <i
+                onClick={() => setToggler(false)}
+                className="fas fa-times fa-times-cancel-edits"
+              ></i>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
