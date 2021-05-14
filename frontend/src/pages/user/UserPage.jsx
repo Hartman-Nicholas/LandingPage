@@ -8,7 +8,7 @@ import { OwnerGroupsBar } from "../groups/group-details/OwnerGroupBar";
 import UserCard from "./UserCard";
 
 export default function User() {
-	return (
+  return (
     <div className="gridRight">
       <div className="center">
         <ErrorBoundary FallbackComponent={ErrorMessage}>
@@ -22,7 +22,7 @@ export default function User() {
         </ErrorBoundary>
       </div>
       <div className="rightBar">
-            <OwnerGroupsBar />
+        <OwnerGroupsBar />
       </div>
     </div>
   );
