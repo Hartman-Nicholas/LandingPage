@@ -4,7 +4,7 @@
 
 .sidebarWrapper {
   display: grid;
-  /* grid-auto-flow: column; */
+  grid-auto-flow: column;
   grid-template-columns: repeat(minmax(150px, 1fr));
   grid-column-gap: 5px;
   white-space: nowrap;
