@@ -60,7 +60,7 @@
   overflow-x: scroll;
 }
 
-.sidebarButtonTop {
+.sidebarButtonTopLeft {
   border: 1px solid #006aa8;
   color: #006aa8;
   padding: 10px;
@@ -81,7 +81,7 @@
   object-fit: cover;
 }
 
-.sidebarButtonBottom {
+.sidebarButtonTopRight {
   border: 1px solid #006aa8;
   color: white;
   padding: 10px;
@@ -96,8 +96,13 @@
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
-
 }
+
+.sidebarButtonBottom,
+.sidebarButtonTop {
+  display: none;
+}
+
 
 @media screen and (min-width: 1025px) {
 
@@ -115,7 +120,6 @@
     top: 0;
     left: 0;
     border-right: 2px solid white;
-
   }
 
   ::-webkit-scrollbar {
@@ -143,6 +147,7 @@
   .sidebar-group-list {
     display: grid;
     grid-template-columns: 20% 80%;
+    grid-gap: 5px;
     height: 55px;
     width: 240px;
   }
@@ -187,10 +192,37 @@
     overflow-x: scroll;
   }
 
-
-  .sidebarButtonBottom,
-  .sidebarButtonTop {
-    width: 130px;
-    font-size: 12px;
+  .sidebar-button {
+    display: none;
   }
+
+.sidebarButtonTop {
+  margin: 0 auto;
+  display: flex;
+  width: 120px;
+  border: 1px solid #006aa8;
+  color: #006aa8;
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: 500;
+  width: 200px;
+  height: 40px;
+  background-color: white;
+}
+.sidebarButtonBottom {
+  margin: 30px auto;
+  display: flex;
+  width: 120px;
+  border: 1px solid #006aa8;
+  color: white;
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: 500;
+  width: 200px;
+  height: 40px;
+  background-color: #006aa8;
+}
+.sidebarButtonTop a, .sidebarButtonBottom a{
+  margin: 0 auto;
+}
 }
