@@ -13,6 +13,7 @@ export default function EditProfile({ setToggler, onSubmit }) {
   const [userForm, setUserForm] = useState({
     name: userData.name,
     email: userData.email,
+    avatar: userData.avatar,
     bio: userData.bio,
   });
 
