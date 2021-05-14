@@ -3,11 +3,16 @@
 }
 
 .sidebarWrapper {
-  display: grid;
+  /* display: grid;
   grid-auto-flow: column;
   grid-template-columns: repeat(minmax(150px, 1fr));
-  grid-column-gap: 5px;
+  grid-column-gap: 5px; */
   white-space: nowrap;
+
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+
   overflow-x: scroll;
   top: 0;
 }
@@ -37,6 +42,7 @@
   align-items: center;
   width: 120px;
   height: fit-content;
+  margin: 5px;
 }
 
 .sidebar-group-list:hover {
