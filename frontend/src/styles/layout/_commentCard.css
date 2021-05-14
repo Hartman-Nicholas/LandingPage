@@ -1,9 +1,10 @@
 .commentCard {
+  width: 88%;
   position: relative;
   margin-top: 2rem;
   margin-bottom: 4rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 6px;
   box-shadow: var(--bs);
   background: var(--veryLight-grey);
@@ -28,7 +29,4 @@
 .commentCard__card--edit {
   font-size: var(--fs-body);
   cursor: pointer;
-  position: absolute;
-  top: 22px;
-  left: 175px;
 }

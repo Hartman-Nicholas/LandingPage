@@ -1,0 +1,59 @@
+.groupHome {
+  position: relative;
+  padding: 2rem;
+}
+
+.groupHome--edit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 20px;
+}
+
+.groupHome--image {
+  width: 100%;
+  object-fit: cover;
+  height: 400px;
+  box-shadow: var(--bs);
+  margin-top: 1rem;
+}
+
+.groupHome--image img {
+  width: inherit;
+  height: inherit;
+}
+
+.groupHome--heading {
+  text-transform: capitalize;
+  line-height: 2rem;
+  letter-spacing: 0.5rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  font-weight: var(--fw-medium);
+}
+
+.groupHome__labels {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.groupHome__labels--item {
+  position: relative;
+  font-size: 2rem;
+  font-weight: var(--fw-reg);
+  cursor: pointer;
+}
+
+.groupHome__labels--item:hover {
+  color: var(--sweden-blue);
+
+  transform: scale(1.2);
+}
+
+.active {
+  color: var(--sweden-blue);
+  text-decoration: underline;
+}

@@ -16,7 +16,7 @@
   font-size: 1.8rem;
   padding: 1rem 1rem 1rem 0.5rem;
   display: block;
-  width: 32rem;
+  width: 50rem;
   border: none;
   border-radius: 0;
   border-bottom: 1px solid #c6c6c6;
@@ -31,13 +31,13 @@
 .form--input textarea:not(:placeholder-shown) ~ label,
 .form--input textarea:focus ~ label {
   opacity: 100%;
-  top: -14px;
+  top: -15px;
   font-size: 14px;
   color: #2196f3;
 }
 .form--input input:focus ~ .bar:before,
 .form--input textarea:focus ~ .bar:before {
-  width: 32rem;
+  width: 50rem;
 }
 
 .form--input label {
@@ -56,7 +56,7 @@
   position: relative;
   margin: auto;
   display: block;
-  width: 32rem;
+  width: 50rem;
 }
 .form--input .bar:before {
   content: "";
