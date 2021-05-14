@@ -24,24 +24,35 @@ export default function UserCard() {
   };
 
   useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
     if (!imageUrl) {
       return;
     }
     console.log("useEffect for imageUrl", { imageUrl });
     updateProfile(imageUrl);
     console.log({ userData });
+
+    return () => {
+      abortController.abort()
+    }
+
   }, [imageUrl]);
 
-  console.log({ userData });
+  // console.log({ userData });
 
   // Constants
 
   // Components
   return (
     <section>
-      <h1>UserCard Template</h1>
-      <div className="listItem">
-        <img className="groupForm--avatar" src={userData.avatar} alt="avatar" />
+      <div className="custom-file-upload">
+        <img
+          className="img-wrap img-upload"
+          src={userData.avatar}
+          alt="avatar"
+        />
       </div>
       <ImageUploader setImageState={setImageUrl} />
 
@@ -50,9 +61,7 @@ export default function UserCard() {
       <div className="listItem">Bio: {userData.bio}</div>
 
       <button onClick={() => setToggler(!toggler)}>Edit Profile</button>
-      {toggler && (
-        <EditProfile setToggler={setToggler} />
-      )}
+      {toggler && <EditProfile setToggler={setToggler} />}
 
       <div>
         <ul className="list">
