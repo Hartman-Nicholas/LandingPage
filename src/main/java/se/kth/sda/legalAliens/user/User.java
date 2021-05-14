@@ -14,6 +14,7 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,7 +32,9 @@ public class User {
     @Column(name = "id")
     private Long id;
 
+
     private String avatar= "https://res.cloudinary.com/dlvwrtpzq/image/upload/v1620637324/profilePhotos/unisex_enjdoe.gif";
+
     private String bio = "Sample information, a short description of where you are from, your interests, personality.";
 
     @Email(message = "Invalid email address! Please provide a valid email address")

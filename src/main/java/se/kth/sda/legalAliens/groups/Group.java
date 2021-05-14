@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
@@ -27,7 +28,9 @@ public class Group {
 
     @Column(name = "title", unique = true)
     private String title;
+    @Size(max = 4000)
     private String description;
+    @Size(max = 4000)
     private String rules;
     private String avatar;
     private Date created;

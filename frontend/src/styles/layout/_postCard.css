@@ -1,7 +1,10 @@
 .postCard {
   position: relative;
+  width: 88%;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 6px;
   box-shadow: var(--bs);
   background: var(--white);
@@ -69,9 +72,6 @@
 .postCard__card--edit {
   font-size: var(--fs-body);
   cursor: pointer;
-  position: absolute;
-  top: 22px;
-  left: 148px;
 }
 
 .postCard__card--delete {

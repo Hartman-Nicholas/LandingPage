@@ -27,7 +27,7 @@ export const GroupHome = () => {
 
   // Components
   const handleSubmit = (e) => {
-    switch (e.target.name) {
+    switch (e.target.getAttribute("name")) {
       case "about":
         setAboutState(true);
         setDiscussionState(false);
@@ -49,8 +49,8 @@ export const GroupHome = () => {
   };
 
   return (
-    <div className="gridRight">
-      <div className="center">
+    <div className="groupHome">
+      <div>
         <Link
           to={{
             pathname: "./edit",
@@ -59,7 +59,9 @@ export const GroupHome = () => {
             },
           }}
         >
-          Edit
+          <div className="groupHome--edit">
+            <i className="fas fa-edit"></i>
+          </div>
         </Link>
         <GroupHeader
           group={groupData}
