@@ -51,7 +51,7 @@ export default function UserCard() {
 
       <button onClick={() => setToggler(!toggler)}>Edit Profile</button>
       {toggler && (
-        <EditProfile currentUser={userData} setToggler={setToggler} />
+        <EditProfile setToggler={setToggler} />
       )}
 
       <div>
