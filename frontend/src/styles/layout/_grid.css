@@ -10,19 +10,36 @@
     display: grid;
     grid-template-columns: 30% 70%;
   }
+
   .gridRight {
     display: grid;
     grid-template-columns: 73% 27%;
   }
-  .rightBar {
-    display: flex; /* To Discuss: remove 3 column layout?*/
-  }
+
   .center {
     border-right: 2px solid white;
   }
+
   .rightBar {
-    width: fit-content;
+    display: flex;
+    /* To Discuss: remove 3 column layout?*/
+    flex-direction: column;
+    margin: 0 auto;
+    height: fit-content;
     object-fit: contain;
-    overflow: hidden;
+    overflow-y: scroll;
+  }
+
+  .rightBar .postCard {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    align-items: center;
+    margin-left: 8px;
+    margin-right: 10px;
+  }
+
+  .rightBar .postCard__card {
+    width: 180px;
   }
 }

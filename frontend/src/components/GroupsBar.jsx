@@ -40,18 +40,25 @@ export const GroupsBar = () => {
 
   return (
     <section id="sidebar">
+      <button className="sidebarButtonTop">
+        <Link to="/groups/create">Join new group +</Link>
+      </button>
+
       <div className="sidebar-button">
-        <button className="sidebarButtonTop">
+        <button className="sidebarButtonTopLeft">
           <Link to="/groups/create">+ Create a group</Link>
         </button>
-        <button className="sidebarButtonBottom">
-          <Link to="/groups">Join new group +</Link>
+        <button className="sidebarButtonTopRight">
+          <Link to="/groups/create">Join new group +</Link>
         </button>
       </div>
       <div className="sidebarWrapper">
         {groupsJoined}
         {groupCreated}
       </div>
+      <button className="sidebarButtonBottom">
+        <Link to="/groups">+ Create a group</Link>
+      </button>
     </section>
   );
 };

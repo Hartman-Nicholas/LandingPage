@@ -1,13 +1,18 @@
 #sidebar {
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .sidebarWrapper {
-  display: grid;
-  /* grid-auto-flow: column; */
+  /* display: grid;
+  grid-auto-flow: column;
   grid-template-columns: repeat(minmax(150px, 1fr));
-  grid-column-gap: 5px;
+  grid-column-gap: 5px; */
   white-space: nowrap;
+
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+
   overflow-x: scroll;
   top: 0;
 }
@@ -37,6 +42,7 @@
   align-items: center;
   width: 120px;
   height: fit-content;
+  margin: 5px;
 }
 
 .sidebar-group-list:hover {
@@ -54,7 +60,7 @@
   overflow-x: scroll;
 }
 
-.sidebarButtonTop {
+.sidebarButtonTopLeft {
   border: 1px solid #006aa8;
   color: #006aa8;
   padding: 10px;
@@ -63,6 +69,8 @@
   width: 150px;
   height: 40px;
   background-color: white;
+  margin: 10px;
+
 }
 
 .fa-sign-out-alt {
@@ -75,7 +83,7 @@
   object-fit: cover;
 }
 
-.sidebarButtonBottom {
+.sidebarButtonTopRight {
   border: 1px solid #006aa8;
   color: white;
   padding: 10px;
@@ -84,14 +92,22 @@
   width: 150px;
   height: 40px;
   background-color: #006aa8;
+  margin: 10px;
 }
 
 .sidebar-button {
-  margin-bottom: 20px;
-  display: flex;
+  margin: 0 auto;
+  padding: 5px;
+  /* display: flex;
   justify-content: space-between;
-
+  margin-bottom: 10px; */
 }
+
+.sidebarButtonBottom,
+.sidebarButtonTop {
+  display: none;
+}
+
 
 @media screen and (min-width: 1025px) {
 
@@ -109,7 +125,6 @@
     top: 0;
     left: 0;
     border-right: 2px solid white;
-
   }
 
   ::-webkit-scrollbar {
@@ -137,6 +152,7 @@
   .sidebar-group-list {
     display: grid;
     grid-template-columns: 20% 80%;
+    grid-gap: 5px;
     height: 55px;
     width: 240px;
   }
@@ -181,10 +197,40 @@
     overflow-x: scroll;
   }
 
+  .sidebar-button {
+    display: none;
+  }
 
-  .sidebarButtonBottom,
   .sidebarButtonTop {
-    width: 130px;
-    font-size: 12px;
+    margin: 0 auto;
+    display: flex;
+    width: 120px;
+    border: 1px solid #006aa8;
+    color: #006aa8;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    width: 200px;
+    height: 40px;
+    background-color: white;
+  }
+
+  .sidebarButtonBottom {
+    margin: 30px auto;
+    display: flex;
+    width: 120px;
+    border: 1px solid #006aa8;
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    width: 200px;
+    height: 40px;
+    background-color: #006aa8;
+  }
+
+  .sidebarButtonTop a,
+  .sidebarButtonBottom a {
+    margin: 0 auto;
   }
 }
