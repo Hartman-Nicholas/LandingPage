@@ -49,7 +49,13 @@ export const Discussion = ({ data }) => {
         <h2 className="discussions--subHeading">Why not make one?</h2>
       </div>
     ) : (
-      postData?.map((post) => (
+      postData?.sort((currentPost,nextPost)=>{
+        if(currentPost.created > nextPost.created){
+          return -1
+        }else{
+          return 1
+        }
+      }).map((post) => (
         <PostCard
           key={post.id}
           data={post}

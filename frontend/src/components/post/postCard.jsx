@@ -54,7 +54,6 @@ export const PostCard = ({
     likeStatus();
     dislikeStatus();
   }, [comments, id]);
-  //TODO fix like-dislike handlers
 
   // Constants
   const handleSubmit = (newComment) => {
@@ -185,7 +184,7 @@ export const PostCard = ({
               <p className="postCard__card--postGroup">{postGroup}</p>
 
               <div className="postCard__card--created">
-                {created ? "Created: " : "Last updated: "}
+                {updated === null? "Created: " : "Last updated: "}
                 <ReactTimeAgo
                   date={new Date(created ? created : updated)}
                   locale="en-US"
