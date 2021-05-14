@@ -189,7 +189,7 @@ export const PostCard = ({
 
 
 							<div className="postCard__card--created">
-								{created ? "Created: " : "Last updated: "}
+								{updated === null? "Created " : "updated "}
 								<ReactTimeAgo
 									date={new Date(created ? created : updated)}
 									locale="en-US"
