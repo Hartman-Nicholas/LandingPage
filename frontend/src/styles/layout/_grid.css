@@ -8,7 +8,7 @@
 @media screen and (min-width: 1025px) {
   #grid {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 25% 75%;
   }
 
   .gridRight {
@@ -17,7 +17,7 @@
   }
 
   .center {
-    border-right: 2px solid white;
+    border-right: 1px solid rgb(215, 216, 216);
   }
 
   .rightBar {
@@ -28,6 +28,7 @@
     height: fit-content;
     object-fit: contain;
     overflow-y: scroll;
+
   }
 
   .rightBar .postCard {
@@ -37,9 +38,13 @@
     align-items: center;
     margin-left: 8px;
     margin-right: 10px;
+
   }
 
   .rightBar .postCard__card {
-    width: 180px;
+    width: 250px;
+  }
+  .rightBar .postCard__card--delete {
+    display: none;
   }
 }

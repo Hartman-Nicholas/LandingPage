@@ -75,7 +75,7 @@ export const GroupForm = () => {
   // Components
 
   return (
-    <div className="gridRight" style={{ display: "flex" }}>
+    <div>
       <Form
         onSubmit={onSubmit}
         decorators={[focusOnError]}

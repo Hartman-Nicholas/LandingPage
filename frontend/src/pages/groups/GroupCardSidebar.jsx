@@ -23,13 +23,6 @@ export const GroupCardSidebar = ({ groupData, joinGroup, leaveGroup }) => {
 
   return (
     <div className="sidebar-list">
-      <div className="sidebar danger-btn">
-        {groupData.groupOwner !== userData.name &&
-          groupMembers.includes(userData.name) && (
-            <i class="fas fa-sign-out-alt" title="Leave Group" onClick={handleClick}>
-            </i>
-          )}
-      </div>
       <Link to={`/groups/${groupData.id}/home`}>
         <div className="sidebar-group-list">
           <div className="sidebar-image">
@@ -43,6 +36,16 @@ export const GroupCardSidebar = ({ groupData, joinGroup, leaveGroup }) => {
           </div>
           <div className="sidebar-text">
             <h2 className="itemTitle"> {groupData.title}</h2>
+          </div>
+          <div className="sidebar danger-btn">
+            {groupData.groupOwner !== userData.name &&
+              groupMembers.includes(userData.name) && (
+                <i
+                  class="fas fa-sign-out-alt"
+                  title="Leave Group"
+                  onClick={handleClick}
+                ></i>
+              )}
           </div>
         </div>
       </Link>
