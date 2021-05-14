@@ -89,7 +89,6 @@ export const Groups = () => {
 	return (
     <div className="gridRight" style={{ display: "flex" }}>
       <section id="non-sidebar">
-        <h1>All Groups</h1>
         <input name="title" onChange={handleChange} />
         <label htmlFor="Sport"> Sport</label>
         <input
@@ -126,34 +125,27 @@ export const Groups = () => {
           id="Family"
           name="Family"
         />
-        <br />
-        <div className="group-grid">
+        <h2 className="beginning" style={{ fontStyle: "italic" }}>
+          “Alone, we can do so little; together, we can do so much”
+          <span style={{ fontStyle:"normal", fontWeight:"100"}}> – Helen Keller</span>
+        </h2>
+        <section className="group-grid container">
           {queryList.length > 0 || flag
             ? queryList.map((group) => (
-                <ul className="list">
-                  <li className="listItem">
-                    <GroupCard
-                      key={group.id}
-                      groupData={group}
-                      joinGroup={(id) => addMember(id)}
-                    />
-                  </li>
-                </ul>
+                <GroupCard
+                  key={group.id}
+                  groupData={group}
+                  joinGroup={(id) => addMember(id)}
+                />
               ))
             : groupsList.map((group) => (
-                <ul className="list">
-                  <li className="listItem">
-                    <GroupCard
-                      key={group.id}
-                      groupData={group}
-                      joinGroup={(id) => addMember(id)}
-                    />
-                  </li>
-                </ul>
+                <GroupCard
+                  key={group.id}
+                  groupData={group}
+                  joinGroup={(id) => addMember(id)}
+                />
               ))}
-        </div>
-
-        <br />
+        </section>
       </section>
     </div>
   );

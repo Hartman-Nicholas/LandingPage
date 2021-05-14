@@ -47,21 +47,6 @@ export const EditPostForm = ({ data, onSubmit, postId, setPhoto }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form--input">
-        <textarea
-          value={postForm.body}
-          onChange={handleChange}
-          placeholder="what's on your mind..."
-          type="text"
-          name="body"
-          required
-          maxLength="255"
-        />
-        <span class="highlight"></span>
-        <span class="bar"></span>
-        <label>Your edits here</label>
-      </div>
-
       <div className="postForm">
         {imageUrl !== "" && (
           <div className="postForm-avatarContainer">
@@ -76,9 +61,28 @@ export const EditPostForm = ({ data, onSubmit, postId, setPhoto }) => {
           </div>
         )}
       </div>
-      <ImageUploader setImageState={setImageUrl} />
-      <div onClick={handleSubmit}>
-        <i className="fas fa-check"></i>
+      <div className="postForm__textArea form--input">
+        <textarea
+          value={postForm.body}
+          onChange={handleChange}
+          placeholder="what's on your mind..."
+          type="text"
+          name="body"
+          required
+          maxLength="4000"
+        />
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Your edits here</label>
+      </div>
+      <div className="editPostForm__img-position">
+        <ImageUploader setImageState={setImageUrl} />
+      </div>
+
+      <div className="editPostForm__share-position">
+        <div className="share" onClick={handleSubmit}>
+          <i class="fas fa-share"></i>
+        </div>
       </div>
     </form>
   );
