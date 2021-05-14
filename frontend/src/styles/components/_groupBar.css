@@ -150,11 +150,12 @@
   }
 
   .sidebar-group-list {
+    left: 0;
     display: grid;
     grid-template-columns: 20% 80%;
     grid-gap: 5px;
     height: 55px;
-    width: 240px;
+    width: 300px;
   }
 
   .sidebar-image img {
