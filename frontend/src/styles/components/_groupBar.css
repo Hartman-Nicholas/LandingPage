@@ -21,7 +21,6 @@
   display: none;
 }
 
-
 .sidebarWrapper {
   align-items: center;
 }
@@ -35,7 +34,7 @@
       rgba(255, 255, 255, 0.1) 0%,
       rgba(255, 255, 255, 0) 100%),
     rgba(255, 255, 255, 0.356); */
-  background-color: white;
+  background-color: #f8f9fa;
   border-radius: 10px;
   border: 1px solid white;
   margin-bottom: 20px;
@@ -50,7 +49,6 @@
   border: 2px solid var(--sweden-blue);
   filter: brightness(110%);
 }
-
 
 #sidebar .itemTitle {
   font-size: 14px;
@@ -70,10 +68,9 @@
   height: 40px;
   background-color: white;
   margin: 10px;
-
 }
 
-.fa-sign-out-alt {
+.fa-times-circle {
   display: none;
 }
 
@@ -108,9 +105,7 @@
   display: none;
 }
 
-
 @media screen and (min-width: 1025px) {
-
   #sidebar {
     display: flex;
     flex-direction: column;
@@ -152,11 +147,12 @@
   .sidebar-group-list {
     left: 0;
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 30% 68%;
     grid-gap: 5px;
     height: 60px;
     width: 300px;
-    box-shadow: var(--bs);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   }
 
   .sidebar-image img {
@@ -166,20 +162,19 @@
     border-radius: 10px;
   }
 
-  .fa-sign-out-alt {
+  .fa-times-circle {
     display: flex;
     font-size: 20px;
     /* color: #999; */
-    color: red;
+    color: #9999;
     text-align: center;
     transform: scaleX(-1);
     -moz-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
     -ms-transform: scaleX(-1);
-
   }
 
-  .fa-sign-out-alt:hover {
+  .fa-times-circle:hover {
     color: #ff0033;
   }
 
@@ -188,22 +183,22 @@
     display: grid;
     grid-template-columns: 10% 90%;
     grid-column-gap: 5px;
-  
-        /* position: relative; */
 
+    position: relative;
+    margin-top: 10px;
   }
 
-  /* .danger-btn {
-    position: absolute;
-    right: -20px;
-    top: -20px;
 
-  } */
-  .danger-btn>i {
+  .danger-btn {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+
+  .danger-btn > i {
     position: relative;
     top: calc(50% - 20px);
   }
-
 
   #sidebar .itemTitle {
     text-align: justify;

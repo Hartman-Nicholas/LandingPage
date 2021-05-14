@@ -41,7 +41,7 @@ export const GroupCardSidebar = ({ groupData, joinGroup, leaveGroup }) => {
             {groupData.groupOwner !== userData.name &&
               groupMembers.includes(userData.name) && (
                 <i
-                  class="fas fa-sign-out-alt"
+                  class="fas fa-times-circle"
                   title="Leave Group"
                   onClick={handleClick}
                 ></i>
