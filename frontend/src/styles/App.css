@@ -16,6 +16,7 @@
 @import "./components/_groupBar.css";
 @import "./components/_checkBox.css";
 @import "./components/_imgUpload.css";
+@import "./components/_share.css";
 
 /* layout */
 
@@ -28,6 +29,10 @@
 @import "./layout/_grid.css";
 @import "./layout/_discussions.css";
 @import "./layout/_postForm.css";
+@import "./layout/_editPostForm.css";
+@import "./layout/_commentForm.css";
+@import "./layout/_commentCard.css";
+@import "./layout/_editCommentCard.css";
 
 /* pages */
 
@@ -35,3 +40,4 @@
 @import "./pages/_groupForm.css";
 @import './pages/_group-grid.css';
 @import './pages/_profileCard.css';
+@import "./pages/_guideLines.css";

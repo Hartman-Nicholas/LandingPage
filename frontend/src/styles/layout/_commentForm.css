@@ -1,0 +1,9 @@
+.commentForm__textArea {
+  padding-bottom: 6rem;
+}
+
+.commentForm__share-position {
+  position: absolute;
+  right: 50px;
+  bottom: 20px;
+}

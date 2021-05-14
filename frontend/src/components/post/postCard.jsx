@@ -34,8 +34,9 @@ export const PostCard = ({
   const [commentToggler, setCommentToggler] = useState(false);
   const [likeToggler, setLikeToggler] = useState();
   const [dislikeToggler, setDislikeToggler] = useState();
-  const [likesCount, setLikesCount] = useState(postLikes?.length);
-  const [dislikeCount, setDislikeCount] = useState(postDislikes?.length);
+  const [likesCount, setLikesCount] = useState(postLikes?.length | 0);
+  const [dislikeCount, setDislikeCount] = useState(postDislikes?.length | 0);
+  const [imageUrl, setImageUrl] = useState(photo);
 
   useEffect(() => {
     setCommentsData(comments ? comments : []);
@@ -71,14 +72,12 @@ export const PostCard = ({
 
   const handleLike = () => {
     if (likeToggler) {
-      setLikesCount(
-        likesCount === postLikes.length ? likesCount : likesCount - 1
-      );
+      setLikesCount(likesCount - 1);
       deleteLikePost();
       setLikeToggler(false);
     } else {
       likePost();
-      setLikesCount(postLikes?.length + 1);
+      setLikesCount(likesCount + 1);
       setLikeToggler(true);
       if (dislikeToggler) {
         setDislikeCount(dislikeCount - 1);
@@ -107,13 +106,11 @@ export const PostCard = ({
 
   const handleDislike = () => {
     if (dislikeToggler) {
-      setDislikeCount(
-        dislikeCount === postDislikes?.length ? dislikeCount : dislikeCount - 1
-      );
+      setDislikeCount(dislikeCount - 1);
       deleteDislikePost();
       setDislikeToggler(false);
     } else {
-      setDislikeCount(postDislikes?.length + 1);
+      setDislikeCount(dislikeCount + 1);
       dislikePost();
       setDislikeToggler(true);
       if (likeToggler) {
@@ -174,11 +171,11 @@ export const PostCard = ({
           <p className="postCard__card--owner">{postOwner}</p>
 
           <div className="postCard__card__content">
-            {photo !== "" && (
+            {imageUrl !== "" && (
               <div className="postCard__card--imgContainer">
                 <img
                   className="postCard__card--img"
-                  src={postBody.photo}
+                  src={imageUrl}
                   alt="post"
                 />
               </div>
@@ -265,12 +262,19 @@ export const PostCard = ({
       {toggler && (
         <div className="postCard__edit">
           <EditPostForm
+            setPhoto={setImageUrl}
             data={postBody}
-            photo={photo}
             onSubmit={handleUpdate}
             postId={id}
           />
-          <button onClick={() => setToggler(false)}>Close</button>
+          <div className="postForm__edit--cancel-position">
+            <div className="postForm__edit--cancel">
+              <i
+                onClick={() => setToggler(false)}
+                className="fas fa-times fa-times-cancel-edits"
+              ></i>
+            </div>
+          </div>
         </div>
       )}
     </div>
