@@ -49,7 +49,7 @@ export const GroupsBar = () => {
           <Link to="/groups/create">+ Create a group</Link>
         </button>
         <button className="sidebarButtonTopRight">
-          <Link to="/groups/create">+ Create a group</Link>
+          <Link to="/groups/create">Join new group +</Link>
         </button>
       </div>
       <div className="sidebarWrapper">
