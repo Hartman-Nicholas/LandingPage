@@ -36,7 +36,9 @@ export const PostCard = ({
   const [dislikeToggler, setDislikeToggler] = useState();
   const [likesCount, setLikesCount] = useState(postLikes?.length | 0);
   const [dislikeCount, setDislikeCount] = useState(postDislikes?.length | 0);
+  const [commentsCount, setCommentsCount] = useState(comments?.length | 0);
   const [imageUrl, setImageUrl] = useState(photo);
+
 
   useEffect(() => {
     setCommentsData(comments ? comments : []);
@@ -59,11 +61,13 @@ export const PostCard = ({
   const handleSubmit = (newComment) => {
     const list = commentsData.concat(newComment);
     setCommentsData(list);
+    setCommentsCount(commentsCount+1);
   };
 
   const deleteComment = async (commentId) => {
     try {
       await CommentsApi.deleteComment(commentId);
+      setCommentsCount(commentsCount-1)
     } catch (e) {
       console.error(e);
     }
@@ -189,6 +193,10 @@ export const PostCard = ({
                   date={new Date(created ? created : updated)}
                   locale="en-US"
                 />
+              </div>
+              {/* Comments counter */}
+              <div>
+                {commentsCount} comments
               </div>
               {likeToggler ? (
                 <div className="postCard__card--like">
