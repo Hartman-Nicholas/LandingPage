@@ -198,95 +198,96 @@ export const GroupEdit = (props) => {
               </div>
             )}
           </Field>
-          <div className="topicsCheckBox">
-            <div className="topicsCheckBox__wrapper">
-              <Field
-                className="topicsCheckBox__wrapper--checkbox"
-                onClick={onCheck}
-                onChange={() => {
-                  setChecked({ ...checked, sport: !checked.sport });
-                }}
-                checked={checked.sport}
-                id="sport"
-                name="sport"
-                component="input"
-                value="1"
-                type="checkbox"
-              />
-              <label htmlFor="sport">Sport</label>
-            </div>
-
-            <div className="topicsCheckBox__wrapper">
-              <Field
-                className="topicsCheckBox__wrapper--checkbox"
-                onChange={() => {
-                  setChecked({
-                    ...checked,
-                    entertainment: !checked.entertainment,
-                  });
-                }}
-                checked={checked.entertainment}
-                onClick={onCheck}
-                id="Entertainment"
-                name="entertainment"
-                component="input"
-                type="checkbox"
-                value="2"
-              />
-              <label htmlFor="Entertainment">Entertainment</label>
-            </div>
-
-            <div className="topicsCheckBox__wrapper">
-              <Field
-                className="topicsCheckBox__wrapper--checkbox"
-                onChange={() => {
-                  setChecked({ ...checked, health: !checked.health });
-                }}
-                checked={checked.health}
-                onClick={onCheck}
-                id="health"
-                name="health"
-                component="input"
-                value="3"
-                type="checkbox"
-              />
-              <label htmlFor="health">Health</label>
-            </div>
-
-            <div className="topicsCheckBox__wrapper">
-              <Field
-                className="topicsCheckBox__wrapper--checkbox"
-                onChange={() => {
-                  setChecked({ ...checked, education: !checked.education });
-                }}
-                checked={checked.education}
-                onClick={onCheck}
-                id="Education"
-                name="education"
-                component="input"
-                value="4"
-                type="checkbox"
-              />
-              <label htmlFor="Education">Education</label>
-            </div>
-
-            <div className="topicsCheckBox__wrapper">
-              <Field
-                className="topicsCheckBox__wrapper--checkbox"
-                onChange={() => {
-                  setChecked({ ...checked, family: !checked.family });
-                }}
-                checked={checked.family}
-                onClick={onCheck}
-                id="Family"
-                name="family"
-                component="input"
-                value="5"
-                type="checkbox"
-              />
-              <label htmlFor="Family">Family</label>
-            </div>
-          </div>
+          <ul className="ks-cboxtags">
+            <li>
+              <div>
+                <Field
+                  onClick={onCheck}
+                  onChange={() => {
+                    setChecked({ ...checked, sport: !checked.sport });
+                  }}
+                  checked={checked.sport}
+                  id="sport"
+                  name="sport"
+                  component="input"
+                  value="1"
+                  type="checkbox"
+                />
+                <label htmlFor="sport">Sport</label>
+              </div>
+            </li>
+            <li>
+              <div>
+                <Field
+                  onChange={() => {
+                    setChecked({
+                      ...checked,
+                      entertainment: !checked.entertainment,
+                    });
+                  }}
+                  checked={checked.entertainment}
+                  onClick={onCheck}
+                  id="Entertainment"
+                  name="entertainment"
+                  component="input"
+                  type="checkbox"
+                  value="2"
+                />
+                <label htmlFor="Entertainment">Entertainment</label>
+              </div>
+            </li>
+            <li>
+              <div>
+                <Field
+                  onChange={() => {
+                    setChecked({ ...checked, health: !checked.health });
+                  }}
+                  checked={checked.health}
+                  onClick={onCheck}
+                  id="health"
+                  name="health"
+                  component="input"
+                  value="3"
+                  type="checkbox"
+                />
+                <label htmlFor="health">Health</label>
+              </div>
+            </li>
+            <li>
+              <div>
+                <Field
+                  onChange={() => {
+                    setChecked({ ...checked, education: !checked.education });
+                  }}
+                  checked={checked.education}
+                  onClick={onCheck}
+                  id="Education"
+                  name="education"
+                  component="input"
+                  value="4"
+                  type="checkbox"
+                />
+                <label htmlFor="Education">Education</label>
+              </div>
+            </li>
+            <li>
+              <div>
+                <Field
+                  onChange={() => {
+                    setChecked({ ...checked, family: !checked.family });
+                  }}
+                  checked={checked.family}
+                  onClick={onCheck}
+                  id="Family"
+                  name="family"
+                  component="input"
+                  value="5"
+                  type="checkbox"
+                />
+                <label htmlFor="Family">Family</label>
+              </div>
+            </li>
+          </ul>
           <div className="groupForm--upload">
             <ImageUploader setImageState={setImageUrl} />
           </div>
