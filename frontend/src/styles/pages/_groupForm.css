@@ -3,13 +3,16 @@
 }
 
 .groupForm--img {
+  overflow: hidden;
 }
 
 .groupForm--avatar {
-  width: "100%";
   max-height: 500px;
   border-radius: 8px;
-  object-fit: contain;
+  object-fit: none;
+  overflow: hidden;
+  object-position: center;
+
   box-shadow: var(--bs);
 }
 

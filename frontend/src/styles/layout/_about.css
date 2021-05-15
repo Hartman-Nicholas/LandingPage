@@ -1,0 +1,9 @@
+.aboutPage {
+  display: grid;
+  grid-template-columns: 15% 75%;
+  text-align: left;
+  grid-gap: 2rem;
+  margin-top: 2rem;
+  padding: 2rem;
+  font-size: 1rem;
+}

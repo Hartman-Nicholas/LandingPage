@@ -1,9 +1,7 @@
-
-
-
-export const MemberCard = ({member}) => {
-console.log("member", member)
+export const MemberCard = ({ member }) => {
   return (
-    <h1>{member}</h1>
-  )
-}
+    <div>
+      <p className="membersPage--member">{member}</p>
+    </div>
+  );
+};
