@@ -1,23 +1,25 @@
 // NPM Packages
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { Link, useHistory } from "react-router-dom";
+import { useRecoilState } from "recoil";
 
 // Project files
 import { userDataState } from "../../state/userDataState";
 import { GroupHeader } from "./group-details/GroupHeader";
 import GroupApi from "../../api/GroupApi";
+import UserApi from "../../api/UserApi";
 
 export const GroupHome = () => {
   // State
   const { id } = useParams();
   const [groupData, setGroupData] = useState([]);
-  const { name: userInSession } = useRecoilValue(userDataState);
+  const [userData, setUserData] = useRecoilState(userDataState);
 
   const [aboutState, setAboutState] = useState(false);
   const [discussionState, setDiscussionState] = useState(true);
   const [membersState, setMembersState] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     const groupsData = async () => {
@@ -51,24 +53,37 @@ export const GroupHome = () => {
     }
   };
 
-  console.log(groupData);
+  const handleDelete = async () => {
+    const confirmBox = window.confirm(
+      "Deleting a Group is irreversible!! Please confirm you would like to continue."
+    );
+    if (confirmBox) {
+      await GroupApi.deleteGroup(id);
+      await UserApi.getUser()
+        .then(({ data }) => setUserData(data))
+        .then(history.push("/"));
+    }
+  };
 
   return (
     <div className="groupHome">
       <div>
-        {groupData.groupOwner === userInSession && (
-          <Link
-            to={{
-              pathname: "./edit",
-              state: {
-                fromNotifications: { groupData },
-              },
-            }}
-          >
-            <div className="groupHome--edit">
-              <i className="fas fa-edit"></i>
-            </div>
-          </Link>
+        {groupData.groupOwner === userData.name && (
+          <div>
+            <Link
+              to={{
+                pathname: "./edit",
+                state: {
+                  fromNotifications: { groupData },
+                },
+              }}
+            >
+              <div className="groupHome--edit">
+                <i className="fas fa-edit"></i>
+              </div>
+            </Link>
+            <button onClick={handleDelete}>Delete Group</button>
+          </div>
         )}
 
         <GroupHeader
