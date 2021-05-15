@@ -83,3 +83,9 @@
   opacity: 0;
   transition: 300ms ease all;
 }
+
+.form--submitEdit {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+}

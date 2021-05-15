@@ -2,15 +2,18 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 
 // Project files
+import { userDataState } from "../../state/userDataState";
 import { GroupHeader } from "./group-details/GroupHeader";
 import GroupApi from "../../api/GroupApi";
-import { About } from "./group-details/About";
+
 export const GroupHome = () => {
   // State
   const { id } = useParams();
   const [groupData, setGroupData] = useState([]);
+  const { name: userInSession } = useRecoilValue(userDataState);
 
   const [aboutState, setAboutState] = useState(false);
   const [discussionState, setDiscussionState] = useState(true);
@@ -48,21 +51,26 @@ export const GroupHome = () => {
     }
   };
 
+  console.log(groupData);
+
   return (
     <div className="groupHome">
       <div>
-        <Link
-          to={{
-            pathname: "./edit",
-            state: {
-              fromNotifications: { groupData },
-            },
-          }}
-        >
-          <div className="groupHome--edit">
-            <i className="fas fa-edit"></i>
-          </div>
-        </Link>
+        {groupData.groupOwner === userInSession && (
+          <Link
+            to={{
+              pathname: "./edit",
+              state: {
+                fromNotifications: { groupData },
+              },
+            }}
+          >
+            <div className="groupHome--edit">
+              <i className="fas fa-edit"></i>
+            </div>
+          </Link>
+        )}
+
         <GroupHeader
           group={groupData}
           handleSubmit={handleSubmit}
@@ -70,11 +78,6 @@ export const GroupHome = () => {
           discussionState={discussionState}
           membersState={membersState}
         />
-      </div>
-      <div className="rightBar">
-        <About />
-        {/* TODO render Member component after BE fixes */}
-        {/* <Members /> */}
       </div>
     </div>
   );

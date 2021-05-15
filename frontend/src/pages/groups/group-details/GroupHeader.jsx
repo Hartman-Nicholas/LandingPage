@@ -17,8 +17,8 @@ export const GroupHeader = ({
   return (
     <div>
       <div>
-        <div className="groupHome--image">
-          <img src={group.avatar} alt="group" />
+        <div className="groupHome--avatar-container">
+          <img className="groupHome--avatar" src={group.avatar} alt="group" />
         </div>
 
         <h2 className="groupHome--heading">{group.title}</h2>

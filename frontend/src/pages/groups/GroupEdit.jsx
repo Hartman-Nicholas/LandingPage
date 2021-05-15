@@ -290,19 +290,24 @@ export const GroupEdit = (props) => {
           <div className="groupForm--upload">
             <ImageUploader setImageState={setImageUrl} />
           </div>
-          <div className="groupForm--img">
+          <div className="groupHome--avatar-container">
             <img
-              className="groupForm--avatar"
+              className="groupHome--avatar"
               src={imageUrl}
               alt="User Avatar"
             />
           </div>
-          <input
-            className="btn"
-            value="Update Group"
-            type="submit"
-            disabled={pristine || submitting}
-          />
+          <div className="form--submitEdit">
+            <Link to={`/groups/${groupData.id}/home`}>
+              <button className="btn-cancel">Cancel</button>
+            </Link>
+            <input
+              className="btn-blue"
+              value="Update Group"
+              type="submit"
+              disabled={pristine || submitting}
+            />
+          </div>
           <FormSpy subscription={{ submitSucceeded: true, values: true }}>
             {({ submitSucceeded }) => {
               if (submitSucceeded) {

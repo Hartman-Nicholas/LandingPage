@@ -35,3 +35,48 @@
 .btn.transparent:hover {
   background-color: var(--medium-blue-hover);
 }
+
+.btn-blue {
+  cursor: pointer;
+  border: 1px solid #006aa8;
+  color: white;
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: 500;
+  width: 150px;
+  height: 40px;
+  background-color: #006aa8;
+  margin: 0;
+}
+
+.btn-blue:hover {
+  background-color: white;
+  color: var(--sweden-blue);
+}
+
+.btn-blue:focus::before {
+  content: "✓";
+  transition: 10s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.btn-blue:active {
+  transform: translateY(5px);
+}
+
+.btn-cancel {
+  cursor: pointer;
+  border: 1px solid #006aa8;
+  color: var(--sweden-blue);
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: 500;
+  width: 150px;
+  height: 40px;
+  background-color: var(--sweden-yellow);
+  margin: 0;
+}
+
+.btn-cancel:hover {
+  background-color: white;
+  color: var(--sweden-blue);
+}
