@@ -82,7 +82,9 @@ export const GroupHome = () => {
                 <i className="fas fa-edit"></i>
               </div>
             </Link>
-            <button onClick={handleDelete}>Delete Group</button>
+            <div className="groupHome--delete">
+              <i onClick={handleDelete} className="fas fa-trash-alt"></i>
+            </div>
           </div>
         )}
 

@@ -21,9 +21,8 @@
   font-size: 35px;
 }
 
-.header__list--item .fas:hover,
-.header__list--item:hover,
-.header__list--title:hover {
+.header__list--item:hover .fas,
+.header__list--item:hover {
   color: var(--sweden-blue);
   transform: scale(1.1);
 }

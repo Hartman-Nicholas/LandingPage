@@ -11,12 +11,12 @@
 .form--input input,
 .form--input textarea {
   background: none;
-  margin: auto;
   color: var(--onyx);
+  margin-left: 2rem;
   font-size: 1.8rem;
   padding: 1rem 1rem 1rem 0.5rem;
   display: block;
-  width: 50rem;
+  width: 90%;
   border: none;
   border-radius: 0;
   border-bottom: 1px solid #c6c6c6;
@@ -37,7 +37,7 @@
 }
 .form--input input:focus ~ .bar:before,
 .form--input textarea:focus ~ .bar:before {
-  width: 50rem;
+  width: 100%;
 }
 
 .form--input label {
@@ -56,7 +56,7 @@
   position: relative;
   margin: auto;
   display: block;
-  width: 50rem;
+  width: 100%;
 }
 .form--input .bar:before {
   content: "";

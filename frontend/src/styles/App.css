@@ -36,6 +36,8 @@
 @import "./layout/_editCommentCard.css";
 @import "./layout/_about.css";
 @import "./layout/_members.css";
+@import "./layout/_OwnerGroupBar.css";
+@import "./layout/_userCard.css";
 
 /* pages */
 
