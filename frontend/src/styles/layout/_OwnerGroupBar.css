@@ -1,0 +1,51 @@
+.userCreatedGroups {
+  padding-left: 1rem;
+}
+
+.userCreatedGroups__grid {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  background: var(--white);
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: auto;
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: var(--bs-dark);
+}
+
+.userCreatedGroups__grid:hover {
+  background-color: var(--medium-blue-hover-light);
+}
+
+.userCreatedGroups--author-text {
+  display: flex;
+  justify-content: space-between;
+  font-weight: var(--fw-reg);
+  color: var(--onyx);
+  margin-bottom: 0.7rem;
+}
+
+.userCreatedGroups--img-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.userCreatedGroups--img {
+  width: 100%;
+}
+
+.userCreatedGroups--description {
+  text-align: left;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.8rem;
+}
+
+.userCreatedGroups--itemTitle {
+  font-size: 1rem;
+  margin-bottom: 0.6rem;
+}

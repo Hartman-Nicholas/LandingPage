@@ -4,7 +4,7 @@
 
 .search__input {
   padding: 12px 24px;
-
+  width: 300px;
   background-color: transparent;
   transition: transform 250ms ease-in-out;
   font-size: 14px;

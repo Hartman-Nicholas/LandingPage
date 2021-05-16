@@ -44,7 +44,7 @@ export default function UserCard() {
 
   // Components
   return (
-    <section>
+    <section className="userCard">
       {!toggler && (
         <div>
           <div className="custom-file-upload">
@@ -55,49 +55,35 @@ export default function UserCard() {
             />
           </div>
           <ImageUploader setImageState={setImageUrl} />
-
-          <div className="listItem">Name: {userData.name}</div>
-          <div className="listItem">Email: {userData.email}</div>
-          <div className="listItem">Bio: {userData.bio}</div>
-
-          <div>
-            <ul className="list">
-              <li className="listItem">
-                <label htmlFor="">Created </label>
-              </li>
-              <li className="listItem">{userData?.groupsCreated?.length}</li>
-            </ul>
-          </div>
-          <div>
-            <ul className="list">
-              <li className="listItem">
-                <label htmlFor="">Joined </label>
-              </li>
-              {userData?.groupsJoined?.length}
-            </ul>
-          </div>
-          <div>
-            <ul className="list">
-              <li className="listItem">
-                <label htmlFor="">Posts </label>
-              </li>
-              <li className="listItem">{userData?.posts?.length}</li>
-            </ul>
-          </div>
-          <div>
-            <ul className="list">
-              <li className="listItem">
-                <label htmlFor="">Comments </label>
-              </li>
-              <li className="listItem">{userData?.comments?.length}</li>
-            </ul>
+          <div className="userCard__info">
+            <p>Name:</p>
+            <p>{userData.name}</p>
+            <p>Email:</p>
+            <p>{userData.email}</p>
+            <p>Bio:</p>
+            <p>{userData.bio}</p>
+            <p>Groups Created:</p>
+            <p>{userData.groupsCreated?.length}</p>
+            <p>Groups Joined:</p>
+            <p> {userData.groupsJoined?.length}</p>
+            <p>Posts:</p>
+            <p>{userData.posts?.length}</p>
+            <p>Comments:</p>
+            <p>{userData.comments?.length}</p>
+            <p></p>
           </div>
         </div>
       )}
 
-      <button onClick={handleDelete}>Delete profile</button>
+      <div className="userCard__buttons">
+        <button className="btn-cancel" onClick={handleDelete}>
+          Delete profile
+        </button>
+        <button className="btn-blue" onClick={() => setToggler(!toggler)}>
+          Edit Profile
+        </button>
+      </div>
 
-      <button onClick={() => setToggler(!toggler)}>Edit Profile</button>
       {toggler && <EditProfile setToggler={setToggler} />}
     </section>
   );

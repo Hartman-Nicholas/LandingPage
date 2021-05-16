@@ -17,33 +17,35 @@ export const OwnerGroupsBar = () => {
   const list = owner.groupsCreated
     ? owner.groupsCreated.map((group) => {
         return (
-          <section className="group-grid container">
-            <div className="group-container">
-              <div className="group-image">
-                <Link to={`/groups/${group.id}/home`}>
+          <div className="userCreatedGroups">
+            <div className="userCreatedGroups__grid">
+              <Link to={`/groups/${group.id}/home`}>
+                <h3 className="userCreatedGroups--itemTitle">{group.title}</h3>
+                <div className="userCreatedGroups--img-container">
                   <img
+                    className="userCreatedGroups--img"
                     src={group.avatar}
                     alt="group"
-                    style={{
-                      width: "95%",
-                      objectFit: "cover",
-                    }}
                   />
-                </Link>
-              </div>
-              <p className="author-text">
-                <span>
-                  <ReactTimeAgo date={new Date(group.created)} locale="en-US" />
-                </span>
-                <span>{group.members.length} members</span>
-              </p>
-              {/* <TagRow tags={groupData.topics} /> */}
+                </div>
 
-              <h3 className="itemTitle">{group.title}</h3>
+                <div className="userCreatedGroups--author-text">
+                  <span>
+                    <ReactTimeAgo
+                      date={new Date(group.created)}
+                      locale="en-US"
+                    />
+                  </span>
+                  <span>{group.members.length} members</span>
+                </div>
 
-              <p className="description-text"> {group.description}</p>
+                <div className="userCreatedGroups--description">
+                  {" "}
+                  {group.description}
+                </div>
+              </Link>
             </div>
-          </section>
+          </div>
         );
       })
     : "no groups has been created yet";

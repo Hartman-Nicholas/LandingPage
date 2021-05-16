@@ -1,48 +1,82 @@
 // NPM Packages
-import { Link } from "react-router-dom";
-//Project files
-import logo from "../assets/logoLandingPage.png";
+import { Link, useLocation } from "react-router-dom";
 
-export default function Header({ onLogout, loggedIn }) {
+//Project files
+import { useEffect, useState } from "react";
+
+export default function Header({ onLogout }) {
+  const [home, setHome] = useState(false);
+  const [groups, setGroups] = useState(false);
+  const [profile, setProfile] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleSelect = () => {
+      switch (location.pathname) {
+        case "/":
+          setGroups(false);
+          setProfile(false);
+          setHome(true);
+          break;
+        case "/groups":
+          setGroups(true);
+          setProfile(false);
+          setHome(false);
+          break;
+        case "/user":
+          setGroups(false);
+          setProfile(true);
+          setHome(false);
+          break;
+
+        default:
+          break;
+      }
+    };
+
+    handleSelect();
+  }, [location.pathname]);
+
   // Components
 
   return (
-    <nav>
-      <div className="flexbox-container">
-        <ul>
-          {loggedIn && (
-            <li>
-              <Link to="/">
-                <img
-                  className="logo"
-                  src={logo}
-                  alt="Logo"
-                  style={{
-                    width: "70px",
-                    height: "50px",
-                    borderRadius: "8px",
-                  }}
-                />
-              </Link>
-              <ul className="headerBar">
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/groups">Groups</Link>
-                </li>
-                <li>
-                  <Link to="/user">Profile</Link>
-                </li>
-              </ul>
+    <nav className="header">
+      <ul className="header__list">
+        <li className={`header__list--item ${home ? "activeNav" : ""}`}>
+          <Link to="/">
+            <i name="home" className="fas fa-rocket"></i>
+            <div className="header__list--title" name="home">
+              Home
+            </div>
+          </Link>
+        </li>
 
-              <button className="logout" type="button" onClick={onLogout}>
-                Logout
-              </button>
-            </li>
-          )}
-        </ul>
-      </div>
+        <li className={`header__list--item ${groups ? "activeNav" : ""}`}>
+          <Link to="/groups">
+            <i name="groups" className="fas fa-globe-europe"></i>
+            <div className="header__list--title" name="groups">
+              Groups
+            </div>
+          </Link>
+        </li>
+        <li className={`header__list--item ${profile ? "activeNav" : ""}`}>
+          <Link to="/user">
+            <i name="profile" className="fas fa-user-astronaut"></i>
+            <div className="header__list--title" name="profile">
+              Profile
+            </div>
+          </Link>
+        </li>
+
+        <li className="header__list--item">
+          <div onClick={onLogout}>
+            <i className="fas fa-sign-out-alt"></i>
+          </div>
+
+          <div className="header__list--title">Logout</div>
+        </li>
+      </ul>
     </nav>
   );
 }

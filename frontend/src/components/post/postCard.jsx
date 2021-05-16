@@ -155,6 +155,17 @@ export const PostCard = ({
     setCommentsData(filteredList);
   };
   // Components
+
+  const renderDelete = () => {
+    if ((groupOwner === userInSession) | (postOwner === userInSession)) {
+      return (
+        <div className="postCard__card--delete">
+          <i onClick={() => handleDelete(id)} className="fas fa-trash-alt"></i>
+        </div>
+      );
+    } else return <div></div>;
+  };
+
   let commentList =
     commentsData === null || commentsData.length === 0
       ? "No Available comments"
@@ -242,14 +253,7 @@ export const PostCard = ({
             </div>
           </div>
 
-          {groupOwner | (postOwner === userInSession) && (
-            <div className="postCard__card--delete">
-              <i
-                onClick={() => handleDelete(id)}
-                className="fas fa-trash-alt"
-              ></i>
-            </div>
-          )}
+          {renderDelete()}
 
           <div className="postCard__card--comments">
             <i

@@ -17,6 +17,9 @@
   --bs: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
     0.125em 0.125em 0.25em rgba(0, 0, 0, 0.15);
 
+  --bs-dark: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
+    0.125em 0.125em 0.25em rgba(0, 0, 0, 0.15);
+
   --white: #fff;
   --red: #ff0033;
   --onyx: #2b272b;
@@ -27,11 +30,12 @@
   --light-grey: #f0f0f0;
   --medium-grey: #acacac;
   --medium-light-grey: #aaa;
-  --dark-grey: #333;
+  --dark-grey: rgba(63, 60, 60, 0.842);
 
   --light-blue: #5995fd;
   --medium-blue: rgba(0, 106, 168, 0.9);
   --medium-blue-hover: rgba(18, 124, 185, 0.9);
+  --medium-blue-hover-light: rgba(18, 124, 185, 0.5);
 
   --sweden-yellow: #fecd00;
   --sweden-blue: #006aa8;

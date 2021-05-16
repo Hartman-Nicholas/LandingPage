@@ -10,6 +10,13 @@
   font-size: 20px;
 }
 
+.groupHome--delete {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  font-size: 20px;
+}
+
 .groupHome--avatar-container {
   overflow: hidden;
   height: 400px;

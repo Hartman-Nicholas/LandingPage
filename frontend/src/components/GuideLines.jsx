@@ -1,4 +1,10 @@
+import { useEffect } from "react";
+
 export default function GuideLines() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <section className="homePage">
       <div>
