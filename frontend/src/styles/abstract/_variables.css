@@ -27,7 +27,7 @@
   --light-grey: #f0f0f0;
   --medium-grey: #acacac;
   --medium-light-grey: #aaa;
-  --dark-grey: #333;
+  --dark-grey: rgba(63, 60, 60, 0.842);
 
   --light-blue: #5995fd;
   --medium-blue: rgba(0, 106, 168, 0.9);

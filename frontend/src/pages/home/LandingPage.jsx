@@ -27,6 +27,14 @@ export default function LandingPage() {
           . This is what makes our community so great.
         </li>
         <li className="homePage__list--item">
+          Your privacy is important to us read our{" "}
+          <Link className="homePage--links" to="/privacy">
+            Privacy Policy
+          </Link>{" "}
+          which hilights the measure we take to keep your personal information
+          safe.
+        </li>
+        <li className="homePage__list--item">
           All updated and read up? Time to head over to
           <Link className="homePage--links" to="/groups">
             {" "}
