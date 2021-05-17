@@ -47,9 +47,15 @@
 .grid-container-column {
   position: relative;
   display: grid;
-  gap: 3rem;
+  gap: 2rem;
+
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  max-width: 114rem;
   justify-items: center;
-  margin: 0 auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.col-1-of-2 {
+  margin: 0 2rem;
+  height: 100%;
 }

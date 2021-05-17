@@ -25,10 +25,10 @@
     /* To Discuss: remove 3 column layout?*/
     flex-direction: column;
     margin: 0 auto;
+    margin-top: 2rem;
     height: fit-content;
     object-fit: contain;
     overflow-y: scroll;
-
   }
 
   .rightBar .postCard {
@@ -38,7 +38,6 @@
     align-items: center;
     margin-left: 8px;
     margin-right: 10px;
-
   }
 
   .rightBar .postCard__card {
