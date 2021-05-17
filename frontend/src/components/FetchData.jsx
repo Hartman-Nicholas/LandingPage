@@ -12,8 +12,7 @@ export const UserData = () => {
 	const { data } = useRecoilValue(getUserData);
 	const [userData, setUserData] = useRecoilState(userDataState);
 	// Constants
-console.log("here", userData)
-console.log("data", data)
+
 	// Components
 useEffect(() => {
 	setUserData(data)

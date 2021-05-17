@@ -9,9 +9,7 @@ import { userDataState } from "../../state/userDataState";
 import TagRow from "../../components/TagRow";
 
 export const GroupCard = ({ groupData, joinGroup, leaveGroup }) => {
-  console.log({ groupData });
 
-  console.log("TOPICS", groupData?.topics);
   // State
   const [userData, setUserData] = useRecoilState(userDataState);
   const [groupMembers] = useState(groupData.members);

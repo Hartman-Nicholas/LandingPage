@@ -7,7 +7,7 @@ import { MemberCard } from "./MemberCard";
 export const Members = ({ data, status }) => {
   // State
   const [membersList, setMembersList] = useState(data?.members);
-  console.log("membersList", membersList);
+
   useEffect(() => {
     setMembersList(data.members);
   }, [status, data.id]);

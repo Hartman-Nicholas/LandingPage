@@ -5,8 +5,6 @@ import { PostCard } from "./post/postCard";
 export default function UserPosts() {
   const [userData, setUserData] = useRecoilState(userDataState);
 
-  console.log({ userData });
-
   const userPosts =
     userData?.posts?.map((post) => <PostCard key={post.id} data={post} />) ||
     [];
