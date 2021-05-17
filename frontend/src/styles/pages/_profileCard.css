@@ -3,19 +3,19 @@
   display: inline-block;
   position: relative;
   padding: 6px;
-  cursor: pointer;
-  background: linear-gradient(270deg,var(--sweden-blue),var(--sweden-yellow));
+  background: linear-gradient(270deg, var(--sweden-blue), var(--sweden-yellow));
   margin-bottom: 25px;
 }
 
-.img-wrap{
+.img-wrap {
   position: relative;
   width: 200px;
   height: 200px;
   overflow: hidden;
+  object-fit: cover;
   border-radius: 50%;
 }
-.img-upload:before{
+.img-upload:before {
   content: "\f093";
   font-size: 90px;
   position: absolute;
@@ -29,11 +29,11 @@
   height: 200px;
   border-radius: 50%;
   opacity: 0;
-  transition: .5s ease;
+  transition: 0.5s ease;
   background-color: #fff;
 }
-.img-upload:hover:before{
- opacity: 1;
+.img-upload:hover:before {
+  opacity: 1;
 }
 img {
   width: auto;

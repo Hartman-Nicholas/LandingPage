@@ -17,6 +17,7 @@
 @import "./components/_checkBox.css";
 @import "./components/_imgUpload.css";
 @import "./components/_share.css";
+@import "./components/_searchBar.css";
 
 /* layout */
 
@@ -33,11 +34,16 @@
 @import "./layout/_commentForm.css";
 @import "./layout/_commentCard.css";
 @import "./layout/_editCommentCard.css";
+@import "./layout/_about.css";
+@import "./layout/_members.css";
+@import "./layout/_OwnerGroupBar.css";
+@import "./layout/_userCard.css";
 
 /* pages */
 
 @import "./pages/_authPage.css";
 @import "./pages/_groupForm.css";
-@import './pages/_profileCard.css';
+@import "./pages/_profileCard.css";
 @import "./pages/_group-grid.css";
 @import "./pages/_guideLines.css";
+@import "./pages/_groupHome.css";

@@ -39,7 +39,6 @@ export const PostCard = ({
   const [commentsCount, setCommentsCount] = useState(comments?.length | 0);
   const [imageUrl, setImageUrl] = useState(photo);
 
-
   useEffect(() => {
     setCommentsData(comments ? comments : []);
 
@@ -61,13 +60,13 @@ export const PostCard = ({
   const handleSubmit = (newComment) => {
     const list = commentsData.concat(newComment);
     setCommentsData(list);
-    setCommentsCount(commentsCount+1);
+    setCommentsCount(commentsCount + 1);
   };
 
   const deleteComment = async (commentId) => {
     try {
       await CommentsApi.deleteComment(commentId);
-      setCommentsCount(commentsCount-1)
+      setCommentsCount(commentsCount - 1);
     } catch (e) {
       console.error(e);
     }
@@ -156,6 +155,17 @@ export const PostCard = ({
     setCommentsData(filteredList);
   };
   // Components
+
+  const renderDelete = () => {
+    if ((groupOwner === userInSession) | (postOwner === userInSession)) {
+      return (
+        <div className="postCard__card--delete">
+          <i onClick={() => handleDelete(id)} className="fas fa-trash-alt"></i>
+        </div>
+      );
+    } else return <div></div>;
+  };
+
   let commentList =
     commentsData === null || commentsData.length === 0
       ? "No Available comments"
@@ -188,16 +198,23 @@ export const PostCard = ({
               <p className="postCard__card--postGroup">{postGroup}</p>
 
               <div className="postCard__card--created">
-                {updated === null? "Created: " : "Last updated: "}
+                {updated === null ? "Created: " : "Last updated: "}
                 <ReactTimeAgo
                   date={new Date(created ? created : updated)}
                   locale="en-US"
                 />
+                {"  "}
+                {postOwner === userInSession && (
+                  <span className="postCard__card--edit">
+                    <i
+                      onClick={() => setToggler(true)}
+                      className="fas fa-edit"
+                    ></i>
+                  </span>
+                )}
               </div>
               {/* Comments counter */}
-              <div>
-                {commentsCount} comments
-              </div>
+
               {likeToggler ? (
                 <div className="postCard__card--like">
                   <i onClick={handleLike} className="fas fa-thumbs-up">
@@ -236,25 +253,16 @@ export const PostCard = ({
             </div>
           </div>
 
-          {postOwner === userInSession && (
-            <div className="postCard__card--edit">
-              <i onClick={() => setToggler(true)} className="fas fa-edit"></i>
-            </div>
-          )}
-          {groupOwner | (postOwner === userInSession) && (
-            <div className="postCard__card--delete">
-              <i
-                onClick={() => handleDelete(id)}
-                className="fas fa-trash-alt"
-              ></i>
-            </div>
-          )}
+          {renderDelete()}
 
           <div className="postCard__card--comments">
             <i
               onClick={() => setCommentToggler(!commentToggler)}
               className="fas fa-comments"
-            ></i>
+            ></i>{" "}
+            <span className="postCard__card--commentCount">
+              {commentsCount}
+            </span>
           </div>
 
           {commentToggler && (

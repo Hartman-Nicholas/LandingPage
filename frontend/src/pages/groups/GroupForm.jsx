@@ -11,8 +11,13 @@ import GroupApi from "../../api/GroupApi";
 import UserApi from "../../api/UserApi";
 import { ImageUploader } from "../../components/ImageUploader";
 
-const composeValidators = (...validators) => (value) =>
-  validators.reduce((error, validator) => error || validator(value), undefined);
+const composeValidators =
+  (...validators) =>
+  (value) =>
+    validators.reduce(
+      (error, validator) => error || validator(value),
+      undefined
+    );
 const focusOnError = createDecorator();
 
 export const GroupForm = () => {
@@ -48,7 +53,7 @@ export const GroupForm = () => {
 
       setGroup(group);
 
-      for(const topic of topicArray){
+      for (const topic of topicArray) {
         await GroupApi.joinTopic(group.id, topic);
       }
 
@@ -156,94 +161,73 @@ export const GroupForm = () => {
               )}
             </Field>
             <h2>Set Topics</h2>
-            <div className="topicsCheckBox">
-              <div className="topicsCheckBox__wrapper">
-                <Field
-                  className="topicsCheckBox__wrapper--checkbox"
-                  onClick={onCheck}
-                  id="sport"
-                  name="sport"
-                  component="input"
-                  value="1"
-                  type="checkbox"
-                />
-                <label
-                  className="topicsCheckBox__wrapper--label"
-                  htmlFor="sport"
-                >
-                  Sport
-                </label>
-              </div>
-
-              <div className="topicsCheckBox__wrapper">
-                <Field
-                  className="topicsCheckBox__wrapper--checkbox"
-                  onClick={onCheck}
-                  id="Entertainment"
-                  name="Entertainment"
-                  component="input"
-                  value="2"
-                  type="checkbox"
-                />
-                <label
-                  className="topicsCheckBox__wrapper--label"
-                  htmlFor="Entertainment"
-                >
-                  Entertainment
-                </label>
-              </div>
-              <div className="topicsCheckBox__wrapper">
-                <Field
-                  className="topicsCheckBox__wrapper--checkbox"
-                  onClick={onCheck}
-                  id="Health"
-                  name="Health"
-                  component="input"
-                  value="3"
-                  type="checkbox"
-                />
-                <label
-                  className="topicsCheckBox__wrapper--label"
-                  htmlFor="Health"
-                >
-                  Health
-                </label>
-              </div>
-              <div className="topicsCheckBox__wrapper">
-                <Field
-                  className="topicsCheckBox__wrapper--checkbox"
-                  onClick={onCheck}
-                  id="Education"
-                  name="Education"
-                  component="input"
-                  value="4"
-                  type="checkbox"
-                />
-                <label
-                  className="topicsCheckBox__wrapper--label"
-                  htmlFor="Education"
-                >
-                  Education
-                </label>
-              </div>
-              <div className="topicsCheckBox__wrapper">
-                <Field
-                  className="topicsCheckBox__wrapper--checkbox"
-                  onClick={onCheck}
-                  id="Family"
-                  name="Family"
-                  component="input"
-                  value="5"
-                  type="checkbox"
-                />
-                <label
-                  className="topicsCheckBox__wrapper--label"
-                  htmlFor="Family"
-                >
-                  Family
-                </label>
-              </div>
-            </div>
+            <ul className="ks-cboxtags">
+              <li>
+                <div>
+                  <Field
+                    onClick={onCheck}
+                    id="Sport"
+                    name="Sport"
+                    component="input"
+                    value="1"
+                    type="checkbox"
+                  />
+                  <label htmlFor="Sport">Sport</label>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <Field
+                    onClick={onCheck}
+                    id="Entertainment"
+                    name="Entertainment"
+                    component="input"
+                    value="2"
+                    type="checkbox"
+                  />
+                  <label htmlFor="Entertainment">Entertainment</label>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <Field
+                    onClick={onCheck}
+                    id="Health"
+                    name="Health"
+                    component="input"
+                    value="3"
+                    type="checkbox"
+                  />
+                  <label htmlFor="Health">Health</label>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <Field
+                    onClick={onCheck}
+                    id="Education"
+                    name="Education"
+                    component="input"
+                    value="4"
+                    type="checkbox"
+                  />
+                  <label htmlFor="Education">Education</label>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <Field
+                    onClick={onCheck}
+                    id="Family"
+                    name="Family"
+                    component="input"
+                    value="5"
+                    type="checkbox"
+                  />
+                  <label htmlFor="Family">Family</label>
+                </div>
+              </li>
+            </ul>
             <div className="groupForm--upload">
               <ImageUploader setImageState={setImageUrl} />
             </div>

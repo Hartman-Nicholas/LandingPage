@@ -6,34 +6,62 @@ import { Discussion } from "./Discussion";
 import { Members } from "./Members";
 
 export const GroupHeader = ({
-	group,
-	handleSubmit,
-	aboutState,
-	discussionState,
-	membersState,
+  group,
+  handleSubmit,
+  aboutState,
+  discussionState,
+  membersState,
 }) => {
-	// State
+  // State
 
-	return (
+  return (
     <div>
       <div>
-        <h1>{group.title}</h1>
-        {/* <h1>{group.id}</h1> */}
-        <img
-          src={group.avatar}
-          alt="group"
-          style={{ width: "100px", height: "100px", borderRadius: "8px" }}
-        />
+        <div className="groupHome--avatar-container">
+          <img className="groupHome--avatar" src={group.avatar} alt="group" />
+        </div>
+
+        <h2 className="groupHome--heading">{group.title}</h2>
       </div>
-      <button name="about" onClick={handleSubmit}>
-        About{" "}
-      </button>
-      <button name="discussion" onClick={handleSubmit}>
-        Discussion{" "}
-      </button>
-      <button name="members" onClick={handleSubmit}>
-        Members{" "}
-      </button>
+      <div className="groupHome__labels">
+        <div
+          className={
+            aboutState
+              ? "groupHome__labels--item active"
+              : "groupHome__labels--item"
+          }
+          name="about"
+          onClick={handleSubmit}
+        >
+          <i class="fas fa-info-circle"></i>
+          About
+        </div>
+        <div
+          className={
+            discussionState
+              ? "groupHome__labels--item active"
+              : "groupHome__labels--item"
+          }
+          name="discussion"
+          onClick={handleSubmit}
+        >
+          <i class="fas fa-comment-dots"></i>
+          Discussion
+        </div>
+        <div
+          className={
+            membersState
+              ? "groupHome__labels--item active"
+              : "groupHome__labels--item"
+          }
+          name="members"
+          onClick={handleSubmit}
+        >
+          <i class="fas fa-users"></i>
+          Members
+        </div>
+      </div>
+
       {aboutState && <About data={group} />}
       {discussionState && <Discussion data={group} />}
       {membersState && <Members data={group} />}

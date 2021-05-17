@@ -136,15 +136,15 @@ export const CommentCard = ({
             <ReactTimeAgo
               date={new Date(created ? created : updated)}
               locale="en-US"
-            />
+            />{" "}
+            {userCommentOwner === userInSession && (
+              <span className="commentCard__card--edit">
+                <i onClick={() => setToggler(true)} className="fas fa-edit"></i>
+              </span>
+            )}
           </div>
           <p className="commentCard__card--body">{commentBody}</p>
 
-          {userCommentOwner === userInSession && (
-            <div className="commentCard__card--edit">
-              <i onClick={() => setToggler(true)} className="fas fa-edit"></i>
-            </div>
-          )}
           {groupOwner | (userCommentOwner === userInSession) && (
             <div className="postCard__card--delete">
               <i

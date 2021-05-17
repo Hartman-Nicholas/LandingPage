@@ -51,8 +51,6 @@ body {
 section {
   padding: 1rem;
   text-align: center;
-  padding-bottom: 3rem;
-  margin-bottom: 1rem;
   flex-grow: 1;
 }
 
