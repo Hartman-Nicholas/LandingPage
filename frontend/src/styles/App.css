@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
 /* abstract */
 
 @import "./abstract/_variables.css";
@@ -11,12 +13,20 @@
 /* components */
 
 @import "./components/_button.css";
+@import "./components/_groupBar.css";
+@import "./components/_checkBox.css";
 
 /* layout */
 
 @import "./layout/_footer.css";
 @import "./layout/_header.css";
+@import "./layout/_authForm.css";
+@import "./layout/_Form.css";
+@import "./layout/_postCard.css";
+@import "./layout/_center.css";
+@import "./layout/_grid.css";
 
 /* pages */
 
 @import "./pages/_authPage.css";
+@import "./pages/_groupForm.css";

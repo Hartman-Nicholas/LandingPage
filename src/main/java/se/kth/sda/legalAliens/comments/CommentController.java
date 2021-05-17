@@ -68,7 +68,6 @@ public class CommentController {
     @DeleteMapping("/{commentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteComment(@PathVariable Long commentId, Principal principal) {
-        Comment comment = commentService.deleteComment(commentId, principal);
-        commentRepository.delete(comment);
+        commentService.deleteComment(commentId, principal);
     }
 }

@@ -1,0 +1,104 @@
+.authPage {
+}
+
+.authPage__form {
+  padding-left: 4rem;
+  padding-right: 4rem;
+  text-align: center;
+}
+
+.authPage--logo {
+  width: 120px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.authPage--blueWave::before {
+  content: "";
+  position: absolute;
+  width: 2000px;
+  height: 2000px;
+  border-radius: 50%;
+  left: 60%;
+  bottom: 48%;
+  right: auto;
+  top: auto;
+  transform: translateX(-65%) translateY(-3%);
+
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    #006aa8;
+
+  z-index: -10;
+}
+
+.authPage--yellowWave::before {
+  content: "";
+  position: absolute;
+  width: 2000px;
+  height: 2000px;
+  border-radius: 50%;
+  left: 60%;
+  bottom: 48%;
+  right: auto;
+  top: auto;
+  transform: translateX(-29%) translateY(102%);
+
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 48.96%,
+      rgba(255, 255, 255, 0.45) 100%
+    ),
+    #fecd00;
+
+  z-index: -10;
+}
+
+.authPage__form--img {
+  opacity: 0;
+}
+
+@media (min-width: 40.625em) {
+  .authPage {
+    padding: 1rem;
+  }
+
+  .authPage--blueWave::before {
+    transform: translateX(-98%) translateY(6%);
+  }
+
+  .authPage--yellowWave::before {
+    transform: translateX(-20%) translateY(101%);
+  }
+
+  .loginForm__form {
+    top: 10rem;
+    left: 4rem;
+  }
+
+  .authPage__headingSection {
+    text-align: left;
+  }
+
+  .authPage__form {
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+
+  .authPage__form__switch {
+    text-align: left;
+  }
+
+  .authPage__form--imgContainer {
+    text-align: right;
+    margin-top: -5rem;
+  }
+
+  .authPage__form--img {
+    opacity: 100%;
+    width: 300px;
+  }
+}

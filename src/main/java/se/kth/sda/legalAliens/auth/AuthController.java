@@ -44,9 +44,15 @@ public class AuthController {
         }
     }
 
-    @GetMapping ("/register/{userName}")
-    public boolean checkUserName (@PathVariable String userName) {
+    @GetMapping("/register/{userName}")
+    public boolean checkUserName(@PathVariable String userName) {
         User user = userService.findUserByName(userName);
+        return user != null;
+    }
+
+    @GetMapping("/register/email/{email}")
+    public boolean checkEmail(@PathVariable String email) {
+        User user = userService.findUserByEmail(email);
         return user != null;
     }
 

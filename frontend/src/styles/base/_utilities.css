@@ -1,0 +1,9 @@
+.margin-top-medium {
+  margin-top: 5rem !important;
+}
+
+@media (min-width: 40.625em) {
+  .margin-top-medium {
+    margin-top: 0rem !important;
+  }
+}

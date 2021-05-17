@@ -1,28 +1,61 @@
 // NPM Packages
-import { Suspense } from "react";
-import { ErrorBoundary } from "react-error-boundary";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 // Project files
-import { GroupData, UserData } from "./FetchData";
-import { ErrorMessage } from "./ErrorMessage";
+import GroupApi from '../api/GroupApi'
+import { getUserData } from "../state/recoilFetch";
+import { userDataState } from "../state/userDataState";
+import { GroupCard } from "../pages/groups/GroupCard";
 
 export const GroupsBar = () => {
-	// State
+  // State
+  const { data } = useRecoilValue(getUserData);
+  const [userData , setUserData] = useRecoilState(userDataState);
 
-	// Constants
+  // Constants
+	const unsubscribe =async (groupId) => {
+    try{
+      await GroupApi.unjoinGroup(groupId);
+      let filteredGroup= userData.groupsJoined.filter(group => group.id !== groupId)
+      setUserData({...userData, groupsJoined: filteredGroup});
+    }catch(e){
+      console.error(e)
+    }
+	};
 
-	// Components
-	return (
-		<div>
-			<Link to="/groups/create">Create a group</Link>
-			<ErrorBoundary FallbackComponent={ErrorMessage}>
-				<Suspense fallback={<div>loading...</div>}>
-					<UserData />
-					<GroupData />
-				</Suspense>
-			</ErrorBoundary>
-			<Link to="/groups">Join a new group</Link>
-		</div>
-	);
+  // Components
+  const groupsJoined = data.groupsJoined.map((group) => {
+    return <GroupCard key={group.id} groupData={group} leaveGroup={(id)=> unsubscribe(id)} />;
+  });
+
+  const groupCreated = data.groupsCreated.map((group) => {
+    return <GroupCard key={group.id} groupData={group} />;
+  });
+
+  useEffect(() => {
+    setUserData(data);
+  }, []);
+
+  return (
+    <section id="sidebar">
+      <div className="sidebarWrapper">
+        <button className="sidebarButtonTop">
+          <Link to="/groups">Join a new group +</Link>
+        </button>
+        <h2>joined :</h2>
+        {groupsJoined}
+        <h2>created :</h2>
+        <ul className="list">
+          <li className="listItem">
+            <span>{groupCreated}</span>
+          </li>
+        </ul>
+        <button className="sidebarButtonBottom">
+          <Link to="/groups/create">+ Create a group</Link>
+        </button>
+      </div>
+    </section>
+  );
 };

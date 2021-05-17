@@ -32,11 +32,10 @@ public class GroupController {
         this.topicRepository = topicRepository;
     }
 
-    // Return all Groups.
+    // Return all Groups not created or joined by user.
     @GetMapping
-    public List<Group> listAllGroups() {
-        List<Group> groups = groupRepository.findAll();
-        return groups;
+    public List<Group> listAllGroups(Principal principal) {
+        return groupService.filterGroupList(principal);
     }
 
     // Return a specific group based on the groupId.
@@ -77,6 +76,7 @@ public class GroupController {
 
     }
 
+
     @PostMapping("/{groupId}/topics/{topicId}")
     public ResponseEntity<Group> createTopicMembership(@PathVariable Long groupId, @PathVariable Long topicId) {
         Group group = groupRepository.findById(groupId).orElseThrow(ResourceNotFoundException::new);
@@ -100,11 +100,15 @@ public class GroupController {
         groupService.deleteGroup(groupId, principal);
     }
 
-   @DeleteMapping("/{groupId}/topics/{topicId}")
+       @DeleteMapping("/{groupId}/topics/{topicId}")
     public ResponseEntity<Group> deleteTopicFromGroup(@PathVariable Long groupId, @PathVariable Long topicId) {
        return groupService.deleteTopicFromGroup(groupId,topicId);
    }
 
-
+    @DeleteMapping("/{groupId}/user")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteGroupMembership(@PathVariable Long groupId, Principal principal) {
+        groupService.deleteGroupMembership(groupId, principal);
+    }
 
 }

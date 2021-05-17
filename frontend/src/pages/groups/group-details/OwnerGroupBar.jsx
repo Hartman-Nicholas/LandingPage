@@ -1,36 +1,37 @@
-import { useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
 import { Link } from "react-router-dom";
-
 // Project files
-import { getUserData } from "../../../state/recoilFetch";
-import { userDataState} from "../../../state/userDataState";
+import { useRecoilValue } from "recoil";
+import { userDataState } from "../../../state/userDataState";
 
 export const OwnerGroupsBar = () => {
-    // State
+	// State
 
-    // const { data } = useRecoilValue(getGroupsList);
-    const userData  = useRecoilValue(userDataState);
-    console.log("owner",userData)
-    // Constants
-
-    // Components
+	const owner = useRecoilValue(userDataState)
 
 
-    const list = userData.groupsCreated.map((group) => {
-      return (
-        <Link
-          to={{
-            pathname: `/groups/${group.id}`,
-          }}
-          key={group.id}
-        >
-          <div>
-            <h1>{group.title}</h1>
-          </div>
-        </Link>
-      );
-    });
+	// Constants
 
-    return <div>{list.length === 0 ? "Groups list is empty" : list}</div>;
-  };
+	// Components
+
+	const list = (owner.groupsCreated) ? owner.groupsCreated.map((group) => {
+
+		return (
+      <Link to={`/groups/${group.id}/home`}>
+        <div>
+          <ul className="list">
+            <li className="listItem">
+              <div className="listItemContent">
+                <div className="sidebarItemText">
+                  <h2>{group.title}</h2>
+                 
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </Link>
+    );
+	}): "no groups has been created yet";
+
+	return <div>your groups:{list.length === 0 ? "Groups list is empty" : list}</div>;
+};

@@ -1,22 +1,27 @@
 package se.kth.sda.legalAliens.comments;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import se.kth.sda.legalAliens.comments.CommentLike.CommentLike;
 import se.kth.sda.legalAliens.posts.Post;
+import se.kth.sda.legalAliens.posts.postlike.PostLike;
+
+import se.kth.sda.legalAliens.comments.commentdislikes.CommentDislike;
+
+import se.kth.sda.legalAliens.posts.postdislikes.PostDislike;
+
 import se.kth.sda.legalAliens.user.User;
 
 @Entity
@@ -26,6 +31,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(max = 4000)
     private String body;
     private Date created;
     private Date updated;
@@ -43,6 +49,16 @@ public class Comment {
     @JoinColumn(nullable = false)
     @NotNull
     private User userCommentOwner;
+
+
+    @OneToMany(mappedBy = "likedComment")
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    private List<CommentLike> commentLikes;
+
+    @OneToMany(mappedBy = "dislikedComment")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<CommentDislike> commentDislikes;
+
 
     @PrePersist
     protected void onCreate() {
@@ -109,4 +125,21 @@ public class Comment {
         this.updated = updated;
     }
 
+
+    public List<CommentLike> getCommentLikes() {
+        return commentLikes;
+    }
+
+    public void setCommentLikes(List<CommentLike> commentLikes) {
+        this.commentLikes = commentLikes;
+    }
+
+    public List<CommentDislike> getCommentDislikes() {
+        return commentDislikes;
+    }
+
+    public void setCommentDislikes(List<CommentDislike> commentDislikes) {
+        this.commentDislikes = commentDislikes;
+
+    }
 }

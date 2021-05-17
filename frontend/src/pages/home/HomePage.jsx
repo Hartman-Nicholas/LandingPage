@@ -1,14 +1,17 @@
 // NPM Packages
 
-
 // Project files
+import Feed from "../../components/Feed";
 
+import UserPosts from "../../components/UserPosts";
 
 export default function Home() {
-
-	return (
-		<section>
-			<div>Home Template</div>
-		</section>
-	);
+  return (
+    <>
+      <div className="gridRight">
+        <Feed />
+        <UserPosts />
+      </div>
+    </>
+  );
 }

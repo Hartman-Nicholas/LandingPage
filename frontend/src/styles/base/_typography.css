@@ -1,0 +1,13 @@
+body,
+input {
+  font-family: var(--ff-primary);
+}
+
+h1 {
+  font-size: var(--fs-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+  padding: 1rem;
+}
