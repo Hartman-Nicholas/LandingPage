@@ -30,12 +30,14 @@ export const GroupCardSidebar = ({ groupData, joinGroup, leaveGroup }) => {
             <img className="sidebar-img" src={groupData.avatar} alt="group" />
             <div className="sidebar__groupInfo">
               <p className="sidebar__groupInfo--title">{groupData.title}</p>
-              <p className="sidebar__groupInfo--item">
-                Members: {groupData.members?.length}
-              </p>
-              <p className="sidebar__groupInfo--item">
-                Posts: {groupData.posts?.length}
-              </p>
+              <div className="sidebar__groupInfo--item">
+                <p className="sidebar__groupInfo--item-member">
+                  Members: {groupData.members?.length}
+                </p>
+                <p className="sidebar__groupInfo--item-posts">
+                  Posts: {groupData.posts?.length}
+                </p>
+              </div>
             </div>
           </div>
 
