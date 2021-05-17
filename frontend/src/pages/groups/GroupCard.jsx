@@ -47,7 +47,7 @@ export const GroupCard = ({ groupData, joinGroup, leaveGroup }) => {
           </span>
           <span>{groupMembers.length} members</span>
         </p>
-        {/* <TagRow tags={groupData.topics} /> */}
+        <TagRow tags={groupData.topics} />
 
         <h3 className="itemTitle">{groupData.title}</h3>
 
