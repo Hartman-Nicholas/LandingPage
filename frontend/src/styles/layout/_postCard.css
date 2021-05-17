@@ -22,9 +22,14 @@
 }
 
 .postCard__card--img {
-  object-fit: cover;
+  margin-top: 10px;
   width: 100%;
-  height: 100%;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.rightBar .postCard__card--img {
+  max-height: 100px;
 }
 
 .postCard__card--postGroup {
@@ -36,11 +41,22 @@
   margin-bottom: 5rem;
   padding: 1.5rem;
   padding-top: 3.7rem;
+}
+
+.postCard__card--body {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.rightBar .postCard__card--body{
+  margin-bottom: 0;
+}
+.rightBar .postCard__card__content{
+  margin-bottom: 3rem;
 }
 
 .postCard__card--like {
