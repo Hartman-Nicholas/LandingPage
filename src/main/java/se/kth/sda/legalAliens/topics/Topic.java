@@ -5,6 +5,9 @@ import se.kth.sda.legalAliens.groups.Group;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ *
+ */
 @Entity
 public class Topic {
     @Id
