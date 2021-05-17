@@ -32,11 +32,17 @@
 
 .groupHome--heading {
   text-transform: capitalize;
-  line-height: 2rem;
-  letter-spacing: 0.5rem;
+  height: 3em;
+  line-height: 1.1em;
+  font-weight: 300;
   margin-bottom: 2rem;
   margin-top: 2rem;
-  font-weight: var(--fw-medium);
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
 }
 
 .groupHome__labels {
