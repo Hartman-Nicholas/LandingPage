@@ -1,5 +1,13 @@
 .userCreatedGroups {
-  padding-left: 1rem;
+  position: relative;
+  width: 88%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 6px;
+  box-shadow: var(--bs);
+  background: var(--white);
 }
 
 .userCreatedGroups__grid {
@@ -7,9 +15,6 @@
   margin-bottom: 2rem;
   background: var(--white);
   padding: 1rem;
-  display: grid;
-  grid-template-columns: auto;
-  width: 100%;
   border-radius: 6px;
   box-shadow: var(--bs-dark);
 }
@@ -27,18 +32,20 @@
 }
 
 .userCreatedGroups--img-container {
-  width: 100%;
-  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .userCreatedGroups--img {
   width: 100%;
+  max-height: 100px;
+  object-fit: cover;
 }
 
 .userCreatedGroups--description {
+  width: 210px;
   text-align: left;
   text-overflow: ellipsis;
-  display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -46,6 +53,13 @@
 }
 
 .userCreatedGroups--itemTitle {
+  width: 210px;
   font-size: 1rem;
+  font-weight: 400;
   margin-bottom: 0.6rem;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
