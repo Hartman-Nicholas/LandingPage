@@ -34,8 +34,13 @@
 .postCard__card__content {
   position: relative;
   margin-bottom: 5rem;
-  padding: 2rem;
+  padding: 1.5rem;
   padding-top: 3.7rem;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .postCard__card--like {
