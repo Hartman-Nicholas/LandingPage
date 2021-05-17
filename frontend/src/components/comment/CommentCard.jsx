@@ -124,6 +124,16 @@ export const CommentCard = ({
     setCommentBody(updatedComment);
     setToggler(false);
   };
+
+  const renderDelete = () => {
+    if (groupOwner | (userCommentOwner === userInSession)) {
+      return (
+        <div className="postCard__card--delete">
+          <i onClick={() => handleDelete(id)} className="fas fa-trash-alt"></i>
+        </div>
+      );
+    } else return <div></div>;
+  };
   // Components
 
   return (
@@ -145,14 +155,7 @@ export const CommentCard = ({
           </div>
           <p className="commentCard__card--body">{commentBody}</p>
 
-          {groupOwner | (userCommentOwner === userInSession) && (
-            <div className="postCard__card--delete">
-              <i
-                onClick={() => handleDelete(id)}
-                className="fas fa-trash-alt"
-              ></i>
-            </div>
-          )}
+          {renderDelete()}
           {likeToggler ? (
             <div className="postCard__card--like">
               <i onClick={handleLike} className="fas fa-thumbs-up">
