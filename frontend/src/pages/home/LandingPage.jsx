@@ -44,7 +44,7 @@ export default function LandingPage() {
         </li>
         <li className="homePage__list--item">
           Didn't find what you where looking for? Why not{" "}
-          <Link className="homePage--links" to="/groups">
+          <Link className="homePage--links" to="/groups/create">
             create your own group
           </Link>{" "}
           and get the community talking?
