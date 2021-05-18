@@ -50,6 +50,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   font-size: 0.8rem;
+  display: -webkit-box;
 }
 
 .userCreatedGroups--itemTitle {
