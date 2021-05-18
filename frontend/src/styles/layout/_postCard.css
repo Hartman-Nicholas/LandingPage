@@ -24,8 +24,8 @@
 .postCard__card--img {
   margin-top: 10px;
   width: 100%;
-  max-height: 300px;
-  object-fit: cover;
+  max-height: 500px;
+  object-fit: scale-down;
 }
 
 .rightBar .postCard__card--img {
