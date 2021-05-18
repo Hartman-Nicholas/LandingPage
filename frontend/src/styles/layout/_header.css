@@ -16,6 +16,10 @@
   font-size: 0.8rem;
 }
 
+.header__list--title {
+  font-size: 1rem;
+}
+
 .header__list--item .fas {
   color: var(--dark-grey);
   font-size: 35px;

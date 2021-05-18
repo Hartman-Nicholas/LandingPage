@@ -41,7 +41,7 @@ export default function Footer() {
           </div>
         </div>
         <div class="col-1-of-2">
-          <p class="footer__copyright">
+          <div class="footer__copyright">
             Community project built during{" "}
             <a
               target="_blank"
@@ -63,7 +63,7 @@ export default function Footer() {
             . Copyright &copy; by legalAliens. This is an open source project so
             please feel free to join the community on GitHub and contribute to
             the future of a welcoming and inclusive society.
-          </p>
+          </div>
         </div>
       </div>
     </footer>

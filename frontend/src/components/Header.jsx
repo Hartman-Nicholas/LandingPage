@@ -11,6 +11,14 @@ export default function Header({ onLogout }) {
 
   const location = useLocation();
 
+  const regex = /[0-9]/g;
+  const arrayId = location.pathname.match(regex);
+  const groupId = arrayId?.reduce(function (previous, current) {
+    return previous + current;
+  }, "");
+
+  // const user =
+
   useEffect(() => {
     const handleSelect = () => {
       switch (location.pathname) {
@@ -20,6 +28,16 @@ export default function Header({ onLogout }) {
           setHome(true);
           break;
         case "/groups":
+          setGroups(true);
+          setProfile(false);
+          setHome(false);
+          break;
+        case "/groups/create":
+          setGroups(true);
+          setProfile(false);
+          setHome(false);
+          break;
+        case `/groups/${groupId}/home`:
           setGroups(true);
           setProfile(false);
           setHome(false);
@@ -36,7 +54,7 @@ export default function Header({ onLogout }) {
     };
 
     handleSelect();
-  }, [location.pathname]);
+  }, [groupId, location.pathname]);
 
   // Components
 

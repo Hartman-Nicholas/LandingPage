@@ -6,24 +6,24 @@ import { useState } from "react";
 
 // Project files
 import { userDataState } from "../../state/userDataState";
-import TagRow from '../../components/TagRow';
+import TagRow from "../../components/TagRow";
 
 export const GroupCard = ({ groupData, joinGroup, leaveGroup }) => {
-	// State
-	const [userData, setUserData] = useRecoilState(userDataState);
-	const [groupMembers] = useState(groupData.members);
+  // State
+  const [userData, setUserData] = useRecoilState(userDataState);
+  const [groupMembers] = useState(groupData.members);
 
-	// Constants
-	const handleClick = (e) => {
-		e.preventDefault();
-		leaveGroup(groupData.id);
-		let filteredGroup = userData.groupsJoined.filter(
-			(group) => group.id !== groupData.id
-		);
-		setUserData({ ...userData, groupsJoined: filteredGroup });
-	};
+  // Constants
+  const handleClick = (e) => {
+    e.preventDefault();
+    leaveGroup(groupData.id);
+    let filteredGroup = userData.groupsJoined.filter(
+      (group) => group.id !== groupData.id
+    );
+    setUserData({ ...userData, groupsJoined: filteredGroup });
+  };
 
-	return (
+  return (
     <>
       <div className="group-container">
         <div className="group-image">

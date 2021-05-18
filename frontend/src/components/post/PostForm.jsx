@@ -30,8 +30,7 @@ export const PostForm = ({ groupId, onSubmit }) => {
       ...postForm,
       [name]: value,
     });
-    console.log(postForm);
-    console.log(photoUrl);
+
   };
 
   const handleSubmit = (e) => {
