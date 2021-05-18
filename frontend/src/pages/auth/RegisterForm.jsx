@@ -155,7 +155,7 @@ export default function RegisterForm() {
 					</Field>
 					<input
 						className="btn"
-						value="Login"
+						value="Create"
 						type="submit"
 						disabled={pristine || submitting}
 					/>
