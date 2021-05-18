@@ -36,14 +36,14 @@
 
 .sidebar-img-container {
   display: grid;
-  grid-template-columns: 20px 90px 1fr;
+  grid-template-columns: 20px 110px 1fr;
   width: 100%;
   overflow: hidden;
 }
 
 .sidebar-img {
-  height: 60px;
-  width: 80px;
+  height: 80px;
+  width: 100px;
   border-radius: 3px;
   object-fit: cover;
   box-shadow: var(--bs);
@@ -52,13 +52,14 @@
 }
 
 .sidebar-list {
-  width: 300px;
+  /* width: 300px; */
   text-align: left;
-  height: 70px;
-  padding-top: 5px;
+  height: 100px;
+  padding: 8px;
+  /* padding-top: 5px; */
   border-radius: 10px;
   position: relative;
-  margin-top: 2rem;
+  margin-top: 3rem;
   box-shadow: var(--bs);
 }
 
@@ -68,7 +69,7 @@
 }
 
 .sidebar__groupInfo {
-  width: 190px;
+  width: 170px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -90,8 +91,8 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: auto;
-  height: 2.2em;
-  line-height: 1em;
+  height: 3rem;
+  line-height: 1.5rem;
   margin-right: 3px;
   letter-spacing: -0.3px;
 }
@@ -108,7 +109,8 @@
 .sidebar .tags-container {
   display: flex;
   flex-direction: column;
-  height: 60px;
+  justify-content: space-evenly;
+  height: 80px;
   margin: 0 auto;
   align-items: center;
 }
