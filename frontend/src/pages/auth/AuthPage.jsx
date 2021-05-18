@@ -16,13 +16,26 @@ export default function LoginPage() {
       <div className="authPage--blueWave"></div>
       <div className="authPage__headingSection">
         <img className="authPage--logo" src={logo} alt="Bird Flying"></img>
-        <h1 className="authPage--MainHeading">Landing Page</h1>
+        <h1
+          className="authPage--MainHeading"
+          style={{ color: "white", fontWeight: "600", letterSpacing: "1.3px" }}
+        >
+          Landing Page
+        </h1>
       </div>
 
       {signIn && (
         <div className="authPage__form">
           <div className="authPage__form__switch">
-            <h2 className="authPage__form__switch--title">New here?</h2>
+            <h2
+              className="authPage__form__switch--title"
+              style={{
+                color: "#333",
+                fontWeight: "600",
+              }}
+            >
+              New here?
+            </h2>
             <button
               className="btn transparent"
               type="button"

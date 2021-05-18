@@ -6,7 +6,7 @@ import ReactTimeAgo from "react-time-ago";
 
 // Project files
 import { userDataState } from "../../state/userDataState";
-
+import SideBarTagRow from "../../components/SideBarTagRow";
 export const GroupCardSidebar = ({ groupData, joinGroup, leaveGroup }) => {
   // State
   const [userData, setUserData] = useRecoilState(userDataState);
@@ -27,15 +27,22 @@ export const GroupCardSidebar = ({ groupData, joinGroup, leaveGroup }) => {
       <Link to={`/groups/${groupData.id}/home`}>
         <div className="sidebar-group-list">
           <div className="sidebar-img-container">
+            <div >
+              <SideBarTagRow tags={groupData.topics} />
+            </div>
+
             <img className="sidebar-img" src={groupData.avatar} alt="group" />
             <div className="sidebar__groupInfo">
+              {/* <SideBarTagRow tags={groupData.topics} style={{backgroundImage:`url(${require(`${groupData.avatar}`).default})`}}/> */}
               <p className="sidebar__groupInfo--title">{groupData.title}</p>
-              <p className="sidebar__groupInfo--item">
-                Members: {groupData.members?.length}
-              </p>
-              <p className="sidebar__groupInfo--item">
-                Posts: {groupData.posts?.length}
-              </p>
+              <div className="sidebar__groupInfo--item">
+                <p className="sidebar__groupInfo--item-member">
+                  Members: {groupData.members?.length}
+                </p>
+                <p className="sidebar__groupInfo--item-posts">
+                  Posts: {groupData.posts?.length}
+                </p>
+              </div>
             </div>
           </div>
 

@@ -79,8 +79,8 @@
 }
 
 .btn-cancel:hover {
-  background-color: white;
-  color: var(--sweden-blue);
+  color: white;
+  background-color: #ff0033;
 }
 
 .btn-create {
