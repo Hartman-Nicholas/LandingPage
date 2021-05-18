@@ -36,19 +36,21 @@
 
 .sidebar-img-container {
   display: grid;
-  grid-template-columns: 20px 90px 1fr ;
+  grid-template-columns: 20px 90px 1fr;
   width: 100%;
   overflow: hidden;
 }
+
 .sidebar-img {
   height: 60px;
   width: 80px;
   border-radius: 3px;
   object-fit: cover;
   box-shadow: var(--bs);
-              filter: brightness(70%);
+  filter: brightness(80%);
 
 }
+
 .sidebar-list {
   width: 300px;
   text-align: left;
@@ -61,7 +63,8 @@
 }
 
 .sidebar-list:hover {
-  background: var(--medium-blue-hover-light);
+  /* background: var(--medium-blue-hover-light); */
+  background: rgb(203, 209, 215);
 }
 
 .sidebar__groupInfo {
@@ -101,17 +104,26 @@
   text-align: right;
   color: #999;
 }
-.sidebar .tags-container{
+
+.sidebar .tags-container {
   display: flex;
   flex-direction: column;
   height: 60px;
   margin: 0 auto;
   align-items: center;
 }
-.sidebar .tags-container .tag{
+
+.sidebar .tags-container .tag {
   line-height: .15em;
   padding: 0 auto;
 }
+
+.fa-times-circle:hover {
+  color: #ff0033;
+  transform: scale(1.1);
+
+}
+
 /* #sidebar {
   margin-bottom: 0;
 }
